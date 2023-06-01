@@ -37,7 +37,14 @@ abstract class SQL{
         $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" AND ", $sqlWhere));
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute($where);
-        return $queryPrepared->fetch();
+        $queryFetched = $queryPrepared->fetch();
+        if(gettype($queryFetched) == 'object'){
+            return $queryFetched;
+        }
+        else{
+            return $obj = (object) ['property' => 'pas de resultat'];
+        }
+        //return $queryPrepared->fetch();
     }
 
 
