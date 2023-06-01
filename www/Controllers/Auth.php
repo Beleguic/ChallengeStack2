@@ -20,7 +20,15 @@ class Auth
             $user = $user->getOneWhere(['email' => $_POST['email']]);
             if(!isset($user->property)){
                 if(password_verify($_POST['pwd'], $user->getPwd())) {
-                    echo "Identifiant Correct";
+                    $user->populateWithMail($_POST['email']);
+                    $_SESSION['login']['connected'] = true;
+                    $_SESSION['login']['email'] = $_POST['email'];
+                    $_SESSION['login']['firstname'] = $user->getFirstname();
+                    $_SESSION['login']['lastname'] = $user->getLastname();
+                    $_SESSION['login']['id'] = $user->getId();
+                    $_SESSION['login']['status'] = $user->getStatus();
+                    //echo "Identifiant Correct";
+                    header('location: /?conn=true');
                 } else {
                     echo "Identifiant Incorrect";
                 }
@@ -57,7 +65,15 @@ class Auth
 
     public function logout(): void
     {
-        echo "Page de déconnexion";
+        unset($_SESSION['login']);
+        if(isset($_SESSION['login'])){
+             header('location: /?logout=false');
+        }
+        else{
+             header('location: /?logout=true');
+        }
+       
+        
     }
 
 }

@@ -1,0 +1,60 @@
+===============================================================================================================
+							ROAD MAP
+===============================================================================================================
+
+- 4 type d'utilisateurs
+	- Utilisateur anonymes (sans compte)
+		- peut regarder les annonces
+		- se crée un compte
+		- S'inscire a la newsletter
+	- Utilisateur lambda
+		- Capable de faire ce qu'un utilisateur anonyme peut faire 
+		- Capable d'ajouter dans ces favorie une annonce
+		- se connecter
+		- Peut laisser un commentaire sous l'annonce
+	- Utilisateur annonceur
+		- Capache de faire ce qu'un utilisateur lambda peut faire
+		- Acces back Office restraint
+		- Publier des annonces
+		- Gestion des annonces
+		- Repondre au commentaire
+	- Utilisateur Admin
+		- Capable de faire ce qu'un utilisateur annonceur peut faire
+		- Gere les utilisateurs
+		- Gere les templates
+		- Gere les commentaire reported
+		
+
+-----------------------------
+
+- Header
+	Bouton connexion/inscirption
+	Bouton Deconnexion (si connecter)
+	Bouton 'Annonce'
+	Bouton 'a propos'
+	bouton backoffice -> Si et seulement si uilisateur annonceur et/ou admin
+	Logo
+
+- Footer
+	Newsletter
+	Plan du site
+	Raccourcie filtre
+	resumer a propos
+
+- Pages
+
+	1/ Login / Register
+		-> Formulaire de connexion/inscription
+	2/ Page accueil
+		-> liste des annonce avec filtres
+	3/ Page annonce particuliere
+		-> Annonce detailler
+	4/ A propos
+		-> Bla bla administratif
+	5/ Back office
+		-> dashboard
+		-> gestion utilisateur
+		-> Festion annonce
+		-> gestion commentaire signaler
+		-> Gestion templates
+
