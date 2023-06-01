@@ -4,13 +4,33 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Forms\Register;
+use App\Forms\Login;
 use App\Models\User;
 
 class Auth
 {
     public function login(): void
     {
-        echo "Page de connexion";
+        $form = new Login();
+        $view = new View("Auth/login", "front");
+        $view->assign("form", $form->getConfig());
+
+        if ($form->isSubmited() && $form->isValid()) {
+            $user = new User();
+            $user = $user->getOneWhere(['email' => $_POST['email']]);
+            if(!isset($user->property)){
+                if(password_verify($_POST['pwd'], $user->getPwd())) {
+                    echo "Identifiant Correct";
+                } else {
+                    echo "Identifiant Incorrect";
+                }
+            }
+            else{
+                echo "Identifiant Incorrect";
+            }
+        }
+        
+        $view->assign("formErrors", $form->errors);
     }
 
     public function register(): void
