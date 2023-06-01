@@ -19,18 +19,20 @@ class Auth
         $view = new View("Auth/register", "front");
         $view->assign("form", $form->getConfig());
 
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
+        
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){
             $user = new User();
-            $user->setFirstname();
-            $user->setLastname();
-            $user->setEmail();
-            $user->setPwd();
+            $user->setFirstname($_POST['firstname']);
+            $user->setLastname($_POST['lastname']);
+            $user->setEmail($_POST['email']);
+            $user->setPwd($_POST['pwd']);
             $user->save();
         }
         $view->assign("formErrors", $form->errors);
-
-
     }
 
     public function logout(): void

@@ -11,14 +11,14 @@ abstract class SQL{
         //Connexion à la bdd
         //SINGLETON à réaliser
         try {
-            $this->pdo = new \PDO("pgsql:host=database;dbname=esgi;port=5432", "esgi", "Test1234");
-        }catch(\Exception $e){
+            $this->pdo = new \PDO("pgsql:host=db.bpuhpyzfldoarlwgwxkz.supabase.co;dbname=postgres;port=5432", "postgres", "zdS2TmaWFhb4fgmo");
+        } catch(\Exception $e) {
             die("Erreur SQL : ".$e->getMessage());
         }
 
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
-        $this->table = "esgi_".end($classExploded);
+        $this->table = "zfgh_".end($classExploded);
     }
 
     public static function populate(Int $id): object
