@@ -1,0 +1,21 @@
+# Dossiers
+node_modules/
+build/
+dist/
+tmp/
+temp/
+logs/
+backup/
+cache/
+.idea/
+.vscode/
+
+# Fichiers
+*.log
+*.json
+!package.json
+!package-lock.json
+*.lock
+*.swp
+.DS_Store
+Thumbs.db
