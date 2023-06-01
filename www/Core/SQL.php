@@ -28,6 +28,13 @@ abstract class SQL{
         return $objet->getOneWhere(["id"=>$id]);
     }
 
+    public static function populateWithMail(String $email): object
+    {
+        $class = get_called_class();
+        $objet = new $class();
+        return $objet->getOneWhere(["email"=>$email]);
+    }
+
     public function getOneWhere(array $where): object
     {
         $sqlWhere = [];

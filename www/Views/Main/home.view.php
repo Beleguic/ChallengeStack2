@@ -1,4 +1,24 @@
 <h2>Welcome to Home Page</h2>
 
-<a href="/login">Se connecter</a>
-<a href="/s-inscrire">Inscription</a>
+
+
+<?php
+
+	if(isset($_SESSION['login']['connected']) && $_SESSION['login']['connected']):
+		echo("<pre>");
+		var_dump($_SESSION['login']);
+		echo("</pre>");
+		?>
+		<a href="/logout">Deconnexion</a>
+		<?php
+	
+	else:?>
+
+		<a href="/login">Se connecter</a>
+		<a href="/s-inscrire">Inscription</a>
+
+
+	<?php
+	endif;
+
+?>
