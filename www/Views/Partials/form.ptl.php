@@ -11,18 +11,44 @@
 
     <?php foreach ($config["inputs"] as $name=>$configInput): ?>
 
-        <input
+        <?php if ($configInput["balise"] == "input"): ?>
+
+            <input
                 name="<?= $name ?>"
                 placeholder="<?= $configInput["placeholder"] ?>"
                 class="<?= $configInput["class"] ?>"
                 id="<?= $configInput["placeholder"] ?>"
                 type="<?= $configInput["type"] ?>"
                 <?= $configInput["required"]?"required":"" ?>
-         ><br>
+            >
+
+        <?php elseif ($configInput["balise"] == "label"): ?>
+
+            <label
+                id="<?= $configInput["id"]?>"
+                class="<?= $configInput["class"] ?>"
+                for="<?= $configInput["for"] ?>"
+            >
+            <?= $configInput["value"] ?>
+            </label>
+
+        <?php elseif ($configInput["balise"] == "div"): ?>
+
+            <div
+                id="<?= $configInput["id"]?>"
+                class="<?= $configInput["class"] ?>"
+            >
+
+        <?php elseif ($configInput["balise"] == "end-div"): ?>
+
+            </div>
+
+        <?php endif; ?>
 
     <?php endforeach;?>
-
-    <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
-    <input type="reset" value="<?= $config["config"]["reset"] ?>">
+    <div id="div-register-submit-reset" class="div-form-50">
+        <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
+        <input type="reset" value="<?= $config["config"]["reset"] ?>">
+    </div>
 
 </form>
