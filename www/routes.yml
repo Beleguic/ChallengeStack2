@@ -1,27 +1,34 @@
 default:
   controller: Main
   action: home
+  level_auth: 0
 
 a-propos:
   controller: Main
   action: aboutUs
+  level_auth: 0
 
 about-us:
   controller: Main
   action: aboutUs
+  level_auth: 0
 
 contact:
   controller: Main
   action: contact
+  level_auth: 0
 
 login:
   controller: Auth
   action: login
+  level_auth: 0
 
 logout:
   controller: Auth
   action: logout
+  level_auth: 1
 
 s-inscrire:
   controller: Auth
   action: register
+  level_auth: 0

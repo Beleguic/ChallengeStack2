@@ -9,8 +9,11 @@ class Main
     public function home(): void
     {
         $pseudo = "Prof";
-        $view = new View("Main/home", "front");
-        $view->assign("pseudo", $pseudo);
+        $view = new View("Main/home", "front"); 
+        // Appelle la l'objet Vue 
+        // Vassigner a la vue le fichier main/home sur le tamplete front
+        // la vue va appeller le template puis la vue precise ...
+        $view->assign("pseudo", $pseudo); // Passe des variable dans la vue avec assign 
         $view->assign("age", 30);
         $view->assign("titleseo", "supernouvellepage");
     }
