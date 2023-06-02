@@ -11,5 +11,9 @@
     <!-- inclure la vue -->
     <?php include $this->view;?>
 
+
+
+
+    
 </body>
 </html>
