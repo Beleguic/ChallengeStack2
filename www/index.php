@@ -21,7 +21,27 @@ spl_autoload_register(function ($class) {
     }
 });
 
+/*
+Level Authentificatioin
+    - 0 : Utilisateur anonyme
+    - 1 : Utilisateur Lambda
+    - 2 : Utilisateur Annonceur
+    - 3 : Utilisateur Admin 
 
+*/
+
+// Recuperation info de connection
+if(isset($_SESSION['zfgh_login'])){
+    if($_SESSION['zfgh_login']['connected']){
+        $level_auth_user = $_SESSION['zfgh_login']['status'];
+    }
+    else{
+        $level_auth_user = 0;    
+    }
+}
+else{
+    $level_auth_user = 0;   
+}
 
 
 //Afficher le controller et l'action correspondant à l'URI
@@ -42,6 +62,7 @@ $routes = yaml_parse_file("routes.yml");
 
 if(empty($routes[$uri])){
     die("Page 404");
+    // Route pour les annonce dynamique a mettre ici
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"]) ){
@@ -50,6 +71,13 @@ if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"]) ){
 
 $controller = $routes[$uri]["controller"];
 $action = $routes[$uri]["action"];
+$level_auth = $routes[$uri]["level_auth"];
+
+// Si le niveau d'auth de l'utilisateur est plus petit que celui de la route,
+// on le redirige vers l'accueil avec une pop up erreur
+if($level_auth_user < $level_auth){
+    header('location: /?err=1');
+}
 
 
 // $controller => Auth ou Main

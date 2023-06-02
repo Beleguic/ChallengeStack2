@@ -21,12 +21,12 @@ class Auth
             if(!isset($user->property)){
                 if(password_verify($_POST['pwd'], $user->getPwd())) {
                     $user->populateWithMail($_POST['email']);
-                    $_SESSION['login']['connected'] = true;
-                    $_SESSION['login']['email'] = $_POST['email'];
-                    $_SESSION['login']['firstname'] = $user->getFirstname();
-                    $_SESSION['login']['lastname'] = $user->getLastname();
-                    $_SESSION['login']['id'] = $user->getId();
-                    $_SESSION['login']['status'] = $user->getStatus();
+                    $_SESSION['zfgh_login']['connected'] = true;
+                    $_SESSION['zfgh_login']['email'] = $_POST['email'];
+                    $_SESSION['zfgh_login']['firstname'] = $user->getFirstname();
+                    $_SESSION['zfgh_login']['lastname'] = $user->getLastname();
+                    $_SESSION['zfgh_login']['id'] = $user->getId();
+                    $_SESSION['zfgh_login']['status'] = $user->getStatus();
                     //echo "Identifiant Correct";
                     header('location: /?conn=true');
                 } else {
@@ -65,8 +65,8 @@ class Auth
 
     public function logout(): void
     {
-        unset($_SESSION['login']);
-        if(isset($_SESSION['login'])){
+        unset($_SESSION['zfgh_login']);
+        if(isset($_SESSION['zfgh_login'])){
              header('location: /?logout=false');
         }
         else{

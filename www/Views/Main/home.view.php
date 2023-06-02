@@ -3,6 +3,8 @@
 
 
 <?php
+	//var_dump($this->data);
+	// Pour recupere la data passer par 'view->assign' -> '$this->data'
 
 	if(isset($_SESSION['login']['connected']) && $_SESSION['login']['connected']):
 		echo("<pre>");
