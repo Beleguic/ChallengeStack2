@@ -44,6 +44,8 @@ else{
 }
 
 
+
+
 //Afficher le controller et l'action correspondant à l'URI
 
 $uri = $_SERVER["REQUEST_URI"];
@@ -73,12 +75,14 @@ $controller = $routes[$uri]["controller"];
 $action = $routes[$uri]["action"];
 $level_auth = $routes[$uri]["level_auth"];
 
+
+
 // Si le niveau d'auth de l'utilisateur est plus petit que celui de la route,
 // on le redirige vers l'accueil avec une pop up erreur
 if($level_auth_user < $level_auth){
-    header('location: /?err=1');
+    header('location: /?conn=false');
+    exit;
 }
-
 
 // $controller => Auth ou Main
 // $action=> home ou login
