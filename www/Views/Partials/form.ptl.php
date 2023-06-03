@@ -2,7 +2,6 @@
 <?php print_r($errors);?>
 <?php endif;?>
 
-
 <form method="<?= $config["config"]["method"] ?>"
       action="<?= $config["config"]["action"] ?>"
       enctype="<?= $config["config"]["enctype"] ?>"
