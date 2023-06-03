@@ -18,54 +18,46 @@ class Login extends Validator
                 "submit"=>"Se connecter",
                 "reset"=>"Annuler"
             ],
-            "inputs"=>[
+            "divs"=>[
                 "div-email" =>[
-                    "balise" => "div",
                     "id" => "div-login-email",
-                    "class" => "div-form-100"
+                    "class" => "div-form-100",
+                    "inside" => ["email"]
                 ],
-                "label-email" =>[
-                    "balise" => "label",
-                    "for" => "login-form-email",
-                    "id" => "label-login-form-email",
-                    "class" => "form-label",
-                    "value" => "Adresse mail"
+                "div-pwd" =>[
+                    "id" => "div-login-pwd",
+                    "class" => "div-form-100",
+                    "inside" => ["pwd"]
                 ],
+            ],
+            "inputs"=>[
                 "email"=>[
-                    "balise" => "input",
                     "id"=>"login-form-email",
                     "class"=>"form-input",
                     "placeholder"=>"Email",
                     "type"=>"email",
                     "error"=>"Votre email est incorrect",
+                    "label" =>[
+                        "for" => "login-form-email",
+                        "id" => "label-login-form-email",
+                        "class" => "form-label",
+                        "value" => "Adresse mail"
+                    ],
                     "required"=>true
                 ],
-                "end-div-firstname-lastname" => [
-                    "balise" => "end-div"
-                ],
-                "div-pwd" =>[
-                    "balise" => "div",
-                    "id" => "div-login-pwd",
-                    "class" => "div-form-100"
-                ],
-                "label-pwd" =>[
-                    "balise" => "label",
-                    "for" => "login-form-pwd",
-                    "id" => "label-login-form-pwd",
-                    "class" => "form-label",
-                    "value" => "Mot de passe"
-                ],
                 "pwd"=>[
-                    "balise" => "input",
                     "id"=>"login-form-pwd",
                     "class"=>"form-input",
                     "placeholder"=>"Mot de passe",
                     "type"=>"password",
                     "error"=>"Votre mot de passe est incorrect",
+                    "label" =>[
+                        "for" => "login-form-pwd",
+                        "id" => "label-login-form-pwd",
+                        "class" => "form-label",
+                        "value" => "Mot de passe"
+                    ],
                     "required"=>true
-                ],
-                "end-div-pwd" => [
-                    "balise" => "end-div"
                 ],
             ]
         ];
