@@ -1,7 +1,7 @@
 <?php
 
     namespace App;
-   
+    use App\Core\Application;
 
     //require "Core/View.php";
 
