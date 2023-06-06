@@ -6,9 +6,12 @@
 
         protected array $routes = [];
         public Request $request;
+        public Response $response;
 
-        public function __construct(Request $request){
+
+        public function __construct(Request $request,Response $response){
             $this->request = $request;
+            $this->response = $response;
 
         }
 
@@ -23,14 +26,40 @@
             $callback = $this->routes[$method][$path] ?? false;
 
             if($callback ===false){
-                echo"not found";
-                exit;
+                $this->response->setStatutCode(404);
+                return "not found";
             }
-            print_r($this->routes);
-            echo call_user_func($callback);
-
+          
+            if(is_string($callback)){
+                return $this->renderView($callback);
+            }
+        
+        
+            return call_user_func($callback);
         }
 
+
+
+        public function renderView($view){
+
+            $layoutContent = $this->layoutContent();
+            $viewContent = $this->renderOnlyView($view);
+            return str_replace('{{content}}', $viewContent, $layoutContent);
+        }
+
+
+        protected function layoutContent()
+        {
+            ob_start();
+            include "Views/layout/main.php";
+            return ob_get_clean();
+        }
+
+        protected function renderOnlyView($view){
+            ob_start();
+            include "Views/" . $view . ".php";
+            return ob_get_clean();
+        }
 
 
 
