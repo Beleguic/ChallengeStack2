@@ -1,0 +1,13 @@
+.logo-img {
+  max-width: 100px; /* Ajustez la taille maximale souhaitée */
+  height: auto; /* Pour maintenir les proportions */
+}
+
+.navbar-wrapper {
+  background-color: #34495e;
+  width: 100%;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
