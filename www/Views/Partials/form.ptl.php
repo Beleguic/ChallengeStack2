@@ -32,8 +32,13 @@
                         name="<?= $name ?>"
                         placeholder="<?= $inputVal["placeholder"] ?>"
                         class="<?= $inputVal["class"] ?>"
-                        id="<?= $inputVal["placeholder"] ?>"
+                        id="<?= $inputVal["id"] ?>"
                         type="<?= $inputVal["type"] ?>"
+                        <?php if($inputVal['value'] == 'NULL'): ?>
+                            value="<?= $dataValue[$name] ?>"
+                        <?php else: ?>
+                            value="<?= $inputVal['value'] ?>"
+                        <?php endif; ?>
                         <?= $inputVal["required"]?"required":"" ?>
                     >
                 <?php endif;?>
@@ -43,7 +48,9 @@
     <?php endforeach;?>
     <div id="div-register-submit-reset" class="div-form-50">
         <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
-        <input type="reset" value="<?= $config["config"]["reset"] ?>">
+        <?php if(isset($config["config"]["reset"])):?>
+            <input type="reset" value="<?= $config["config"]["reset"] ?>">
+        <?php endif; ?>
     </div>
 
 </form>

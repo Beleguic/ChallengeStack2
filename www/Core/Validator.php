@@ -20,7 +20,7 @@ class Validator
         if($_SERVER["REQUEST_METHOD"] != $this->method){
             die("Tentative de Hack1");
         }
-        //Le nb de inputs
+        //Le nb de inputs3
         if(count($this->config["inputs"])+1 != count($this->data)){
             die("Tentative de Hack2");
         }

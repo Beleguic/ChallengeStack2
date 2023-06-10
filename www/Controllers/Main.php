@@ -8,6 +8,7 @@ class Main
 {
     public function home(): void
     {
+        // Affiche les annonces 3 par lignes
         $pseudo = "Prof";
         $view = new View("Main/home", "front"); 
         // Appelle la l'objet Vue 

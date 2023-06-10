@@ -32,3 +32,8 @@ s-inscrire:
   controller: Auth
   action: register
   level_auth: 0
+
+ajout-type:
+  controller: BackOffice
+  action: typeAnnonce
+  level_auth: 0
