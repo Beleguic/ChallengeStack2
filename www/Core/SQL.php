@@ -53,7 +53,6 @@ abstract class SQL{
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute($where);
         $queryFetched = $queryPrepared->fetch();
-        var_dump($queryFetched);
         if(gettype($queryFetched) == 'object'){
             return $queryFetched;
         }
@@ -115,5 +114,7 @@ abstract class SQL{
     function getResultat(){
         return $this->resultat;
     }
+
+    public abstract function getConfigObject();
 
 }

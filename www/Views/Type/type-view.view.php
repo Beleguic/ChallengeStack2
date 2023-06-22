@@ -24,17 +24,18 @@
 	*/
 ?>
 
-	<dialog id='modal-update'>
+	<!--<dialog id='modal-update'>
 		<h2> Modification </h2>
-		<?php $this->partial("form", $formUpd) ?>
+		<?php // $this->partial("form", $formUpd) ?>
 		<button onclick="document.getElementById('modal-update').close();"> Annuler </button>
 	</dialog>
 	<dialog id='modal-delete'>
 		<h2> Confirmer la suppression ? </h2>
-		<?php $this->partial("form", $formDel) ?>
+		<?php // $this->partial("form", $formDel) ?>
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
-	</dialog>
-
+	</dialog>-->
+	<a href="/">Accueil</a>
+	<a href="/add-type">Ajouter un Type de propriéter </a>
 	<div style="width: 60%; margin: auto;">
 		<table id='tableType' >	
 			<thead>	
@@ -43,13 +44,12 @@
 					<td> Action </td>
 			</thead>
 			<tbody>	
-
 		<?php while ($row = $this->data['typeList']->fetch()): ?>
 				<tr>
 					<td><?=$row->getTexte()?></td>
 					<td>
-						<a texte ="<?=$row->getTexte()?>" idHash="<?= $row->getId_Hash() ?>" class="button-Update">Modifier</a>
-						<a texte ="<?=$row->getTexte()?>" idHash="<?= $row->getId_Hash() ?>" class="button-Delete">Supprimer</a>
+						<a class="button-Update" href="/update-type?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
+						<a class="button-Delete" href="/delete-type?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
@@ -68,15 +68,15 @@
     </script>
 
 
-    <div>
-    	<?php $this->partial("form", $formAdd) ?>
-    </div>
+    <!--<div>
+    	<?php //$this->partial("form", $formAdd) ?>
+    </div>-->
 
 
-<a href="/">Accueil</a>
+
 
 <script>
-	
+	/*
 	var buttonsUpd = document.querySelectorAll('.button-Update');
 	var buttonsDel = document.querySelectorAll('.button-Delete');
 
@@ -107,5 +107,5 @@
     	
 	  });
 	});
-
+	*/
 </script>

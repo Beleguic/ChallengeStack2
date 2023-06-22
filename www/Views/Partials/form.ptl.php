@@ -34,11 +34,20 @@
                         class="<?= $inputVal["class"] ?>"
                         id="<?= $inputVal["id"] ?>"
                         type="<?= $inputVal["type"] ?>"
-                        <?php if($inputVal['value'] == 'NULL'): ?>
-                            value="<?= $dataValue[$name] ?>"
-                        <?php else: ?>
-                            value="<?= $inputVal['value'] ?>"
-                        <?php endif; ?>
+                        <?php   
+                            if(!isset($inputData[$name])){
+                                if(!isset($inputVal['value'])){
+                                    $value = "";
+                                }
+                                else{
+                                    $value = $inputVal['value'];
+                                }
+                            }
+                            else{
+                                $value = $inputData[$name];
+                            }
+                        ?>
+                        value="<?= $value ?>"
                         <?= $inputVal["required"]?"required":"" ?>
                     >
                 <?php endif;?>
@@ -47,7 +56,9 @@
         </div>
     <?php endforeach;?>
     <div id="div-register-submit-reset" class="div-form-50">
-        <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
+        <?php foreach ($config["config"]["submit"] as $value): ?>
+            <input type="submit" name="submit" value="<?= $value ?>">
+        <?php endforeach; ?>
         <?php if(isset($config["config"]["reset"])):?>
             <input type="reset" value="<?= $config["config"]["reset"] ?>">
         <?php endif; ?>

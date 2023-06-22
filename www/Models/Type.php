@@ -56,6 +56,16 @@ class Type extends SQL
         $this->texte = ucwords(strtolower(trim($texte)));
     }
 
+    public function getConfigObject(): array
+    {
+
+        $array['id_hash'] = $this->getId_Hash();
+        $array['texte'] = $this->getTexte();
+        $array['id'] = $this->getId();
+        return $array;
+
+    }
+
     
 
 

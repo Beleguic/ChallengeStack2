@@ -15,7 +15,7 @@ class Type extends Validator
                 "id"=>"type-form",
                 "class"=>"form-add",
                 "enctype"=>"",
-                "submit"=>"Ajouter le type d'annonce",
+                "submit"=>["Ajouter le type d'annonce"],
                 "reset"=>"Annuler"
             ],
             "divs"=>[
@@ -51,11 +51,11 @@ class Type extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"/ajout-type?update=true",
+                "action"=>"",
                 "id"=>"",
                 "class"=>"form-updatde",
                 "enctype"=>"",
-                "submit"=>"Modifier le type d'annonce",
+                "submit"=>["Modifier le type d'annonce"],
             ],
             "divs"=>[
                 "div-texte" =>[
@@ -94,17 +94,17 @@ class Type extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"/ajout-type?delete=true",
+                "action"=>"",
                 "id"=>"",
                 "class"=>"form-delete",
                 "enctype"=>"",
-                "submit"=>"Supprimer"
+                "submit"=>["Supprimer","Annuler"],
             ],
             "divs"=>[
                 "div-form" =>[
                     "id" => "div-type-form",
                     "class" => "div-form-100",
-                    "inside" => ["id_hash"]
+                    "inside" => ["submit","id_hash"]
                 ],
             ],
             "inputs"=>[
@@ -122,3 +122,5 @@ class Type extends Validator
         return $this->config;
     }
 }
+
+https://www.google.fr?q=maeecherche
