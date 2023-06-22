@@ -31,6 +31,9 @@
 
     $app->router->get('/contact', 'contact');
 
+    $app->router->post('/contact', function () {
+        return 'envoie de la donné';
+    });
     
 
 
