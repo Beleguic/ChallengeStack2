@@ -4,10 +4,10 @@
 
 	?>
 
-	<h2>Type annonce</h2>
+	<h2>Annonce</h2>
 
 	<a href="/">Accueil</a>
-	<a href="/view-type">Liste des Types</a>
+	<a href="/view-annonce">Liste des Annonces</a>
 
     <div>
     	<?php $this->partial("form", $formUpd, $formUpdDate) ?>

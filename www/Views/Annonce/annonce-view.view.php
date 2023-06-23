@@ -1,4 +1,4 @@
-<h2>Type annonce</h2>
+<h2>Annonce</h2>
 
 <?php
 
@@ -35,21 +35,40 @@
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
 	<a href="/">Accueil</a>
-	<a href="/add-type">Ajouter un Type de propriéter </a>
+	<a href="/add-annonce">Ajouter une nouvelle annonce</a>
 	<div style="width: 60%; margin: auto;">
 		<table id='tableType' >	
-			<thead>	
+			<thead>
 				<tr>	
-					<td> Texte </td>
-					<td> Action </td>
+					<th> Titre </th>
+					<th> Prix </th>
+					<th> Superficie Maison </th>
+					<th> Superficie Terrain </th>
+					<th> Nombre de pieces </th>
+					<th> Nombre de chambre </th>
+					<th> Ville </th>
+					<th> Rue </th>
+					<th> Departement </th>
+					<th> Regions </th>
+					<th> Action </th>
 			</thead>
 			<tbody>	
-		<?php while ($row = $this->data['typeList']->fetch()): ?>
+		<?php while ($row = $this->data['annonceList']->fetch()): ?>
 				<tr>
-					<td><?=$row->getTexte()?></td>
+					<td><?=$row->getTitre()?></td>
+					<td><?=$row->getPrix()?></td>
+					<td><?=$row->getSuperficieMaison()?></td>
+					<td><?=$row->getSuperficieTerrain()?></td>
+					<td><?=$row->getNbrPiece()?></td>
+					<td><?=$row->getNbrChambre()?></td>
+					<td><?=$row->getNbrChambre()?></td>
+					<td><?=$row->getVille()?></td>
+					<td><?=$row->getRue()?></td>
+					<td><?=$row->getDepartement()?></td>
+					<td><?=$row->getRegions()?></td>
 					<td>
-						<a class="button-Update" href="/update-type?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
-						<a class="button-Delete" href="/delete-type?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
+						<a class="button-Update" href="/update-annonce?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
+						<a class="button-Delete" href="/delete-annonce?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>

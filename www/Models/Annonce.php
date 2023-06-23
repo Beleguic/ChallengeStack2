@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Core\SQL;
-class Type extends SQL
+class Annonce extends SQL
 {
     private Int $id = 0;
     protected String $id_hash;
@@ -11,7 +11,7 @@ class Type extends SQL
     protected String $titre;
     protected Int $prix;
     protected Int $superficieMaison;
-    protected Int $SuperficieTerrain;
+    protected Int $superficieTerrain;
     protected Int $nbrPiece;
     protected Int $nbrChambre;
     //addresse
@@ -31,12 +31,13 @@ class Type extends SQL
         $array['id'] = $this->getId();
         $array['id_hash'] = $this->getIdHash();
         $array['id_type'] = $this->getIdType();
+        $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
         $array['superficieMaison'] = $this->getSuperficieMaison();
-        $array['SuperficieTerrain'] = $this->getSuperficieTerrain();
+        $array['superficieTerrain'] = $this->getSuperficieTerrain();
         $array['nbrPiece'] = $this->getNbrPiece();
         $array['nbrChambre'] = $this->getNbrChambre();
-        $array['ville'] = $this->getPrix();
+        $array['ville'] = $this->getVille();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
         $array['regions'] = $this->getRegions();
@@ -88,8 +89,6 @@ class Type extends SQL
     public function setRegions(String $regions): void
     {
         $this->regions = $regions;
-
-        return $this;
     }
 
     /**
@@ -108,8 +107,6 @@ class Type extends SQL
     public function setIdType(Int $id_type): void
     {
         $this->id_type = $id_type;
-
-        return $this;
     }
 
     /**
@@ -128,8 +125,6 @@ class Type extends SQL
     public function setTitre(String $titre): void
     {
         $this->titre = $titre;
-
-        return $this;
     }
 
     /**
@@ -148,8 +143,6 @@ class Type extends SQL
     public function setPrix(Int $prix): void
     {
         $this->prix = $prix;
-
-        return $this;
     }
 
     /**
@@ -168,8 +161,6 @@ class Type extends SQL
     public function setSuperficieMaison(Int $superficieMaison): void
     {
         $this->superficieMaison = $superficieMaison;
-
-        return $this;
     }
 
     /**
@@ -177,7 +168,7 @@ class Type extends SQL
      */
     public function getSuperficieTerrain(): Int
     {
-        return $this->SuperficieTerrain;
+        return $this->superficieTerrain;
     }
 
     /**
@@ -185,11 +176,9 @@ class Type extends SQL
      *
      * @return self
      */
-    public function setSuperficieTerrain(Int $SuperficieTerrain): void
+    public function setSuperficieTerrain(Int $superficieTerrain): void
     {
-        $this->SuperficieTerrain = $SuperficieTerrain;
-
-        return $this;
+        $this->superficieTerrain = $superficieTerrain;
     }
 
     /**
@@ -208,8 +197,6 @@ class Type extends SQL
     public function setNbrPiece(Int $nbrPiece): void
     {
         $this->nbrPiece = $nbrPiece;
-
-        return $this;
     }
 
     /**
@@ -228,8 +215,6 @@ class Type extends SQL
     public function setNbrChambre(Int $nbrChambre): void
     {
         $this->chambre = $chambre;
-
-        return $this;
     }
 
     /**
@@ -248,8 +233,6 @@ class Type extends SQL
     public function setVille(String $ville): void
     {
         $this->ville = $ville;
-
-        return $this;
     }
 
     /**
@@ -268,8 +251,6 @@ class Type extends SQL
     public function setRue(String $rue): void
     {
         $this->rue = $rue;
-
-        return $this;
     }
 
     /**
@@ -288,8 +269,6 @@ class Type extends SQL
     public function setDepartement(String $departement): void
     {
         $this->departement = $departement;
-
-        return $this;
     }
 
 }
