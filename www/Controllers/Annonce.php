@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
+use App\Models\v_Annonce as v_AnnonceModel;
 use App\Models\Type as TypeModel;
 
 class Annonce
@@ -15,7 +16,7 @@ class Annonce
 
         $view = new View("Annonce/annonce-view", "back");
 
-        $annonce = new AnnonceModel();
+        $annonce = new v_AnnonceModel();
         
         
         //$formDel = new TypeForm(); // genere le model Type (Formulaire Delete)
@@ -71,18 +72,20 @@ class Annonce
         // envoie les information du formulaire a la view
         $view->assign("typeList", $type->getSelectInfo());
         $view->assign("formAdd", $formAdd->getConfigAdd()); 
-
+        var_dump($_POST);
         if($formAdd->isSubmited() && $formAdd->isValid()){
+            $annonce->setIdHash();
             $annonce->setTitre($_POST['titre']);
+            $annonce->setIdType($_POST['id_type']);
             $annonce->setPrix($_POST['prix']);
-            $annonce->setPrix($_POST['superficieMaison']);
-            $annonce->setPrix($_POST['superficieTerrain']);
-            $annonce->setPrix($_POST['nbrPiece']);
-            $annonce->setPrix($_POST['nbrChambre']);
-            $annonce->setPrix($_POST['ville']);
-            $annonce->setPrix($_POST['rue']);
-            $annonce->setPrix($_POST['departement']);
-            $annonce->setPrix($_POST['regions']);
+            $annonce->setSuperficieMaison($_POST['superficieMaison']);
+            $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
+            $annonce->setNbrPiece($_POST['nbrPiece']);
+            $annonce->setNbrChambre($_POST['nbrChambre']);
+            $annonce->setVille($_POST['ville']);
+            $annonce->setRue($_POST['rue']);
+            $annonce->setDepartement($_POST['departement']);
+            $annonce->setRegions($_POST['regions']);
             
             $annonce->save();
             header('location: /view-annonce');

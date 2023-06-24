@@ -109,10 +109,12 @@ abstract class SQL{
                     " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
             }else{
                 echo('here3');
+
                 $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                     " (".implode("," , array_keys($columns) ).") 
                 VALUES
                  (:".implode(",:" , array_keys($columns) ).") ");
+                var_dump($queryPrepared);
             }
             $queryPrepared->execute($columns);
         }

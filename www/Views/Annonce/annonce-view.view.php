@@ -36,12 +36,13 @@
 	</dialog>-->
 	<a href="/">Accueil</a>
 	<a href="/add-annonce">Ajouter une nouvelle annonce</a>
-	<div style="width: 60%; margin: auto;">
+	<div style="width: 80%; margin: auto;">
 		<table id='tableType' >	
 			<thead>
 				<tr>	
 					<th> Titre </th>
 					<th> Prix </th>
+					<th> Type </th>
 					<th> Superficie Maison </th>
 					<th> Superficie Terrain </th>
 					<th> Nombre de pieces </th>
@@ -57,18 +58,18 @@
 				<tr>
 					<td><?=$row->getTitre()?></td>
 					<td><?=$row->getPrix()?></td>
-					<td><?=$row->getSuperficieMaison()?></td>
-					<td><?=$row->getSuperficieTerrain()?></td>
-					<td><?=$row->getNbrPiece()?></td>
-					<td><?=$row->getNbrChambre()?></td>
-					<td><?=$row->getNbrChambre()?></td>
+					<td><?=$row->getTexte()?></td>
+					<td><?=$row->getSuperficiemaison()?></td>
+					<td><?=$row->getSuperficieterrain()?></td>
+					<td><?=$row->getNbrpiece()?></td>
+					<td><?=$row->getNbrchambre()?></td>
 					<td><?=$row->getVille()?></td>
 					<td><?=$row->getRue()?></td>
 					<td><?=$row->getDepartement()?></td>
 					<td><?=$row->getRegions()?></td>
 					<td>
-						<a class="button-Update" href="/update-annonce?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
-						<a class="button-Delete" href="/delete-annonce?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
+						<a class="button-Update" href="/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
+						<a class="button-Delete" href="/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>

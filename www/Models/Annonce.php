@@ -10,10 +10,10 @@ class Annonce extends SQL
     protected Int $id_type;
     protected String $titre;
     protected Int $prix;
-    protected Int $superficieMaison;
-    protected Int $superficieTerrain;
-    protected Int $nbrPiece;
-    protected Int $nbrChambre;
+    protected Int $superficiemaison;
+    protected Int $superficieterrain;
+    protected Int $nbrpiece;
+    protected Int $nbrchambre;
     //addresse
     protected String $ville;
     protected String $rue;
@@ -33,10 +33,10 @@ class Annonce extends SQL
         $array['id_type'] = $this->getIdType();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
-        $array['superficieMaison'] = $this->getSuperficieMaison();
-        $array['superficieTerrain'] = $this->getSuperficieTerrain();
-        $array['nbrPiece'] = $this->getNbrPiece();
-        $array['nbrChambre'] = $this->getNbrChambre();
+        $array['superficiemaison'] = $this->getSuperficiemaison();
+        $array['superficieterrain'] = $this->getSuperficieterrain();
+        $array['nbrpiece'] = $this->getNbrpiece();
+        $array['nbrchambre'] = $this->getNbrchambre();
         $array['ville'] = $this->getVille();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
@@ -68,7 +68,7 @@ class Annonce extends SQL
      */
     public function setId(int $id): void
     {
-        $this->setId_Hash();
+        
         $this->id = $id;
     }
 
@@ -148,9 +148,9 @@ class Annonce extends SQL
     /**
      * @return mixed
      */
-    public function getSuperficieMaison(): Int
+    public function getSuperficiemaison(): Int
     {
-        return $this->superficieMaison;
+        return $this->superficiemaison;
     }
 
     /**
@@ -158,17 +158,17 @@ class Annonce extends SQL
      *
      * @return self
      */
-    public function setSuperficieMaison(Int $superficieMaison): void
+    public function setSuperficiemaison(Int $superficiemaison): void
     {
-        $this->superficieMaison = $superficieMaison;
+        $this->superficiemaison = $superficiemaison;
     }
 
     /**
      * @return mixed
      */
-    public function getSuperficieTerrain(): Int
+    public function getSuperficieterrain(): Int
     {
-        return $this->superficieTerrain;
+        return $this->superficieterrain;
     }
 
     /**
@@ -176,17 +176,17 @@ class Annonce extends SQL
      *
      * @return self
      */
-    public function setSuperficieTerrain(Int $superficieTerrain): void
+    public function setSuperficieterrain(Int $superficieterrain): void
     {
-        $this->superficieTerrain = $superficieTerrain;
+        $this->superficieterrain = $superficieterrain;
     }
 
     /**
      * @return mixed
      */
-    public function getNbrPiece(): Int
+    public function getNbrpiece(): Int
     {
-        return $this->nbrPiece;
+        return $this->nbrpiece;
     }
 
     /**
@@ -194,17 +194,17 @@ class Annonce extends SQL
      *
      * @return self
      */
-    public function setNbrPiece(Int $nbrPiece): void
+    public function setNbrpiece(Int $nbrpiece): void
     {
-        $this->nbrPiece = $nbrPiece;
+        $this->nbrpiece = $nbrpiece;
     }
 
     /**
      * @return mixed
      */
-    public function getNbrChambre(): Int
+    public function getNbrchambre(): Int
     {
-        return $this->chambre;
+        return $this->nbrchambre;
     }
 
     /**
@@ -212,9 +212,9 @@ class Annonce extends SQL
      *
      * @return self
      */
-    public function setNbrChambre(Int $nbrChambre): void
+    public function setNbrchambre(Int $nbrchambre): void
     {
-        $this->chambre = $chambre;
+        $this->nbrchambre = $nbrchambre;
     }
 
     /**

@@ -68,7 +68,7 @@ class Type extends SQL
 
     public function getSelectInfo(): object{
 
-        $who = ['id_hash', 'texte'];
+        $who = ['id', 'texte'];
         return $this->getThemWhereAll($who);
 
     }

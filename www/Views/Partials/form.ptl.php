@@ -36,7 +36,7 @@
                                 id="<?= $inputVal["id"] ?>"
                             >
                             <?php while ($row = $this->data[$config["inputs"][$name]['value']]->fetch()): ?>
-                                <option value=<?= $row->getId_Hash() ?>><?= $row->getTexte() ?></option>
+                                <option value=<?= $row->getId() ?>><?= $row->getTexte() ?></option>
                             <?php endwhile; ?>
                             </select>
                         <?php endif;?>
