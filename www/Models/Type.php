@@ -66,10 +66,15 @@ class Type extends SQL
 
     }
 
-    public function getSelectInfo(): object{
+    public function getSelectInfo(): array{
 
         $who = ['id', 'texte'];
-        return $this->getThemWhereAll($who);
+        $selecteInfo = $this->getThemWhereAll($who);
+        $array = [];
+        while ($row = $selecteInfo->fetch()){
+           $array[] = ['value' => $row->getId(), 'content' => $row->getTexte()];
+        }
+        return $array;
 
     }
 

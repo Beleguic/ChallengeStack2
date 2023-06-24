@@ -35,9 +35,9 @@
                                 class="<?= $inputVal["class"] ?>"
                                 id="<?= $inputVal["id"] ?>"
                             >
-                            <?php while ($row = $this->data[$config["inputs"][$name]['value']]->fetch()): ?>
-                                <option value=<?= $row->getId() ?>><?= $row->getTexte() ?></option>
-                            <?php endwhile; ?>
+                            <?php foreach ($this->data[$config["inputs"][$name]['value']] as $types): ?>
+                                <option value=<?= $types['value'] ?>><?= $types['content'] ?></option>
+                            <?php endforeach; ?>
                             </select>
                         <?php endif;?>
                     <?php else: ?>
