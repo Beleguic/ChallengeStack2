@@ -94,7 +94,7 @@ class Annonce
 
     }
 
-    public function updateType(): void
+    public function updateAnnonce(): void
     {
         if(!isset($_GET['id_hash'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
@@ -106,22 +106,26 @@ class Annonce
 
         $formUpd = new AnnonceForm(); // genere le model Type (Formulaire Update)
         $annonce = new AnnonceModel();
+        $type = new TypeModel();
         $annonce = $annonce->populateWithIdHash($_GET["id_hash"]);
         $view->assign("formUpd", $formUpd->getConfigUpdate());
         $view->assign("formUpdDate", $annonce->getConfigObject());
+        $view->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
             $annonce = $annonce->populateWithIdHash($_POST["id_hash"]);
+            $annonce->setIdHash();
             $annonce->setTitre($_POST['titre']);
+            $annonce->setIdType($_POST['id_type']);
             $annonce->setPrix($_POST['prix']);
-            $annonce->setPrix($_POST['superficieMaison']);
-            $annonce->setPrix($_POST['superficieTerrain']);
-            $annonce->setPrix($_POST['nbrPiece']);
-            $annonce->setPrix($_POST['nbrChambre']);
-            $annonce->setPrix($_POST['ville']);
-            $annonce->setPrix($_POST['rue']);
-            $annonce->setPrix($_POST['departement']);
-            $annonce->setPrix($_POST['regions']);
+            $annonce->setSuperficieMaison($_POST['superficieMaison']);
+            $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
+            $annonce->setNbrPiece($_POST['nbrPiece']);
+            $annonce->setNbrChambre($_POST['nbrChambre']);
+            $annonce->setVille($_POST['ville']);
+            $annonce->setRue($_POST['rue']);
+            $annonce->setDepartement($_POST['departement']);
+            $annonce->setRegions($_POST['regions']);
             $annonce->save();
             header('location: /view-annonce');
         }
@@ -129,10 +133,8 @@ class Annonce
 
     }
 
-    public function deleteType(): void
+    public function deleteAnnonce(): void
     {
-
-        var_dump($_POST);
 
         if(!isset($_GET['id_hash'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";

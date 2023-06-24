@@ -36,7 +36,11 @@
                                 id="<?= $inputVal["id"] ?>"
                             >
                             <?php foreach ($this->data[$config["inputs"][$name]['value']] as $types): ?>
-                                <option value=<?= $types['value'] ?>><?= $types['content'] ?></option>
+                                <?php if($inputData[$name] == $types['value']): ?>
+                                    <option value="<?= $types['value'] ?>" selected="selected"><?= $types['content'] ?></option>
+                                <?php else:?>
+                                    <option value="<?= $types['value'] ?>"><?= $types['content'] ?></option>
+                                <?php endif;?>
                             <?php endforeach; ?>
                             </select>
                         <?php endif;?>

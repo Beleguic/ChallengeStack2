@@ -33,10 +33,10 @@ class Annonce extends SQL
         $array['id_type'] = $this->getIdType();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
-        $array['superficiemaison'] = $this->getSuperficiemaison();
-        $array['superficieterrain'] = $this->getSuperficieterrain();
-        $array['nbrpiece'] = $this->getNbrpiece();
-        $array['nbrchambre'] = $this->getNbrchambre();
+        $array['superficieMaison'] = $this->getSuperficiemaison();
+        $array['superficieTerrain'] = $this->getSuperficieterrain();
+        $array['nbrPiece'] = $this->getNbrpiece();
+        $array['nbrChambre'] = $this->getNbrchambre();
         $array['ville'] = $this->getVille();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();

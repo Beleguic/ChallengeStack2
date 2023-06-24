@@ -114,7 +114,6 @@ abstract class SQL{
                     " (".implode("," , array_keys($columns) ).") 
                 VALUES
                  (:".implode(",:" , array_keys($columns) ).") ");
-                var_dump($queryPrepared);
             }
             $queryPrepared->execute($columns);
         }
