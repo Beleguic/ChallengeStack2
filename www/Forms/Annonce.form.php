@@ -12,33 +12,67 @@ class Annonce extends Validator
             "config"=>[
                 "method"=>$this->method,
                 "action"=>"",
-                "id"=>"type-form",
+                "id"=>"annonce-form",
                 "class"=>"form-add",
                 "enctype"=>"",
-                "submit"=>["Ajouter le type d'annonce"],
+                "submit"=>["Ajouter l'annonce"],
                 "reset"=>"Annuler"
             ],
             "divs"=>[
-                "div-texte" =>[
+                "div-titre" =>[
                     "id" => "div-type-texte",
                     "class" => "div-form-100",
-                    "inside" => ["texte"]
+                    "inside" => ["titre"]
+                ],
+                "div-prix" =>[
+                    "id" => "div-type-texte",
+                    "class" => "div-form-100",
+                    "inside" => ["prix","id_type"]
                 ],
             ],
             "inputs"=>[
-                "texte"=>[
-                    "id"=>"type-form-texte",
+                "titre"=>[
+                    "id"=>"type-form-titre",
                     "class"=>"form-input",
-                    "placeholder"=>"Type d'annonce",
+                    "placeholder"=>"Titre de l'annonce",
                     "type"=>"text",
+                    "error"=>"Le titre d'annonce est incorrect",
+                    "label" =>[
+                        "for" => "Type-form-titre",
+                        "id" => "label-Type-form-titre",
+                        "class" => "form-label",
+                        "value" => "Titre"
+                    ],
+                    "value"=>"",
+                    "required"=>true
+                ],
+                "prix"=>[
+                    "id"=>"type-form-prix",
+                    "class"=>"form-input",
+                    "placeholder"=>"Prix de l'annonce",
+                    "type"=>"number",
+                    "error"=>"Le prix d'annonce est incorrect",
+                    "label" =>[
+                        "for" => "Type-form-prix",
+                        "id" => "label-Type-form-prix",
+                        "class" => "form-label",
+                        "value" => "Prix"
+                    ],
+                    "value"=>"",
+                    "required"=>true
+                ],
+                "id_type"=>[
+                    "balise" => "select",
+                    "id"=>"type-form-id-type",
+                    "class"=>"form-input",
                     "error"=>"Le type d'annonce est incorrect",
                     "label" =>[
-                        "for" => "Type-form-texte",
-                        "id" => "label-Type-form-texte",
+                        "for" => "Type-form-id-type",
+                        "id" => "label-Type-form-id-type",
                         "class" => "form-label",
                         "value" => "Type d'annonce"
                     ],
-                    "value"=>"",
+                    "value"=>"typeList",
                     "required"=>true
                 ],
             ]
@@ -121,6 +155,10 @@ class Annonce extends Validator
         ];
         return $this->config;
     }
-}
 
-https://www.google.fr?q=maeecherche
+    function getOptionFromSelect($table){
+
+
+
+    }
+}

@@ -28,28 +28,42 @@
                         </label>
                     <?php endif;?>
                     <?php $inputVal = $config["inputs"][$name]; ?>
-                    <input
-                        name="<?= $name ?>"
-                        placeholder="<?= $inputVal["placeholder"] ?>"
-                        class="<?= $inputVal["class"] ?>"
-                        id="<?= $inputVal["id"] ?>"
-                        type="<?= $inputVal["type"] ?>"
-                        <?php   
-                            if(!isset($inputData[$name])){
-                                if(!isset($inputVal['value'])){
-                                    $value = "";
+                    <?php if(isset($config["inputs"][$name]['balise'])): ?>
+                        <?php if($config["inputs"][$name]['balise'] == "select"): ?>
+                            <select
+                                name="<?= $name ?>"
+                                class="<?= $inputVal["class"] ?>"
+                                id="<?= $inputVal["id"] ?>"
+                            >
+                            <?php while ($row = $this->data[$config["inputs"][$name]['value']]->fetch()): ?>
+                                <option value=<?= $row->getId_Hash() ?>><?= $row->getTexte() ?></option>
+                            <?php endwhile; ?>
+                            </select>
+                        <?php endif;?>
+                    <?php else: ?>
+                        <input
+                            name="<?= $name ?>"
+                            placeholder="<?= $inputVal["placeholder"] ?>"
+                            class="<?= $inputVal["class"] ?>"
+                            id="<?= $inputVal["id"] ?>"
+                            type="<?= $inputVal["type"] ?>"
+                            <?php   
+                                if(!isset($inputData[$name])){
+                                    if(!isset($inputVal['value'])){
+                                        $value = "";
+                                    }
+                                    else{
+                                        $value = $inputVal['value'];
+                                    }
                                 }
                                 else{
-                                    $value = $inputVal['value'];
+                                    $value = $inputData[$name];
                                 }
-                            }
-                            else{
-                                $value = $inputData[$name];
-                            }
-                        ?>
-                        value="<?= $value ?>"
-                        <?= $inputVal["required"]?"required":"" ?>
-                    >
+                            ?>
+                            value="<?= $value ?>"
+                            <?= $inputVal["required"]?"required":"" ?>
+                        >
+                    <?php endif;?>
                 <?php endif;?>
              <?php endforeach;?>
         <?php endif;?>

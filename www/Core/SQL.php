@@ -71,6 +71,15 @@ abstract class SQL{
         return $queryPrepared;
     }
 
+    public function getThemWhereAll(array $who): object{
+
+        $queryPrepared = $this->pdo->prepare("SELECT ".implode(' , ', $who). " FROM ".$this->table.";"); 
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared;
+
+    }
+
 
     public function save($del=''): void
     {

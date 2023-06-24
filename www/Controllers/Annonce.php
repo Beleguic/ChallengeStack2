@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
+use App\Models\Type as TypeModel;
 
 class Annonce
 
@@ -62,9 +63,13 @@ class Annonce
         $view = new View("Annonce/annonce-add", "back"); // vue ajout type
 
         $formAdd = new AnnonceForm(); // genere le model Type (Formulaire Ajout)
+        //var_dump($formAdd);
+        //var_dump($formAdd->getConfigAdd());
         $annonce = new AnnonceModel(); // miroir BDD de la table type
+        $type = new TypeModel();
 
         // envoie les information du formulaire a la view
+        $view->assign("typeList", $type->getSelectInfo());
         $view->assign("formAdd", $formAdd->getConfigAdd()); 
 
         if($formAdd->isSubmited() && $formAdd->isValid()){

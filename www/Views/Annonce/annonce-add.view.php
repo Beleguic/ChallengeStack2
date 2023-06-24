@@ -1,6 +1,6 @@
 	<?php
 
-	// View : Formlaire de l'ajout d'un type de bien
+	// View : Formlaire de l'ajout d'une annonce
 
 	?>
 
