@@ -5,6 +5,7 @@
 namespace App\Controllers;
 use App\Core\Application;
 use App\Core\Controller;
+use App\Core\Request;
 
 
 class SiteController extends Controller
@@ -25,9 +26,13 @@ class SiteController extends Controller
         return $this->render("home",$params);
     }
 
-    static function handleContact()
+    static function handleContact(Request $request)
     {
-        return "envoie de la donnée";
+        $body=Application::$app->request->getBody();
+        echo '<pre>';
+        var_dump($body);
+        echo '</pre>';
+        return "envoie de la doSnnée";
     }
 
 

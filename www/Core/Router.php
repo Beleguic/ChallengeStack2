@@ -43,7 +43,7 @@
                 $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
            
-            return call_user_func($callback);
+            return call_user_func($callback,$this->request);
         }
 
 

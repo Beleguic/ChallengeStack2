@@ -21,6 +21,26 @@
             return strtolower($_SERVER['REQUEST_METHOD']);
         }
 
+        public function getBody()
+        {
+            $body = [];
+            if($this->getMethod() === 'get'){
+                foreach($_GET as $key => $value){
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                }
+            }
+
+            if($this->getMethod() === 'post'){
+            echo "samiut";
+                foreach($_POST as $key => $value){
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                }
+            }
+
+            return $body;
+        }
+
 
 
 
