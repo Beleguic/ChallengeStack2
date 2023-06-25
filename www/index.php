@@ -29,8 +29,11 @@
 
 
     $app->router->get('/', [SiteController::class ,"home"]);
+    
+    
 
     $app->router->get('/contact',[SiteController::class ,"contact"]);
+    $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 
     $app->router->post('/contact',[SiteController::class ,'handleContact']);
     

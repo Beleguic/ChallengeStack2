@@ -10,10 +10,15 @@ use App\Core\Controller;
 class SiteController extends Controller
 {
 
-    public function contact()
+    public function contact($id )
     {
+        echo "<pre>";
+        var_dump($id);
+        echo "</pre>";
         return $this->render("contact");
     }
+
+    
 
 
 
