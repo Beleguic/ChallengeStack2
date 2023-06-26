@@ -46,9 +46,26 @@
   </main>
   <!-- END : Main Content -->
 
+  <!-- BEGIN: Footer -->
   <footer>
-    <p class="text-center">&copy Copyright 2023 - All Right Reserved </p>
-  </footer>
+  <div class="container-fluid py-5 bg-darker-blue">
+    <section class="newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h2 class="text-center text-light mb-4">Inscrivez-vous à notre newsletter</h2>
+            <form class="row g-3">
+              <div class="col-sm-8">
+                <input type="email" class="form-control" placeholder="Votre adresse e-mail" required>
+              </div>
+              <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
   <!-- Script JS -->
   <script src="../asset/js/bootstrap.js"></script>
@@ -65,5 +82,16 @@
       }
     });
   </script> -->
+    <hr class="text-light my-5">
+
+    <div class="text-center">
+      <a href="#" class="text-decoration-none text-white" data-bs-toggle="modal" data-bs-target="#mentionsLegales">Mentions légales</a>
+    </div>
+    <p class="text-light text-center">&copy; 2023 Moving House | All Right Reserved</p>
+  </div>
+</footer>
+<!-- END: Footer -->
+
+ 
 </body>
 </html>
