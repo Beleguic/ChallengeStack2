@@ -32,3 +32,44 @@ s-inscrire:
   controller: Auth
   action: register
   level_auth: 0
+
+view-type:
+  controller: Type
+  action: viewType
+  level_auth: 0
+
+add-type:
+  controller: Type
+  action: addType
+  level_auth: 0
+
+update-type:
+  controller: Type
+  action: updateType
+  level_auth: 0
+
+delete-type:
+  controller: Type
+  action: deleteType
+  level_auth: 0
+
+view-annonce:
+  controller: Annonce
+  action: viewAnnonce
+  level_auth: 0
+
+add-annonce:
+  controller: Annonce
+  action: addAnnonce
+  level_auth: 0
+
+update-annonce:
+  controller: Annonce
+  action: updateAnnonce
+  level_auth: 0
+
+delete-annonce:
+  controller: Annonce
+  action: deleteAnnonce
+  level_auth: 0
+

@@ -5,6 +5,7 @@ abstract class SQL{
 
     private $pdo;
     private $table;
+    private $resultat = [];
 
     public function __construct()
     {
@@ -35,6 +36,13 @@ abstract class SQL{
         return $objet->getOneWhere(["email"=>$email]);
     }
 
+    public static function populateWithIdHash(String $id_hash): object
+    {
+        $class = get_called_class();
+        $objet = new $class();
+        return $objet->getOneWhere(["id_hash"=>$id_hash]);
+    }
+
     public function getOneWhere(array $where): object
     {
         $sqlWhere = [];
@@ -51,32 +59,72 @@ abstract class SQL{
         else{
             return $obj = (object) ['property' => 'pas de resultat'];
         }
+        
         //return $queryPrepared->fetch();
     }
 
-
-    public function save(): void
+    public function getAll(): object
     {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table);
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared;
+    }
+
+    public function getThemWhereAll(array $who): object{
+
+        $queryPrepared = $this->pdo->prepare("SELECT ".implode(' , ', $who). " FROM ".$this->table.";"); 
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared;
+
+    }
+
+
+    public function save($del=''): void
+    {
+
+        echo('here1');
+
         $columns = get_object_vars($this);
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
-        if(is_numeric($this->getId()) && $this->getId()>0) {
-            $sqlUpdate = [];
-            foreach ($columns as $column=>$value) {
-                $sqlUpdate[] = $column."=:".$column;
+        if($del == 'del'){
+            echo('here4');
+            if(is_numeric($this->getId()) && $this->getId()>0) { 
+                // Prepare et execute la requete de suppression
+                $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table.
+                    " WHERE id =?;")->execute([$this->getId()]);
             }
-            $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
-                " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
-        }else{
-            $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
-                " (".implode("," , array_keys($columns) ).") 
-            VALUES
-             (:".implode(",:" , array_keys($columns) ).") ");
+        }
+        else{
+            if(is_numeric($this->getId()) && $this->getId()>0) {
+                echo('here2');
+                $sqlUpdate = [];
+                foreach ($columns as $column=>$value) {
+                    $sqlUpdate[] = $column."=:".$column;
+                }
+                $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
+                    " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
+            }else{
+                echo('here3');
+
+                $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
+                    " (".implode("," , array_keys($columns) ).") 
+                VALUES
+                 (:".implode(",:" , array_keys($columns) ).") ");
+            }
+            $queryPrepared->execute($columns);
         }
 
-        $queryPrepared->execute($columns);
 
     }
+
+    function getResultat(){
+        return $this->resultat;
+    }
+
+    public abstract function getConfigObject();
 
 }

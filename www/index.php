@@ -1,5 +1,6 @@
 <?php
 
+
     namespace App;
 
     use App\Controllers\SiteController;
@@ -23,6 +24,32 @@
             include $classForm;
         }
     });
+
+/*
+
+
+Level Authentificatioin
+    - 0 : Utilisateur anonyme
+    - 1 : Utilisateur Lambda
+    - 2 : Utilisateur Annonceur
+    - 3 : Utilisateur Admin 
+
+
+
+// Recuperation info de connection
+if(isset($_SESSION['zfgh_login'])){
+    if($_SESSION['zfgh_login']['connected']){
+        $level_auth_user = $_SESSION['zfgh_login']['status'];
+    }
+    else{
+        $level_auth_user = 0;    
+    }
+}
+else{
+    $level_auth_user = 0;   
+}
+
+*/
 
     $app = new Application();
 

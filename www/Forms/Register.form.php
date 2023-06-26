@@ -18,6 +18,23 @@ class Register extends Validator
                     "submit"=>"Nous rejoindre",
                     "reset"=>"Annuler"
                 ],
+                "divs"=>[
+                    "div-firstname-lastname" =>[
+                        "id" => "div-register-firstname-lastname",
+                        "class" => "div-form-50",
+                        "inside" => ["firstname","lastname"]
+                    ],
+                    "div-email" =>[
+                        "id" => "div-register-email",
+                        "class" => "div-form-100",
+                        "inside" => ["email"]
+                    ],
+                    "div-pwd" =>[
+                        "id" => "div-register-pwd",
+                        "class" => "div-form-50",
+                        "inside" => ["pwd", "pwdConfirm"]
+                    ],
+                ],
                 "inputs"=>[
                     "firstname"=>[
                         "id"=>"register-form-firstname",
@@ -27,6 +44,12 @@ class Register extends Validator
                         "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                         "min"=>2,
                         "max"=>60,
+                        "label" =>[
+                            "for" => "register-form-firstname",
+                            "id" => "label-register-form-firstname",
+                            "class" => "form-label",
+                            "value" => "Prenom"
+                        ],
                         "required"=>true
                     ],
                     "lastname"=>[
@@ -37,31 +60,61 @@ class Register extends Validator
                         "error"=>"Votre nom doit faire entre 2 et 120 caractères",
                         "min"=>2,
                         "max"=>120,
+                        "label" =>[
+                            "for" => "register-form-lastname",
+                            "id" => "label-register-form-lastname",
+                            "class" => "form-label",
+                            "value" => "Nom"
+                        ],
                         "required"=>true
                     ],
                     "email"=>[
+                        "balise" => "input",
                         "id"=>"register-form-email",
                         "class"=>"form-input",
                         "placeholder"=>"Votre email",
                         "type"=>"email",
                         "error"=>"Votre email est incorrect",
+                        "label" =>[
+                            "balise" => "label",
+                            "for" => "register-form-email",
+                            "id" => "label-register-form-email",
+                            "class" => "form-label",
+                            "value" => "Adresse mail"
+                        ],
                         "required"=>true
                     ],
                     "pwd"=>[
+                        "balise" => "input",
                         "id"=>"register-form-pwd",
                         "class"=>"form-input",
                         "placeholder"=>"Votre mot de passe",
                         "type"=>"password",
                         "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
+                        "label" =>[
+                            "balise" => "label",
+                            "for" => "register-form-pwd",
+                            "id" => "label-register-form-pwd",
+                            "class" => "form-label",
+                            "value" => "Mot de passe"
+                        ],
                         "required"=>true
                     ],
                     "pwdConfirm"=>[
+                        "balise" => "input",
                         "id"=>"register-form-pwd-confirm",
                         "class"=>"form-input",
                         "placeholder"=>"Confirmation",
                         "type"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
                         "required"=>true,
+                        "label" =>[
+                            "balise" => "label",
+                            "for" => "register-form-pwd-confirm",
+                            "id" => "label-register-form-pwd-confirm",
+                            "class" => "form-label",
+                            "value" => "Confirmation du mot de passe"
+                        ],
                         "confirm"=>"pwd"
                     ],
                 ]
