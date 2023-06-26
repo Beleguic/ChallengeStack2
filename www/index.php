@@ -4,6 +4,7 @@
     namespace App;
 
     use App\Controllers\SiteController;
+    use App\Controllers\Main;
     use App\Core\Application;
 
     //require "Core/View.php";
@@ -55,8 +56,7 @@ else{
 
 
 
-    $app->router->get('/', [SiteController::class ,"home"]);
-    
+    $app->router->get('/', [Main::class ,"home"]);
     
 
     $app->router->get('/contact',[SiteController::class ,"contact"]);
