@@ -7,6 +7,33 @@
         protected array $routes = [];
         public Request $request;
         public Response $response;
+        private $test = "LALALALALALALALA@@@@@@@@@";
+
+        private String $view;
+        private String $template;
+
+        /**
+         * @param String $view
+         */
+        public function setView(string $view): void
+        {
+            $this->view = "Views/".$view.".view.php";
+            if(!file_exists($this->view)){
+                die("La vue ".$this->view." n'existe pas");
+            }
+        }
+
+        /**
+         * @param String $template
+         */
+        public function setTemplate(string $template): void
+        {
+            $this->template = "Views/".$template.".tpl.php";
+            if(!file_exists($this->template)){
+                die("Le template ".$this->template." n'existe pas");
+            }
+        }
+        
 
 
         public function __construct(Request $request,Response $response){
@@ -49,19 +76,18 @@
 
 
             if($callback ===false){
-                $this->response->setStatutCode(404);
-                return $this->renderView("_404");
+                $this->diePage("testlala");
             }
           
             if(is_string($callback)){
-                return $this->renderView($callback);
+                return $this->renderView($callback,"front");
             }
 
             if(is_array($callback)){
                 $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
         
-            return call_user_func($callback,$params);
+            return call_user_func($callback,$params="");
         }
 
         private function convertToRegex($route)
@@ -73,24 +99,18 @@
             return $pattern;
         }
 
-        public function renderView($view,$params =[]){
-
-            $layoutContent = $this->layoutContent();
+        public function renderView($view,$template,$params = []){
+            $layoutContent = $this->layoutContent($template);
             $viewContent = $this->renderOnlyView($view,$params);
             return str_replace('{{content}}', $viewContent, $layoutContent);
         }
 
-        public function renderContent($viewContent){
 
-            $layoutContent = $this->layoutContent();
-            return str_replace('{{content}}', $viewContent, $layoutContent);
-        }
-
-
-        protected function layoutContent()
+        protected function layoutContent($template)
         {
             ob_start();
-            include "Views/layout/main.php";
+            
+            include $template;
             return ob_get_clean();
         }
 
@@ -100,9 +120,30 @@
                 $$key = $value;
             }
             ob_start();
-            include "Views/" . $view . ".php";
+
+            include $view;
             return ob_get_clean();
+            
+            
         }
+
+        // Genere le formulaire
+        public function partial(String $name, array $config, array $inputData=[] ,$errors = [],): void
+        {
+            if(!file_exists("Views/Partials/".$name.".ptl.php")){
+                //die("Le partial ".$name." n'existe pas");
+            }
+            include "Views/Partials/".$name.".ptl.php";
+        }
+/*
+        public function diePage($message=""){
+            echo('je passe dans le die page <br>');
+            //$message = ["code404" => $message];
+
+            $this->response->setStatutCode(404);
+            return $this->renderView("_404","front");
+
+        }*/
 
 
 

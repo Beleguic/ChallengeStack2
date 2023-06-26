@@ -5,6 +5,7 @@
 namespace App\Controllers;
 use App\Core\Application;
 use App\Core\Controller;
+use App\Forms\Annonce as AnnonceForm;
 
 
 class SiteController extends Controller
@@ -27,7 +28,15 @@ class SiteController extends Controller
         $params = [
             'name' => "Afonso Jason"
         ];
-        return $this->render("home",$params);
+        $formAdd = new AnnonceForm();
+
+        $this->assign("test",$params);
+        $this->assign("formAdd", $formAdd->getConfigAdd()); 
+
+        $this->setTemplate("front");
+        $this->setView("home");
+        
+        return $this->render();
     }
 
     static function handleContact()

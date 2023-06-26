@@ -4,6 +4,7 @@
     namespace App;
 
     use App\Controllers\SiteController;
+    use App\Controllers\Main;
     use App\Core\Application;
 
     //require "Core/View.php";

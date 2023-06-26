@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\View;
 
-class Main
+class Main extends Controller
 {
     public function home(): void
     {
