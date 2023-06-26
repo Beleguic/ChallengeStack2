@@ -7,7 +7,8 @@
         protected array $routes = [];
         public Request $request;
         public Response $response;
-        private $test = "LALALALALALALALA@@@@@@@@@";
+
+        private $data = [];
 
         private String $view;
         private String $template;
@@ -56,7 +57,8 @@
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callback = $this->routes[$method][$path] ?? false;
-            
+            echo("<pre>");
+            var_dump($this->routes);
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
         
@@ -76,11 +78,13 @@
 
 
             if($callback ===false){
-                $this->diePage("testlala");
+                $this->response->setStatutCode(404);
+                return $this->renderView("Views/_404.php","Views/layout/front.tpl.php");
             }
           
             if(is_string($callback)){
-                return $this->renderView($callback,"front");
+                echo("@@@@@@@@@@@@@@@@@@@@@@@@ Probleme, si ce message s'affiche, le dire sur discord Merci (Ligne 84 du Router.php @@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                return $this->renderView("View/".$callback.".php","Views/layout/front.tpl.php");
             }
 
             if(is_array($callback)){
@@ -100,8 +104,9 @@
         }
 
         public function renderView($view,$template,$params = []){
+            $this->data = $params;
             $layoutContent = $this->layoutContent($template);
-            $viewContent = $this->renderOnlyView($view,$params);
+            $viewContent = $this->renderOnlyView($view);
             return str_replace('{{content}}', $viewContent, $layoutContent);
         }
 
@@ -109,18 +114,13 @@
         protected function layoutContent($template)
         {
             ob_start();
-            
             include $template;
             return ob_get_clean();
         }
 
-        protected function renderOnlyView($view,$params){
+        protected function renderOnlyView($view){
 
-            foreach($params as $key => $value){
-                $$key = $value;
-            }
             ob_start();
-
             include $view;
             return ob_get_clean();
             

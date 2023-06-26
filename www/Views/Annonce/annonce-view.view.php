@@ -35,7 +35,7 @@
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
 	<a href="/">Accueil</a>
-	<a href="/add-annonce">Ajouter une nouvelle annonce</a>
+	<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
 	<div style="width: 80%; margin: auto;">
 		<table id='tableType' >	
 			<thead>
@@ -68,8 +68,8 @@
 					<td><?=$row->getDepartement()?></td>
 					<td><?=$row->getRegions()?></td>
 					<td>
-						<a class="button-Update" href="/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
-						<a class="button-Delete" href="/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
@@ -77,9 +77,9 @@
 		</table>
 	</div>
 
-	<script src='./asset/js/jquery.js'></script>
-	<script src='./asset/js/dataTable.min.js'></script>
-	<link rel="stylesheet" type="text/css" href="./asset/css/dataTable.min.css">
+	<script src='/asset/js/jquery.js'></script>
+	<script src='/asset/js/dataTable.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="/asset/css/dataTable.min.css">
 
 	<script>
 

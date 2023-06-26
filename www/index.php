@@ -5,6 +5,9 @@
 
     use App\Controllers\SiteController;
     use App\Controllers\Main;
+    use App\Controllers\Auth;
+    use App\Controllers\Annonce;
+    use App\Controllers\Type;
     use App\Core\Application;
 
     //require "Core/View.php";
@@ -57,12 +60,20 @@ else{
 
 
     $app->router->get('/', [Main::class ,"home"]);
+    // Route annonce back
+    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);
+    $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
+    $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);
+    $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"]);
+    $app->router->get('/back/type', [Type::class ,"viewType"]);
+    $app->router->get('/se-connecter', [Auth::class ,"login"]);
+    $app->router->get('/s-inscrire', [Auth::class ,"register"]);
     
 
-    $app->router->get('/contact',[SiteController::class ,"contact"]);
+    /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 
-    $app->router->post('/contact',[SiteController::class ,'handleContact']);
+    $app->router->post('/contact',[SiteController::class ,'handleContact']);*/
     
 
 

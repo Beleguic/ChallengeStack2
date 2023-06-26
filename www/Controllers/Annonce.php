@@ -1,24 +1,29 @@
 <?php
 
 namespace App\Controllers;
+use App\Core\Controller;
 
-use App\Core\View;
+//use App\Core\View;
 use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
 use App\Models\Type as TypeModel;
 
-class Annonce
+class Annonce extends Controller
 
 {
-    public function viewAnnonce(): void
+    public function viewAnnonce(): String
     {
 
-        $view = new View("Annonce/annonce-view", "back");
+        //$view = new View("Annonce/annonce-view", "back");
+        $this->setView("Annonce/annonce-view");
+        $this->setTemplate("back");
 
         $annonce = new v_AnnonceModel();
+
+        $this->assign("annonceList", $annonce->getAll());
         
-        
+        return $this->render();
         //$formDel = new TypeForm(); // genere le model Type (Formulaire Delete)
         
          
@@ -54,25 +59,23 @@ class Annonce
             $view->assign("formErrors", $formAdd->errors);
         }*/
 
-        $view->assign("annonceList", $annonce->getAll());
+       
         //Permet de Visualiser les donnée de Type
 
     }
 
-    public function addAnnonce(): void
+    public function addAnnonce(): String
     {
-        $view = new View("Annonce/annonce-add", "back"); // vue ajout type
+        $this->setView("Annonce/annonce-add"); // vue ajout type
+        $this->setTemplate("back");
 
         $formAdd = new AnnonceForm(); // genere le model Type (Formulaire Ajout)
-        //var_dump($formAdd);
-        //var_dump($formAdd->getConfigAdd());
         $annonce = new AnnonceModel(); // miroir BDD de la table type
         $type = new TypeModel();
 
         // envoie les information du formulaire a la view
-        $view->assign("typeList", $type->getSelectInfo());
-        $view->assign("formAdd", $formAdd->getConfigAdd()); 
-        var_dump($_POST);
+        $this->assign("typeList", $type->getSelectInfo());
+        $this->assign("formAdd", $formAdd->getConfigAdd()); 
         if($formAdd->isSubmited() && $formAdd->isValid()){
             $annonce->setIdHash();
             $annonce->setTitre($_POST['titre']);
@@ -90,11 +93,12 @@ class Annonce
             $annonce->save();
             header('location: /view-annonce');
         }
-        $view->assign("formErrors", $formAdd->errors);
+        $this->assign("formErrors", $formAdd->errors);
+        return $this->render();
 
     }
 
-    public function updateAnnonce(): void
+    public function updateAnnonce(): String
     {
         if(!isset($_GET['id_hash'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
@@ -102,15 +106,16 @@ class Annonce
             header('location: /view-type');
         }
 
-        $view = new View("Annonce/annonce-update", "back"); // vue ajout type
+        $this->setView("Annonce/annonce-update"); // vue ajout type
+        $this->setTemplate("back");
 
         $formUpd = new AnnonceForm(); // genere le model Type (Formulaire Update)
         $annonce = new AnnonceModel();
         $type = new TypeModel();
         $annonce = $annonce->populateWithIdHash($_GET["id_hash"]);
-        $view->assign("formUpd", $formUpd->getConfigUpdate());
-        $view->assign("formUpdDate", $annonce->getConfigObject());
-        $view->assign("typeList", $type->getSelectInfo());
+        $this->assign("formUpd", $formUpd->getConfigUpdate());
+        $this->assign("formUpdDate", $annonce->getConfigObject());
+        $this->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
             $annonce = $annonce->populateWithIdHash($_POST["id_hash"]);
@@ -129,11 +134,11 @@ class Annonce
             $annonce->save();
             header('location: /view-annonce');
         }
-        $view->assign("formErrors", $formUpd->errors);
-
+        $this->assign("formErrors", $formUpd->errors);
+        return $this->render();
     }
 
-    public function deleteAnnonce(): void
+    public function deleteAnnonce(): String
     {
 
         if(!isset($_GET['id_hash'])){
@@ -142,26 +147,29 @@ class Annonce
             header('location: /view-type');
         }
 
-        $view = new View("Annonce/annonce-delete", "back"); // vue ajout type
+        $this->setView("Annonce/annonce-delete"); // vue ajout type
+        $this->setTemplate("back");
 
         $formDel = new AnnonceForm(); // genere le model Type (Formulaire Update)
         $annonce = new AnnonceModel();
         $annonce = $annonce->populateWithIdHash($_GET["id_hash"]);
-        $view->assign("formDel", $formDel->getConfigDelete());
-        $view->assign("formDelDate", $annonce->getConfigObject());
-
+        $this->assign("formDel", $formDel->getConfigDelete());
+        $this->assign("formDelDate", $annonce->getConfigObject());
+        echo('here');
         if($formDel->isSubmited() && $formDel->isValid()){
+            echo('here');
+
             if($_POST['submit'] == 'Supprimer'){
                 $annonce = $annonce->populateWithIdHash($_POST["id_hash"]);
                 $annonce->save('del');
-                header('location: /view-annonce');
+                header('location: /back/annonce');
             }
             else{
-                header('location: /view-annonce');
+                header('location: /back/annonce');
             }
         }
-        $view->assign("formErrors", $formDel->errors);
-        
+        $this->assign("formErrors", $formDel->errors);
+        return $this->render();
         
     }
 
