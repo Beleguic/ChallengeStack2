@@ -73,3 +73,7 @@ delete-annonce:
   action: deleteAnnonce
   level_auth: 0
 
+annonce-appartement:
+  controller: Main
+  action: annonceAppartement
+  level_auth: 0
