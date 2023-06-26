@@ -56,8 +56,7 @@ else{
 
 
 
-    $app->router->get('/', [SiteController::class ,"home"]);
-    
+    $app->router->get('/', [Main::class ,"home"]);
     
 
     $app->router->get('/contact',[SiteController::class ,"contact"]);

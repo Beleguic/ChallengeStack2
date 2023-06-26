@@ -30,4 +30,8 @@ class Main extends Controller
         echo "Page à propos";
     }
 
+    public function annonceAppartement(): void
+    {
+        $view = new View("Main/annonce-appartement", "front");
+    }
 }
