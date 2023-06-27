@@ -16,8 +16,8 @@
           </div>
           <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi labore totam, numquam ullam accusantium cum odit rem saepe accusamus expedita itaque. Temporibus debitis amet doloremque qui quaerat cupiditate exercitationem aliquam?</p>
           <div class="row">
-            <div class="col-4">
-            <a href="/annonce-appartement" class="btn btn-dark text-light">Voir l'annonce</a>
+            <div class="col-12 col-md-4">
+            <a href="/annonce/Annonce 1" class="btn btn-dark text-light">Voir l'annonce</a>
             </div>
             <div class="col-4">
             <a href="#" class="btn btn-danger text-light">Ajouter au favoris</a>
