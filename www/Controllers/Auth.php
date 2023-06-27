@@ -29,6 +29,7 @@ class Auth extends Controller
                     $_SESSION['zfgh_login']['lastname'] = $user->getLastname();
                     $_SESSION['zfgh_login']['id'] = $user->getId();
                     $_SESSION['zfgh_login']['status'] = $user->getStatus();
+                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
                     //echo "Identifiant Correct";
                     header('location: /?conn=true');
                 } else {
@@ -87,6 +88,57 @@ class Auth extends Controller
         $user = new User();
 
         $this->assign("userList", $user->getAll());
+        
+        return $this->render();
+
+    }
+
+    public function updateUser(): String
+    {
+        $this->setView("Auth/user-update");
+        $this->setTemplate("back");
+
+        $user = new User();
+        $form=new Register();
+        $user = $user->populate($_GET["id"]);
+        $this->assign("formUpd", $form->getConfigUpdate());
+        $this->assign("formUpdDate", $user->getConfigObject());
+
+        if($form->isSubmited() && $form->isValid()){
+            $user = $user->populate($_POST["id"]);
+            $user->setFirstname($_POST['firstname']);
+            $user->setLastname($_POST['lastname']);
+            $user->save();
+            header('location: /back/user');
+        }
+        
+        return $this->render();
+
+    }
+
+    public function deleteUser(): String
+    {
+        $this->setView("Auth/user-delete");
+        $this->setTemplate("back");
+
+        $user = new User();
+        $form=new Register();
+        $user = $user->populate($_GET["id"]);
+        $this->assign("formDel", $form->getConfigDelete());
+        $this->assign("formDelDate", $user->getConfigObject());
+
+        if($form->isSubmited() && $form->isValid()){
+            if($_POST['submit'] == 'Supprimer'){
+                $user = $user->populate($_POST["id"]);
+                $user->save('del');
+                header('location: /back/user');
+            }
+            else{
+                header('location: /back/user');
+            }
+        }
+
+
         
         return $this->render();
 

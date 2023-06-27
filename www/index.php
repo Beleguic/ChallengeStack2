@@ -78,6 +78,10 @@ else{
 
     $app->router->get('/back/user', [Auth::class ,"listUser"]);
     $app->router->post('/back/user', [Auth::class ,"listUser"]);
+    $app->router->get('/back/update-user', [Auth::class ,"updateUser"]);
+    $app->router->post('/back/update-user', [Auth::class ,"updateUser"]);
+    $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"]);
+    $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"]);
 
     $app->router->get('/se-connecter', [Auth::class ,"login"]);
     $app->router->post('/se-connecter', [Auth::class ,"login"]);

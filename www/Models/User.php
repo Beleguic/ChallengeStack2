@@ -15,6 +15,7 @@ class User extends SQL implements SQLInterface
     protected Int $status = 0;
     private ?String $date_inserted;
     private ?String $date_updated;
+    private bool $actif;
 
     public function __construct(){
         $sql = parent::getInstance();
@@ -30,11 +31,12 @@ class User extends SQL implements SQLInterface
         $array['firstname'] = $this->getFirstname();
         $array['lastname'] = $this->getLastname();
         $array['email'] = $this->getEmail();
-        $array['pwd'] = $this->getPwd();
+        //$array['pwd'] = $this->getPwd();
         $array['country'] = $this->getCountry();
         $array['status'] = $this->getStatus();
-        $array['date_inserted'] = $this->getDateInserted();
-        $array['date_updated'] = $this->getDateUpdated();
+        //$array['date_inserted'] = $this->getDateInserted();
+        //$array['date_updated'] = $this->getDateUpdated();
+        $array['actif'] = $this->getActif();
         return $array;
 
     }
@@ -181,6 +183,22 @@ class User extends SQL implements SQLInterface
     public function setDateUpdated(\DateTime $date_updated): void
     {
         $this->date_updated = $date_updated;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getActif(): Int
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param \DateTime $date_updated
+     */
+    public function setActif(bool $actif): void
+    {
+        $this->actif = $actif;
     }
 
 

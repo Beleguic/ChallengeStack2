@@ -43,6 +43,7 @@
 					<th> Prenom </th>
 					<th> Adresse mail </th>
 					<th> Status </th>
+					<th> Actif </th>
 					<th> Action </th>
 			</thead>
 			<tbody>	
@@ -52,9 +53,10 @@
 					<td><?=$row->getLastName()?></td>
 					<td><?=$row->getEmail()?></td>
 					<td><?=$row->getStatus()?></td>
+					<td><?=$row->getActif()?></td>
 					<td>
-						<a class="button-Update" href="/back/update-annonce?id_hash=<?=$row->getId()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-annonce?id_hash=<?=$row->getId()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-user?id=<?=$row->getId()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-user?id=<?=$row->getId()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
