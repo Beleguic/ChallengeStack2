@@ -7,6 +7,7 @@ use App\Core\View;
 use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
+use App\Models\UserCode;
 
 class Auth extends Controller
 {
@@ -143,5 +144,35 @@ class Auth extends Controller
         return $this->render();
 
     }
+
+    public function activateAccount(){
+
+        $this->setView("Auth/user-active");
+        $this->setTemplate("front");
+
+        $user_code = new UserCode();
+        $form = new Login();
+        $this->assign("formActivation", $form->getConfigActivation());
+
+        if($form->isSubmited() && $form->isValid()){
+            if($_POST['submit'] == 'Supprimer'){
+                $user_code = $user->getOneWhere($_POST["id"]);
+                if($_POST['code'] == $user_code->getCode()){
+                    $user = new User();
+                    $user = $user->populate($_POST["id_user"]);
+                    $user->setActif(true);
+                    $user->save();
+                }
+                else{
+                    header('location: /activateAccount?non=true');
+                }
+            }
+            else{
+                header('location: /activateAccount?non=true');
+            }
+        }
+
+        return $this->render();
+    } 
 
 }
