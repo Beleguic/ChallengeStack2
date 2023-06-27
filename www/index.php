@@ -61,16 +61,40 @@ else{
     $app->router->get('/', [Main::class ,"home"]);
      //Login
      $app->router->get('/login', [Auth::class ,"login"]);
+     $app->router->post('/login', [Auth::class ,"login"]);
      $app->router->get('/register', [Auth::class ,"register"]);
+     $app->router->post('/register', [Auth::class ,"register"]);
+
+     $app->router->get('/se-connecter', [Auth::class ,"login"]);
+     $app->router->post('/se-connecter', [Auth::class ,"login"]);
+     $app->router->get('/s-inscrire', [Auth::class ,"register"]);
+     $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+
  
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);
+
     $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
     $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);
     $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"]);
+
+    $app->router->post('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
+    $app->router->post('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);
+    $app->router->post('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"]);
+
+
+    //Route type back
     $app->router->get('/back/type', [Type::class ,"viewType"]);
-    $app->router->get('/se-connecter', [Auth::class ,"login"]);
-    $app->router->get('/s-inscrire', [Auth::class ,"register"]);
+
+    $app->router->get('/back/add-type', [Annonce::class ,"addType"]);
+    $app->router->get('/back/update-type', [Annonce::class ,"updateType"]);
+    $app->router->get('/back/delete-type', [Annonce::class ,"deleteType"]);
+    $app->router->post('/back/add-type', [Annonce::class ,"addType"]);
+    $app->router->post('/back/update-type', [Annonce::class ,"updateType"]);
+    $app->router->post('/back/delete-type', [Annonce::class ,"deleteType"]);
+
+
+   
     
 
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
