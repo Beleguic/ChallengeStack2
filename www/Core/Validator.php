@@ -6,6 +6,7 @@ class Validator
 {
     private array $data = [];
     public array $errors = [];
+    
     public function isSubmited(): bool
     {
         $this->data = ($this->method == "POST")?$_POST:$_GET;

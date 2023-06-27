@@ -57,10 +57,8 @@
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callback = $this->routes[$method][$path] ?? false;
-            var_dump($callback);
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
-        
                 if (preg_match($pattern, $path, $matches)) {
                     // La route correspond, enregistrez le rappel (callback) et les paramètres
                     $callback = $routeCallback;
@@ -90,7 +88,7 @@
                 $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
         
-            return call_user_func($callback,$params="");
+            return call_user_func($callback,$params);
         }
 
         private function convertToRegex($route)

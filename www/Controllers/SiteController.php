@@ -17,7 +17,11 @@ class SiteController extends Controller
     }
 
     
+    function test($content){
+        echo($content['annonceTitle']); 
+        //echo('je suis dans le controller steController avec la mthode test');
 
+    }
 
 
     public function home()
