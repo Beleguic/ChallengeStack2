@@ -53,12 +53,13 @@ class Controller
     }
 
     public function diePage($message=""){
+        echo('la');
         $message = ["code404" => $message];
 
         http_response_code(404);
 		
 		$this->setView("_404");
-		$this->setTemplate("front");
+		$this->setTemplate("_404");
 		$this->data = $message;
 		
 

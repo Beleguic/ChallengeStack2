@@ -89,12 +89,12 @@ else{
     //Route type back
     $app->router->get('/back/type', [Type::class ,"viewType"]);
 
-    $app->router->get('/back/add-type', [Annonce::class ,"addType"]);
-    $app->router->get('/back/update-type', [Annonce::class ,"updateType"]);
-    $app->router->get('/back/delete-type', [Annonce::class ,"deleteType"]);
-    $app->router->post('/back/add-type', [Annonce::class ,"addType"]);
-    $app->router->post('/back/update-type', [Annonce::class ,"updateType"]);
-    $app->router->post('/back/delete-type', [Annonce::class ,"deleteType"]);
+    $app->router->get('/back/add-type', [Type::class ,"addType"]);
+    $app->router->get('/back/update-type', [Type::class ,"updateType"]);
+    $app->router->get('/back/delete-type', [Type::class ,"deleteType"]);
+    $app->router->post('/back/add-type', [Type::class ,"addType"]);
+    $app->router->post('/back/update-type', [Type::class ,"updateType"]);
+    $app->router->post('/back/delete-type', [Type::class ,"deleteType"]);
 
 
    
