@@ -57,9 +57,6 @@
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callback = $this->routes[$method][$path] ?? false;
-            /*echo("<pre>");
-            var_dump($this->routes);
-            echo("</pre>");*/
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
         
@@ -80,7 +77,7 @@
 
             if($callback ===false){
                 $this->response->setStatutCode(404);
-                return $this->renderView("Views/_404.php","Views/layout/front.tpl.php");
+                return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
             }
           
             if(is_string($callback)){
