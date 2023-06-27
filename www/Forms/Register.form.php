@@ -15,7 +15,7 @@ class Register extends Validator
                     "id"=>"register-form",
                     "class"=>"form",
                     "enctype"=>"",
-                    "submit"=>"Nous rejoindre",
+                    "submit"=>["Nous rejoindre"],
                     "reset"=>"Annuler"
                 ],
                 "divs"=>[
@@ -69,7 +69,6 @@ class Register extends Validator
                         "required"=>true
                     ],
                     "email"=>[
-                        "balise" => "input",
                         "id"=>"register-form-email",
                         "class"=>"form-input",
                         "placeholder"=>"Votre email",
@@ -85,7 +84,6 @@ class Register extends Validator
                         "required"=>true
                     ],
                     "pwd"=>[
-                        "balise" => "input",
                         "id"=>"register-form-pwd",
                         "class"=>"form-input",
                         "placeholder"=>"Votre mot de passe",
@@ -101,7 +99,6 @@ class Register extends Validator
                         "required"=>true
                     ],
                     "pwdConfirm"=>[
-                        "balise" => "input",
                         "id"=>"register-form-pwd-confirm",
                         "class"=>"form-input",
                         "placeholder"=>"Confirmation",

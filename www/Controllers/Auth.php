@@ -2,18 +2,20 @@
 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
 
-class Auth
+class Auth extends Controller
 {
-    public function login(): void
+    public function login(): String
     {
+        $this->setView("Auth/login");
+        $this->setTemplate('front');
         $form = new Login();
-        $view = new View("Auth/login", "front");
-        $view->assign("form", $form->getConfig());
+        $this->assign("form", $form->getConfig());
 
         if ($form->isSubmited() && $form->isValid()) {
             $user = new User();
@@ -38,18 +40,16 @@ class Auth
             }
         }
         
-        $view->assign("formErrors", $form->errors);
+        $this->assign("formErrors", $form->errors);
+        return $this->render();
     }
 
-    public function register(): void
+    public function register(): String
     {
-        $form = new Register();
-        $view = new View("Auth/register", "front");
-        $view->assign("form", $form->getConfig());
-
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+        $this->setView("Auth/register");
+        $this->setTemplate("front");
+        $form=new Register;
+        $this->assign("form", $form->getConfig());
         
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){
@@ -60,7 +60,8 @@ class Auth
             $user->setPwd($_POST['pwd']);
             $user->save();
         }
-        $view->assign("formErrors", $form->errors);
+        $this->assign("formErrors", $form->errors);
+        return $this->render();
     }
 
     public function logout(): void

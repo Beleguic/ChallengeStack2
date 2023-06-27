@@ -60,6 +60,10 @@ else{
 
 
     $app->router->get('/', [Main::class ,"home"]);
+     //Login
+     $app->router->get('/login', [Auth::class ,"login"]);
+     $app->router->get('/register', [Auth::class ,"register"]);
+ 
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);
     $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
