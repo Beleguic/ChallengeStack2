@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use App\Core\SQL;
-class Type extends SQL
+use App\Core\SQLInterface;
+class Type extends SQL implements SQLInterface
 {
     private Int $id = 0;
     protected String $id_hash;
     protected String $texte;
 
     public function __construct(){
-        parent::__construct();
+        $sql = parent::getInstance();
+        $classExploded = explode("\\", get_called_class());
+        $this->pdo = $sql->pdo;
+        $this->table = "zfgh_".end($classExploded);
     }
 
     public function setId_Hash(): void

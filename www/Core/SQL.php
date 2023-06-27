@@ -1,13 +1,21 @@
 <?php
 namespace App\Core;
 
-abstract class SQL{
+interface SQLInterface
+{
+    public function getConfigObject();
+}
 
-    private $pdo;
-    private $table;
+
+class SQL{
+
+    protected $pdo;
+    protected $table;
     private $resultat = [];
 
-    public function __construct()
+    protected static $instance = NULL;
+
+    private function __construct()
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
@@ -16,10 +24,15 @@ abstract class SQL{
         } catch(\Exception $e) {
             die("Erreur SQL : ".$e->getMessage());
         }
+    }
 
-        //$this->table = static::class;
-        $classExploded = explode("\\", get_called_class());
-        $this->table = "zfgh_".end($classExploded);
+    public static function getInstance()
+    {  
+        if(is_null(self::$instance))
+        {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public static function populate(Int $id): object
@@ -125,6 +138,5 @@ abstract class SQL{
         return $this->resultat;
     }
 
-    public abstract function getConfigObject();
-
+    
 }

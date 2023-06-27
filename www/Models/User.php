@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Core\SQL;
-class User extends SQL
+use App\Core\SQLInterface;
+class User extends SQL implements SQLInterface
 {
     private Int $id = 0;
     protected String $firstname;
@@ -16,7 +17,10 @@ class User extends SQL
     private ?String $date_updated;
 
     public function __construct(){
-        parent::__construct();
+        $sql = parent::getInstance();
+        $classExploded = explode("\\", get_called_class());
+        $this->pdo = $sql->pdo;
+        $this->table = "zfgh_".end($classExploded);
     }
 
     /**

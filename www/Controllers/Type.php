@@ -106,8 +106,6 @@ class Type
     public function deleteType(): void
     {
 
-        var_dump($_POST);
-
         if(!isset($_GET['id_hash'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";

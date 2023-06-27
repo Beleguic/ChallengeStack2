@@ -132,7 +132,7 @@ class Annonce extends Controller
             $annonce->setDepartement($_POST['departement']);
             $annonce->setRegions($_POST['regions']);
             $annonce->save();
-            header('location: /view-annonce');
+            header('location: /back/annonce');
         }
         $this->assign("formErrors", $formUpd->errors);
         return $this->render();
