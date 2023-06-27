@@ -70,6 +70,9 @@ else{
      $app->router->get('/s-inscrire', [Auth::class ,"register"]);
      $app->router->post('/s-inscrire', [Auth::class ,"register"]);
 
+     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+
  
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);

@@ -12,6 +12,19 @@ use App\Models\Type as TypeModel;
 class Annonce extends Controller
 
 {
+
+    public function getOneAnnonce($annonceTitle): String
+    {
+        $this->setView("Annonce/annonce-one");
+        $this->setTemplate("front");
+        $annonce = new v_AnnonceModel();
+        //var_dump($annonceTitle[0]);
+        //var_dump($annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
+        $this->assign("annonceOne", $annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
+        
+        return $this->render();
+    }
+
     public function viewAnnonce(): String
     {
 
