@@ -1,67 +1,31 @@
 <?php
 
 namespace App\Controllers;
+use App\Core\Controller;
 
 use App\Core\View;
 use App\Forms\Type as TypeForm;
 use App\Models\Type as TypeModel;
 
-class Type
+class Type extends Controller
 
 {
-    public function viewType(): void
+    public function viewType(): String
     {
 
-        $this->setView("Type/type"); // vue ajout type
+        $this->setView("Type/type-view"); // vue ajout type
         $this->setTemplate("back");
 
         $type = new TypeModel();
         
-        
-        //$formDel = new TypeForm(); // genere le model Type (Formulaire Delete)
-        
-         
-        //$view->assign("formDel", $formDel->getConfigDelete());
-
-        /*
-            Si modification : $_GET['update'] = true
-            Si delete : $_GET['delete'] = true
-        */
-
-        /*if(isset($_GET['update']) && $_GET['update']){ // Update
-            if($formUpd->isSubmited() && $formUpd->isValid()){
-                $type = $type->populateWithIdHash($_POST["id_hash"]);
-                $type->setTexte($_POST['texte']);
-                $type->save();
-                header('location: /ajout-type');
-            }
-        }
-        else if(isset($_GET['delete']) && $_GET['delete']){
-            if($formDel->isSubmited() && $formDel->isValid()){
-                $type = $type->populateWithIdHash($_POST["id_hash"]);
-                $type->save('del');
-                header('location: /ajout-type');
-            }
-        }
-        else if(isset($_POST['texte'])){
-            if($formAdd->isSubmited() && $formAdd->isValid()){
-               
-                $type->setTexte($_POST['texte']);
-                $type->save();
-                header('location: /ajout-type');
-            }
-            $view->assign("formErrors", $formAdd->errors);
-        }*/
-
         $this->assign("typeList", $type->getAll());
-        //Permet de Visualiser les donnée de Type
         return $this->render();
 
     }
 
-    public function addType(): void
+    public function addType(): String
     {
-        $this->setView("Type/add-type"); // vue ajout type
+        $this->setView("Type/type-add"); // vue ajout type
         $this->setTemplate("back");
 
         $formAdd = new TypeForm(); // genere le model Type (Formulaire Ajout)
@@ -74,22 +38,22 @@ class Type
            
             $type->setTexte($_POST['texte']);
             $type->save();
-            header('location: /view-type');
+            header('location: /back/type');
         }
         $this->assign("formErrors", $formAdd->errors);
         return $this->render();
 
     }
 
-    public function updateType(): void
+    public function updateType(): String
     {
         if(!isset($_GET['id_hash'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";
-            header('location: /view-type');
+            header('location: /back/type');
         }
 
-        $this->setView("Type/update-type"); // vue ajout type
+        $this->setView("Type/type-update"); // vue ajout type
         $this->setTemplate("back");
 
         $formUpd = new TypeForm(); // genere le model Type (Formulaire Update)
@@ -102,13 +66,13 @@ class Type
             $type = $type->populateWithIdHash($_POST["id_hash"]);
             $type->setTexte($_POST['texte']);
             $type->save();
-            header('location: /view-type');
+            header('location: /back/type');
         }
         $this->assign("formErrors", $formUpd->errors);
         return $this->render();
     }
 
-    public function deleteType(): void
+    public function deleteType(): String
     {
 
         var_dump($_POST);
@@ -119,7 +83,7 @@ class Type
             header('location: /view-type');
         }
 
-        $this->setView("Type/delete-type"); // vue ajout type
+        $this->setView("Type/type-delete"); // vue ajout type
         $this->setTemplate("back");
 
         $formDel = new TypeForm(); // genere le model Type (Formulaire Update)
@@ -132,10 +96,10 @@ class Type
             if($_POST['submit'] == 'Supprimer'){
                 $type = $type->populateWithIdHash($_POST["id_hash"]);
                 $type->save('del');
-                header('location: /view-type');
+                header('location: /back/type');
             }
             else{
-                header('location: /view-type');
+                header('location: /back/type');
             }
         }
         $this->assign("formErrors", $formDel->errors);

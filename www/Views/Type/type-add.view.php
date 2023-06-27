@@ -7,8 +7,8 @@
 	<h2>Type annonce</h2>
 
 	<a href="/">Accueil</a>
-	<a href="/view-type">Liste des Types</a>
+	<a href="/back/type">Liste des Types</a>
 
     <div>
-    	<?php $this->partial("form", $formAdd) ?>
+    	<?php $this->partial("form", $this->data['formAdd']) ?>
     </div>

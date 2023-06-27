@@ -35,7 +35,7 @@
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
 	<a href="/">Accueil</a>
-	<a href="/add-type">Ajouter un Type de propriéter </a>
+	<a href="/back/add-type">Ajouter un Type de propriéter </a>
 	<div style="width: 60%; margin: auto;">
 		<table id='tableType' >	
 			<thead>	
@@ -48,8 +48,8 @@
 				<tr>
 					<td><?=$row->getTexte()?></td>
 					<td>
-						<a class="button-Update" href="/update-type?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
-						<a class="button-Delete" href="/delete-type?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-type?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-type?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
