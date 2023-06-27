@@ -31,7 +31,7 @@
         {
             $this->template = "Views/".$template.".tpl.php";
             if(!file_exists($this->template)){
-                die("Le template ".$this->template." n'existe pas");
+                die("Le templatee ".$this->template." n'existe pas");
             }
         }
         
@@ -57,6 +57,7 @@
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callback = $this->routes[$method][$path] ?? false;
+
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
         

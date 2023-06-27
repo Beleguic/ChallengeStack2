@@ -12,9 +12,9 @@ class Auth extends Controller
 {
     public function login(): String
     {
-        $form = new Login();
         $this->setView("Auth/login");
-        $this->setTemplate("front");
+        $this->setTemplate('front');
+        $form = new Login();
         $this->assign("form", $form->getConfig());
 
         if ($form->isSubmited() && $form->isValid()) {
@@ -46,14 +46,10 @@ class Auth extends Controller
 
     public function register(): String
     {
-        $form = new Register();
         $this->setView("Auth/register");
         $this->setTemplate("front");
+        $form=new Register();
         $this->assign("form", $form->getConfig());
-
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
         
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){
