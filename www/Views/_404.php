@@ -8,7 +8,7 @@
 				<input type="text" placeholder="Search...">
 				<button type="button">Search</button>
 			</form>
-			<a href="#"><span class="arrow"></span>Return To Homepage</a>
+			<a href="/"><span class="arrow"></span>Return To Homepage</a>
 		</div>
 	</div>
 
