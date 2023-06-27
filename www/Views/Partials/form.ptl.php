@@ -43,6 +43,25 @@
                                 <?php endif;?>
                             <?php endforeach; ?>
                             </select>
+                        <?php elseif($config["inputs"][$name]['balise'] == "textarea"): ?>
+                            <textarea
+                                name="<?= $name ?>"
+                                placeholder="<?= $inputVal["placeholder"] ?>"
+                                class="<?= $inputVal["class"] ?>"
+                                id="<?= $inputVal["id"] ?>"
+                            ><?php   
+                                if(!isset($inputData[$name])){
+                                    if(!isset($inputVal['value'])){
+                                        $value = "";
+                                    }
+                                    else{
+                                        $value = $inputVal['value'];
+                                    }
+                                }
+                                else{
+                                    $value = $inputData[$name];
+                                }
+                                ?><?= $value ?></textarea>
                         <?php endif;?>
                     <?php else: ?>
                         <input

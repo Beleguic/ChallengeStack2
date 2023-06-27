@@ -36,7 +36,7 @@
 	</dialog>-->
 	<a href="/">Accueil</a>
 	<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
-	<div style="width: 80%; margin: auto;">
+	<div style="width: 90%; margin: auto;">
 		<table id='tableType' >	
 			<thead>
 				<tr>	
@@ -51,6 +51,7 @@
 					<th> Rue </th>
 					<th> Departement </th>
 					<th> Regions </th>
+					<th> Description </th>
 					<th> Action </th>
 			</thead>
 			<tbody>	
@@ -67,6 +68,7 @@
 					<td><?=$row->getRue()?></td>
 					<td><?=$row->getDepartement()?></td>
 					<td><?=$row->getRegions()?></td>
+					<td><?=$row->getDescription()?></td>
 					<td>
 						<a class="button-Update" href="/back/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
 						<a class="button-Delete" href="/back/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
