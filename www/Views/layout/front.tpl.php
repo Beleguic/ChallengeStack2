@@ -38,7 +38,7 @@
   </div>
 
   <!-- BEGIN : Main Content -->
-  <main class="container">
+  <main class="container py-5">
     {{content}}
   </main>
   <!-- END : Main Content -->

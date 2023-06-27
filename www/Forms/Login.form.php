@@ -15,25 +15,24 @@ class Login extends Validator
                 "id"=>"login-form",
                 "class"=>"form",
                 "enctype"=>"",
-                "submit"=>["Se connecter"],
-                "reset"=>"Annuler"
+                "submit"=>["Se connecter"]
             ],
             "divs"=>[
                 "div-email" =>[
                     "id" => "div-login-email",
-                    "class" => "div-form-100",
+                    "class" => "form-group div-form-100 col-md-6 mx-auto",
                     "inside" => ["email"]
                 ],
                 "div-pwd" =>[
                     "id" => "div-login-pwd",
-                    "class" => "div-form-100",
+                    "class" => "form-group div-form-100 col-md-6 mx-auto",
                     "inside" => ["pwd"]
                 ],
             ],
             "inputs"=>[
                 "email"=>[
                     "id"=>"login-form-email",
-                    "class"=>"form-input",
+                    "class"=>"form-control",
                     "placeholder"=>"Email",
                     "type"=>"email",
                     "error"=>"Votre email est incorrect",
@@ -47,7 +46,7 @@ class Login extends Validator
                 ],
                 "pwd"=>[
                     "id"=>"login-form-pwd",
-                    "class"=>"form-input",
+                    "class"=>"form-control",
                     "placeholder"=>"Mot de passe",
                     "type"=>"password",
                     "error"=>"Votre mot de passe est incorrect",

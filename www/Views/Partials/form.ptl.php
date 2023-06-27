@@ -73,7 +73,7 @@
         <?php endif;?>
         </div>
     <?php endforeach;?>
-    <div id="div-register-submit-reset" class="div-form-50">
+    <div id="div-register-submit-reset" class="div-form-50 d-flex justify-content-center">
         <?php foreach ($config["config"]["submit"] as $value): ?>
             <input type="submit" name="submit" value="<?= $value ?>">
         <?php endforeach; ?>
