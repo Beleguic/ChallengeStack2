@@ -15,6 +15,7 @@ class v_Annonce extends SQL implements SQLInterface
     protected Int $superficieterrain;
     protected Int $nbrpiece;
     protected Int $nbrchambre;
+    protected String $description;
     //addresse
     protected String $ville;
     protected String $rue;
@@ -41,6 +42,7 @@ class v_Annonce extends SQL implements SQLInterface
         $array['superficieterrain'] = $this->getSuperficieterrain();
         $array['nbrpiece'] = $this->getNbrpiece();
         $array['nbrchambre'] = $this->getNbrchambre();
+        $array['description'] = $this->getDescription();
         $array['ville'] = $this->getVille();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
@@ -151,4 +153,13 @@ class v_Annonce extends SQL implements SQLInterface
     {
         return $this->regions;
     }
+
+    /**
+     * @return String
+     */
+    public function getDescription(): String
+    {
+        return $this->description;
+    }
+
 }

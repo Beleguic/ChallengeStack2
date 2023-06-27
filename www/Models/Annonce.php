@@ -15,11 +15,14 @@ class Annonce extends SQL implements SQLInterface
     protected Int $superficieterrain;
     protected Int $nbrpiece;
     protected Int $nbrchambre;
+    protected String $description;
     //addresse
     protected String $ville;
     protected String $rue;
     protected String $departement;
     protected String $regions;
+
+
 
 
     public function __construct(){
@@ -41,6 +44,7 @@ class Annonce extends SQL implements SQLInterface
         $array['superficieTerrain'] = $this->getSuperficieterrain();
         $array['nbrPiece'] = $this->getNbrpiece();
         $array['nbrChambre'] = $this->getNbrchambre();
+        $array['description'] = $this->getDescription();
         $array['ville'] = $this->getVille();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
@@ -273,6 +277,22 @@ class Annonce extends SQL implements SQLInterface
     public function setDepartement(String $departement): void
     {
         $this->departement = $departement;
+    }
+
+
+    public function getDescription(): String
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $departement
+     *
+     * @return self
+     */
+    public function setDescription(String $description): void
+    {
+        $this->description = $description;
     }
 
 }

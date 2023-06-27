@@ -49,6 +49,11 @@ class Annonce extends Validator
                     "class" => "div-form-100",
                     "inside" => ["departement","regions"]
                 ],
+                "div-departement-description" =>[
+                    "id" => "div-description",
+                    "class" => "div-form-100",
+                    "inside" => ["description"]
+                ],
             ],
             "inputs"=>[
                 "titre"=>[
@@ -215,6 +220,21 @@ class Annonce extends Validator
                     "value"=>"",
                     "required"=>true
                 ],
+                "description"=>[
+                    "balise"=>"textarea",
+                    "id"=>"type-form-description",
+                    "class"=>"form-input",
+                    "placeholder"=>"Description",
+                    "error"=>"La description est incorrect",
+                    "label" =>[
+                        "for" => "Type-form-description",
+                        "id" => "label-Type-form-description",
+                        "class" => "form-label",
+                        "value" => "Description"
+                    ],
+                    "value"=>"",
+                    "required"=>true
+                ],
             ]
         ];
         return $this->config;
@@ -261,6 +281,11 @@ class Annonce extends Validator
                     "id" => "div-departement-regions",
                     "class" => "div-form-100",
                     "inside" => ["departement","regions"]
+                ],
+                "div-departement-description" =>[
+                    "id" => "div-description",
+                    "class" => "div-form-100",
+                    "inside" => ["description"]
                 ],
             ],
 
@@ -434,6 +459,21 @@ class Annonce extends Validator
                         "id" => "label-Type-form-regions",
                         "class" => "form-label",
                         "value" => "Régions"
+                    ],
+                    "value"=>"",
+                    "required"=>true
+                ],
+                "description"=>[
+                    "balise"=>"textarea",
+                    "id"=>"type-form-description",
+                    "class"=>"form-input",
+                    "placeholder"=>"Description",
+                    "error"=>"La description est incorrect",
+                    "label" =>[
+                        "for" => "Type-form-description",
+                        "id" => "label-Type-form-description",
+                        "class" => "form-label",
+                        "value" => "Description"
                     ],
                     "value"=>"",
                     "required"=>true
