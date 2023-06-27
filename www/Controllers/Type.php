@@ -12,7 +12,8 @@ class Type
     public function viewType(): void
     {
 
-        $view = new View("Type/type-view", "back");
+        $this->setView("Type/type"); // vue ajout type
+        $this->setTemplate("back");
 
         $type = new TypeModel();
         
@@ -52,20 +53,22 @@ class Type
             $view->assign("formErrors", $formAdd->errors);
         }*/
 
-        $view->assign("typeList", $type->getAll());
+        $this->assign("typeList", $type->getAll());
         //Permet de Visualiser les donnée de Type
+        return $this->render();
 
     }
 
     public function addType(): void
     {
-        $view = new View("Type/type-add", "back"); // vue ajout type
+        $this->setView("Type/add-type"); // vue ajout type
+        $this->setTemplate("back");
 
         $formAdd = new TypeForm(); // genere le model Type (Formulaire Ajout)
         $type = new TypeModel(); // miroir BDD de la table type
 
         // envoie les information du formulaire a la view
-        $view->assign("formAdd", $formAdd->getConfigAdd()); 
+        $this->assign("formAdd", $formAdd->getConfigAdd()); 
 
         if($formAdd->isSubmited() && $formAdd->isValid()){
            
@@ -73,7 +76,8 @@ class Type
             $type->save();
             header('location: /view-type');
         }
-        $view->assign("formErrors", $formAdd->errors);
+        $this->assign("formErrors", $formAdd->errors);
+        return $this->render();
 
     }
 
@@ -85,13 +89,14 @@ class Type
             header('location: /view-type');
         }
 
-        $view = new View("Type/type-update", "back"); // vue ajout type
+        $this->setView("Type/update-type"); // vue ajout type
+        $this->setTemplate("back");
 
         $formUpd = new TypeForm(); // genere le model Type (Formulaire Update)
         $type = new TypeModel();
         $type = $type->populateWithIdHash($_GET["id_hash"]);
-        $view->assign("formUpd", $formUpd->getConfigUpdate());
-        $view->assign("formUpdDate", $type->getConfigObject());
+        $this->assign("formUpd", $formUpd->getConfigUpdate());
+        $this->assign("formUpdDate", $type->getConfigObject());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
             $type = $type->populateWithIdHash($_POST["id_hash"]);
@@ -99,8 +104,8 @@ class Type
             $type->save();
             header('location: /view-type');
         }
-        $view->assign("formErrors", $formUpd->errors);
-
+        $this->assign("formErrors", $formUpd->errors);
+        return $this->render();
     }
 
     public function deleteType(): void
@@ -114,13 +119,14 @@ class Type
             header('location: /view-type');
         }
 
-        $view = new View("Type/type-delete", "back"); // vue ajout type
+        $this->setView("Type/delete-type"); // vue ajout type
+        $this->setTemplate("back");
 
         $formDel = new TypeForm(); // genere le model Type (Formulaire Update)
         $type = new TypeModel();
         $type = $type->populateWithIdHash($_GET["id_hash"]);
-        $view->assign("formDel", $formDel->getConfigDelete());
-        $view->assign("formDelDate", $type->getConfigObject());
+        $this->assign("formDel", $formDel->getConfigDelete());
+        $this->assign("formDelDate", $type->getConfigObject());
 
         if($formDel->isSubmited() && $formDel->isValid()){
             if($_POST['submit'] == 'Supprimer'){
@@ -132,7 +138,8 @@ class Type
                 header('location: /view-type');
             }
         }
-        $view->assign("formErrors", $formDel->errors);
+        $this->assign("formErrors", $formDel->errors);
+        return $this->render();
         
         
     }
