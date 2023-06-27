@@ -2,5 +2,7 @@
 
 <?php $this->partial("form", $this->data['form']) ?>
 
-<a href="/s-inscrire">Inscription</a>
-<a href="/">Accueil</a>
+<p class="text-center">Vous n'avez pas de compte ? <br></p>
+<div class="text-center">     
+    <a href="/s-inscrire" class="text-center">Créer un compte ! </a>
+</div>

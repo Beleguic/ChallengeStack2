@@ -20,7 +20,7 @@ class Login extends Validator
             "submit"=>[
                 "Se connecter" => [
                     "id" => "",
-                    "class" => ""
+                    "class" => "btn btn-outline-primary btn-block mb-4"
                 ],
             ],
             "divs"=>[
