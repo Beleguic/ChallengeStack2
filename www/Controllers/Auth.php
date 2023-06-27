@@ -48,7 +48,7 @@ class Auth extends Controller
     {
         $this->setView("Auth/register");
         $this->setTemplate("front");
-        $form=new Register;
+        $form=new Register();
         $this->assign("form", $form->getConfig());
         
         //Form validé ? et correct ?
