@@ -17,6 +17,12 @@ class Login extends Validator
                 "enctype"=>"",
                 "submit"=>["Se connecter"]
             ],
+            "submit"=>[
+                "Se connecter" => [
+                    "id" => "",
+                    "class" => ""
+                ],
+            ],
             "divs"=>[
                 "div-email" =>[
                     "id" => "div-login-email",
