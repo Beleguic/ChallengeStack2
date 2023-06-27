@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\SQL;
 use App\Core\SQLInterface;
-class User extends SQL implements SQLInterface
+class User extends SQL 
 {
     private Int $id = 0;
     protected String $firstname;
@@ -23,6 +23,8 @@ class User extends SQL implements SQLInterface
         $this->table = "zfgh_".end($classExploded);
     }
 
+
+    
     /**
      * @return Int
      */
