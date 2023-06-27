@@ -57,7 +57,6 @@
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callback = $this->routes[$method][$path] ?? false;
-            /*echo("<pre>");
             var_dump($this->routes);
             echo("</pre>");*/
             foreach ($this->routes[$method] as $route => $routeCallback) {
