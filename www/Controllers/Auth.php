@@ -59,6 +59,8 @@ class Auth extends Controller
             $user->setEmail($_POST['email']);
             $user->setPwd($_POST['pwd']);
             $user->save();
+
+
         }
         $this->assign("formErrors", $form->errors);
         return $this->render();
@@ -75,6 +77,19 @@ class Auth extends Controller
         }
        
         
+    }
+
+    public function listUser(): String
+    {
+        $this->setView("Auth/userList");
+        $this->setTemplate("back");
+
+        $user = new User();
+
+        $this->assign("userList", $user->getAll());
+        
+        return $this->render();
+
     }
 
 }

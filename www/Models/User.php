@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\SQL;
 use App\Core\SQLInterface;
-class User extends SQL 
+class User extends SQL implements SQLInterface
 {
     private Int $id = 0;
     protected String $firstname;
@@ -23,7 +23,21 @@ class User extends SQL
         $this->table = "zfgh_".end($classExploded);
     }
 
+    public function getConfigObject(): array
+    {
 
+        $array['id'] = $this->getId();
+        $array['firstname'] = $this->getFirstname();
+        $array['lastname'] = $this->getLastname();
+        $array['email'] = $this->getEmail();
+        $array['pwd'] = $this->getPwd();
+        $array['country'] = $this->getCountry();
+        $array['status'] = $this->getStatus();
+        $array['date_inserted'] = $this->getDateInserted();
+        $array['date_updated'] = $this->getDateUpdated();
+        return $array;
+
+    }
     
     /**
      * @return Int

@@ -71,18 +71,21 @@ else{
     $app->router->post('/a-propos', [Main::class ,"aboutUs"]);
 
      //Login
-     $app->router->get('/login', [Auth::class ,"login"]);
-     $app->router->post('/login', [Auth::class ,"login"]);
-     $app->router->get('/register', [Auth::class ,"register"]);
-     $app->router->post('/register', [Auth::class ,"register"]);
+    $app->router->get('/login', [Auth::class ,"login"]);
+    $app->router->post('/login', [Auth::class ,"login"]);
+    $app->router->get('/register', [Auth::class ,"register"]);
+    $app->router->post('/register', [Auth::class ,"register"]);
 
-     $app->router->get('/se-connecter', [Auth::class ,"login"]);
-     $app->router->post('/se-connecter', [Auth::class ,"login"]);
-     $app->router->get('/s-inscrire', [Auth::class ,"register"]);
-     $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->get('/back/user', [Auth::class ,"listUser"]);
+    $app->router->post('/back/user', [Auth::class ,"listUser"]);
 
-     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
-     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+    $app->router->get('/se-connecter', [Auth::class ,"login"]);
+    $app->router->post('/se-connecter', [Auth::class ,"login"]);
+    $app->router->get('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+
+    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
 
  
     // Route annonce back
