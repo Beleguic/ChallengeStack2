@@ -2,6 +2,16 @@
 
 namespace App\Controllers;
 
+use phpMailer\PHPMailer\PHPMailer;
+use phpMailer\PHPMailer\SMTP;
+use phpMailer\PHPMailer\Exception;
+
+require 'asset/phpMailer/src/Exception.php';
+require 'asset/phpMailer/src/PHPMailer.php'; 
+require 'asset/phpMailer/src/SMTP.php';
+
+
+
 use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Register;
@@ -12,6 +22,44 @@ class Auth extends Controller
 {
     public function login(): String
     {
+        $mail = new PHPMailer(true);
+
+try {
+    //Server settings
+                         //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'movinghouseesgi@gmail.com';                     //SMTP username
+    $mail->Password   = 'jzdtvjyrimtcjdyr';                               //SMTP password
+    $mail->SMTPSecure = "ssl";         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+    $mail->Port       = 465;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+    //Recipients
+    $mail->setFrom('from@example.com', 'Mailer');
+    $mail->addAddress('klimeck.emilie@hotmail.com', 'Joe User');     //Add a recipient
+    
+
+    //Attachments
+            //Add attachments
+        //Optional name
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'Salut c est jason ton mec, je t envoie un mail depuis mon application du projet';
+    $mail->Body    = 'CLiquez sur ce lien pour valider';
+    $mail->AltBody = 'caca';
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+
+
+
+
         $this->setView("Auth/login");
         $this->setTemplate('front');
         $form = new Login();
