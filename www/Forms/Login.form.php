@@ -15,8 +15,7 @@ class Login extends Validator
                 "id"=>"login-form",
                 "class"=>"form",
                 "enctype"=>"",
-                "submit"=>["Se connecter"],
-                "reset"=>"Annuler"
+                "submit"=>["Se connecter"]
             ],
             "divs"=>[
                 "div-email" =>[
