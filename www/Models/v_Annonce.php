@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Core\SQL;
-class v_Annonce extends SQL
+use App\Core\SQLInterface;
+class v_Annonce extends SQL implements SQLInterface
 {
     private Int $id = 0;
     protected String $id_hash;
@@ -22,7 +23,10 @@ class v_Annonce extends SQL
 
 
     public function __construct(){
-        parent::__construct();
+        $sql = parent::getInstance();
+        $classExploded = explode("\\", get_called_class());
+        $this->pdo = $sql->pdo;
+        $this->table = "zfgh_".end($classExploded);
     }
 
     public function getConfigObject(): array

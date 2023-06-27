@@ -13,9 +13,6 @@ class SiteController extends Controller
 
     public function contact($id )
     {
-        echo "<pre>";
-        var_dump($id);
-        echo "</pre>";
         return $this->render("contact");
     }
 
