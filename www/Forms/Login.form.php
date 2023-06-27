@@ -18,6 +18,12 @@ class Login extends Validator
                 "submit"=>["Se connecter"],
                 "reset"=>"Annuler"
             ],
+            "submit"=>[
+                "Se connecter" => [
+                    "id" => "",
+                    "class" => ""
+                ],
+            ],
             "divs"=>[
                 "div-email" =>[
                     "id" => "div-login-email",

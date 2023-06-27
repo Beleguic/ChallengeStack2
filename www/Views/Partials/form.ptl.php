@@ -75,7 +75,14 @@
     <?php endforeach;?>
     <div id="div-register-submit-reset" class="div-form-50">
         <?php foreach ($config["config"]["submit"] as $value): ?>
-            <input type="submit" name="submit" value="<?= $value ?>">
+            <?php if(isset($config["submit"][$value])): ?>
+                <input type="submit" name="submit"
+                    id="<?=$config["submit"][$value]["id"] ?>"
+                    class="<?=$config["submit"][$value]["class"] ?>"
+                    value="<?= $value ?>">
+            <?php else: ?> 
+                <input type="submit" name="submit" value="<?= $value ?>">
+            <?php endif; ?>
         <?php endforeach; ?>
         <?php if(isset($config["config"]["reset"])):?>
             <input type="reset" value="<?= $config["config"]["reset"] ?>">
