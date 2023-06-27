@@ -59,6 +59,17 @@ else{
 
 
     $app->router->get('/', [Main::class ,"home"]);
+
+    
+    // Navbar
+    $app->router->get('/contact', [Main::class ,"contact"]);
+    $app->router->post('/contact', [Main::class ,"contact"]);
+    $app->router->get('/about-us', [Main::class ,"aboutUs"]);
+    $app->router->post('/about-us', [Main::class ,"aboutUs"]);
+
+    $app->router->get('/a-propos', [Main::class ,"aboutUs"]);
+    $app->router->post('/a-propos', [Main::class ,"aboutUs"]);
+
      //Login
      $app->router->get('/login', [Auth::class ,"login"]);
      $app->router->post('/login', [Auth::class ,"login"]);
