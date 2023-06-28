@@ -59,6 +59,7 @@ else{
 
 
     $app->router->get('/', [Main::class ,"home"]);
+    
 
     
     // Navbar
@@ -86,7 +87,7 @@ else{
 
  
     // Route annonce back
-    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);
+    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],1);
 
     $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
     $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);

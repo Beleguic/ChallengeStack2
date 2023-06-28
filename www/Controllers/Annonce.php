@@ -25,9 +25,9 @@ class Annonce extends Controller
         return $this->render();
     }
 
-    public function viewAnnonce(): String
+    public function viewAnnonce($args): String
     {
-
+        var_dump($args);
         //$view = new View("Annonce/annonce-view", "back");
         $this->setView("Annonce/annonce-view");
         $this->setTemplate("back");
