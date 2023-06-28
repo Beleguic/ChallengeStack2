@@ -26,52 +26,56 @@ class Register extends Validator
                 "divs"=>[
                     "div-firstname-lastname" =>[
                         "id" => "div-register-firstname-lastname",
-                        "class" => "row",
+                        "class" => "row pb-3",
                         "inside" => ["firstname","lastname"]
                     ],
                     "div-email" =>[
                         "id" => "div-register-email",
-                        "class" => "div-form-100",
+                        "class" => "div-form-100 pb-3",
                         "inside" => ["email"]
                     ],
                     "div-pwd" =>[
                         "id" => "div-register-pwd",
-                        "class" => "div-form-50",
+                        "class" => "div-form-50 pb-3",
                         "inside" => ["pwd", "pwdConfirm"]
                     ],
                 ],
                 "inputs"=>[
                     "firstname"=>[
+                        "divId"=>"",
+                        "divClass"=>"col",
                         "id"=>"register-form-firstname",
-                        "class"=>"col-4",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre prénom",
                         "type"=>"text",
                         "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                         "min"=>2,
                         "max"=>60,
-                        // "label" =>[
+                        "label" =>[
                             
-                        //     "for" => "register-form-firstname",
-                        //     "id" => "label-register-form-firstname",
-                        //     "class" => "form-label",
-                        //     "value" => "Prenom"
-                        // ],
+                            "for" => "register-form-firstname",
+                            "id" => "label-register-form-firstname",
+                            "class" => "form-label",
+                            "value" => "Prenom"
+                        ],
                         "required"=>true
                     ],
                     "lastname"=>[
+                        "divId"=>"",
+                        "divClass"=>"col",
                         "id"=>"register-form-lastname",
-                        "class"=>"col-4",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre nom",
                         "type"=>"text",
                         "error"=>"Votre nom doit faire entre 2 et 120 caractères",
                         "min"=>2,
                         "max"=>120,
-                        // "label" =>[
-                        //     "for" => "register-form-lastname",
-                        //     "id" => "label-register-form-lastname",
-                        //     "class" => "form-label",
-                        //     "value" => "Nom"
-                        // ],
+                        "label" =>[
+                            "for" => "register-form-lastname",
+                            "id" => "label-register-form-lastname",
+                            "class" => "form-label",
+                            "value" => "Nom"
+                        ],
                         "required"=>true
                     ],
                     "email"=>[
@@ -115,7 +119,7 @@ class Register extends Validator
                             "balise" => "label",
                             "for" => "register-form-pwd-confirm",
                             "id" => "label-register-form-pwd-confirm",
-                            "class" => "form-label",
+                            "class" => "form-label pt-3",
                             "value" => "Confirmation du mot de passe"
                         ],
                         "confirm"=>"pwd"
