@@ -8,33 +8,12 @@
         public Request $request;
         public Response $response;
 
+         
+
         private $data = [];
 
         private String $view;
         private String $template;
-
-        /**
-         * @param String $view
-         */
-        public function setView(string $view): void
-        {
-            $this->view = "Views/".$view.".view.php";
-            if(!file_exists($this->view)){
-                die("La vue ".$this->view." n'existe pas");
-            }
-        }
-
-        /**
-         * @param String $template
-         */
-        public function setTemplate(string $template): void
-        {
-            $this->template = "Views/".$template.".tpl.php";
-            if(!file_exists($this->template)){
-                die("Le templatee ".$this->template." n'existe pas");
-            }
-        }
-        
 
 
         public function __construct(Request $request,Response $response){
@@ -43,10 +22,13 @@
 
         }
 
-        public function get($path,$callback){
-            $this->routes['get'][$path] = $callback;
+        public function get($path, $callback, $role = 0)
+        {
+            $this->routes['get'][$path] = [
+                'callback' => $callback,
+                'role' => $role
+            ];
         }
-
 
         public function post($path,$callback){
             $this->routes['post'][$path] = $callback;
@@ -54,9 +36,17 @@
 
         public function resolve()
         {
+            
+    
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
-            $callback = $this->routes[$method][$path] ?? false;
+            $callbackData= $this->routes[$method][$path] ?? false;
+
+            if ($callbackData) {
+                $callback = $callbackData['callback'];
+                $role = $callbackData['role'];
+            }
+            
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
                 if (preg_match($pattern, $path, $matches)) {
@@ -85,10 +75,16 @@
             }
 
             if(is_array($callback)){
-                $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
+                echo "<pre>";
+                var_dump($role);
+                $callback["callback"][0]= new $callback["callback"][0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
+                
             }
         
-            return call_user_func($callback,$params);
+            return call_user_func($callback["callback"],[
+                "roles"=>$role,
+                "params"=>$params
+            ]);
         }
 
         private function convertToRegex($route)
@@ -122,6 +118,28 @@
             return ob_get_clean();
             
             
+        }
+
+        /**
+         * @param String $view
+         */
+        public function setView(string $view): void
+        {
+            $this->view = "Views/".$view.".view.php";
+            if(!file_exists($this->view)){
+                die("La vue ".$this->view." n'existe pas");
+            }
+        }
+
+        /**
+         * @param String $template
+         */
+        public function setTemplate(string $template): void
+        {
+            $this->template = "Views/".$template.".tpl.php";
+            if(!file_exists($this->template)){
+                die("Le templatee ".$this->template." n'existe pas");
+            }
         }
 
         // Genere le formulaire
