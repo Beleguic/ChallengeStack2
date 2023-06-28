@@ -217,6 +217,10 @@ class Auth extends Controller
         {
             header('location: /');
         }
+        else 
+        {
+            
+        }
         $this->setView("Auth/reset-pwd");
         $this->setTemplate("front");
 
