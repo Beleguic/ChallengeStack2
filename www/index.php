@@ -9,6 +9,8 @@
     use App\Controllers\Type;
     use App\Core\Application;
 
+    date_default_timezone_set("Europe/Paris");
+
     //require "Core/View.php";
 
     spl_autoload_register(function ($class) {
@@ -27,6 +29,18 @@
             include $classForm;
         }
     });
+    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
+        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
+        if($uri != "activation"){
+            header("location: /activation");
+        }
+    }
+    else{
+        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
+        if($uri == "activation"){
+            header("location: /");
+        }
+    }
 
 /*
 
@@ -75,6 +89,8 @@ else{
     $app->router->post('/login', [Auth::class ,"login"]);
     $app->router->get('/register', [Auth::class ,"register"]);
     $app->router->post('/register', [Auth::class ,"register"]);
+    $app->router->get('/logout', [Auth::class ,"logout"]);
+    $app->router->post('/logout', [Auth::class ,"logout"]);
 
     $app->router->get('/back/user', [Auth::class ,"listUser"]);
     $app->router->post('/back/user', [Auth::class ,"listUser"]);
@@ -90,6 +106,8 @@ else{
     $app->router->post('/se-connecter', [Auth::class ,"login"]);
     $app->router->get('/s-inscrire', [Auth::class ,"register"]);
     $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->get('/deconnexion', [Auth::class ,"logout"]);
+    $app->router->post('/deconnexion', [Auth::class ,"logout"]);
 
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
