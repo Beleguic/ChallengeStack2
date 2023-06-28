@@ -181,6 +181,7 @@ class Auth extends Controller
                     $user = new User();
                     $user = $user->populate($user_code->getIdUser());
                     $user->setActif(true);
+                    $_SESSION['zfgh_login']['actif'] = true;
                     $user->save();
                     header("location: /");
                 }
@@ -189,7 +190,7 @@ class Auth extends Controller
                 }
             }
             else{
-                header('location: /activation?non=true&e=2');
+                header('location: /activation?e=2');
             }
         }
 

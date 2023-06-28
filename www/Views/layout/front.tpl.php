@@ -28,7 +28,11 @@
           <a class="nav-link text-white fs-6" href="/contact">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fs-6" href="/login">Mon compte</a>
+          <?php if(isset($_SESSION['zfgh_login']['connected'])): ?>
+            <a class="nav-link text-white fs-6" href="/deconnexion">Deconnexion</a>
+          <?php else: ?>
+            <a class="nav-link text-white fs-6" href="/se-connecter">Mon compte</a>
+          <?php endif; ?>
         </li>
       </ul>
     </div>
