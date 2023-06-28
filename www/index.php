@@ -90,6 +90,8 @@ else{
     $app->router->post('/se-connecter', [Auth::class ,"login"]);
     $app->router->get('/s-inscrire', [Auth::class ,"register"]);
     $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"]);
+    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"]);
 
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
