@@ -12,6 +12,11 @@
   padding-right: 15px;
 }
 
+.custom-img-height {
+  height: 350px; /* Ajuste la hauteur selon tes besoins */
+  object-fit: cover; /* Permet de recadrer l'image si nécessaire */
+}
+
 /*  Page 404  */
 
 * {

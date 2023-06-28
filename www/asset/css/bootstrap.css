@@ -37,7 +37,7 @@
     --bs-danger: #dc3545;
     --bs-light: #f8f9fa;
     --bs-dark: #212529;
-    --bs-primary-rgb: 13, 110, 253;
+    --bs-primary-rgb: 1, 44, 134;
     --bs-secondary-rgb: 108, 117, 125;
     --bs-success-rgb: 25, 135, 84;
     --bs-info-rgb: 13, 202, 240;
@@ -3286,7 +3286,7 @@ textarea.form-control-lg {
 .btn-outline-light {
     --bs-btn-color: #f8f9fa;
     --bs-btn-border-color: #f8f9fa;
-    --bs-btn-hover-color: #000;
+    --bs-btn-hover-color: #012C86;
     --bs-btn-hover-bg: #f8f9fa;
     --bs-btn-hover-border-color: #f8f9fa;
     --bs-btn-focus-shadow-rgb: 248, 249, 250;
