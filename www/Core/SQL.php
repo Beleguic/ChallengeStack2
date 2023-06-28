@@ -56,6 +56,13 @@ class SQL{
         return $objet->getOneWhere(["id_hash"=>$id_hash]);
     }
 
+    public static function populateWith(Array $search): object
+    {
+        $class = get_called_class();
+        $objet = new $class();
+        return $objet->getOneWhere($search);
+    }
+
     public function getOneWhere(array $where): object
     {
         $sqlWhere = [];
@@ -96,8 +103,11 @@ class SQL{
 
     public function save($del=''): void
     {
-
         $columns = get_object_vars($this);
+        echo("<pre>");
+        var_dump($columns);
+        echo("</pre>");
+        
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
@@ -117,6 +127,9 @@ class SQL{
                 $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
                     " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
             }else{
+                echo("<pre>");
+                var_dump($columns);
+                echo("</pre>");
                 $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                     " (".implode("," , array_keys($columns) ).") 
                 VALUES
@@ -131,6 +144,7 @@ class SQL{
             }
             catch(\PDOException $e){
                 echo("Erreur ".$e->getCode());
+                echo("Erreur ".$e->getMessage());
             }
 
             /*echo "\nPDOStatement::errorInfo():\n";

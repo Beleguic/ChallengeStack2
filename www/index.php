@@ -83,6 +83,9 @@ else{
     $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"]);
     $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"]);
 
+    $app->router->get('/activation', [Auth::class ,"activateAccount"]);
+    $app->router->post('/activation', [Auth::class ,"activateAccount"]);
+
     $app->router->get('/se-connecter', [Auth::class ,"login"]);
     $app->router->post('/se-connecter', [Auth::class ,"login"]);
     $app->router->get('/s-inscrire', [Auth::class ,"register"]);

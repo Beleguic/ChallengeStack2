@@ -22,10 +22,9 @@ class UserCode extends SQL implements SQLInterface
 
         $array['id'] = $this->getId();
         $array['id_user'] = $this->getIdUser();
-        $array['code'] = $this->getCode();
         
         return $array;
-
+    }
     
     /**
      * @return mixed
@@ -77,8 +76,9 @@ class UserCode extends SQL implements SQLInterface
      *
      * @return self
      */
-    public function setCode(): void
+    public function setCode(Int $code): void
     {
-        $this->code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $this->code = $code;
+        
     }
 }

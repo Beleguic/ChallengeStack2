@@ -61,8 +61,13 @@ class Auth extends Controller
             $user->setEmail($_POST['email']);
             $user->setPwd($_POST['pwd']);
             $user->save();
-
-
+            $userAdd = $user->populateWithMail($_POST['email']);
+            $user_code = new UserCode();
+            $user_code->setIdUser($userAdd->getId());
+            $user_code->setCode($this->createCode());
+            var_dump($user_code->getCode());
+            $user_code->save();
+            // Envoie du mail
         }
         $this->assign("formErrors", $form->errors);
         return $this->render();
@@ -145,23 +150,32 @@ class Auth extends Controller
 
     }
 
+    private function createCode(){
+
+        return str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+    }
+
     public function activateAccount(){
 
         $this->setView("Auth/user-active");
         $this->setTemplate("front");
 
         $user_code = new UserCode();
+        $user_code = $user_code->populateWith(["id_user" => $_SESSION['zfgh_login']['id']]);
         $form = new Login();
         $this->assign("formActivation", $form->getConfigActivation());
+        $this->assign("formActivationData", $user_code->getConfigObject());
 
         if($form->isSubmited() && $form->isValid()){
-            if($_POST['submit'] == 'Supprimer'){
+            if($_POST['submit'] == 'Valider'){
                 $user_code = $user->getOneWhere($_POST["id"]);
                 if($_POST['code'] == $user_code->getCode()){
                     $user = new User();
-                    $user = $user->populate($_POST["id_user"]);
+                    $user = $user->populate($user_code->getIdUser());
                     $user->setActif(true);
                     $user->save();
+                    header("location: /");
                 }
                 else{
                     header('location: /activateAccount?non=true');
