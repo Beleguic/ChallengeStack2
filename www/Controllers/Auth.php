@@ -211,4 +211,31 @@ class Auth extends Controller
         return $this->render();
     } 
 
+    public function resetPwd(): String 
+    {
+        if (!isset($_GET['id'])) 
+        {
+            header('location: /');
+        }
+        $this->setView("Auth/reset-pwd");
+        $this->setTemplate("front");
+
+        $form = new Login();
+        $this->assign("form", $form->getConfigResetPwd());
+
+        if ($form->isSubmited() && $form->isValid()) 
+        {
+            $user = new User();
+            $user = $user->populate($_GET['id']);
+            $user->setPwd($_POST['pwd']);
+            $user->save();
+
+            header('location: /');
+        }
+
+ 
+
+        return $this->render();
+    }
+
 }

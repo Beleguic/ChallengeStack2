@@ -130,4 +130,61 @@ class Login extends Validator
         ];
         return $this->config;
     }
+
+    public function getConfigResetPwd(): array 
+    {
+        $this->config = [
+                "config"=>[
+                    "method"=>$this->method,
+                    "action"=>"",
+                    "id"=>"register-form",
+                    "class"=>"form",
+                    "enctype"=>"",
+                    "submit"=>["Modifier mon mot de passe"],
+                    "reset"=>"Annuler"
+                ],
+                "divs"=>[
+                    "div-pwd" =>[
+                        "id" => "div-register-pwd",
+                        "class" => "div-form-50",
+                        "inside" => ["pwd", "pwdConfirm"]
+                    ],
+                ],
+                "inputs"=>[
+                    "pwd"=>[
+                        "id"=>"register-form-pwd",
+                        "class"=>"form-input",
+                        "placeholder"=>"Votre mot de passe",
+                        "type"=>"password",
+                        "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
+                        "label" =>[
+                            "balise" => "label",
+                            "for" => "register-form-pwd",
+                            "id" => "label-register-form-pwd",
+                            "class" => "form-label",
+                            "value" => "Mot de passe"
+                        ],
+                        "required"=>true
+                    ],
+                    "pwdConfirm"=>[
+                        "id"=>"register-form-pwd-confirm",
+                        "class"=>"form-input",
+                        "placeholder"=>"Confirmation",
+                        "type"=>"password",
+                        "error"=>"Votre mot de passe de confirmation ne correspond pas",
+                        "required"=>true,
+                        "label" =>[
+                            "balise" => "label",
+                            "for" => "register-form-pwd-confirm",
+                            "id" => "label-register-form-pwd-confirm",
+                            "class" => "form-label",
+                            "value" => "Confirmation du mot de passe"
+                        ],
+                        "confirm"=>"pwd"
+                    ],
+                ]
+        ];
+        return $this->config;
+    }
+    
 }
