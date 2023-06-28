@@ -37,6 +37,8 @@ class Login extends Validator
             ],
             "inputs"=>[
                 "email"=>[
+                    "divId"=>"",
+                    "divClass"=>"",
                     "id"=>"login-form-email",
                     "class"=>"form-control",
                     "placeholder"=>"Email",
