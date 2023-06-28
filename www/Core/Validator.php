@@ -39,6 +39,15 @@ class Validator
             if(isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])){
                 $this->errors[]=$configInput["error"];
             }
+            if($name == 'email' && !self::isEmailGood($this->data[$name])){
+                $this->errors[]=$configInput["error"];
+            }   
+            if($name == 'pwd'){
+                $result = self::isPwdGood($this->data[$name],$this->data['pwdConfirm']);
+                if(gettype($result) != "boolean"){
+                    $this->errors[]=$result;
+                }                
+            }
         }
         if(empty($this->errors)){
             return true;
@@ -58,5 +67,40 @@ class Validator
     {
         return strlen(trim($string))<=$length;
     }
+    public static function isEmailGood(String $email): bool
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+    public static function isPwdEqual(String $pwd, String $pwdConfirm): bool
+    {
+        return $pwd == $pwdConfirm;
+    }
+    public static function isPwdGood(String $pwd, String $pwdConfirm): bool|String
+    {
+        if(!empty($pwd) && !self::isPwdEqual($pwd, $pwdConfirm)) {
+            if (strlen($pwd) <= '8') {
+                $passwordErr = "Votre mot de passe doit contenir au moins 8 carcatères !";
+            }
+            elseif(!preg_match("#[0-9]+#",$pwd)) {
+                $passwordErr = "Votre mot de passe doit contenir au moins 1 nombre !";
+            }
+            elseif(!preg_match("#[A-Z]+#",$pwd)) {
+                $passwordErr = "Votre mot de passe doit contenir au moins 1 lettre majuscule !";
+            }
+            elseif(!preg_match("#[a-z]+#",$pwd)) {
+                $passwordErr = "Votre mot de passe doit contenir au moins 1 lettre minuscule !";
+            }
+            else{
+                return true;
+            }
+        }
+        elseif(!empty($_POST["pwd"])) {
+            $cpasswordErr = "Les deux mot de passe ne sont pas les mêmes";
+        } else {
+             $passwordErr = "Entrée un mot de passe";
+        }
+        return $passwordErr;
+    }
+
 
 }
