@@ -15,7 +15,7 @@ class User extends SQL implements SQLInterface
     protected Int $status = 0;
     private ?String $date_inserted;
     private ?String $date_updated;
-    private bool $actif;
+    protected bool $actif;
 
     public function __construct(){
         $sql = parent::getInstance();

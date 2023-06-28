@@ -92,7 +92,7 @@ class Login extends Validator
                 "div-activation" =>[
                     "id" => "div-login-activation",
                     "class" => "form-group div-form-100 col-md-6 mx-auto",
-                    "inside" => ["code"]
+                    "inside" => ["code","id","id_user"]
                 ],
             ],
             "inputs"=>[

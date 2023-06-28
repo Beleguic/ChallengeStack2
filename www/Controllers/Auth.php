@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+
+
+use App\Core\Mailer;
 use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Register;
@@ -13,6 +16,17 @@ class Auth extends Controller
 {
     public function login(): String
     {
+
+        $mail = new Mailer();
+        $mail->sendMail("jason.afonso.fernandes@gmail.com","Jason","Votre inscription","salut c'est un test");
+
+
+
+
+
+
+
+
         $this->setView("Auth/login");
         $this->setTemplate('front');
         $form = new Login();
@@ -61,13 +75,21 @@ class Auth extends Controller
             $user->setEmail($_POST['email']);
             $user->setPwd($_POST['pwd']);
             $user->save();
+
             $userAdd = $user->populateWithMail($_POST['email']);
+            $_SESSION['zfgh_login']['connected'] = true;
+            $_SESSION['zfgh_login']['email'] = $_POST['email'];
+            $_SESSION['zfgh_login']['firstname'] = $userAdd->getFirstname();
+            $_SESSION['zfgh_login']['lastname'] = $userAdd->getLastname();
+            $_SESSION['zfgh_login']['id'] = $userAdd->getId();
+            $_SESSION['zfgh_login']['status'] = $userAdd->getStatus();
+            $_SESSION['zfgh_login']['actif'] = $userAdd->getActif();
             $user_code = new UserCode();
             $user_code->setIdUser($userAdd->getId());
             $user_code->setCode($this->createCode());
-            var_dump($user_code->getCode());
             $user_code->save();
             // Envoie du mail
+            header("location: /activation");
         }
         $this->assign("formErrors", $form->errors);
         return $this->render();
@@ -152,7 +174,7 @@ class Auth extends Controller
 
     private function createCode(){
 
-        return str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        return str_pad(mt_rand(100000, 999999), 6, '0', STR_PAD_LEFT);
 
     }
 
@@ -166,23 +188,23 @@ class Auth extends Controller
         $form = new Login();
         $this->assign("formActivation", $form->getConfigActivation());
         $this->assign("formActivationData", $user_code->getConfigObject());
-
         if($form->isSubmited() && $form->isValid()){
-            if($_POST['submit'] == 'Valider'){
-                $user_code = $user->getOneWhere($_POST["id"]);
+            if($_POST['submit'] == 'Activer mon compte'){
+                $user_code = $user_code->getOneWhere(["id"=>$_POST["id"]]);
                 if($_POST['code'] == $user_code->getCode()){
                     $user = new User();
                     $user = $user->populate($user_code->getIdUser());
                     $user->setActif(true);
+                    $_SESSION['zfgh_login']['actif'] = true;
                     $user->save();
                     header("location: /");
                 }
                 else{
-                    header('location: /activateAccount?non=true');
+                    header('location: /activation?e=1');
                 }
             }
             else{
-                header('location: /activateAccount?non=true');
+                header('location: /activation?e=2');
             }
         }
 

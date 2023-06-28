@@ -15,36 +15,44 @@ class Register extends Validator
                     "id"=>"register-form",
                     "class"=>"form",
                     "enctype"=>"",
-                    "submit"=>["Nous rejoindre"],
-                    "reset"=>"Annuler"
+                    "submit"=>["Nous rejoindre"]
+                ],
+                "submit"=>[
+                    "Nous rejoindre" => [
+                        "id" => "",
+                        "class" => "btn btn-outline-primary btn-block mb-4 mt-4"
+                    ],
                 ],
                 "divs"=>[
                     "div-firstname-lastname" =>[
                         "id" => "div-register-firstname-lastname",
-                        "class" => "div-form-50",
+                        "class" => "row pb-3",
                         "inside" => ["firstname","lastname"]
                     ],
                     "div-email" =>[
                         "id" => "div-register-email",
-                        "class" => "div-form-100",
+                        "class" => "div-form-100 pb-3",
                         "inside" => ["email"]
                     ],
                     "div-pwd" =>[
                         "id" => "div-register-pwd",
-                        "class" => "div-form-50",
+                        "class" => "div-form-50 pb-3",
                         "inside" => ["pwd", "pwdConfirm"]
                     ],
                 ],
                 "inputs"=>[
                     "firstname"=>[
+                        "divId"=>"",
+                        "divClass"=>"col",
                         "id"=>"register-form-firstname",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre prénom",
                         "type"=>"text",
                         "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                         "min"=>2,
                         "max"=>60,
                         "label" =>[
+                            
                             "for" => "register-form-firstname",
                             "id" => "label-register-form-firstname",
                             "class" => "form-label",
@@ -53,8 +61,10 @@ class Register extends Validator
                         "required"=>true
                     ],
                     "lastname"=>[
+                        "divId"=>"",
+                        "divClass"=>"col",
                         "id"=>"register-form-lastname",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre nom",
                         "type"=>"text",
                         "error"=>"Votre nom doit faire entre 2 et 120 caractères",
@@ -70,7 +80,7 @@ class Register extends Validator
                     ],
                     "email"=>[
                         "id"=>"register-form-email",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre email",
                         "type"=>"email",
                         "error"=>"Votre email est incorrect",
@@ -85,7 +95,7 @@ class Register extends Validator
                     ],
                     "pwd"=>[
                         "id"=>"register-form-pwd",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre mot de passe",
                         "type"=>"password",
                         "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
@@ -100,7 +110,7 @@ class Register extends Validator
                     ],
                     "pwdConfirm"=>[
                         "id"=>"register-form-pwd-confirm",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Confirmation",
                         "type"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
@@ -109,7 +119,7 @@ class Register extends Validator
                             "balise" => "label",
                             "for" => "register-form-pwd-confirm",
                             "id" => "label-register-form-pwd-confirm",
-                            "class" => "form-label",
+                            "class" => "form-label pt-3",
                             "value" => "Confirmation du mot de passe"
                         ],
                         "confirm"=>"pwd"
