@@ -11,7 +11,7 @@
 <body>
   <div class="fluid-container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-darker-blue">
-      <div class="container-fluid mx-5">
+      <div class="container-fluid mx-lg-5">
         <a class="navbar-brand d-flex align-items-center" href="/">
           <img src="../asset/img/Logo.png" alt="Logo" width="75" height="75" class="d-inline-block align-top me-2">
           <span class="fs-4 mb-0">Moving House</span>
