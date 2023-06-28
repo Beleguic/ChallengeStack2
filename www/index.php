@@ -9,6 +9,8 @@
     use App\Controllers\Type;
     use App\Core\Application;
 
+    date_default_timezone_set("Europe/Paris");
+
     //require "Core/View.php";
 
     spl_autoload_register(function ($class) {

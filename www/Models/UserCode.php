@@ -7,14 +7,14 @@ use App\Core\SQLInterface;
 class UserCode extends SQL implements SQLInterface
 {
     private Int $id = 0;
-    private Int $id_user;
-    private Int $code;
+    protected Int $id_user;
+    protected Int $code;
 
     public function __construct(){
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_".end($classExploded);
+        $this->table = "zfgh_user_code";
     }
 
     public function getConfigObject(): array
@@ -79,6 +79,7 @@ class UserCode extends SQL implements SQLInterface
     public function setCode(Int $code): void
     {
         $this->code = $code;
-        
+
     }
+
 }

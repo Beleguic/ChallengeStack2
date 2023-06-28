@@ -104,9 +104,6 @@ class SQL{
     public function save($del=''): void
     {
         $columns = get_object_vars($this);
-        echo("<pre>");
-        var_dump($columns);
-        echo("</pre>");
         
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
@@ -127,9 +124,6 @@ class SQL{
                 $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
                     " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
             }else{
-                echo("<pre>");
-                var_dump($columns);
-                echo("</pre>");
                 $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                     " (".implode("," , array_keys($columns) ).") 
                 VALUES
