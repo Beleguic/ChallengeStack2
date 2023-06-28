@@ -37,6 +37,8 @@ class Login extends Validator
             ],
             "inputs"=>[
                 "email"=>[
+                    "divId"=>"",
+                    "divClass"=>"",
                     "id"=>"login-form-email",
                     "class"=>"form-control",
                     "placeholder"=>"Email",
@@ -62,6 +64,66 @@ class Login extends Validator
                         "class" => "form-label",
                         "value" => "Mot de passe"
                     ],
+                    "required"=>true
+                ],
+            ]
+        ];
+        return $this->config;
+    }
+
+    public function getConfigActivation(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"login-form",
+                "class"=>"form",
+                "enctype"=>"",
+                "submit"=>["Activer mon compte"]
+            ],
+            "submit"=>[
+                "Activer mon compte" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block mb-4"
+                ],
+            ],
+            "divs"=>[
+                "div-activation" =>[
+                    "id" => "div-login-activation",
+                    "class" => "form-group div-form-100 col-md-6 mx-auto",
+                    "inside" => ["code"]
+                ],
+            ],
+            "inputs"=>[
+                "code"=>[
+                    "id"=>"login-form-activation",
+                    "class"=>"form-control",
+                    "placeholder"=>"Code d'activation",
+                    "type"=>"text",
+                    "error"=>"Votre Code d'activation est incorrect",
+                    "label" =>[
+                        "for" => "login-form-activation",
+                        "id" => "label-login-form-activation",
+                        "class" => "form-label",
+                        "value" => "Code d'activation"
+                    ],
+                    "required"=>true
+                ],
+                "id"=>[
+                    "id"=>"",
+                    "class"=>"",
+                    "placeholder"=>"",
+                    "type"=>"hidden",
+                    "error"=>"",
+                    "required"=>true
+                ],
+                "id_user"=>[
+                    "id"=>"",
+                    "class"=>"",
+                    "placeholder"=>"",
+                    "type"=>"hidden",
+                    "error"=>"",
                     "required"=>true
                 ],
             ]

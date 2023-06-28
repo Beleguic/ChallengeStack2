@@ -56,6 +56,13 @@ class SQL{
         return $objet->getOneWhere(["id_hash"=>$id_hash]);
     }
 
+    public static function populateWith(Array $search): object
+    {
+        $class = get_called_class();
+        $objet = new $class();
+        return $objet->getOneWhere($search);
+    }
+
     public function getOneWhere(array $where): object
     {
         $sqlWhere = [];
@@ -96,15 +103,15 @@ class SQL{
 
     public function save($del=''): void
     {
-
-        echo('here1');
-
         $columns = get_object_vars($this);
+        echo("<pre>");
+        var_dump($columns);
+        echo("</pre>");
+        
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
 
         if($del == 'del'){
-            echo('here4');
             if(is_numeric($this->getId()) && $this->getId()>0) { 
                 // Prepare et execute la requete de suppression
                 $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table.
@@ -113,7 +120,6 @@ class SQL{
         }
         else{
             if(is_numeric($this->getId()) && $this->getId()>0) {
-                echo('here2');
                 $sqlUpdate = [];
                 foreach ($columns as $column=>$value) {
                     $sqlUpdate[] = $column."=:".$column;
@@ -121,14 +127,29 @@ class SQL{
                 $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
                     " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
             }else{
-                echo('here3');
-
+                echo("<pre>");
+                var_dump($columns);
+                echo("</pre>");
                 $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                     " (".implode("," , array_keys($columns) ).") 
                 VALUES
                  (:".implode(",:" , array_keys($columns) ).") ");
             }
-            $queryPrepared->execute($columns);
+            if (!$queryPrepared) {
+                echo "\nPDO::errorInfo():\n";
+                print_r($this->pdo->errorInfo());
+            }
+            try{
+                $queryPrepared->execute($columns);
+            }
+            catch(\PDOException $e){
+                echo("Erreur ".$e->getCode());
+                echo("Erreur ".$e->getMessage());
+            }
+
+            /*echo "\nPDOStatement::errorInfo():\n";
+            $arr = $this->pdo->errorInfo();
+            print_r($arr);*/
         }
 
 

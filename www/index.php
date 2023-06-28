@@ -71,18 +71,28 @@ else{
     $app->router->post('/a-propos', [Main::class ,"aboutUs"]);
 
      //Login
-     $app->router->get('/login', [Auth::class ,"login"]);
-     $app->router->post('/login', [Auth::class ,"login"]);
-     $app->router->get('/register', [Auth::class ,"register"]);
-     $app->router->post('/register', [Auth::class ,"register"]);
+    $app->router->get('/login', [Auth::class ,"login"]);
+    $app->router->post('/login', [Auth::class ,"login"]);
+    $app->router->get('/register', [Auth::class ,"register"]);
+    $app->router->post('/register', [Auth::class ,"register"]);
 
-     $app->router->get('/se-connecter', [Auth::class ,"login"]);
-     $app->router->post('/se-connecter', [Auth::class ,"login"]);
-     $app->router->get('/s-inscrire', [Auth::class ,"register"]);
-     $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->get('/back/user', [Auth::class ,"listUser"]);
+    $app->router->post('/back/user', [Auth::class ,"listUser"]);
+    $app->router->get('/back/update-user', [Auth::class ,"updateUser"]);
+    $app->router->post('/back/update-user', [Auth::class ,"updateUser"]);
+    $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"]);
+    $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"]);
 
-     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
-     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+    $app->router->get('/activation', [Auth::class ,"activateAccount"]);
+    $app->router->post('/activation', [Auth::class ,"activateAccount"]);
+
+    $app->router->get('/se-connecter', [Auth::class ,"login"]);
+    $app->router->post('/se-connecter', [Auth::class ,"login"]);
+    $app->router->get('/s-inscrire', [Auth::class ,"register"]);
+    $app->router->post('/s-inscrire', [Auth::class ,"register"]);
+
+    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
 
  
     // Route annonce back

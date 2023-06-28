@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\SQL;
 use App\Core\SQLInterface;
-class User extends SQL 
+class User extends SQL implements SQLInterface
 {
     private Int $id = 0;
     protected String $firstname;
@@ -15,6 +15,7 @@ class User extends SQL
     protected Int $status = 0;
     private ?String $date_inserted;
     private ?String $date_updated;
+    private bool $actif;
 
     public function __construct(){
         $sql = parent::getInstance();
@@ -23,7 +24,22 @@ class User extends SQL
         $this->table = "zfgh_".end($classExploded);
     }
 
+    public function getConfigObject(): array
+    {
 
+        $array['id'] = $this->getId();
+        $array['firstname'] = $this->getFirstname();
+        $array['lastname'] = $this->getLastname();
+        $array['email'] = $this->getEmail();
+        //$array['pwd'] = $this->getPwd();
+        $array['country'] = $this->getCountry();
+        $array['status'] = $this->getStatus();
+        //$array['date_inserted'] = $this->getDateInserted();
+        //$array['date_updated'] = $this->getDateUpdated();
+        $array['actif'] = $this->getActif();
+        return $array;
+
+    }
     
     /**
      * @return Int
@@ -167,6 +183,22 @@ class User extends SQL
     public function setDateUpdated(\DateTime $date_updated): void
     {
         $this->date_updated = $date_updated;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getActif(): Int
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param \DateTime $date_updated
+     */
+    public function setActif(bool $actif): void
+    {
+        $this->actif = $actif;
     }
 
 
