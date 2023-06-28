@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+
+
+use App\Core\Mailer;
 use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Register;
@@ -13,6 +16,17 @@ class Auth extends Controller
 {
     public function login(): String
     {
+
+        $mail = new Mailer();
+        $mail->sendMail("jason.afonso.fernandes@gmail.com","Jason","Votre inscription","salut c'est un test");
+
+
+
+
+
+
+
+
         $this->setView("Auth/login");
         $this->setTemplate('front');
         $form = new Login();
