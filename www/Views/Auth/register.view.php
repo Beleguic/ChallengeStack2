@@ -1,4 +1,4 @@
-<h2>S'inscrire</h2>
+<h2 class="text-center title-form pt-5">Inscription</h2>
 
 <?php $this->partial("form", $this->data["form"]) ?>
 

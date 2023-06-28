@@ -2229,7 +2229,7 @@ progress {
 }
 .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
     padding-right: 0;
-    padding-left: 0;
+    padding-left: 20;
 }
 
 .form-control-sm {
