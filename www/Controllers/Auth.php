@@ -12,6 +12,7 @@ use App\Forms\Login;
 use App\Models\User;
 use App\Models\UserCode;
 use App\Models\UserPwdForget;
+use App\Models\Connexion;
 
 class Auth extends Controller
 {
@@ -29,6 +30,8 @@ class Auth extends Controller
             if(!isset($user->property)){
                 if(password_verify($_POST['pwdLogin'], $user->getPwd())) {
                     $user->populateWithMail($_POST['email']);
+                    $connexion = new Connexion;
+                    $newToken = sha1(uniqid());
                     $_SESSION['zfgh_login']['connected'] = true;
                     $_SESSION['zfgh_login']['email'] = $_POST['email'];
                     $_SESSION['zfgh_login']['firstname'] = $user->getFirstname();
@@ -36,7 +39,10 @@ class Auth extends Controller
                     $_SESSION['zfgh_login']['id'] = $user->getId();
                     $_SESSION['zfgh_login']['status'] = $user->getStatus();
                     $_SESSION['zfgh_login']['actif'] = $user->getActif();
-                    //echo "Identifiant Correct";
+                    $_SESSION['zfgh_login']['token'] = $newToken;
+                    $connexion->setIdUser($user->getId());
+                    $connexion->setToken($newToken);
+                    $connexion->save();
                     header('location: /?conn=true');
                 } else {
                     echo "Identifiant Incorrect";
@@ -68,6 +74,8 @@ class Auth extends Controller
             $user->save();
 
             $userAdd = $user->populateWithMail($_POST['email']);
+            $connexion = new Connexion;
+            $newToken = sha1(uniqid());
             $_SESSION['zfgh_login']['connected'] = true;
             $_SESSION['zfgh_login']['email'] = $_POST['email'];
             $_SESSION['zfgh_login']['firstname'] = $userAdd->getFirstname();
@@ -75,6 +83,7 @@ class Auth extends Controller
             $_SESSION['zfgh_login']['id'] = $userAdd->getId();
             $_SESSION['zfgh_login']['status'] = $userAdd->getStatus();
             $_SESSION['zfgh_login']['actif'] = $userAdd->getActif();
+            $_SESSION['zfgh_login']['token'] = $newToken;
             $user_code = new UserCode();
             $user_code->setIdUser($userAdd->getId());
             $user_code->setCode($this->createCode());
@@ -82,6 +91,10 @@ class Auth extends Controller
             // Envoie du mail
             $mail = new Mailer();
             $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
+
+            $connexion->setIdUser($user->getId());
+            $connexion->setToken($newToken);
+            $connexion->save();
             header("location: /activation");
         }
         $this->assign("formErrors", $form->errors);
@@ -90,6 +103,14 @@ class Auth extends Controller
 
     public function logout(): void
     {
+        if(!isset($_SESSION['zfgh_login'])){
+            header("location: /");
+        }
+
+        $id_user = $_SESSION['zfgh_login']['id'];
+        $connexion = new Connexion();
+        $connexion = $connexion->populateWith(["id_user" => $id_user]);
+        $connexion->save('del');
         unset($_SESSION['zfgh_login']);
         if(isset($_SESSION['zfgh_login'])){
              header('location: /?logout=false');
@@ -97,8 +118,6 @@ class Auth extends Controller
         else{
              header('location: /?logout=true');
         }
-       
-        
     }
 
     public function listUser(): String
