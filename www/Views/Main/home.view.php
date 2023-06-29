@@ -4,7 +4,7 @@
   <div class="row row-cols-1 row-cols-lg-2 g-4">
     <div class="col-12 col-lg-6">
       <div class="card h-100">
-        <img src="../../asset/img/appartement.jpg" class="card-img-top custom-img-height" alt="Appartement">
+        <img src="../../asset/images/annonces/appartement.jpg" class="card-img-top custom-img-height" alt="Appartement">
         <div class="card-body">
           <div class="row">
             <div class="col-6">
@@ -32,7 +32,7 @@
     
     <div class="col-12 col-lg-6">
       <div class="card h-100">
-        <img src="../../asset/img/maison.jpg" class="card-img-top custom-img-height" alt="Maison">
+        <img src="../../asset/images/annonces/maison.jpg" class="card-img-top custom-img-height" alt="Maison">
         <div class="card-body">
           <div class="row">
             <div class="col-6">
@@ -49,7 +49,7 @@
     
     <div class="col-12 col-lg-6">
       <div class="card h-100">
-        <img src="../../asset/img/parking.jpg" class="card-img-top custom-img-height" alt="Parking">
+        <img src="../../asset/images/annonces/parking.jpg" class="card-img-top custom-img-height" alt="Parking">
         <div class="card-body">
           <div class="row">
             <div class="col-6">
@@ -66,7 +66,7 @@
     
     <div class="col-12 col-lg-6">
       <div class="card h-100">
-        <img src="../../asset/img/chateau.jpg" class="card-img-top custom-img-height" alt="Chateau">
+        <img src="../../asset/images/annonces/chateau.jpg" class="card-img-top custom-img-height" alt="Chateau">
         <div class="card-body">
           <div class="row">
             <div class="col-6">

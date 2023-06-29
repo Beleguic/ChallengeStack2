@@ -6,14 +6,14 @@
   <meta name="description" content="Moving House">
   <link rel="stylesheet" href="../asset/css/style.css">
   <link rel="stylesheet" href="../asset/css/bootstrap.css">
-  <link rel="icon" href="../asset/img/Logo.png">
+  <link rel="shortcut icon" href="../../asset/images/logo.png">
 </head>
 <body>
   <div class="fluid-container">
   <nav class="navbar navbar-expand-lg navbar-dark bg-darker-blue">
   <div class="container-fluid mx-5">
   <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="../asset/img/Logo.png" alt="Logo" width="75" height="75" class="d-inline-block align-top me-2">
+      <img src="../asset/images/logo.png" alt="Logo" width="75" height="75" class="d-inline-block align-top me-2">
       <span class="fs-4 mb-0">Moving House</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
