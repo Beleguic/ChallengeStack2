@@ -1,6 +1,8 @@
 <?php
 
     namespace App\Core;
+
+    use App\Models\User;
     class Router
     {
 
@@ -43,8 +45,12 @@
 
         }
 
-        public function get($path,$callback){
-            $this->routes['get'][$path] = $callback;
+        public function get($path,$callback, array $middleware = null, int $role = 0){
+            $this->routes['get'][$path] =[
+                "callback" => $callback,
+                "middleware" => $middleware,
+                "role" => $role
+                ];
         }
 
 
@@ -56,12 +62,28 @@
         {
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
-            $callback = $this->routes[$method][$path] ?? false;
+
+
+            $callback = $this->routes[$method][$path]["callback"] ?? false;
+            $middleware = $this->routes[$method][$path]["middleware"] ?? false;
+            $role = $this->routes[$method][$path]["role"] ?? false;
+
+
+            $user = new User();
+            $user->setStatus(1);
+
+            if($middleware!=false){
+            $middleware = new $middleware[0]($role, $user);
+            }
+
+
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
+            
                 if (preg_match($pattern, $path, $matches)) {
+                    
                     // La route correspond, enregistrez le rappel (callback) et les paramètres
-                    $callback = $routeCallback;
+                    $callback = $routeCallback["callback"];
                     array_shift($matches); // Supprime la première correspondance qui contient le chemin complet
                     $params = $matches;
                     break;
@@ -72,8 +94,7 @@
 
 
 
-
-            if($callback ===false){
+            if($callback === false){
                 $this->response->setStatutCode(404);
                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
             }
@@ -84,6 +105,12 @@
             }
 
             if(is_array($callback)){
+           
+                if($middleware!=false){
+
+                $middleware->execute();
+                }
+            
                 $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
         

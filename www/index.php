@@ -7,6 +7,7 @@
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
+    use App\Core\Middleware\AuthMiddleware;
     use App\Models\Connexion;
     use App\Core\Application;
 
@@ -126,7 +127,7 @@ else{
     $app = new Application();
 
     // Route de base
-    $app->router->get('/', [Main::class ,"home"]);
+    $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],2);
     $app->router->get('/back', [Main::class ,"dashboard"]);
 
     // Navbar front
@@ -163,7 +164,7 @@ else{
     
     // Route annonce front
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
-    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],2);
     
 
     // Route annonce back
