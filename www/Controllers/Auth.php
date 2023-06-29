@@ -17,16 +17,6 @@ class Auth extends Controller
     public function login(): String
     {
 
-        $mail = new Mailer();
-        $mail->sendMail("jason.afonso.fernandes@gmail.com","Jason","Votre inscription","salut c'est un test");
-
-
-
-
-
-
-
-
         $this->setView("Auth/login");
         $this->setTemplate('front');
         $form = new Login();
@@ -89,6 +79,8 @@ class Auth extends Controller
             $user_code->setCode($this->createCode());
             $user_code->save();
             // Envoie du mail
+            $mail = new Mailer();
+            $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
             header("location: /activation");
         }
         $this->assign("formErrors", $form->errors);
@@ -178,6 +170,8 @@ class Auth extends Controller
 
     }
 
+    
+
     public function activateAccount(){
 
         $this->setView("Auth/user-active");
@@ -185,6 +179,12 @@ class Auth extends Controller
 
         $user_code = new UserCode();
         $user_code = $user_code->populateWith(["id_user" => $_SESSION['zfgh_login']['id']]);
+        if(isset($_GET['email']) && $_GET['email'] == "resend"){
+            $userAdd = new User();
+            $userAdd = $userAdd->populate($_SESSION['zfgh_login']['id']);
+            $mail = new Mailer();
+            $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
+        }
         $form = new Login();
         $this->assign("formActivation", $form->getConfigActivation());
         $this->assign("formActivationData", $user_code->getConfigObject());
