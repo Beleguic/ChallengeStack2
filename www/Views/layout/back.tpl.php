@@ -9,12 +9,9 @@
   <link rel="stylesheet" href="../../asset/css/style.css">
   <link rel="stylesheet" href="../../asset/css/bootstrap.css">
   <link rel="stylesheet" href="../../asset/css/back-bootstrap.css">
-  <link rel="icon" href="../../asset/img/Logo.png">
-  
-  <!-- FontAwesome JS-->
-  <script defer src="../../asset/plugins/fontawesome/js/all.min.js"></script>
-
+  <link rel="icon" href="../../asset/images/logo.png">
 </head>
+
 <body class="app">
   <!-- BEGIN: Header -->
   <header class="app-header fixed-top">
@@ -155,13 +152,13 @@
 	      <div class="sidepanel-inner d-flex flex-column">
 		      <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		      <div class="app-branding">
-		        <a class="app-logo" href="./annonce"><img class="logo-icon me-2" src="../../asset/images/app-logo.svg" alt="logo"><span class="logo-text">ADMIN</span></a>
+		        <a class="app-logo" href="/back"><img class="logo-icon me-2" src="../../asset/images/app-logo.svg" alt="logo"><span class="logo-text">ADMIN</span></a>
 	        </div>
 		        
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
 					    <li class="nav-item">
-					      <a class="nav-link active" href="./annonce">
+					      <a class="nav-link active" href="/back">
                   <span class="nav-icon">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
@@ -188,9 +185,9 @@
                 </a>
 					      <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
 						      <ul class="submenu-list list-unstyled">
-                    <li class="submenu-item"><a class="submenu-link" href="./annonce">Annonce</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="./type">Type annonce</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="./user">Liste des utilisateurs</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/annonce">Annonce</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/type">Type annonce</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/user">Liste des utilisateurs</a></li>
                   </ul>
                 </div>
 					    </li>    
