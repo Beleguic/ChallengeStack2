@@ -6,7 +6,7 @@
   <meta name="description" content="Moving House">
   <link rel="stylesheet" href="../asset/css/style.css">
   <link rel="stylesheet" href="../asset/css/bootstrap.css">
-  <link rel="icon" href="../asset/img/Logo.png">
+  <link rel="icon" href="../../asset/img/Logo.png">
 </head>
 <body>
   <div class="fluid-container">

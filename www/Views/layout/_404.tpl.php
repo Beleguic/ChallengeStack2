@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Erreur 404</title>
     <meta name="description" content="Moving House">
-    <link rel="stylesheet" href="../asset/css/style.css">
-    <link rel="stylesheet" href="../asset/css/bootstrap.css">
+    <link rel="stylesheet" href="../../asset/css/style.css">
+    <link rel="stylesheet" href="../../asset/css/bootstrap.css">
     <link rel="icon" href="../asset/img/Logo.png">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
