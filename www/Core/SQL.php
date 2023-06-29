@@ -117,7 +117,7 @@ class SQL{
         $columns = array_diff_key($columns, $columnsToExclude);
 
         if($del == 'del'){
-            if(is_numeric($this->getId()) && $this->getId()!='0') { 
+            if(is_string($this->getId()) && $this->getId()!='0') { 
                 // Prepare et execute la requete de suppression
                 $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table.
                     " WHERE id =?;")->execute([$this->getId()]);

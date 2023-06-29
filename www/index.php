@@ -7,6 +7,7 @@
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
+    use App\Models\Connexion;
     use App\Core\Application;
 
     date_default_timezone_set("Europe/Paris");
@@ -41,8 +42,63 @@
             header("location: /");
         }
     }
+    if(isset($_SESSION['zfgh_login'])){
+        if(isset($_SESSION['zfgh_login']['token'])){
+            $token = $_SESSION['zfgh_login']['token'];
+            $id = $_SESSION['zfgh_login']['id'];
+            $connexion = new Connexion();
+            $connexion = $connexion->populateWith(["id_user" => $id]);
+            if(isset($connexion->property)){ 
+                unset($_SESSION['zfgh_login']);
+            }
+            else{
+                $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
+                $heure_supplementaire = strtotime('+2 hour', strtotime($last_seen));
+                $last_seenPlus2Hour = date('Y-m-d H:i:s', $heure_supplementaire);
+                $dateNow = date('Y-m-d H:i:s.u');
+                if ($dateNow > $last_seenPlus2Hour)
+                {
+                   $connexion->save('del');
+                   unset($_SESSION['zfgh_login']);
+                }
+                else{
+                    if($token == $connexion->getToken()){
+                        $newToken = sha1(uniqid());
+                        $_SESSION['zfgh_login']['token'] = $newToken;
+                        $connexion->setToken($newToken);
+                        $connexion->setLastSeen(date('Y-m-d H:i:s'));
+                        $connexion->save();
+                    }
+                    else{
+                        $connexion->save('del');
+                        unset($_SESSION['zfgh_login']); 
+                    }
+                }
+            }
+
+        }
+        else{
+            unset($_SESSION['zfgh_login']);
+        }
+    }
+    else{
+        unset($_SESSION['zfgh_login']);
+    }
 
 /*
+
+token de connexion
+Creation d'une nouvelle table 'Connexion'
+id, mail et token de co
+a chaque F5, on verifie si le token dans le $_SESSION est le meme que la BDD
+Si il est pareil, on maintien la connexion et on change le token dans la BDD et dans le $_SESSION pour le prochain F5
+Si il n'est pas pareil, on deconnecte l'utilisateur
+Création d'un token dans la BDD au moment de la connexion a l'appli
+Si l'utilisateur fait f5 au bout de 2h apres le dernier, il est deconnecter et doit ce reconnecter pour generer un nouveau token
+Connexion : Insert
+F5 : update
+F5 + 2h : Delete
+Desconnexion : Delete
 
 
 Level Authentificatioin
