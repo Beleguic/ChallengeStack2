@@ -11,6 +11,7 @@ use App\Forms\Register;
 use App\Forms\Login;
 use App\Models\User;
 use App\Models\UserCode;
+use App\Models\UserPwdForget;
 
 class Auth extends Controller
 {
@@ -213,13 +214,22 @@ class Auth extends Controller
 
     public function resetPwd(): String 
     {
-        if (!isset($_GET['id'])) 
+        if (!isset($_GET['token'])) 
         {
             header('location: /');
         }
         else 
         {
-
+            $userPwdForget = new UserPwdForget();
+            $userPwdForget = $userPwdForget->populateWith(['token'=>$_GET['token']]);
+            $validity = date('Y-m-d H:i:s.u', strtotime($userPwdForget->getValidity()));
+            $heure_supplementaire = strtotime('+1 hour', strtotime($validity));
+            $validityPlus1Hour = date('Y-m-d H:i:s', $heure_supplementaire);
+            $dateNow = date('Y-m-d H:i:s.u');
+            if ($dateNow > $validityPlus1Hour)
+            {
+                header ("location: /");
+            }
         }
         $this->setView("Auth/reset-pwd");
         $this->setTemplate("front");
@@ -253,9 +263,20 @@ class Auth extends Controller
         if ($form->isSubmited() && $form->isValid()) 
         {
             $user = new User();
-            $isMailExist = $user->checkSomething(["email",$_POST['email']]);
-            var_dump($isMailExist);
+            $mailClean = strtolower(trim($_POST['email']));
+            $isMailExist = $user->checkSomething(["email",$mailClean]);
 
+            if ($isMailExist)
+            {
+                $userPwdForget = new UserPwdForget();
+                $userPwdForget-> setEmail($mailClean);
+                $userPwdForget-> setToken(sha1(uniqid()));
+                $userPwdForget->save();
+
+                $mail = new Mailer();
+                $mail->sendMail($userPwdForget->getEmail(),"","Mot de passe - Mooving House","Pour rénitialiser votre mot de passe, cliquer sur le lien suivant : http://localhost/reset-pwd?token=".$userPwdForget->getToken()."");
+                
+            }
             //header('location: /');
         }
 
