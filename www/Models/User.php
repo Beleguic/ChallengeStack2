@@ -15,6 +15,7 @@ class User extends SQL
     protected Int $status = 0;
     private ?String $date_inserted;
     private ?String $date_updated;
+    protected int $role;
 
     public function __construct(){
         $sql = parent::getInstance();
@@ -23,7 +24,14 @@ class User extends SQL
         $this->table = "zfgh_".end($classExploded);
     }
 
+    public function getRole()
+    {
+        return $this->role;
+    }
 
+    public function setRole(int $role){
+        $this->role = $role;
+    }
     
     /**
      * @return Int

@@ -8,6 +8,7 @@
     use App\Controllers\Annonce;
     use App\Controllers\Type;
     use App\Core\Application;
+    use App\Core\Middleware\AuthMiddleWare;
 
     //require "Core/View.php";
 
@@ -83,11 +84,11 @@ else{
      $app->router->post('/s-inscrire', [Auth::class ,"register"]);
 
      $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
-     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
+     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleWare::class],1);
 
  
     // Route annonce back
-    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],1);
+    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleWare::class],1);
 
     $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
     $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);

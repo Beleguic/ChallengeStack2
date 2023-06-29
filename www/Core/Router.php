@@ -1,6 +1,7 @@
 <?php
 
     namespace App\Core;
+    use App\Models\User;
     class Router
     {
 
@@ -22,11 +23,13 @@
 
         }
 
-        public function get($path, $callback, $role = 0)
+        public function get($path, $callback,$middleware = null,$role = 0)
         {
             $this->routes['get'][$path] = [
                 'callback' => $callback,
+                'middleware'=>$middleware,
                 'role' => $role
+
             ];
         }
 
@@ -36,8 +39,21 @@
 
         public function resolve()
         {
-            
-    
+
+            $user = new User();
+            $user->setFirstname("jason");
+            $user->setLastname("afonso");
+            $user->setEmail("test@gmail.com");
+            $user->setPwd("pass");
+            $user->setRole(3);
+
+        
+
+
+
+
+
+
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $callbackData= $this->routes[$method][$path] ?? false;
@@ -45,6 +61,10 @@
             if ($callbackData) {
                 $callback = $callbackData['callback'];
                 $role = $callbackData['role'];
+                if(isset($callbackData['middleware'][0])){
+                    $middleware = new $callbackData['middleware'][0]($role,$user);
+                }
+                
             }
             
             foreach ($this->routes[$method] as $route => $routeCallback) {
@@ -75,8 +95,10 @@
             }
 
             if(is_array($callback)){
-                echo "<pre>";
-                var_dump($role);
+                if(isset($middleware)){
+                    $middleware->execute();
+                }
+                
                 $callback["callback"][0]= new $callback["callback"][0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
                 
             }
