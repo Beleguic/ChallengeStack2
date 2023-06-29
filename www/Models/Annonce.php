@@ -6,9 +6,8 @@ use App\Core\SQL;
 use App\Core\SQLInterface;
 class Annonce extends SQL implements SQLInterface
 {
-    private Int $id = 0;
-    protected String $id_hash;
-    protected Int $id_type;
+    private String $id = '0';
+    protected String $id_type;
     protected String $titre;
     protected Int $prix;
     protected Int $superficiemaison;
@@ -36,7 +35,6 @@ class Annonce extends SQL implements SQLInterface
     {
 
         $array['id'] = $this->getId();
-        $array['id_hash'] = $this->getIdHash();
         $array['id_type'] = $this->getIdType();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
@@ -53,20 +51,11 @@ class Annonce extends SQL implements SQLInterface
 
     }
 
-    public function setIdHash(): void
-    {
-        $this->id_hash = sha1(uniqid());
-    }
-
-    public function getIdHash(): String
-    {
-        return $this->id_hash;
-    }
 
     /**
      * @return Int
      */
-    public function getId(): int
+    public function getId(): String
     {
         return $this->id;
     }
@@ -74,7 +63,7 @@ class Annonce extends SQL implements SQLInterface
     /**
      * @param Int $id
      */
-    public function setId(int $id): void
+    public function setId(String $id): void
     {
         
         $this->id = $id;
@@ -102,7 +91,7 @@ class Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getIdType(): Int
+    public function getIdType(): String
     {
         return $this->id_type;
     }
@@ -112,7 +101,7 @@ class Annonce extends SQL implements SQLInterface
      *
      * @return self
      */
-    public function setIdType(Int $id_type): void
+    public function setIdType(String $id_type): void
     {
         $this->id_type = $id_type;
     }

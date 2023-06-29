@@ -6,14 +6,14 @@ use App\Core\SQL;
 use App\Core\SQLInterface;
 class User extends SQL implements SQLInterface
 {
-    private Int $id = 0;
+    private String $id = '0';
     protected String $firstname;
     protected String $lastname;
     protected String $email;
     protected String $pwd;
     protected String $country;
     protected Int $status = 0;
-    private ?String $date_inserted;
+    private String $date_inserted;
     private ?String $date_updated;
     protected bool $actif;
 
@@ -44,7 +44,7 @@ class User extends SQL implements SQLInterface
     /**
      * @return Int
      */
-    public function getId(): int
+    public function getId(): String
     {
         return $this->id;
     }
@@ -52,7 +52,7 @@ class User extends SQL implements SQLInterface
     /**
      * @param Int $id
      */
-    public function setId(int $id): void
+    public function setId(String $id): void
     {
         $this->id = $id;
     }
