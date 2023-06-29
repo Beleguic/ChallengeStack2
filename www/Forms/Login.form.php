@@ -153,7 +153,7 @@ class Login extends Validator
                 "inputs"=>[
                     "pwd"=>[
                         "id"=>"register-form-pwd",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Votre mot de passe",
                         "type"=>"password",
                         "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
@@ -168,7 +168,7 @@ class Login extends Validator
                     ],
                     "pwdConfirm"=>[
                         "id"=>"register-form-pwd-confirm",
-                        "class"=>"form-input",
+                        "class"=>"form-control",
                         "placeholder"=>"Confirmation",
                         "type"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
@@ -187,4 +187,44 @@ class Login extends Validator
         return $this->config;
     }
     
+    public function getConfigResetPwdMail(): array 
+    {
+        $this->config = [
+                "config"=>[
+                    "method"=>$this->method,
+                    "action"=>"",
+                    "id"=>"register-form",
+                    "class"=>"form",
+                    "enctype"=>"",
+                    "submit"=>["Confirmer mon mail"],
+                    "reset"=>"Annuler"
+                ],
+                "divs"=>[
+                    "div-pwd" =>[
+                        "id" => "div-register-pwd",
+                        "class" => "div-form-50",
+                        "inside" => ["email"]
+                    ],
+                ],
+                "inputs"=>[
+                    "email"=>[
+                        "divId"=>"",
+                        "divClass"=>"",
+                        "id"=>"login-form-email",
+                        "class"=>"form-control",
+                        "placeholder"=>"Email",
+                        "type"=>"email",
+                        "error"=>"Votre email est incorrect",
+                        "label" =>[
+                            "for" => "login-form-email",
+                            "id" => "label-login-form-email",
+                            "class" => "form-label",
+                            "value" => "Adresse mail"
+                        ],
+                        "required"=>true
+                    ]          
+                ]
+        ];
+        return $this->config;
+    }
 }
