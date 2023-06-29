@@ -73,7 +73,6 @@
 
 
 
-
             if($callback ===false){
                 $this->response->setStatutCode(404);
                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");

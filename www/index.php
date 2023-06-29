@@ -110,6 +110,9 @@ else{
     $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"]);
     $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"]);
 
+    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"]);
+    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"]);
+
     $app->router->get('/deconnexion', [Auth::class ,"logout"]);
     $app->router->post('/deconnexion', [Auth::class ,"logout"]);
 

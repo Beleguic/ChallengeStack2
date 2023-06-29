@@ -219,7 +219,7 @@ class Auth extends Controller
         }
         else 
         {
-            
+
         }
         $this->setView("Auth/reset-pwd");
         $this->setTemplate("front");
@@ -230,7 +230,7 @@ class Auth extends Controller
         if ($form->isSubmited() && $form->isValid()) 
         {
             $user = new User();
-            $user = $user->populate($_GET['id']);
+            $user = $user->populate($_POST['id']);
             $user->setPwd($_POST['pwd']);
             $user->save();
 
@@ -241,5 +241,28 @@ class Auth extends Controller
 
         return $this->render();
     }
+
+    public function resetPwdMail(): String 
+    {
+        $this->setView("Auth/reset-pwd-mail");
+        $this->setTemplate("front");
+
+        $form = new Login();
+        $this->assign("form", $form->getConfigResetPwdMail());
+
+        if ($form->isSubmited() && $form->isValid()) 
+        {
+            $user = new User();
+            $isMailExist = $user->checkSomething(["email",$_POST['email']]);
+            var_dump($isMailExist);
+
+            //header('location: /');
+        }
+
+ 
+
+        return $this->render();
+    }
+
 
 }

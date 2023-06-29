@@ -99,6 +99,14 @@ class SQL{
         return $queryPrepared;
 
     }
+    // .implode(' , ', $who).
+    public function checkSomething(array $who): bool
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT count(*) FROM ".$this->table." WHERE ".implode(" = '", $who)."' LIMIT 1;"); 
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared->fetchColumn();
+    }
 
 
     public function save($del=''): void
