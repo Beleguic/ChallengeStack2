@@ -170,8 +170,6 @@ class Auth extends Controller
 
     }
 
-
-
     public function activateAccount(){
 
         $this->setView("Auth/user-active");
