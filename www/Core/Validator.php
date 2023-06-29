@@ -77,7 +77,7 @@ class Validator
     }
     public static function isPwdGood(String $pwd, String $pwdConfirm): bool|String
     {
-        if(!empty($pwd) && !self::isPwdEqual($pwd, $pwdConfirm)) {
+        if(!empty($pwd) && self::isPwdEqual($pwd, $pwdConfirm)) {
             if (strlen($pwd) <= '8') {
                 $passwordErr = "Votre mot de passe doit contenir au moins 8 carcatères !";
             }
