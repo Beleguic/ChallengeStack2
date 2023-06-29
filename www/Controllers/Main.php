@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\View;
-use App\Models\User as UserModel;
 
 class Main extends Controller
 {
@@ -43,18 +42,5 @@ class Main extends Controller
     public function aboutUs(): void
     {
         echo "Page à propos";
-    }
-
-    public function parametre(): String
-    {
-        $user = new UserModel();
-        $userId = $_SESSION['zfgh_login']['id'];
-
-        $this->setView("Main/parametre");
-        $this->setTemplate("front");
-
-        $this->assign("userInfo", $user->populate($userId));
-
-        return $this->render();
     }
 }

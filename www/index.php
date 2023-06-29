@@ -7,7 +7,11 @@
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
+<<<<<<< HEAD
     use App\Core\Middleware\AuthMiddleware;
+=======
+    use App\Controllers\Setting;
+>>>>>>> cd62c4d (feat(account-setting): add new routes for modify and create new controlleur)
     use App\Models\Connexion;
     use App\Core\Application;
     use App\Controllers\Newsletter;
@@ -172,6 +176,9 @@ else{
     $app->router->get('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
     $app->router->post('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
     
+    $app->router->get('/modify-connexion', [Setting::class ,"modifyConnexion"]);
+    $app->router->get('/modify-info', [Setting::class ,"modifyInfo"]);
+    $app->router->get('/modify-password', [Setting::class ,"modifyPassword"]);
 
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleware::class],2);
