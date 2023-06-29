@@ -95,7 +95,7 @@ class Validator
             }
         }
         elseif(!empty($_POST["pwd"])) {
-            $cpasswordErr = "Les deux mot de passe ne sont pas les mêmes";
+            $passwordErr = "Les deux mot de passe ne sont pas les mêmes";
         } else {
              $passwordErr = "Entrée un mot de passe";
         }

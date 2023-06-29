@@ -32,7 +32,7 @@ class Login extends Validator
                 "div-pwd" =>[
                     "id" => "div-login-pwd",
                     "class" => "form-group div-form-100 col-md-6 mx-auto",
-                    "inside" => ["pwd"]
+                    "inside" => ["pwdLogin"]
                 ],
             ],
             "inputs"=>[
@@ -52,7 +52,7 @@ class Login extends Validator
                     ],
                     "required"=>true
                 ],
-                "pwd"=>[
+                "pwdLogin"=>[
                     "id"=>"login-form-pwd",
                     "class"=>"form-control",
                     "placeholder"=>"Mot de passe",

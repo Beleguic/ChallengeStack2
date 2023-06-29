@@ -26,7 +26,7 @@ class Auth extends Controller
             $user = new User();
             $user = $user->getOneWhere(['email' => $_POST['email']]);
             if(!isset($user->property)){
-                if(password_verify($_POST['pwd'], $user->getPwd())) {
+                if(password_verify($_POST['pwdLogin'], $user->getPwd())) {
                     $user->populateWithMail($_POST['email']);
                     $_SESSION['zfgh_login']['connected'] = true;
                     $_SESSION['zfgh_login']['email'] = $_POST['email'];
@@ -170,8 +170,6 @@ class Auth extends Controller
 
     }
 
-    
-
     public function activateAccount(){
 
         $this->setView("Auth/user-active");
@@ -192,11 +190,13 @@ class Auth extends Controller
             if($_POST['submit'] == 'Activer mon compte'){
                 $user_code = $user_code->getOneWhere(["id"=>$_POST["id"]]);
                 if($_POST['code'] == $user_code->getCode()){
+                    echo($user_code->getIdUser());
                     $user = new User();
                     $user = $user->populate($user_code->getIdUser());
                     $user->setActif(true);
-                    $_SESSION['zfgh_login']['actif'] = true;
                     $user->save();
+                    $user = $user->populate($user->getId());
+                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
                     header("location: /");
                 }
                 else{
@@ -210,32 +210,5 @@ class Auth extends Controller
 
         return $this->render();
     } 
-
-    public function resetPwd(): String 
-    {
-        if (!isset($_GET['id'])) 
-        {
-            header('location: /');
-        }
-        $this->setView("Auth/reset-pwd");
-        $this->setTemplate("front");
-
-        $form = new Login();
-        $this->assign("form", $form->getConfigResetPwd());
-
-        if ($form->isSubmited() && $form->isValid()) 
-        {
-            $user = new User();
-            $user = $user->populate($_GET['id']);
-            $user->setPwd($_POST['pwd']);
-            $user->save();
-
-            header('location: /');
-        }
-
- 
-
-        return $this->render();
-    }
 
 }

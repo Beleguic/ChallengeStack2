@@ -6,8 +6,8 @@ use App\Core\SQL;
 use App\Core\SQLInterface;
 class UserCode extends SQL implements SQLInterface
 {
-    private Int $id = 0;
-    protected Int $id_user;
+    private String $id = '0';
+    protected String $id_user;
     protected Int $code;
 
     public function __construct(){
@@ -29,7 +29,7 @@ class UserCode extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getId(): Int
+    public function getId(): String
     {
         return $this->id;
     }
@@ -39,7 +39,7 @@ class UserCode extends SQL implements SQLInterface
      *
      * @return self
      */
-    public function setId(Int $id): void
+    public function setId(String $id): void
     {
         $this->id = $id;
 
@@ -48,7 +48,7 @@ class UserCode extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getIdUser(): Int
+    public function getIdUser(): String
     {
         return $this->id_user;
     }
@@ -58,7 +58,7 @@ class UserCode extends SQL implements SQLInterface
      *
      * @return self
      */
-    public function setIdUser(Int $id_user): void
+    public function setIdUser(String $id_user): void
     {
         $this->id_user = $id_user;
     }

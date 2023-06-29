@@ -6,8 +6,7 @@ use App\Core\SQL;
 use App\Core\SQLInterface;
 class Type extends SQL implements SQLInterface
 {
-    private Int $id = 0;
-    protected String $id_hash;
+    private String $id = '0';
     protected String $texte;
 
     public function __construct(){
@@ -17,20 +16,10 @@ class Type extends SQL implements SQLInterface
         $this->table = "zfgh_".end($classExploded);
     }
 
-    public function setId_Hash(): void
-    {
-        $this->id_hash = sha1(uniqid());
-    }
-
-    public function getId_Hash(): String
-    {
-        return $this->id_hash;
-    }
-
     /**
      * @return Int
      */
-    public function getId(): int
+    public function getId(): String
     {
         return $this->id;
     }
@@ -38,7 +27,7 @@ class Type extends SQL implements SQLInterface
     /**
      * @param Int $id
      */
-    public function setId(int $id): void
+    public function setId(String $id): void
     {
         $this->id = $id;
     }
@@ -64,7 +53,6 @@ class Type extends SQL implements SQLInterface
     {
 
         $array['id_hash'] = $this->getId_Hash();
-        $array['texte'] = $this->getTexte();
         $array['id'] = $this->getId();
         return $array;
 

@@ -35,7 +35,7 @@ class SQL{
         return self::$instance;
     }
 
-    public static function populate(Int $id): object
+    public static function populate(String $id): object
     {
         $class = get_called_class();
         $objet = new $class();
@@ -109,20 +109,20 @@ class SQL{
         $columns = array_diff_key($columns, $columnsToExclude);
 
         if($del == 'del'){
-            if(is_numeric($this->getId()) && $this->getId()>0) { 
+            if(is_numeric($this->getId()) && $this->getId()!='0') { 
                 // Prepare et execute la requete de suppression
                 $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table.
                     " WHERE id =?;")->execute([$this->getId()]);
             }
         }
         else{
-            if(is_numeric($this->getId()) && $this->getId()>0) {
+            if(is_string($this->getId()) && $this->getId()!='0') {
                 $sqlUpdate = [];
                 foreach ($columns as $column=>$value) {
                     $sqlUpdate[] = $column."=:".$column;
                 }
                 $queryPrepared = $this->pdo->prepare("UPDATE ".$this->table.
-                    " SET ".implode(",", $sqlUpdate). " WHERE id=".$this->getId());
+                    " SET ".implode(",", $sqlUpdate). " WHERE id='".$this->getId()."'");
             }else{
                 $queryPrepared = $this->pdo->prepare("INSERT INTO ".$this->table.
                     " (".implode("," , array_keys($columns) ).") 
