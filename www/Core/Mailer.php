@@ -1,14 +1,14 @@
 <?php
- namespace App\Core;
- use phpMailer\PHPMailer\PHPMailer;
- use phpMailer\PHPMailer\SMTP;
- use phpMailer\PHPMailer\Exception;
+namespace App\Core;
+use phpMailer\PHPMailer\PHPMailer;
+use phpMailer\PHPMailer\SMTP;
+use phpMailer\PHPMailer\Exception;
  
- require 'asset/phpMailer/src/Exception.php';
- require 'asset/phpMailer/src/PHPMailer.php'; 
- require 'asset/phpMailer/src/SMTP.php';
+require 'asset/phpMailer/src/Exception.php';
+require 'asset/phpMailer/src/PHPMailer.php'; 
+require 'asset/phpMailer/src/SMTP.php';
 
- class Mailer
+class Mailer
 {
     private $host;
     private $port ;

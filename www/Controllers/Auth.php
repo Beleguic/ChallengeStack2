@@ -17,16 +17,6 @@ class Auth extends Controller
     public function login(): String
     {
 
-        $mail = new Mailer();
-        $mail->sendMail("jason.afonso.fernandes@gmail.com","Jason","Votre inscription","salut c'est un test");
-
-
-
-
-
-
-
-
         $this->setView("Auth/login");
         $this->setTemplate('front');
         $form = new Login();
@@ -36,7 +26,7 @@ class Auth extends Controller
             $user = new User();
             $user = $user->getOneWhere(['email' => $_POST['email']]);
             if(!isset($user->property)){
-                if(password_verify($_POST['pwd'], $user->getPwd())) {
+                if(password_verify($_POST['pwdLogin'], $user->getPwd())) {
                     $user->populateWithMail($_POST['email']);
                     $_SESSION['zfgh_login']['connected'] = true;
                     $_SESSION['zfgh_login']['email'] = $_POST['email'];
@@ -89,6 +79,8 @@ class Auth extends Controller
             $user_code->setCode($this->createCode());
             $user_code->save();
             // Envoie du mail
+            $mail = new Mailer();
+            $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
             header("location: /activation");
         }
         $this->assign("formErrors", $form->errors);
@@ -185,6 +177,12 @@ class Auth extends Controller
 
         $user_code = new UserCode();
         $user_code = $user_code->populateWith(["id_user" => $_SESSION['zfgh_login']['id']]);
+        if(isset($_GET['email']) && $_GET['email'] == "resend"){
+            $userAdd = new User();
+            $userAdd = $userAdd->populate($_SESSION['zfgh_login']['id']);
+            $mail = new Mailer();
+            $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
+        }
         $form = new Login();
         $this->assign("formActivation", $form->getConfigActivation());
         $this->assign("formActivationData", $user_code->getConfigObject());
@@ -192,11 +190,13 @@ class Auth extends Controller
             if($_POST['submit'] == 'Activer mon compte'){
                 $user_code = $user_code->getOneWhere(["id"=>$_POST["id"]]);
                 if($_POST['code'] == $user_code->getCode()){
+                    echo($user_code->getIdUser());
                     $user = new User();
                     $user = $user->populate($user_code->getIdUser());
                     $user->setActif(true);
-                    $_SESSION['zfgh_login']['actif'] = true;
                     $user->save();
+                    $user = $user->populate($user->getId());
+                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
                     header("location: /");
                 }
                 else{
@@ -263,6 +263,5 @@ class Auth extends Controller
 
         return $this->render();
     }
-
 
 }
