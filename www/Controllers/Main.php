@@ -26,6 +26,14 @@ class Main extends Controller
 
     }
 
+    public function dashboard(): String
+    {
+        $this->setView("Main/dashboard");
+        $this->setTemplate("back");
+
+        return $this->render();
+    }
+
     public function contact(): void
     {
         echo "Page de contact";
