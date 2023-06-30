@@ -54,8 +54,12 @@
         }
 
 
-        public function post($path,$callback){
-            $this->routes['post'][$path] = $callback;
+        public function post($path,$callback,array $middleware = null, int $role = 0){
+            $this->routes['get'][$path] =[
+                "callback" => $callback,
+                "middleware" => $middleware,
+                "role" => $role
+                ];
         }
 
         public function resolve()

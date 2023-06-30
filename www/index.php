@@ -127,74 +127,74 @@ else{
     $app = new Application();
 
     // Route de base
-    $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],2);
-    $app->router->get('/back', [Main::class ,"dashboard"]);
+    $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
+    $app->router->get('/back', [Main::class ,"dashboard"],,[AuthMiddleware::class],2);
 
     // Navbar front
-    $app->router->get('/contact', [Main::class ,"contact"]);
-    $app->router->post('/contact', [Main::class ,"contact"]);
-    $app->router->get('/about-us', [Main::class ,"aboutUs"]);
-    $app->router->post('/about-us', [Main::class ,"aboutUs"]);
+    $app->router->get('/contact', [Main::class ,"contact"],[AuthMiddleware::class],0);
+    $app->router->post('/contact', [Main::class ,"contact"],[AuthMiddleware::class],0);
+    $app->router->get('/about-us', [Main::class ,"aboutUs"],[AuthMiddleware::class],0);
+    $app->router->post('/about-us', [Main::class ,"aboutUs"],[AuthMiddleware::class],0);
 
-    $app->router->get('/a-propos', [Main::class ,"aboutUs"]);
-    $app->router->post('/a-propos', [Main::class ,"aboutUs"]);
+    $app->router->get('/a-propos', [Main::class ,"aboutUs"],[AuthMiddleware::class],0);
+    $app->router->post('/a-propos', [Main::class ,"aboutUs"],[AuthMiddleware::class],0);
 
     // Route Login/Register front
-    $app->router->get('/login', [Auth::class ,"login"]);
-    $app->router->get('/se-connecter', [Auth::class ,"login"]);
-    $app->router->get('/register', [Auth::class ,"register"]);
-    $app->router->get('/s-inscrire', [Auth::class ,"register"]);
-    $app->router->get('/logout', [Auth::class ,"logout"]);
-    $app->router->get('/deconnexion', [Auth::class ,"logout"]);
+    $app->router->get('/login', [Auth::class ,"login"],[AuthMiddleware::class],0);
+    $app->router->get('/se-connecter', [Auth::class ,"login"],[AuthMiddleware::class],0);
+    $app->router->get('/register', [Auth::class ,"register"],[AuthMiddleware::class],0);
+    $app->router->get('/s-inscrire', [Auth::class ,"register"],[AuthMiddleware::class],0);
+    $app->router->get('/logout', [Auth::class ,"logout"],0);
+    $app->router->get('/deconnexion', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     
-    $app->router->post('/login', [Auth::class ,"login"]);
-    $app->router->post('/se-connecter', [Auth::class ,"login"]);
-    $app->router->post('/register', [Auth::class ,"register"]);
-    $app->router->post('/s-inscrire', [Auth::class ,"register"]);
-    $app->router->post('/logout', [Auth::class ,"logout"]);
-    $app->router->post('/deconnexion', [Auth::class ,"logout"]);
+    $app->router->post('/login', [Auth::class ,"login"],[AuthMiddleware::class],0);
+    $app->router->post('/se-connecter', [Auth::class ,"login"],[AuthMiddleware::class],0);
+    $app->router->post('/register', [Auth::class ,"register"],[AuthMiddleware::class],0);
+    $app->router->post('/s-inscrire', [Auth::class ,"register"],[AuthMiddleware::class],0);
+    $app->router->post('/logout', [Auth::class ,"logout"],[AuthMiddleware::class],0);
+    $app->router->post('/deconnexion', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     
-    $app->router->get('/activation', [Auth::class ,"activateAccount"]);
-    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"]);
-    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"]);
+    $app->router->get('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
+    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
+    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
     
-    $app->router->post('/activation', [Auth::class ,"activateAccount"]);
-    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"]);
-    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"]);
+    $app->router->post('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
+    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
+    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
     
     // Route annonce front
-    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
-    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],2);
+    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
+    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     
 
     // Route annonce back
-    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"]);
+    $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleware::class],2);
     
-    $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
-    $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);
-    $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"]);
+    $app->router->get('/back/add-annonce', [Annonce::class ,"addAnnonce"],[AuthMiddleware::class],2);
+    $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
+    $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     
-    $app->router->post('/back/add-annonce', [Annonce::class ,"addAnnonce"]);
-    $app->router->post('/back/update-annonce', [Annonce::class ,"updateAnnonce"]);
-    $app->router->post('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"]);
+    $app->router->post('/back/add-annonce', [Annonce::class ,"addAnnonce"],[AuthMiddleware::class],2);
+    $app->router->post('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
+    $app->router->post('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     
     // Route type back
-    $app->router->get('/back/type', [Type::class ,"viewType"]);
+    $app->router->get('/back/type', [Type::class ,"viewType"],[AuthMiddleware::class],2);
     
-    $app->router->get('/back/add-type', [Type::class ,"addType"]);
-    $app->router->get('/back/update-type', [Type::class ,"updateType"]);
-    $app->router->get('/back/delete-type', [Type::class ,"deleteType"]);
-    $app->router->post('/back/add-type', [Type::class ,"addType"]);
-    $app->router->post('/back/update-type', [Type::class ,"updateType"]);
-    $app->router->post('/back/delete-type', [Type::class ,"deleteType"]);
+    $app->router->get('/back/add-type', [Type::class ,"addType"],[AuthMiddleware::class],2);
+    $app->router->get('/back/update-type', [Type::class ,"updateType"],[AuthMiddleware::class],2);
+    $app->router->get('/back/delete-type', [Type::class ,"deleteType"],[AuthMiddleware::class],2);
+    $app->router->post('/back/add-type', [Type::class ,"addType"],[AuthMiddleware::class],2);
+    $app->router->post('/back/update-type', [Type::class ,"updateType"],[AuthMiddleware::class],2);
+    $app->router->post('/back/delete-type', [Type::class ,"deleteType"],[AuthMiddleware::class],2);
     
     // Route user back
-    $app->router->get('/back/user', [Auth::class ,"listUser"]);
-    $app->router->post('/back/user', [Auth::class ,"listUser"]);
-    $app->router->get('/back/update-user', [Auth::class ,"updateUser"]);
-    $app->router->post('/back/update-user', [Auth::class ,"updateUser"]);
-    $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"]);
-    $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"]);
+    $app->router->get('/back/user', [Auth::class ,"listUser"],[AuthMiddleware::class],3);
+    $app->router->post('/back/user', [Auth::class ,"listUser"],[AuthMiddleware::class],3);
+    $app->router->get('/back/update-user', [Auth::class ,"updateUser"],[AuthMiddleware::class],3);
+    $app->router->post('/back/update-user', [Auth::class ,"updateUser"],[AuthMiddleware::class],3);
+    $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
+    $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
 
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
