@@ -9,6 +9,7 @@
     use App\Controllers\Type;
     use App\Models\Connexion;
     use App\Core\Application;
+    use App\Controllers\Newsletter;
 
     date_default_timezone_set("Europe/Paris");
 
@@ -162,6 +163,10 @@ else{
     $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"]);
     
     // Route annonce front
+
+    $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"]);
+    $app->router->post('/subscribe-newsletter', [Newsletter::class ,"subscribe"]);
+
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"]);
     
