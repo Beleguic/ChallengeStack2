@@ -45,14 +45,13 @@ class Type extends SQL implements SQLInterface
      */
     public function setTexte(string $texte): void
     {
-        $this->setId_Hash();
         $this->texte = ucwords(strtolower(trim($texte)));
     }
 
     public function getConfigObject(): array
     {
 
-        $array['id_hash'] = $this->getId_Hash();
+        $array['texte'] = $this->getTexte();
         $array['id'] = $this->getId();
         return $array;
 
@@ -66,12 +65,13 @@ class Type extends SQL implements SQLInterface
         while ($row = $selecteInfo->fetch()){
            $array[] = ['value' => $row->getId(), 'content' => $row->getTexte()];
         }
-        return $array;
-
+        var_dump(sizeof($array));
+        if(sizeof($array) > 0){
+            return $array;
+        }
+        else{
+            $array[] = ['value' => '', 'content' => "Aucun type d'annonce disponible"];
+            return $array;
+        }
     }
-
-    
-
-
-
 }

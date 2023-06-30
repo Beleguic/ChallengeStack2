@@ -10,9 +10,6 @@
     use App\Models\Connexion;
     use App\Core\Application;
 
-    echo("<pre>");
-    var_dump($_SERVER);
-    echo("</pre>");
     date_default_timezone_set("Europe/Paris");
 
     //require "Core/View.php";

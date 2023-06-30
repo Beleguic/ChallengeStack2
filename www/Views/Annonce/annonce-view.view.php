@@ -70,8 +70,8 @@
 					<td><?=$row->getRegions()?></td>
 					<td><?=$row->getDescription()?></td>
 					<td>
-						<a class="button-Update" href="/back/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
