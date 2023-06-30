@@ -12,6 +12,7 @@
 
         private String $view;
         private String $template;
+        private String $newsletter;
 
         /**
          * @param String $view
@@ -21,6 +22,14 @@
             $this->view = "Views/".$view.".view.php";
             if(!file_exists($this->view)){
                 die("La vue ".$this->view." n'existe pas");
+            }
+        }
+
+        public function setNewsLetter(string $newsletter): void
+        {
+            $this->newsletter = "Views/".$newsletter.".view.php";
+            if(!file_exists($this->newsletter)){
+                die("La vue ".$this->newsletter." n'existe pas");
             }
         }
 
@@ -103,7 +112,17 @@
             $this->data = $params;
             $layoutContent = $this->layoutContent($template);
             $viewContent = $this->renderOnlyView($view);
-            return str_replace('{{content}}', $viewContent, $layoutContent);
+            if ($template = "front")
+            {
+                $this->setNewsletter("newsletter");
+                $newsletterContent = $this->renderOnlyView($this->newsletter);
+                $newsletter = str_replace('{{newsletter}}', $newsletterContent, $layoutContent);
+            }
+            else
+            {
+                $newsletter = $layoutContent;
+            }
+            return str_replace('{{content}}', $viewContent, $newsletter);
         }
 
 

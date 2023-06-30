@@ -2,6 +2,8 @@
 
 namespace App\Core;
 use App\Core\Application;
+use App\Forms\Newsletter;
+
 
 
 class Controller
@@ -40,8 +42,10 @@ class Controller
      */
     public function setTemplate(string $template): void
     {
-
-
+        if($template == "front"){
+            $formNewsLetter = new newsletter();
+            $this->assign("formNewsLetter",$formNewsLetter->getConfigNewsletter());
+        }
         $this->template = "Views/layout/".$template.".tpl.php";
         if(!file_exists($this->template)){
         	$this->diePage("je suis un message");
