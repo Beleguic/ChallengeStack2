@@ -1,5 +1,7 @@
 <?php
 namespace App\Core\Middleware;
+use App\Core\Application;
+
 
 use App\Models\User;
 
@@ -15,7 +17,10 @@ class AuthMiddleware extends Middleware
 
     public function execute(){
         if($this->user->getStatus() != $this->role){
-            echo "pas le droit d'être la enflure";
+            echo"enflure";
+            return false;
+        }else{
+            return true;
         }
     }
 }

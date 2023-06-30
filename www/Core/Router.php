@@ -62,6 +62,7 @@
         {
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
+            $params = [];
 
 
             $callback = $this->routes[$method][$path]["callback"] ?? false;
@@ -81,14 +82,27 @@
                     
                     if($routeCallback["middleware"] != null){
                         $middleware = new $routeCallback["middleware"][0]($role, $user);
-                    $middleware->execute();
+                        if(!$middleware->execute()){
+                            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
+                                $this->response->setStatutCode(403);
+                                return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
+                            }else{
+                                return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
+                            }
+                            
+                        }
+                        
+                    
+                    }
+                    else{
+                        $callback = $routeCallback["callback"];
+                    array_shift($matches); // Supprime la première correspondance qui contient le chemin complet
+                    $params = $matches;
+                    
                     }
                     
                     // La route correspond, enregistrez le rappel (callback) et les paramètres
-                    $callback = $routeCallback["callback"];
-                    array_shift($matches); // Supprime la première correspondance qui contient le chemin complet
-                    $params = $matches;
-                    break;
+                    
                 }
             }
 
