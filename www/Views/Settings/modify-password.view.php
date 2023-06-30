@@ -5,7 +5,13 @@
     <a href="/account-settings"><-- Revenir en arrière</a>
   </div>
   <?php $this->partial("form", $this->data['form']) ?>
-  <?php if(isset($this->data['formErrors'])): ?>
-	  <?php print_r($this->data['formErrors']) ?>
-  <?php endif; ?>
+  <div class="bg-danger">
+    <p>Gérer les messages d'erreurs ici</p>
+    <?php if(isset($this->data['formErrors'])): ?>
+      <?php 
+        $showError = $this->data['formErrors'];
+        print_r($this->data['formErrors']);
+       ?>
+    <?php endif; ?>
+  </div>
 </div>

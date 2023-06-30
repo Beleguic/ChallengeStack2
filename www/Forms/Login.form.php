@@ -246,7 +246,7 @@ class Login extends Validator
                 "class"=>"form card card-body bg-light mb-4",
                 "enctype"=>"",
                 "submit"=>["Enregister"],
-                "reset"=>["Annuler"]
+                "reset"=>"Annuler"
             ],
 
             "submit"=>[
@@ -339,7 +339,7 @@ class Login extends Validator
                 "class"=>"form card card-body bg-light mb-4",
                 "enctype"=>"",
                 "submit"=>["Enregister"],
-                "reset"=>["Annuler"]
+                "reset"=>"Annuler"
             ],
 
             "submit"=>[
@@ -396,7 +396,7 @@ class Login extends Validator
                 "class"=>"form card card-body bg-light mb-4",
                 "enctype"=>"",
                 "submit"=>["Enregister"],
-                "reset"=>["Annuler"]
+                "reset"=>"Annuler"
             ],
 
             "submit"=>[
