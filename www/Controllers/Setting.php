@@ -10,6 +10,9 @@ class Setting extends Controller
 {
   public function setting(): String
   {
+    if(!isset($_SESSION['zfgh_login'])) {
+      header('Location : /');
+    }
       $user = new UserModel();
       $userId = $_SESSION['zfgh_login']['id'];
 
@@ -23,27 +26,44 @@ class Setting extends Controller
 
   public function modifyConnexion(): String
   {
-      $user = new UserModel();
-      $userId = $_SESSION['zfgh_login']['id'];
+    $this->setView("Settings/modify-connexion");
+    $this->setTemplate("front");
+      
+    $user = new UserModel();
+    $userId = $_SESSION['zfgh_login']['id'];
+    $formChangeEmail = new UserForm();
 
-      $this->setView("Settings/modify-connexion");
-      $this->setTemplate("front");
+    $this->assign("form", $formChangeEmail->getConfigChangeEmail());
 
-      $this->assign("userInfo", $user->populate($userId));
+    if ($formChangeEmail->isSubmited() && $formChangeEmail->isValid()) {
+      $user = $user->populate($userId);
+      $user->setEmail($_POST['email']);
+      $user->save();
+      header('location: /account-settings');
+    }
 
-      return $this->render();
+    return $this->render();
   }
 
   public function modifyInfo(): String
   {
-      $user = new UserModel();
-      $userId = $_SESSION['zfgh_login']['id'];
-
       $this->setView("Settings/modify-info");
       $this->setTemplate("front");
+        
+      $user = new UserModel();
+      $userId = $_SESSION['zfgh_login']['id'];
+      $formChangeInfo = new UserForm();
 
-      $this->assign("userInfo", $user->populate($userId));
+      $this->assign("form", $formChangeInfo->getConfigChangeInfo());
 
+      if ($formChangeInfo->isSubmited() && $formChangeInfo->isValid()) {
+        $user = $user->populate($userId);
+        $user->setLastname($_POST['lastname']);
+        $user->setFirstname($_POST['firstname']);
+        $user->save();
+        header('location: /account-settings');
+      }
+  
       return $this->render();
   }
 

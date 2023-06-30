@@ -252,14 +252,14 @@ class Login extends Validator
             "submit"=>[
                 "Enregister" => [
                     "id" => "",
-                    "class" => "btn btn-outline-primary btn-block my-4"
+                    "class" => "btn btn-outline-primary btn-block m-4 w-25"
                 ],
             ],
 
             "reset"=>[
                 "Annuler" => [
                     "id" => "",
-                    "class" => "btn btn-outline-primary btn-block my-4"
+                    "class" => "btn btn-outline-secondary btn-block m-4 w-25"
                 ],
             ],
 
@@ -322,6 +322,138 @@ class Login extends Validator
                         "value" => "Confirmation du nouveau mot de passe"
                     ],
                     "confirm"=>"pwd"
+                ],
+            ]
+        ];
+        return $this->config;
+    }
+
+    // Setting change email
+    public function getConfigChangeEmail(): array 
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"change-form",
+                "class"=>"form card card-body bg-light mb-4",
+                "enctype"=>"",
+                "submit"=>["Enregister"],
+                "reset"=>["Annuler"]
+            ],
+
+            "submit"=>[
+                "Enregister" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block m-4 w-25"
+                ],
+            ],
+
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-secondary btn-block m-4 w-25"
+                ],
+            ],
+
+            "divs"=>[
+                "div-email" =>[
+                    "id" => "div-change-email",
+                    "class" => "",
+                    "inside" => ["email"]
+                ],
+            ],
+            "inputs"=>[
+                "email"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"change-form-email",
+                    "class"=>"form-control",
+                    "placeholder"=>"Nouvelle adresse e-mail",
+                    "type"=>"email",
+                    "error"=>"Wrong format",
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "change-form-email",
+                        "id" => "label-change-form-email",
+                        "class" => "form-label",
+                        "value" => "Modification de l'adresse e-mail"
+                    ],
+                    "required"=>true
+                ],
+            ]
+        ];
+        return $this->config;
+    }
+
+    public function getConfigChangeInfo(): array 
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"change-form",
+                "class"=>"form card card-body bg-light mb-4",
+                "enctype"=>"",
+                "submit"=>["Enregister"],
+                "reset"=>["Annuler"]
+            ],
+
+            "submit"=>[
+                "Enregister" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block m-4 w-25"
+                ],
+            ],
+
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-secondary btn-block m-4 w-25"
+                ],
+            ],
+
+            "divs"=>[
+                "div-email" =>[
+                    "id" => "div-change-email",
+                    "class" => "",
+                    "inside" => ["email"]
+                ],
+            ],
+            "inputs"=>[
+                "lastname"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"change-form-lastname",
+                    "class"=>"form-control",
+                    "placeholder"=>"Nouveau nom",
+                    "type"=>"text",
+                    "error"=>"Wrong format",
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "change-form-lastname",
+                        "id" => "label-change-form-lastname",
+                        "class" => "form-label",
+                        "value" => "Modification du nom"
+                    ],
+                    "required"=>true
+                ],
+                "firstname"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"change-form-firstname",
+                    "class"=>"form-control",
+                    "placeholder"=>"Nouveau prénom",
+                    "type"=>"text",
+                    "error"=>"Wrong format",
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "change-form-firstname",
+                        "id" => "label-change-form-firstname",
+                        "class" => "form-label",
+                        "value" => "Modification du prénom"
+                    ],
+                    "required"=>true
                 ],
             ]
         ];
