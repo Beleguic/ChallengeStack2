@@ -128,7 +128,7 @@ else{
 
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
-    $app->router->get('/back', [Main::class ,"dashboard"],,[AuthMiddleware::class],2);
+    $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);
 
     // Navbar front
     $app->router->get('/contact', [Main::class ,"contact"],[AuthMiddleware::class],0);
@@ -144,7 +144,7 @@ else{
     $app->router->get('/se-connecter', [Auth::class ,"login"],[AuthMiddleware::class],0);
     $app->router->get('/register', [Auth::class ,"register"],[AuthMiddleware::class],0);
     $app->router->get('/s-inscrire', [Auth::class ,"register"],[AuthMiddleware::class],0);
-    $app->router->get('/logout', [Auth::class ,"logout"],0);
+    $app->router->get('/logout', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     $app->router->get('/deconnexion', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     
     $app->router->post('/login', [Auth::class ,"login"],[AuthMiddleware::class],0);

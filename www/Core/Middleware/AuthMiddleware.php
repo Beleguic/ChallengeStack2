@@ -16,7 +16,7 @@ class AuthMiddleware extends Middleware
     }
 
     public function execute(){
-        if($this->user->getStatus() != $this->role){
+        if($this->user->getStatus() < $this->role){
             echo"enflure";
             return false;
         }else{
