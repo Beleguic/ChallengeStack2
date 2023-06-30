@@ -1,6 +1,8 @@
 <?php
 
     namespace App\Core;
+
+    use App\Models\User;
     class Router
     {
 
@@ -52,37 +54,80 @@
 
         }
 
-        public function get($path,$callback){
-            $this->routes['get'][$path] = $callback;
+        public function get($path,$callback, array $middleware = null, int $role = 0){
+            $this->routes['get'][$path] =[
+                "callback" => $callback,
+                "middleware" => $middleware,
+                "role" => $role
+                ];
         }
 
 
-        public function post($path,$callback){
-            $this->routes['post'][$path] = $callback;
+        public function post($path,$callback,array $middleware = null, int $role = 0){
+            $this->routes['post'][$path] =[
+                "callback" => $callback,
+                "middleware" => $middleware,
+                "role" => $role
+                ];
         }
 
         public function resolve()
         {
             $path=$this->request->getPath();
             $method = $this->request->getMethod();
-            $callback = $this->routes[$method][$path] ?? false;
+            $params = [];
+
+
+            $callback = $this->routes[$method][$path]["callback"] ?? false;
+            $role = $this->routes[$method][$path]["role"] ?? false;
+            $user = new User();
+
+            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
+                $user=$user->populate($_SESSION["zfgh_login"]["id"]);
+            }else{
+                $user->setStatus(0);
+            }
+
+            
+
+
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
+                
                 if (preg_match($pattern, $path, $matches)) {
-                    // La route correspond, enregistrez le rappel (callback) et les paramètres
-                    $callback = $routeCallback;
+                    if($routeCallback["middleware"] != null){
+                        $middleware = new $routeCallback["middleware"][0]($role, $user);
+                        
+                        if(!$middleware->execute()){
+                            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
+                                $this->response->setStatutCode(403);
+                                return $this->renderView("Views/_403.php","Views/layout/_403.tpl.php");
+                            }else{
+                                
+                                return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
+                            }
+                            
+                        }
+                        
+                    
+                    }
+                    else{
+                        $callback = $routeCallback["callback"];
                     array_shift($matches); // Supprime la première correspondance qui contient le chemin complet
                     $params = $matches;
-                    break;
+                    
+                    }
+                    
+                    // La route correspond, enregistrez le rappel (callback) et les paramètres
+                    
                 }
             }
 
 
 
 
-
-
-            if($callback ===false){
+            
+            if($callback === false){
                 $this->response->setStatutCode(404);
                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
             }
