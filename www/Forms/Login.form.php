@@ -417,7 +417,7 @@ class Login extends Validator
                 "div-email" =>[
                     "id" => "div-change-email",
                     "class" => "",
-                    "inside" => ["email"]
+                    "inside" => ["lastname","firstname"]
                 ],
             ],
             "inputs"=>[
