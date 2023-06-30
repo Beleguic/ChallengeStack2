@@ -33,6 +33,14 @@ class Annonce extends Controller
         $this->setTemplate("back");
 
         $annonce = new v_AnnonceModel();
+        $type = new TypeModel();
+        $result = $type->getNumberOfType();
+        if($result == 0){
+            $this->assign("showAdd",false);
+        }
+        else{
+            $this->assign("showAdd",true);
+        }
 
         $this->assign("annonceList", $annonce->getAll());
         
@@ -79,12 +87,19 @@ class Annonce extends Controller
 
     public function addAnnonce(): String
     {
+        $type = new TypeModel();
+        // envoie les information du formulaire a la view
+        $result = $type->getNumberOfType();
+        if($result == 0){
+            header("location: /back/annonce");
+        }
+
+
         $this->setView("Annonce/annonce-add"); // vue ajout type
         $this->setTemplate("back");
 
         $formAdd = new AnnonceForm(); // genere le model Type (Formulaire Ajout)
         $annonce = new AnnonceModel(); // miroir BDD de la table type
-        $type = new TypeModel();
         // envoie les information du formulaire a la view
         $this->assign("typeList", $type->getSelectInfo());
         $this->assign("formAdd", $formAdd->getConfigAdd()); 

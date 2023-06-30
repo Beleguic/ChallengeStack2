@@ -35,7 +35,9 @@
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
 	<a href="/">Accueil</a>
-	<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
+	<?php if($this->data['showAdd']): ?>
+		<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
+	<?php endif; ?>
 	<div style="width: 90%; margin: auto;">
 		<table id='tableType' >	
 			<thead>

@@ -65,7 +65,6 @@ class Type extends SQL implements SQLInterface
         while ($row = $selecteInfo->fetch()){
            $array[] = ['value' => $row->getId(), 'content' => $row->getTexte()];
         }
-        var_dump(sizeof($array));
         if(sizeof($array) > 0){
             return $array;
         }
@@ -73,5 +72,17 @@ class Type extends SQL implements SQLInterface
             $array[] = ['value' => '', 'content' => "Aucun type d'annonce disponible"];
             return $array;
         }
+    }
+
+    public function getNumberOfType(): int{
+
+        $who = ['id'];
+        $selecteInfo = $this->getThemWhereAll($who);
+        $i = 0;
+        while ($row = $selecteInfo->fetch()){
+           $i++;
+        }
+        return $i;
+
     }
 }
