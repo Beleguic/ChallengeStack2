@@ -169,6 +169,8 @@ else{
 
     $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     $app->router->post('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
+    $app->router->get('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
+    $app->router->post('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
     
 
     // Route annonce back

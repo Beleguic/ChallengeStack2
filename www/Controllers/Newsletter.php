@@ -30,7 +30,7 @@ class Newsletter extends Controller
                 $newsletter->save();
                 $newsletter = $newsletter->populateWithMail($_POST['email']);
                 $email = new Mailer();
-                $email->sendMail($newsletter->getEmail(),"","Newsletter - Mooving House","Félicitation vous êtes abboné à la nawsletter de Mooving House !! /n /n Se désabonner de la newsletter http://localhost/unsubscribe-newsletter/?user=".$newsletter->getId()."");
+                $email->sendMail($newsletter->getEmail(),"","Newsletter - Mooving House","Félicitation vous êtes abboné à la nawsletter de Mooving House !! /n /n Se désabonner de la newsletter http://localhost/unsubscribe-newsletter?user=".$newsletter->getId()."");
             }
             header('location: /'.$redirection);
         }    
@@ -45,17 +45,15 @@ class Newsletter extends Controller
         }
         else
         {
-            //$_GET['user'] = id
             $newsletter = new NewsletterModel();
-            $newsletter->populate($_GET['user']);
+            $newsletter = $newsletter->populate($_GET['user']);
             if(!isset($newsletter->property))
             {
                 $newsletter->save('del');
                 header('location: /');
             }
-            else
-            {
-                header('location: /');               
+            else{
+                header('location: /');
             }
         }
 

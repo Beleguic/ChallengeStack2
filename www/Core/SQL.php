@@ -71,7 +71,14 @@ class SQL{
         }
         $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" AND ", $sqlWhere));
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
-        $queryPrepared->execute($where);
+        try{
+            $queryPrepared->execute($where);
+        }
+        catch(\PDOException $e){
+            echo("Erreur ".$e->getCode());
+            echo("Erreur ".$e->getMessage());
+            //header("location: /");
+        }
         $queryFetched = $queryPrepared->fetch();
         if(gettype($queryFetched) == 'object'){
             return $queryFetched;
