@@ -55,7 +55,7 @@
 
 
         public function post($path,$callback,array $middleware = null, int $role = 0){
-            $this->routes['get'][$path] =[
+            $this->routes['post'][$path] =[
                 "callback" => $callback,
                 "middleware" => $middleware,
                 "role" => $role
@@ -71,10 +71,13 @@
 
             $callback = $this->routes[$method][$path]["callback"] ?? false;
             $role = $this->routes[$method][$path]["role"] ?? false;
-
-
             $user = new User();
-            $user->setStatus(1);
+
+            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
+                $user=$user->populate($_SESSION["zfgh_login"]["id"]);
+            }else{
+                $user->setStatus(0);
+            }
 
             
 
@@ -83,14 +86,15 @@
                 $pattern = $this->convertToRegex($route);
                 
                 if (preg_match($pattern, $path, $matches)) {
-                    
                     if($routeCallback["middleware"] != null){
                         $middleware = new $routeCallback["middleware"][0]($role, $user);
+                        
                         if(!$middleware->execute()){
                             if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
                                 $this->response->setStatutCode(403);
-                                return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
+                                return $this->renderView("Views/_403.php","Views/layout/_403.tpl.php");
                             }else{
+                                
                                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
                             }
                             
@@ -113,7 +117,7 @@
 
 
 
-
+            
             if($callback === false){
                 $this->response->setStatutCode(404);
                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
