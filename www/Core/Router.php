@@ -112,7 +112,7 @@
             $this->data = $params;
             $layoutContent = $this->layoutContent($template);
             $viewContent = $this->renderOnlyView($view);
-            if ($template = "front")
+            if ($template == "front")
             {
                 $this->setNewsletter("newsletter");
                 $newsletterContent = $this->renderOnlyView($this->newsletter);
