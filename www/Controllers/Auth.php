@@ -30,7 +30,7 @@ class Auth extends Controller
             if(!isset($user->property)){
                 if(password_verify($_POST['pwdLogin'], $user->getPwd())) {
                     $user->populateWithMail($_POST['email']);
-                    $connexion = new Connexion;
+                    $connexion = new Connexion();
                     $newToken = sha1(uniqid());
                     $_SESSION['zfgh_login']['connected'] = true;
                     $_SESSION['zfgh_login']['email'] = $_POST['email'];
@@ -40,9 +40,21 @@ class Auth extends Controller
                     $_SESSION['zfgh_login']['status'] = $user->getStatus();
                     $_SESSION['zfgh_login']['actif'] = $user->getActif();
                     $_SESSION['zfgh_login']['token'] = $newToken;
-                    $connexion->setIdUser($user->getId());
-                    $connexion->setToken($newToken);
-                    $connexion->save();
+                    $connexion = $connexion->populateWith(['id_user' => $user->getId()]);
+                    if(isset($connexion->property)){ 
+                        // Insertion nouveau token
+                        $connexion = new Connexion();
+                        $connexion->setIdUser($user->getId());
+                        $connexion->setToken($newToken);
+                        $connexion->save();
+                    }
+                    else{
+                        // Actualisation de l'ancien token
+                        $connexion->setIdUser($user->getId());
+                        $connexion->setToken($newToken);
+                        $connexion->save();
+                    }
+
                     header('location: /?conn=true');
                 } else {
                     echo "Identifiant Incorrect";

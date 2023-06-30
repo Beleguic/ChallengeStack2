@@ -55,14 +55,15 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <h2 class="text-center text-light mb-4">Inscrivez-vous à notre newsletter</h2>
-              <form class="row g-3">
+              <!-- <form class="row g-3">
                 <div class="col-sm-8">
                   <input type="email" class="form-control" placeholder="Votre adresse e-mail" required>
                 </div>
                 <div class="col-sm-4">
                   <button type="submit" class="btn btn-outline-light btn-block mb-4 w-100">S'inscrire</button>
                 </div>
-              </form>
+              </form> -->
+              {{newsletter}}
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ class Type extends Controller
 
     public function updateType(): String
     {
-        if(!isset($_GET['id_hash'])){
+        if(!isset($_GET['id'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";
             header('location: /back/type');
@@ -58,12 +58,12 @@ class Type extends Controller
 
         $formUpd = new TypeForm(); // genere le model Type (Formulaire Update)
         $type = new TypeModel();
-        $type = $type->populateWithIdHash($_GET["id_hash"]);
+        $type = $type->populate($_GET["id"]);
         $this->assign("formUpd", $formUpd->getConfigUpdate());
         $this->assign("formUpdDate", $type->getConfigObject());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
-            $type = $type->populateWithIdHash($_POST["id_hash"]);
+            $type = $type->populate($_POST["id"]);
             $type->setTexte($_POST['texte']);
             $type->save();
             header('location: /back/type');
@@ -77,7 +77,7 @@ class Type extends Controller
 
         var_dump($_POST);
 
-        if(!isset($_GET['id_hash'])){
+        if(!isset($_GET['id'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";
             header('location: /view-type');
@@ -88,13 +88,13 @@ class Type extends Controller
 
         $formDel = new TypeForm(); // genere le model Type (Formulaire Update)
         $type = new TypeModel();
-        $type = $type->populateWithIdHash($_GET["id_hash"]);
+        $type = $type->populate($_GET["id"]);
         $this->assign("formDel", $formDel->getConfigDelete());
         $this->assign("formDelDate", $type->getConfigObject());
 
         if($formDel->isSubmited() && $formDel->isValid()){
             if($_POST['submit'] == 'Supprimer'){
-                $type = $type->populateWithIdHash($_POST["id_hash"]);
+                $type = $type->populate($_POST["id"]);
                 $type->save('del');
                 header('location: /back/type');
             }

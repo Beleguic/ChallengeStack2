@@ -255,7 +255,7 @@ class Annonce extends Validator
                 "div-titre" =>[
                     "id" => "div-titre",
                     "class" => "div-form-100",
-                    "inside" => ["titre","id_hash"]
+                    "inside" => ["titre","id"]
                 ],
                 "div-prix-type" =>[
                     "id" => "div-prix-type",
@@ -290,7 +290,7 @@ class Annonce extends Validator
             ],
 
             "inputs"=>[
-                "id_hash"=>[
+                "id"=>[
                     "id"=>"id-hash-update",
                     "class"=>"",
                     "type"=>"hidden",
@@ -498,11 +498,11 @@ class Annonce extends Validator
                 "div-form" =>[
                     "id" => "div-type-form",
                     "class" => "div-form-100",
-                    "inside" => ["submit","id_hash"]
+                    "inside" => ["id"]
                 ],
             ],
             "inputs"=>[
-                "id_hash"=>[
+                "id"=>[
                     "id"=>"id-hash-delete",
                     "class"=>"",
                     "type"=>"hidden",

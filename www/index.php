@@ -10,6 +10,7 @@
     use App\Core\Middleware\AuthMiddleware;
     use App\Models\Connexion;
     use App\Core\Application;
+    use App\Controllers\Newsletter;
 
     date_default_timezone_set("Europe/Paris");
 
@@ -165,6 +166,9 @@ else{
     // Route annonce front
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
+
+    $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
+    $app->router->post('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     
 
     // Route annonce back

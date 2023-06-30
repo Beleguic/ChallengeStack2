@@ -61,11 +61,11 @@ class Type extends Validator
                 "div-texte" =>[
                     "id" => "div-type-texte",
                     "class" => "div-form-100",
-                    "inside" => ["texte","id_hash"]
+                    "inside" => ["texte","id"]
                 ],
             ],
             "inputs"=>[
-                "id_hash"=>[
+                "id"=>[
                     "id"=>"id-hash-update",
                     "class"=>"",
                     "type"=>"hidden",
@@ -104,11 +104,11 @@ class Type extends Validator
                 "div-form" =>[
                     "id" => "div-type-form",
                     "class" => "div-form-100",
-                    "inside" => ["submit","id_hash"]
+                    "inside" => ["id"]
                 ],
             ],
             "inputs"=>[
-                "id_hash"=>[
+                "id"=>[
                     "id"=>"id-hash-delete",
                     "class"=>"",
                     "type"=>"hidden",
@@ -122,5 +122,3 @@ class Type extends Validator
         return $this->config;
     }
 }
-
-https://www.google.fr?q=maeecherche

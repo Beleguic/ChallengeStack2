@@ -33,6 +33,14 @@ class Annonce extends Controller
         $this->setTemplate("back");
 
         $annonce = new v_AnnonceModel();
+        $type = new TypeModel();
+        $result = $type->getNumberOfType();
+        if($result == 0){
+            $this->assign("showAdd",false);
+        }
+        else{
+            $this->assign("showAdd",true);
+        }
 
         $this->assign("annonceList", $annonce->getAll());
         
@@ -79,18 +87,23 @@ class Annonce extends Controller
 
     public function addAnnonce(): String
     {
+        $type = new TypeModel();
+        // envoie les information du formulaire a la view
+        $result = $type->getNumberOfType();
+        if($result == 0){
+            header("location: /back/annonce");
+        }
+
+
         $this->setView("Annonce/annonce-add"); // vue ajout type
         $this->setTemplate("back");
 
         $formAdd = new AnnonceForm(); // genere le model Type (Formulaire Ajout)
         $annonce = new AnnonceModel(); // miroir BDD de la table type
-        $type = new TypeModel();
-
         // envoie les information du formulaire a la view
         $this->assign("typeList", $type->getSelectInfo());
         $this->assign("formAdd", $formAdd->getConfigAdd()); 
         if($formAdd->isSubmited() && $formAdd->isValid()){
-            $annonce->setIdHash();
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
             $annonce->setPrix($_POST['prix']);
@@ -103,9 +116,8 @@ class Annonce extends Controller
             $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
             $annonce->setRegions($_POST['regions']);
-            
             $annonce->save();
-            header('location: /view-annonce');
+            header('location: /back/annonce');
         }
         $this->assign("formErrors", $formAdd->errors);
         return $this->render();
@@ -114,7 +126,7 @@ class Annonce extends Controller
 
     public function updateAnnonce(): String
     {
-        if(!isset($_GET['id_hash'])){
+        if(!isset($_GET['id'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";
             header('location: /view-type');
@@ -126,14 +138,13 @@ class Annonce extends Controller
         $formUpd = new AnnonceForm(); // genere le model Type (Formulaire Update)
         $annonce = new AnnonceModel();
         $type = new TypeModel();
-        $annonce = $annonce->populateWithIdHash($_GET["id_hash"]);
+        $annonce = $annonce->populate($_GET["id"]);
         $this->assign("formUpd", $formUpd->getConfigUpdate());
         $this->assign("formUpdDate", $annonce->getConfigObject());
         $this->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
-            $annonce = $annonce->populateWithIdHash($_POST["id_hash"]);
-            $annonce->setIdHash();
+            $annonce = $annonce->populate($_POST["id"]);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
             $annonce->setPrix($_POST['prix']);
@@ -156,7 +167,7 @@ class Annonce extends Controller
     public function deleteAnnonce(): String
     {
 
-        if(!isset($_GET['id_hash'])){
+        if(!isset($_GET['id'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";
             header('location: /view-type');
@@ -167,15 +178,12 @@ class Annonce extends Controller
 
         $formDel = new AnnonceForm(); // genere le model Type (Formulaire Update)
         $annonce = new AnnonceModel();
-        $annonce = $annonce->populateWithIdHash($_GET["id_hash"]);
+        $annonce = $annonce->populate($_GET["id"]);
         $this->assign("formDel", $formDel->getConfigDelete());
         $this->assign("formDelDate", $annonce->getConfigObject());
-        echo('here');
         if($formDel->isSubmited() && $formDel->isValid()){
-            echo('here');
-
             if($_POST['submit'] == 'Supprimer'){
-                $annonce = $annonce->populateWithIdHash($_POST["id_hash"]);
+                $annonce = $annonce->populate($_POST["id"]);
                 $annonce->save('del');
                 header('location: /back/annonce');
             }

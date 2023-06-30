@@ -6,8 +6,7 @@ use App\Core\SQL;
 use App\Core\SQLInterface;
 class v_Annonce extends SQL implements SQLInterface
 {
-    private Int $id = 0;
-    protected String $id_hash;
+    private String $id = '0';
     protected String $texte;
     protected String $titre;
     protected Int $prix;
@@ -34,7 +33,6 @@ class v_Annonce extends SQL implements SQLInterface
     {
 
         $array['id'] = $this->getId();
-        $array['id_hash'] = $this->getIdHash();
         $array['texte'] = $this->getTexte();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
@@ -53,17 +51,9 @@ class v_Annonce extends SQL implements SQLInterface
     /**
      * @return Int
      */
-    public function getId(): Int
+    public function getId(): String
     {
         return $this->id;
-    }
-
-    /**
-     * @return String
-     */
-    public function getIdHash(): String
-    {
-        return $this->id_hash;
     }
 
     /**
