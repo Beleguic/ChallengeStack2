@@ -112,9 +112,17 @@
                 <input type="submit" name="submit" value="<?= $value ?>">
             <?php endif; ?>
         <?php endforeach; ?>
-        <?php if(isset($config["config"]["reset"])):?>
-            <input type="reset" value="<?= $config["config"]["reset"] ?>">
-        <?php endif; ?>
+
+        <?php foreach ($config["config"]["reset"] as $value): ?>
+            <?php if(isset($config["reset"][$value])): ?>
+                <input type="reset"
+                    id="<?=$config["reset"][$value]["id"] ?>"
+                    class="<?=$config["reset"][$value]["class"] ?>"
+                    value="<?= $value ?>">
+            <?php else: ?> 
+                <input type="reset" value="<?= $value ?>">
+            <?php endif; ?>
+        <?php endforeach; ?>        
     </div>
 
 </form>

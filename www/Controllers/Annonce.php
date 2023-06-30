@@ -116,7 +116,6 @@ class Annonce extends Controller
             $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
             $annonce->setRegions($_POST['regions']);
-            
             $annonce->save();
             header('location: /back/annonce');
         }
