@@ -61,10 +61,6 @@
             <strong>Prénom</strong><br>
             <span id="firstName" class="text-muted"><?= $firstName ?></span>
           </p>
-          <p class="card-text">
-            <strong>Contry</strong><br>
-            <span id="firstName" class="text-muted"><?= $country ?></span>
-          </p>
           <div class="text-center">
             <a class="btn btn-outline-primary w-100" href="/modify-info">
               Modifier
