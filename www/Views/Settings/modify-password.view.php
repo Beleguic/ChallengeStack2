@@ -1,7 +1,12 @@
 <div class="container">
   <h1 class="text-center py-4">Modifier le mot de passe</h1>
 
-  <div class="row justify-content-center">
+  <?php $this->partial("form", $this->data['form']) ?>
+  <?php if(isset($this->data['formErrors'])): ?>
+	  <?php print_r($this->data['formErrors']) ?>
+  <?php endif; ?>
+
+  <!-- <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card bg-light mb-4">
         <div class="card-body">
@@ -29,5 +34,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

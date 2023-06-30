@@ -1,3 +1,7 @@
+<?php
+  $email = $this->data['userInfo']->getEmail();
+?>
+
 <div class="container">
   <h1 class="text-center py-4">Modifier les données de connexion</h1>
 
@@ -7,13 +11,8 @@
         <div class="card-body">
           <form action="/update-password" method="post">
             <div class="mb-3">
-              <label for="newPhone" class="form-label">Nouveau numéro de téléphone</label>
-              <input type="tel" class="form-control" id="newPhone" name="newPhone" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="newPhone" class="form-label">Nouveau adresse e-mail</label>
-              <input type="email" class="form-control" id="newEmail" name="newEmail" required>
+              <label for="newPhone" class="form-label">Nouvelle adresse e-mail</label>
+              <input type="email" class="form-control" id="newEmail" name="newEmail" value="<?= $email ?>" required>
             </div>
 
             <div class="text-center py-4">

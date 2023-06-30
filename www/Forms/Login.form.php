@@ -234,4 +234,97 @@ class Login extends Validator
         ];
         return $this->config;
     }
+
+    // Setting change password
+    public function getConfigChangePwd(): array 
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"register-form",
+                "class"=>"form card card-body bg-light mb-4",
+                "enctype"=>"",
+                "submit"=>["Enregister"],
+                "reset"=>["Annuler"]
+            ],
+
+            "submit"=>[
+                "Enregister" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block my-4"
+                ],
+            ],
+
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block my-4"
+                ],
+            ],
+
+            "divs"=>[
+                "div-pwd" =>[
+                    "id" => "div-register-pwd",
+                    "class" => "",
+                    "inside" => ["pwdActuel","pwd", "pwdConfirm"]
+                ],
+            ],
+            "inputs"=>[
+                "pwdActuel"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"register-form-pwd-actuel",
+                    "class"=>"form-control",
+                    "placeholder"=>"",
+                    "type"=>"password",
+                    "error"=>"Votre mot de passe n'est pas le même",
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "register-form-pwd-actuel",
+                        "id" => "label-register-form-pwd-actuel",
+                        "class" => "form-label",
+                        "value" => "Mot de passe actuel"
+                    ],
+                    "required"=>true
+                ],
+                "pwd"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"register-form-pwd",
+                    "class"=>"form-control",
+                    "placeholder"=>"",
+                    "type"=>"password",
+                    "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "register-form-pwd",
+                        "id" => "label-register-form-pwd",
+                        "class" => "form-label",
+                        "value" => "Nouveau mot de passe"
+                    ],
+                    "required"=>true
+                ],
+                "pwdConfirm"=>[
+                    "divId"=>"",
+                    "divClass"=>"mb-3",
+                    "id"=>"register-form-pwd-confirm",
+                    "class"=>"form-control",
+                    "placeholder"=>"",
+                    "type"=>"password",
+                    "error"=>"Votre mot de passe de confirmation ne correspond pas",
+                    "required"=>true,
+                    "label" =>[
+                        "balise" => "label",
+                        "for" => "register-form-pwd-confirm",
+                        "id" => "label-register-form-pwd-confirm",
+                        "class" => "form-label",
+                        "value" => "Confirmation du nouveau mot de passe"
+                    ],
+                    "confirm"=>"pwd"
+                ],
+            ]
+        ];
+        return $this->config;
+    }
 }

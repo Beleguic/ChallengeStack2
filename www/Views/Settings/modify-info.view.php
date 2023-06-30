@@ -1,3 +1,8 @@
+<?php
+    $firstName = $this->data['userInfo']->getFirstname();
+    $lastName = $this->data['userInfo']->getLastname();
+?>
+
 <div class="container">
   <h1 class="text-center py-4">Modifier les informations personnelles</h1>
 
@@ -8,12 +13,12 @@
           <form action="/update-password" method="post">
             <div class="mb-3">
               <label for="newLastName" class="form-label">Nouveau nom</label>
-              <input type="text" class="form-control" id="newLastName" name="newLastName" required>
+              <input type="text" class="form-control" id="newLastName" name="newLastName" value="<?= $lastName ?>" required>
             </div>
 
             <div class="mb-3">
               <label for="firstName" class="form-label">Nouveau prénom</label>
-              <input type="text" class="form-control" id="newFirstName" name="newFirstName" required>
+              <input type="text" class="form-control" id="newFirstName" name="newFirstName" value="<?= $firstName ?>" required>
             </div>
 
             <div class="text-center py-4">

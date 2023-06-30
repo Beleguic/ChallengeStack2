@@ -1,12 +1,12 @@
 <?php
-    $firstName = $this->data['userInfo']->getFirstname();
-    $lastName = $this->data['userInfo']->getLastname();
-    $email = $this->data['userInfo']->getEmail();
-    $pwd = $this->data['userInfo']->getPwd();
-    $country = $this->data['userInfo']->getCountry();
-    $status = $this->data['userInfo']->getStatus();
-    //$dateInserted = $this->data['userInfo']->getDateInserted();
-    //$dateUpdated = $this->data['userInfo']->getDateUpdated();
+  $firstName = $this->data['userInfo']->getFirstname();
+  $lastName = $this->data['userInfo']->getLastname();
+  $email = $this->data['userInfo']->getEmail();
+  $pwd = $this->data['userInfo']->getPwd();
+  $country = $this->data['userInfo']->getCountry();
+  $status = $this->data['userInfo']->getStatus();
+  //$dateInserted = $this->data['userInfo']->getDateInserted();
+  //$dateUpdated = $this->data['userInfo']->getDateUpdated();
 ?>
 
 <div class="container">
@@ -17,10 +17,6 @@
       <div class="card bg-light mb-4">
         <div class="card-body">
           <h5 class="card-title text-center pb-3 m-0">Connexion</h5>
-          <p class="card-text">
-            <strong>Numéro de téléphone</strong><br>
-            <span id="phone" class="text-muted">0123456789</span>
-          </p>
           <p class="card-text">
             <strong>Adresse e-mail</strong><br>
             <span id="email" class="text-muted"><?= $email ?></span>
