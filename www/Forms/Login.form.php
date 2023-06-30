@@ -16,7 +16,7 @@ class Login extends Validator
                 "class"=>"form",
                 "enctype"=>"",
                 "submit"=>["Se connecter"],
-                "reset"=>["Annuler"]
+                "reset"=>"Annuler"
             ],
             "submit"=>[
                 "Se connecter" => [

@@ -102,27 +102,29 @@
         </div>
     <?php endforeach;?>
     <div id="div-register-submit-reset" class="div-form-50 d-flex justify-content-center">
-        <?php foreach ($config["config"]["submit"] as $value): ?>
-            <?php if(isset($config["submit"][$value])): ?>
-                <input type="submit" name="submit"
-                    id="<?=$config["submit"][$value]["id"] ?>"
-                    class="<?=$config["submit"][$value]["class"] ?>"
-                    value="<?= $value ?>">
-            <?php else: ?> 
-                <input type="submit" name="submit" value="<?= $value ?>">
-            <?php endif; ?>
-        <?php endforeach; ?>
+        <?php if(isset($config["config"]["submit"])): ?>
+            <?php foreach ($config["config"]["submit"] as $value): ?>
+                <?php if(isset($config["submit"][$value])): ?>
+                    <input type="submit" name="submit"
+                        id="<?=$config["submit"][$value]["id"] ?>"
+                        class="<?=$config["submit"][$value]["class"] ?>"
+                        value="<?= $value ?>">
+                <?php else: ?> 
+                    <input type="submit" name="submit" value="<?= $value ?>">
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-        <?php foreach ($config["config"]["reset"] as $value): ?>
-            <?php if(isset($config["reset"][$value])): ?>
+        <?php if(isset($config["config"]["reset"])): ?>
+            <?php if(isset($config["reset"][$config["config"]["reset"]])): ?>
                 <input type="reset"
-                    id="<?=$config["reset"][$value]["id"] ?>"
-                    class="<?=$config["reset"][$value]["class"] ?>"
-                    value="<?= $value ?>">
+                    id="<?=$config["reset"][$config["config"]["reset"]]["id"] ?>"
+                    class="<?=$config["reset"][$config["config"]["reset"]]["class"] ?>"
+                    value="<?= $config["config"]["reset"] ?>">
             <?php else: ?> 
-                <input type="reset" value="<?= $value ?>">
+                <input type="reset" value="<?= $config["config"]["reset"] ?>">
             <?php endif; ?>
-        <?php endforeach; ?>        
+        <?php endif; ?>        
     </div>
 
 </form>
