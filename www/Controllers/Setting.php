@@ -37,6 +37,7 @@ class Setting extends Controller
 
     if ($formChangeEmail->isSubmited() && $formChangeEmail->isValid()) {
       $user = $user->populate($userId);
+      $user->setDateUpdated(date('Y-m-d H:i:s'));
       $user->setEmail($_POST['email']);
       $user->save();
       header('location: /account-settings');
@@ -58,6 +59,7 @@ class Setting extends Controller
 
       if ($formChangeInfo->isSubmited() && $formChangeInfo->isValid()) {
         $user = $user->populate($userId);
+        $user->setDateUpdated(date('Y-m-d H:i:s'));
         $user->setLastname($_POST['lastname']);
         $user->setFirstname($_POST['firstname']);
         $user->save();
@@ -81,6 +83,7 @@ class Setting extends Controller
     if ($formChangePwd->isSubmited() && $formChangePwd->isValid()) {
       $user = $user->populate($userId);
       if(password_verify($_POST['pwdActuel'], $user->getPwd())) {
+        $user->setDateUpdated(date('Y-m-d H:i:s'));
         $user->setPwd($_POST['pwd']);
         $user->save();
         header('location: /account-settings');
