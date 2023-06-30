@@ -156,7 +156,7 @@ class User extends SQL implements SQLInterface
     /**
      * @return \DateTime
      */
-    public function getDateInserted(): \DateTime
+    public function getDateInserted(): String
     {
         return $this->date_inserted;
     }
@@ -164,7 +164,7 @@ class User extends SQL implements SQLInterface
     /**
      * @param \DateTime $date_inserted
      */
-    public function setDateInserted(\DateTime $date_inserted): void
+    public function setDateInserted(String $date_inserted): void
     {
         $this->date_inserted = $date_inserted;
     }
@@ -172,7 +172,7 @@ class User extends SQL implements SQLInterface
     /**
      * @return \DateTime
      */
-    public function getDateUpdated(): \DateTime
+    public function getDateUpdated(): String
     {
         return $this->date_updated;
     }
@@ -180,7 +180,7 @@ class User extends SQL implements SQLInterface
     /**
      * @param \DateTime $date_updated
      */
-    public function setDateUpdated(\DateTime $date_updated): void
+    public function setDateUpdated(String $date_updated): void
     {
         $this->date_updated = $date_updated;
     }

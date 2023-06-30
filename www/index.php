@@ -8,6 +8,7 @@
     use App\Controllers\Annonce;
     use App\Controllers\Type;
     use App\Core\Middleware\AuthMiddleware;
+    use App\Controllers\Setting;
     use App\Models\Connexion;
     use App\Core\Application;
     use App\Controllers\Newsletter;
@@ -172,6 +173,16 @@ else{
     $app->router->get('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
     $app->router->post('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
     
+    // Route Account setting front
+    $app->router->get('/account-settings', [Setting::class ,"setting"],[AuthMiddleware::class],1);
+    $app->router->get('/modify-connexion', [Setting::class ,"modifyConnexion"],[AuthMiddleware::class],1);
+    $app->router->get('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
+    $app->router->get('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
+
+    $app->router->post('/account-settings', [Setting::class ,"setting"],[AuthMiddleware::class],1);
+    $app->router->post('/modify-connexion', [Setting::class ,"modifyConnexion"],[AuthMiddleware::class],1);
+    $app->router->post('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
+    $app->router->post('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
 
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleware::class],2);
