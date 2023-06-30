@@ -48,8 +48,8 @@
 				<tr>
 					<td><?=$row->getTexte()?></td>
 					<td>
-						<a class="button-Update" href="/back/update-type?id_hash=<?=$row->getId_Hash()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-type?id_hash=<?=$row->getId_Hash()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-type?id=<?=$row->getId()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-type?id=<?=$row->getId()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>

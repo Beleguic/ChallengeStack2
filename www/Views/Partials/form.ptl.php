@@ -110,7 +110,7 @@
                     value="<?= $value ?>">
             <?php else: ?> 
                 <input type="submit" name="submit" value="<?= $value ?>">
-       +     <?php endif; ?>
+            <?php endif; ?>
         <?php endforeach; ?>
         <?php if(isset($config["config"]["reset"])):?>
             <input type="reset" value="<?= $config["config"]["reset"] ?>">

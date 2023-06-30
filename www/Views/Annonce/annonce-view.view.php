@@ -35,7 +35,9 @@
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
 	<a href="/">Accueil</a>
-	<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
+	<?php if($this->data['showAdd']): ?>
+		<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
+	<?php endif; ?>
 	<div style="width: 90%; margin: auto;">
 		<table id='tableType' >	
 			<thead>
@@ -70,8 +72,8 @@
 					<td><?=$row->getRegions()?></td>
 					<td><?=$row->getDescription()?></td>
 					<td>
-						<a class="button-Update" href="/back/update-annonce?id_hash=<?=$row->getIdHash()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-annonce?id_hash=<?=$row->getIdHash()?>">Supprimer</a>
+						<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
+						<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
