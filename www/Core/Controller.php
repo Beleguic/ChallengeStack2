@@ -40,6 +40,8 @@ class Controller
      */
     public function setTemplate(string $template): void
     {
+
+
         $this->template = "Views/layout/".$template.".tpl.php";
         if(!file_exists($this->template)){
         	$this->diePage("je suis un message");
