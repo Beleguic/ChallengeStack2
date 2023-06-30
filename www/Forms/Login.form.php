@@ -15,10 +15,17 @@ class Login extends Validator
                 "id"=>"login-form",
                 "class"=>"form",
                 "enctype"=>"",
-                "submit"=>["Se connecter"]
+                "submit"=>["Se connecter"],
+                "reset"=>["Annuler"]
             ],
             "submit"=>[
                 "Se connecter" => [
+                    "id" => "",
+                    "class" => "btn btn-outline-primary btn-block mb-4"
+                ],
+            ],
+            "reset"=>[
+                "Annuler" => [
                     "id" => "",
                     "class" => "btn btn-outline-primary btn-block mb-4"
                 ],
