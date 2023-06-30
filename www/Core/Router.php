@@ -65,22 +65,24 @@
 
 
             $callback = $this->routes[$method][$path]["callback"] ?? false;
-            $middleware = $this->routes[$method][$path]["middleware"] ?? false;
             $role = $this->routes[$method][$path]["role"] ?? false;
 
 
             $user = new User();
             $user->setStatus(1);
 
-            if($middleware!=false){
-            $middleware = new $middleware[0]($role, $user);
-            }
+            
 
 
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
-            
+                
                 if (preg_match($pattern, $path, $matches)) {
+                    
+                    if($routeCallback["middleware"] != null){
+                        $middleware = new $routeCallback["middleware"][0]($role, $user);
+                    $middleware->execute();
+                    }
                     
                     // La route correspond, enregistrez le rappel (callback) et les paramètres
                     $callback = $routeCallback["callback"];
@@ -105,12 +107,6 @@
             }
 
             if(is_array($callback)){
-           
-                if($middleware!=false){
-
-                $middleware->execute();
-                }
-            
                 $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
         
