@@ -160,6 +160,7 @@ class Auth extends Controller
             $user = $user->populate($_POST["id"]);
             $user->setFirstname($_POST['firstname']);
             $user->setLastname($_POST['lastname']);
+            $user->setDateUpdated(date('Y-m-d H:i:s'));
             $user->save();
             header('location: /back/user');
         }

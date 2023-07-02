@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\SQL;
 use App\Core\SQLInterface;
+
 class Annonce extends SQL implements SQLInterface
 {
     private String $id = '0';
@@ -50,7 +51,6 @@ class Annonce extends SQL implements SQLInterface
         return $array;
 
     }
-
 
     /**
      * @return Int

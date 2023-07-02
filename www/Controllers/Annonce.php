@@ -8,6 +8,7 @@ use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
 use App\Models\Type as TypeModel;
+use App\Models\AnnonceMemento as AnnonceMemento;
 
 class Annonce extends Controller
 
@@ -144,7 +145,9 @@ class Annonce extends Controller
         $this->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
+            $annonceMemento = new AnnonceMemento();
             $annonce = $annonce->populate($_POST["id"]);
+            $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
             $annonce->setPrix($_POST['prix']);
@@ -194,6 +197,45 @@ class Annonce extends Controller
         $this->assign("formErrors", $formDel->errors);
         return $this->render();
         
+    }
+
+    public function restoreAnnonce(): String
+    {
+        
+
+        if(isset($_GET['idAnnonce'])){
+            $annonce = new AnnonceModel(); // objet annonce
+            $annonceMemento = new AnnonceMemento(); // objet annonce memeneto
+            // recupere le memento
+            $annonceMemento = $annonceMemento->populate($_GET['idAnnonce']);
+            $idAnnoceActuelle = $annonceMemento->getIdAnnonce();
+            $annonceMemento = new AnnonceMemento();
+            // recupere l'id de l'annonce actuel pour la sauvegarder
+            $annonceMemento->backup($annonce->populate($idAnnoceActuelle));
+            // peuple l'objet annonce avec les donnée de la restauration
+            $annonceRestore = new AnnonceModel();
+            $annonceRestore = $annonceMemento->restore($_GET['idAnnonce']);
+            // met a jour la restauration dans les annonces.
+            $annonceRestore->save();
+            header("location: /back/annonce?restore=true");
+        }
+
+        if(!isset($_GET['id'])){
+            header("location: /back/annonce");
+        }
+
+        // genere la vue pour la liste des snapshot dispo + restuaration de la snapshot
+        $this->setView("Annonce/annonce-restore"); // vue ajout type
+        $this->setTemplate("back");
+
+        $annonceMemento = new AnnonceMemento();
+        //$AnnonceMemento = $AnnonceMemento->populateWith(['id_annonce' => $_GET['id']]);
+        $where[] = "id_annonce = '".$_GET['id']."'";
+        $order = ['date_memento', "ASC"];
+        $this->assign('resMemento', $annonceMemento->getAllWhere($where,$order));
+
+        return $this->render();
+
     }
 
 

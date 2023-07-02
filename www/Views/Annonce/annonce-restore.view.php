@@ -1,47 +1,11 @@
-<h2>Annonce</h2>
+<h2>Restauration d'annonce</h2>
 
-<?php
-
-	/*
-	*
-	* Genere un tableau avec les information du type d'annonce (texte) 
-	*	A une input hidden avec l'id_hashq que l'on recupere avec les script JS
-	*	Un bouton modifier qui va ouvrir une modal avec le formlaire pret remplie par une function JS
-	*	Un bouton suppression qui va ouvrir une modal de confirmation de suppression
-	*	
-	*	
-	*
-	*
-	*
-	*/
-
-	//<!--<input type="hidden" name="id_hash" value="<?= //$row->getId_Hash()">-->
-	/*
-	<?php $dataValue['id_hash'] = $row->getId_Hash(); ?>
-				<td><?php $this->partial("form", $formUpd, $dataValue) ?></td>
-				<td><button class="button-Update" value='<?=$row->getTexte()?>'> Modifier </button></td>
-				<td><?php $this->partial("form", $formDel, $dataValue) ?></td>
-	*/
-?>
-
-	<!--<dialog id='modal-update'>
-		<h2> Modification </h2>
-		<?php // $this->partial("form", $formUpd) ?>
-		<button onclick="document.getElementById('modal-update').close();"> Annuler </button>
-	</dialog>
-	<dialog id='modal-delete'>
-		<h2> Confirmer la suppression ? </h2>
-		<?php // $this->partial("form", $formDel) ?>
-		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
-	</dialog>-->
-	<a href="/">Accueil</a>
-	<?php if($this->data['showAdd']): ?>
-		<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
-	<?php endif; ?>
-	<div style="width: 90%; margin: auto;">
+	<a href="/back/annonce">Liste des annonces</a>
+	<div style="width: 100%; margin: auto; overflow-x: scroll;">
 		<table id='tableType' >	
 			<thead>
 				<tr>	
+					<th> Date de la sauvegarde </th>
 					<th> Titre </th>
 					<th> Prix </th>
 					<th> Type </th>
@@ -57,11 +21,12 @@
 					<th> Action </th>
 			</thead>
 			<tbody>	
-		<?php while ($row = $this->data['annonceList']->fetch()): ?>
+		<?php while ($row = $this->data['resMemento']->fetch()): ?>
 				<tr>
+					<td><?=$row->getDateMemento()?></td>
 					<td><?=$row->getTitre()?></td>
 					<td><?=$row->getPrix()?></td>
-					<td><?=$row->getTexte()?></td>
+					<td><?=$row->getIdType()?></td>
 					<td><?=$row->getSuperficiemaison()?></td>
 					<td><?=$row->getSuperficieterrain()?></td>
 					<td><?=$row->getNbrpiece()?></td>
@@ -72,9 +37,7 @@
 					<td><?=$row->getRegions()?></td>
 					<td><?=$row->getDescription()?></td>
 					<td>
-						<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
-						<a class="button-Delete" href="/back/restore-annonce?id=<?=$row->getId()?>">Restaurer</a>
+						<a class="button-Delete" href="/back/restore-annonce?idAnnonce=<?=$row->getId()?>">Restauration</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
