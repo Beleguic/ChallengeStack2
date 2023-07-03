@@ -12,9 +12,9 @@ class User extends SQL implements SQLInterface
     protected String $email;
     protected String $pwd;
     protected String $country;
-    protected Int $status = 0;
+    protected Int $status = 1;
     private String $date_inserted;
-    private ?String $date_updated;
+    private String $date_updated;
     protected bool $actif;
 
     public function __construct(){
