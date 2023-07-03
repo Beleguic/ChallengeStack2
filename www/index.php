@@ -33,6 +33,60 @@
             include $classForm;
         }
     });
+
+    if(isset($_SESSION['zfgh_login'])){
+        echo('connected');
+        if(isset($_SESSION['zfgh_login']['token'])){
+            echo('connected token');
+            $token = $_SESSION['zfgh_login']['token'];
+            $id = $_SESSION['zfgh_login']['id'];
+            $connexion = new Connexion();
+            $connexion = $connexion->populateWith(["id_user" => $id]);
+            if(isset($connexion->property)){ 
+                unset($_SESSION['zfgh_login']);
+                echo("aie, deco 1");
+            }
+            else{
+                echo('connected token finaly');
+                $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
+                $heure_supplementaire = strtotime('+2 hour', strtotime($last_seen));
+                $last_seenPlus2Hour = date('Y-m-d H:i:s', $heure_supplementaire);
+                $dateNow = date('Y-m-d H:i:s.u');
+                if ($dateNow > $last_seenPlus2Hour)
+                {
+                   $connexion->save('del');
+                   unset($_SESSION['zfgh_login']);
+                   echo("aie, deco 2");
+                }
+                else{
+                    if($token == $connexion->getToken()){
+                        echo('connected token fiannly bdd');
+                        $newToken = sha1(uniqid());
+                        $_SESSION['zfgh_login']['token'] = $newToken;
+                        $connexion->setToken($newToken);
+                        $connexion->setLastSeen(date('Y-m-d H:i:s'));
+                        $connexion->save();
+                    }
+                    else{
+                        $connexion->save('del');
+                        unset($_SESSION['zfgh_login']);
+                        echo("aie, deco 3"); 
+                    }
+                }
+            }
+
+        }
+        else{
+            echo("aie, deco 4");
+            unset($_SESSION['zfgh_login']);
+        }
+    }
+    else{
+        echo("aie, deco 5");
+        unset($_SESSION['zfgh_login']);
+    }
+
+
     if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
@@ -45,48 +99,7 @@
             header("location: /");
         }
     }
-    if(isset($_SESSION['zfgh_login'])){
-        if(isset($_SESSION['zfgh_login']['token'])){
-            $token = $_SESSION['zfgh_login']['token'];
-            $id = $_SESSION['zfgh_login']['id'];
-            $connexion = new Connexion();
-            $connexion = $connexion->populateWith(["id_user" => $id]);
-            if(isset($connexion->property)){ 
-                unset($_SESSION['zfgh_login']);
-            }
-            else{
-                $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
-                $heure_supplementaire = strtotime('+2 hour', strtotime($last_seen));
-                $last_seenPlus2Hour = date('Y-m-d H:i:s', $heure_supplementaire);
-                $dateNow = date('Y-m-d H:i:s.u');
-                if ($dateNow > $last_seenPlus2Hour)
-                {
-                   $connexion->save('del');
-                   unset($_SESSION['zfgh_login']);
-                }
-                else{
-                    if($token == $connexion->getToken()){
-                        $newToken = sha1(uniqid());
-                        $_SESSION['zfgh_login']['token'] = $newToken;
-                        $connexion->setToken($newToken);
-                        $connexion->setLastSeen(date('Y-m-d H:i:s'));
-                        $connexion->save();
-                    }
-                    else{
-                        $connexion->save('del');
-                        unset($_SESSION['zfgh_login']); 
-                    }
-                }
-            }
-
-        }
-        else{
-            unset($_SESSION['zfgh_login']);
-        }
-    }
-    else{
-        unset($_SESSION['zfgh_login']);
-    }
+    
 
 /*
 
