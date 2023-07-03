@@ -86,7 +86,7 @@ class Auth extends Controller
             $user->save();
 
             $userAdd = $user->populateWithMail($_POST['email']);
-            $connexion = new Connexion;
+            
             $newToken = sha1(uniqid());
             $_SESSION['zfgh_login']['connected'] = true;
             $_SESSION['zfgh_login']['email'] = $_POST['email'];
@@ -104,8 +104,9 @@ class Auth extends Controller
             $mail = new Mailer();
             $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
 
-            $connexion->setIdUser($user->getId());
-            $connexion->setToken($newToken);
+            $connexion = new Connexion;
+            $connexion->setIdUser($userAdd->getId());
+            $connexion->setToken($newToken);   
             $connexion->save();
             header("location: /activation");
         }

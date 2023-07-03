@@ -63,7 +63,7 @@
                     }
                     else{
                         $connexion->save('del');
-                        unset($_SESSION['zfgh_login']); 
+                        unset($_SESSION['zfgh_login']);; 
                     }
                 }
             }
@@ -89,7 +89,6 @@
             header("location: /");
         }
     }
-    
 
 /*
 
