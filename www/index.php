@@ -32,18 +32,7 @@
             include $classForm;
         }
     });
-    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
-        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
-        if($uri != "activation"){
-            header("location: /activation");
-        }
-    }
-    else{
-        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
-        if($uri == "activation"){
-            header("location: /");
-        }
-    }
+
     if(isset($_SESSION['zfgh_login'])){
         if(isset($_SESSION['zfgh_login']['token'])){
             $token = $_SESSION['zfgh_login']['token'];
@@ -86,6 +75,20 @@
     else{
         unset($_SESSION['zfgh_login']);
     }
+    
+    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
+        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
+        if($uri != "activation"){
+            header("location: /activation");
+        }
+    }
+    else{
+        $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
+        if($uri == "activation"){
+            header("location: /");
+        }
+    }
+    
 
 /*
 
