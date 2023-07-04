@@ -144,7 +144,7 @@ class Register extends Validator
                     "div-firstname-lastname" =>[
                         "id" => "div-register-firstname-lastname",
                         "class" => "div-form-50",
-                        "inside" => ["firstname","lastname", "id"]
+                        "inside" => ["firstname","lastname","status","id"]
                     ],
                 ],
                 "inputs"=>[
@@ -178,6 +178,20 @@ class Register extends Validator
                             "class" => "form-label",
                             "value" => "Nom"
                         ],
+                        "required"=>true
+                    ],
+                    "status"=>[
+                        "balise" => "select",
+                        "id"=>"type-form-status",
+                        "class"=>"form-input",
+                        "error"=>"Le status de l'utilisateur est incorrect",
+                        "label" =>[
+                            "for" => "Type-form-select",
+                            "id" => "label-Type-form-select",
+                            "class" => "form-label",
+                            "value" => "Status de l'utilisateur"
+                        ],
+                        "value"=>"statusList",
                         "required"=>true
                     ],
                     "id"=>[

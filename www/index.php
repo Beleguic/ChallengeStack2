@@ -222,6 +222,15 @@ else{
     $app->router->get('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
     $app->router->post('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
 
+    // Route status
+    $app->router->get('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 
