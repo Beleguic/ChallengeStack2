@@ -4,6 +4,7 @@
 
     use App\Controllers\SiteController;
     use App\Controllers\Main;
+    use App\Controllers\InstallerController;
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
@@ -13,6 +14,11 @@
     use App\Core\Application;
     use App\Controllers\Newsletter;
 
+ if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
+        header('Location: /react/web_api/index.html');
+    exit;
+    }
+    
     date_default_timezone_set("Europe/Paris");
 
     //require "Core/View.php";
@@ -33,6 +39,10 @@
             include $classForm;
         }
     });
+
+
+
+   
 
     if(isset($_SESSION['zfgh_login'])){
         if(isset($_SESSION['zfgh_login']['token'])){
@@ -80,12 +90,14 @@
     if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
+        echo "salut";
             header("location: /activation");
         }
     }
     else{
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri == "activation"){
+            echo "salut";
             header("location: /");
         }
     }
@@ -128,8 +140,12 @@ else{
 }
 
 */
+
+
     $app = new Application();
 
+    //api route
+    $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);
