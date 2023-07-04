@@ -10,40 +10,44 @@
 </head>
 <body>
   <div class="fluid-container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-darker-blue">
-  <div class="container-fluid mx-5">
-  <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="../asset/images/logo.png" alt="Logo" width="75" height="75" class="d-inline-block align-top me-2">
-      <span class="fs-4 mb-0">Moving House</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end text-center" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white fs-6" href="/a-propos">À propos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white fs-6" href="/contact">Contact</a>
-        </li>
-        <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true): ?>
-          <li class="nav-item">
-            <a class="nav-link text-white fs-6" href="/account-settings">Parametre du compte</a>
-          </li>
-        <?php endif; ?>
-        <li class="nav-item">
-          <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true): ?>
-            <a class="nav-link text-white fs-6" href="/logout">Déconnexion</a>
-          <?php else: ?>
-            <a class="nav-link text-white fs-6" href="/login">Mon compte</a>
-          <?php endif; ?>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-darker-blue">
+      <div class="container-fluid mx-5">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+          <img src="../asset/images/logo.png" alt="Logo" width="75" height="75" class="d-inline-block align-top me-2">
+          <span class="fs-4 mb-0">Moving House</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end text-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white fs-6" href="/a-propos">À propos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white fs-6" href="/contact">Contact</a>
+            </li>
+            <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true): ?>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" href="/account-settings">Parametre du compte</a>
+              </li>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true && $_SESSION['zfgh_login']['status'] >= 2): ?>
+              <li class="nav-item">
+                <a class="nav-link text-white fs-6" href="/back">Back office</a>
+              </li>
+            <?php endif; ?>
+            <li class="nav-item">
+              <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true): ?>
+                <a class="nav-link text-white fs-6" href="/logout">Déconnexion</a>
+              <?php else: ?>
+                <a class="nav-link text-white fs-6" href="/login">Mon compte</a>
+              <?php endif; ?>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
 
   <!-- BEGIN : Main Content -->
