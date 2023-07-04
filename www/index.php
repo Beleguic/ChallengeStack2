@@ -12,6 +12,7 @@
     use App\Models\Connexion;
     use App\Core\Application;
     use App\Controllers\Newsletter;
+    use App\Controllers\Back;
 
     date_default_timezone_set("Europe/Paris");
 
@@ -216,6 +217,10 @@ else{
     $app->router->post('/back/update-user', [Auth::class ,"updateUser"],[AuthMiddleware::class],3);
     $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
     $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
+
+    // Route agent back
+    $app->router->get('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->post('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
 
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
