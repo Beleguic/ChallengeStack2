@@ -32,6 +32,11 @@
             <a class="nav-link text-white fs-6" href="/account-settings">Parametre du compte</a>
           </li>
         <?php endif; ?>
+        <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true && ($_SESSION['zfgh_login']['status'] == 2 || $_SESSION['zfgh_login']['status'] == 3)): ?>
+          <li class="nav-item">
+            <a class="nav-link text-white fs-6" href="/back">Administration</a>
+          </li>
+        <?php endif; ?>
         <li class="nav-item">
           <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true): ?>
             <a class="nav-link text-white fs-6" href="/logout">Déconnexion</a>

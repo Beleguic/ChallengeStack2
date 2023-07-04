@@ -107,6 +107,7 @@ class Annonce extends Controller
         if($formAdd->isSubmited() && $formAdd->isValid()){
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
+            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -150,6 +151,7 @@ class Annonce extends Controller
             $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
+            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);

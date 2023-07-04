@@ -188,6 +188,8 @@
                     <li class="submenu-item"><a class="submenu-link" href="/back/annonce">Annonce</a></li>
                     <li class="submenu-item"><a class="submenu-link" href="/back/type">Type annonce</a></li>
                     <li class="submenu-item"><a class="submenu-link" href="/back/user">Liste des utilisateurs</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/agent">Liste des agents</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/status">Liste des Status</a></li>
                   </ul>
                 </div>
 					    </li>    

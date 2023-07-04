@@ -52,8 +52,18 @@
 					<td><?=$row->getFirstName()?></td>
 					<td><?=$row->getLastName()?></td>
 					<td><?=$row->getEmail()?></td>
-					<td><?=$row->getStatus()?></td>
-					<td><?=$row->getActif()?></td>
+					<?php if($row->getStatus() == 3): ?>
+						<td> Administrateur </td>
+					<?php elseif($row->getStatus() == 2): ?>
+						<td> Agent </td>
+					<?php else: ?>
+						<td> Utilisateur </td>
+					<?php endif; ?>
+					<?php if($row->getActif() == 1): ?>
+						<td> Actif </td>
+					<?php else: ?>
+						<td> Non Actif </td>
+					<?php endif; ?>
 					<td>
 						<a class="button-Update" href="/back/update-user?id=<?=$row->getId()?>">Modifier</a>
 						<a class="button-Delete" href="/back/delete-user?id=<?=$row->getId()?>">Supprimer</a>
