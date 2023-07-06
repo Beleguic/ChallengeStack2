@@ -34,13 +34,19 @@ class Main extends Controller
         return $this->render();
     }
 
-    public function contact(): void
+    public function contact(): String
     {
-        echo "Page de contact";
+        $this->setView("Main/contact");
+        $this->setTemplate("front");
+
+        return $this->render();
     }
 
-    public function aboutUs(): void
+    public function aboutUs(): String
     {
-        echo "Page à propos";
+        $this->setView("Main/about-us");
+        $this->setTemplate("front");
+
+        return $this->render();
     }
 }
