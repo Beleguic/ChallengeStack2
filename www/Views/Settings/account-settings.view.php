@@ -13,6 +13,37 @@
   <h1 class="text-center pb-2">Bienvenue <?= $firstName ?>,</h1>
   <h2 class="text-center pb-4">Options du compte</h2>
 
+  <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true && ($_SESSION['zfgh_login']['status'] == 2 || $_SESSION['zfgh_login']['status'] == 3)): ?>
+  <div class="col">
+    <div class="card bg-light mb-4">
+      <div class="card-body">
+        <h5 class="card-title text-center pb-3 m-0">Administration</h5>
+        <p class="card-text">
+          <strong>Description de l'accès</strong><br>
+          <span class="text-muted">Accédez à différentes fonctionnalités de l'administration du site pour gérer les annonces et les types de propriétés.</span>
+        </p>
+        <div class="row">
+          <div class="col-4">
+            <a class="btn btn-outline-b-n w-100" href="/back">
+              Accéder au Back Office
+            </a>
+          </div>
+          <div class="col-4">
+            <a class="btn btn-outline-b-n w-100" href="/back/add-annonce">
+              Ajouter une annonce
+            </a>
+          </div>
+          <div class="col-4">
+            <a class="btn btn-outline-b-n w-100" href="/back/add-type">
+              Ajouter un type de propriétés
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php endif; ?> 
+
   <div class="row">
     <div class="col-md-6">
       <div class="card bg-light mb-4">
