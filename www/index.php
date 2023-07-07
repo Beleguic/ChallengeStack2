@@ -17,6 +17,7 @@
     date_default_timezone_set("Europe/Paris");
 
     //require "Core/View.php";
+    var_dump($_SESSION['zfgh_login']['connected']);
 
     spl_autoload_register(function ($class) {
 
@@ -186,6 +187,12 @@ else{
     $app->router->post('/modify-connexion', [Setting::class ,"modifyConnexion"],[AuthMiddleware::class],1);
     $app->router->post('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
     $app->router->post('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
+
+    //route favori
+    $app->router->post('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);
+    $app->router->post('/favori-del', [Annonce::class ,"removeFavori"],[AuthMiddleware::class],1);
+    $app->router->get('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);
+    $app->router->get('/favori-del', [Annonce::class ,"removeFavori"],[AuthMiddleware::class],1);
 
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleware::class],2);

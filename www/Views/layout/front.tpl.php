@@ -32,6 +32,9 @@
   <!-- Main style CSS -->
   <link href="../../asset/front-template/style.css" rel="stylesheet">
 
+  <!-- Jquery -->
+  <script type="text/javascript" src="../../asset/js/jquery.js"></script>
+
 </head>
 
 <body>
