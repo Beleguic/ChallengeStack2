@@ -19,6 +19,12 @@ class Newsletter extends Validator
                     "enctype"=>"",
                     "submit"=>["S'inscrire"],
                 ],
+                "submit"=>[
+                    "S'inscrire" => [
+                        "id" => "",
+                        "class" => "btn btn-outline-b-n btn-block m-4 w-50"
+                    ],
+                ],
                 "divs"=>[
                     "div-pwd" =>[
                         "id" => "div-register-pwd",
@@ -32,12 +38,12 @@ class Newsletter extends Validator
                         "divClass"=>"",
                         "id"=>"login-form-email",
                         "class"=>"form-control",
-                        "placeholder"=>"Email",
+                        "placeholder"=>"E-mail",
                         "type"=>"email",
                         "label" =>[
                             "for" => "login-form-email",
                             "id" => "label-login-form-email",
-                            "class" => "form-label",
+                            "class" => "form-label color-a",
                             "value" => "Votre adresse e-mail"
                         ],
                         "required"=>true

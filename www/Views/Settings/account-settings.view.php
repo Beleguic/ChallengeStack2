@@ -23,17 +23,17 @@
           <span class="text-muted">Accédez à différentes fonctionnalités de l'administration du site pour gérer les annonces et les types de propriétés.</span>
         </p>
         <div class="row">
-          <div class="col-4">
+          <div class="col-12 col-md-4">
             <a class="btn btn-outline-b-n w-100" href="/back">
               Accéder au Back Office
             </a>
           </div>
-          <div class="col-4">
+          <div class="col-12 col-md-4 mt-3 mt-md-0">
             <a class="btn btn-outline-b-n w-100" href="/back/add-annonce">
               Ajouter une annonce
             </a>
           </div>
-          <div class="col-4">
+          <div class="col-12 col-md-4 mt-3 mt-md-0">
             <a class="btn btn-outline-b-n w-100" href="/back/add-type">
               Ajouter un type de propriétés
             </a>
