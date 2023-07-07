@@ -15,7 +15,7 @@
     use App\Controllers\Newsletter;
 
  if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
-        header('Location: /react/web_api/index.html');
+        header('Location: /public/index.html');
     exit;
     }
     

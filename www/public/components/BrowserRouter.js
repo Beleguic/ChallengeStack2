@@ -5,8 +5,8 @@ let routerBasePath;
 
 export default function BrowserRouter(routes, rootElement, baseUrl = "") {
   routerBasePath = baseUrl;
-  const pathname = "/page2"
- 
+  const pathname = location.pathname;
+  console.log(location.pathname);
   rootElement.appendChild(DomRenderer(routes[pathname]()));
 
   const oldPushState = history.pushState;

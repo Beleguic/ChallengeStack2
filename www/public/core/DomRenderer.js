@@ -24,7 +24,6 @@ export default function generateStructure(structure) {
       } else {
         subChild = generateStructure(child);
       }
-    
       element.appendChild(subChild);
     }
   }
