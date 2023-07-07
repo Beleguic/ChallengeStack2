@@ -123,6 +123,38 @@ class SQL{
         return $queryPrepared->fetchColumn();
     }
 
+    public function delWhere (): void
+    {
+
+        $columns = get_object_vars($this);
+        
+        $columnsToExclude = get_class_vars(get_class());
+        $columns = array_diff_key($columns, $columnsToExclude);
+
+        $sqlDelete = [];
+        foreach ($columns as $column=>$value) {
+            $sqlDelete[] = $column."=:".$column;
+        }
+
+        $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table.
+                    " WHERE ".implode(" AND ", $sqlDelete));
+        if (!$queryPrepared) {
+            echo "\nPDO::errorInfo():\n";
+            print_r($this->pdo->errorInfo());
+        }
+        try{
+            $queryPrepared->execute($columns);
+        }
+        catch(\PDOException $e){
+            echo("Erreur ".$e->getCode());
+            echo("Erreur ".$e->getMessage());
+        }
+
+
+            
+
+    }
+
 
     public function save($del=''): void
     {

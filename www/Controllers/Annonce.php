@@ -9,6 +9,7 @@ use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
 use App\Models\Type as TypeModel;
 use App\Models\AnnonceMemento as AnnonceMemento;
+use App\Models\Favori;
 
 class Annonce extends Controller
 
@@ -241,5 +242,43 @@ class Annonce extends Controller
     }
 
 
+    public function addFavori(): Void
+    {
+
+        // Ajoute un favorie pour l'utilisateur
+
+        if(!isset($_SESSION['zfgh_login']['id'])){
+            exit;
+        }
+
+        if(!isset($_GET['id_annonce']) && is_string($_GET['id_annonce'])){
+            exit;
+        }
+
+        $favori = new Favori();
+        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdAnnonce($_GET['id_annonce']);
+        $favori->save();
+
+    }
+
+    public function removeFavori(): Void
+    {
+
+        // Ajoute un favorie pour l'utilisateur
+        if(!isset($_SESSION['zfgh_login']['id'])){
+            exit;
+        }
+
+        if(!isset($_GET['id_annonce']) && !is_string($_GET['id_annonce'])){
+            exit;
+        }
+
+        $favori = new Favori();
+        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdAnnonce($_GET['id_annonce']);
+        $favori->delWhere();
+
+    }
 
 }

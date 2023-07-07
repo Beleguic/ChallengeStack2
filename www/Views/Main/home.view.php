@@ -20,7 +20,7 @@
             <a href="/annonce/Annonce 1" class="btn btn-dark text-light">Voir l'annonce</a>
             </div>
             <div class="col-4">
-            <a href="#" class="btn btn-danger text-light">Ajouter au favoris</a>
+            <a class="btn btn-danger text-light favorite-button" dataAnnonce='54de3091-56c8-49f0-ad52-52671d16aa2c'>Ajouter au favoris</a>
             </div>
             <div class="col-4">
             <a href="#" class="btn btn-info text-light">Envoyer un message</a>
@@ -81,4 +81,27 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    
+
+    $('.favorite-button').click(function() {
+      $(this).toggleClass('active');
+      if ($(this).hasClass('active')) {
+        // favori : Oui
+        this.textContent = "Enlever des favoris";
+        $.get("/favori-add", { id_annonce: this.attributes.dataAnnonce.value });
+        
+      } else {
+        // favori : Non
+        
+        this.textContent = "Ajouter au favoris";
+        $.get("/favori-del", { id_annonce: this.attributes.dataAnnonce.value });
+      }
+      
+    });
+
+
+  </script>
 </div>
+
