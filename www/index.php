@@ -169,9 +169,14 @@ else{
     $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
     
     // Route annonce front
+    $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
+    $app->router->post('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
 
+    // Route newsletter
     $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     $app->router->post('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     $app->router->get('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
