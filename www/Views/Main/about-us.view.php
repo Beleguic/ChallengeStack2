@@ -3,17 +3,17 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
-              <h1 class="title-single">We Do Great Design For Creative Folks</h1>
+              <h1 class="title-single">A Propos De Moving House</h1>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
             <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="/">Home</a>
+                  <a href="/">Accueil</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  About
+                  A propos
                 </li>
               </ol>
             </nav>
@@ -33,7 +33,7 @@
             <div class="sinse-box">
               <h3 class="sinse-title">Moving House
                 <span></span>
-                <br> Sinse 2023
+                <br> Depuis 2023
               </h3>
               <p>Suivi & accompagnement</p>
             </div>
@@ -82,7 +82,7 @@
           <div class="col-md-12">
             <div class="title-wrap d-flex justify-content-between">
               <div class="title-box">
-                <h2 class="title-a">Meet Our Team</h2>
+                <h2 class="title-a">Découvrer notre équipe</h2>
               </div>
             </div>
           </div>
