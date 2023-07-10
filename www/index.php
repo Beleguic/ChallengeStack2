@@ -16,9 +16,6 @@
 
     date_default_timezone_set("Europe/Paris");
 
-    //require "Core/View.php";
-    var_dump($_SESSION['zfgh_login']['connected']);
-
     spl_autoload_register(function ($class) {
 
         //$class = App\Core\View
