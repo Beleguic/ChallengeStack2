@@ -43,7 +43,7 @@ class Contact extends Validator
                 "inputs"=>[
                     "name"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6",
                         "id"=>"contact-form-name",
                         "class"=>"form-control form-control-lg form-control-a",
                         "placeholder"=>"Votre nom",
@@ -62,7 +62,7 @@ class Contact extends Validator
                     ],
                     "email"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6",
                         "id"=>"contact-form-email",
                         "class"=>"form-control form-control-lg form-control-a",
                         "placeholder"=>"Votre E-mail",

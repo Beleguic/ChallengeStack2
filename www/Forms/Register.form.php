@@ -13,7 +13,7 @@ class Register extends Validator
                     "method"=>$this->method,
                     "action"=>"",
                     "id"=>"register-form",
-                    "class"=>"form",
+                    "class"=>"php-email-form",
                     "enctype"=>"",
                     "submit"=>["Nous rejoindre"],
                     "reset"=>"Annuler"
@@ -50,7 +50,7 @@ class Register extends Validator
                 "inputs"=>[
                     "firstname"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6 mb-3 mb-md-0",
                         "id"=>"register-form-firstname",
                         "class"=>"form-control",
                         "placeholder"=>"Votre prénom",
@@ -69,7 +69,7 @@ class Register extends Validator
                     ],
                     "lastname"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6",
                         "id"=>"register-form-lastname",
                         "class"=>"form-control",
                         "placeholder"=>"Votre nom",

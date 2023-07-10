@@ -15,7 +15,7 @@ class Newsletter extends Validator
                     "method"=>$this->method,
                     "action"=>"/subscribe-newsletter",
                     "id"=>"register-form",
-                    "class"=>"form",
+                    "class"=>"php-email-form",
                     "enctype"=>"",
                     "submit"=>["S'inscrire"],
                 ],

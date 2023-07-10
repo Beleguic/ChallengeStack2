@@ -13,7 +13,7 @@ class Login extends Validator
                 "method"=>$this->method,
                 "action"=>"",
                 "id"=>"login-form",
-                "class"=>"form",
+                "class"=>"php-email-form",
                 "enctype"=>"",
                 "submit"=>["Se connecter"],
                 "reset"=>"Annuler"
