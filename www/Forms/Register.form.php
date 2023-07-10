@@ -13,7 +13,7 @@ class Register extends Validator
                     "method"=>$this->method,
                     "action"=>"",
                     "id"=>"register-form",
-                    "class"=>"php-email-form",
+                    "class"=>"form",
                     "enctype"=>"",
                     "submit"=>["Nous rejoindre"],
                     "reset"=>"Annuler"
