@@ -2,10 +2,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-8">
-        <div class="title-single-box">
+          <div class="title-single-box">
             <h1 class="title-single">Nos Incroyables Propriétés</h1>
             <span class="color-text-a">A Louer Uniquement</span>
-        </div>
+          </div>
         </div>
         <div class="col-md-12 col-lg-4">
         <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
