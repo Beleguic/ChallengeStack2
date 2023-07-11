@@ -74,9 +74,9 @@
 		</table>
 	</div>
 
-	<script src='/asset/js/jquery.js'></script>
-	<script src='/asset/js/dataTable.min.js'></script>
-	<link rel="stylesheet" type="text/css" href="/asset/css/dataTable.min.css">
+	<script src='../../asset/back-template/js/jquery.js'></script>
+	<script src='../../asset/back-template/js/dataTable.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="../../asset/back-template/css/dataTable.min.css">
 
 	<script>
 
