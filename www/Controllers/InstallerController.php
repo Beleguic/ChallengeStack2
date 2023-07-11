@@ -7,13 +7,67 @@ use App\Core\Controller;
 
 class InstallerController extends Controller
 {
-    public function getInstaller() : string
-    {
 
-        $data = [
-            "message" => "Ceci est un exemple de réponse JSON depuis l'API."
+    
+    public function getInstaller() 
+    {
+        $requestData = json_decode(file_get_contents('php://input'), true);
+        $host = $requestData['host'] ?? '';
+        $dbname = $requestData['dbname'] ?? '';
+        $port = $requestData['port'] ?? '';
+        $user = $requestData['user'] ?? '';
+        $password = $requestData['password'] ?? '';
+        $email = $requestData['email'] ?? '';
+        $name = $requestData['name'] ?? '';
+
+
+        // Chemin vers le fichier config.php (à adapter selon votre besoin)
+        $configFilePath = 'config.php';
+        try {
+            $pdo = new \PDO("$host;dbname=$dbname;port=$port", $user, $password);
+        } catch (\PDOException $e) {
+            // En cas d'erreur de connexion, renvoyer une réponse JSON avec le message d'erreur
+            $response = [
+                'error' => $e->getMessage()
+            ];
+    
+            header('Content-Type: application/json');
+            echo json_encode("oui");
+            return;
+        }
+
+
+
+
+
+
+
+
+        $configContent = "<?php\n\n";
+        $configContent .= "\$config['host'] = '$host';\n";
+        $configContent .= "\$config['dbname'] = '$dbname';\n";
+        $configContent .= "\$config['port'] = '$port';\n";
+        $configContent .= "\$config['user'] = '$user';\n";
+        $configContent .= "\$config['password'] = '$password';\n";
+        $configContent .= "\$config['email'] = '$email';\n";
+        $configContent .= "\$config['name'] = '$name';\n";
+        $configContent .= "\n";
+
+
+
+
+
+
+        // Écriture du contenu dans le fichier config.php
+        file_put_contents($configFilePath, $configContent);
+
+        // Retourner une réponse JSON
+        $response = [
+            'message' => $host,
         ];
-        header("Content-Type: application/json");
-        return  json_encode($data);
+    
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        
     }
 }

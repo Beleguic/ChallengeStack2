@@ -16,7 +16,7 @@
 
  if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
         header('Location: /public/react/index.html');
-    exit;
+    
     }
     
     date_default_timezone_set("Europe/Paris");
@@ -145,6 +145,7 @@ else{
     $app = new Application();
 
     //api route
+    $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
     $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
