@@ -307,16 +307,73 @@ function createElement(type, props, ...children) {
   }
   
   /** @jsx React.createElement */
-  function Counter(props) {
-    const [state, setState] = React.useState(1)
-    return (
-      <h1 onClick={() => setState(c => c + 1)}>
-            Count: {state}
-            {props.name}
-      </h1>
-    )
-  }
+function Counter(props) {
+  function handleSubmit(event) {
+    event.preventDefault();
   
-  const element = <Counter name="jason" />
+    const formData = new FormData(event.target);
+    const data = formData.get('data');
+  
+    var responseClone; // 1
+fetch('/api/installer')
+.then(function (response) {
+    responseClone = response.clone(); // 2
+    return response.json();
+})
+.then(function (data) {
+    // Do something with data
+}, function (rejectionReason) { // 3
+    console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
+    responseClone.text() // 5
+    .then(function (bodyText) {
+        console.log('Received the following instead of valid JSON:', bodyText); // 6
+    });
+});
+  }
+
+    return (
+      <form onSubmit={handleSubmit}>
+    <input type="text" name="data" />
+    <button type="submit">Envoyer</button>
+  </form>
+    )
+}
+  
+ /** @jsx React.createElement */
+function App() {
+  const [step, setStep] = React.useState(0);
+
+  function goToNextStep() {
+    setStep(c=>c+1);
+  }
+
+  function goToPreviousStep() {
+    setStep(c=>c-1);
+  }
+
+  function renderContent() {
+    switch (step) {
+      case 0:
+        return (
+          <div>
+            <h1>Bienvenue sur l'installateur</h1>
+            <button onClick={goToPreviousStep}>Précédent</button>
+            <button onClick={goToNextStep}>Suivant</button>
+          </div>
+        );
+      case 1:
+        console.log("salut les amis");
+        return <Counter />;
+    }
+  }
+
+  return (
+    <div>
+      {renderContent()}
+    </div>
+  )
+}
+  
+  const element = <App/>
   const container = document.getElementById("root")
   React.render(element, container)
