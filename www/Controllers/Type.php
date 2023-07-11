@@ -75,8 +75,6 @@ class Type extends Controller
     public function deleteType(): String
     {
 
-        var_dump($_POST);
-
         if(!isset($_GET['id'])){
             $_SESSION['error-report']['text'] = "Une erreur s'est produite";
             $_SESSION['error-report']['code'] = "Code 1";

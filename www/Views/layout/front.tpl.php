@@ -56,8 +56,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proriétés</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item " href="#">Acheter</a>
-              <a class="dropdown-item " href="#">Louer</a>
+              <a class="dropdown-item " href="/annonces-buy">Acheter</a>
+              <a class="dropdown-item " href="/annonces-rent">Louer</a>
             </div>
           </li>
 
@@ -119,6 +119,12 @@
               <div class="w-body-a">
                 <ul class="list-unstyled">
                   <li class="item-list-a">
+                    <i class="bi bi-chevron-right"></i> <a href="/annonces-buy">Acheter</a>
+                  </li>
+                  <li class="item-list-a">
+                    <i class="bi bi-chevron-right"></i> <a href="/annonces-rent">Louer</a>
+                  </li>
+                  <li class="item-list-a">
                     <i class="bi bi-chevron-right"></i> <a href="#">Appartements</a>
                   </li>
                   <li class="item-list-a">
@@ -126,9 +132,6 @@
                   </li>
                   <li class="item-list-a">
                     <i class="bi bi-chevron-right"></i> <a href="#">Parkings</a>
-                  </li>
-                  <li class="item-list-a">
-                    <i class="bi bi-chevron-right"></i> <a href="#">Terrains</a>
                   </li>
                   <li class="item-list-a">
                     <i class="bi bi-chevron-right"></i> <a href="#">Privacy Policy</a>

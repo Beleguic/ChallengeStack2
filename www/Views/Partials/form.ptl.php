@@ -57,6 +57,7 @@
                                     placeholder="<?= $inputVal["placeholder"] ?>"
                                     class="<?= $inputVal["class"] ?>"
                                     id="<?= $inputVal["id"] ?>"
+                                    rows="<?= $inputVal["rows"] ?>"
                                 ><?php   
                                     if(!isset($inputData[$name])){
                                         if(!isset($inputVal['value'])){
