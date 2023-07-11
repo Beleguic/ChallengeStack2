@@ -77,7 +77,7 @@
   </nav><!-- End Header/Navbar -->
 
   <!-- ======= Main Content ======= -->
-  <main class="container intro-single">
+  <main class="<?php echo ($_SERVER['REQUEST_URI'] === '/' || empty($_SERVER['REQUEST_URI'])) ? 'intro-single pt-0' : 'intro-single'; ?>">
     {{content}}
   </main><!-- End Main Content -->
 
