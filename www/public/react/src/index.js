@@ -310,33 +310,46 @@ function createElement(type, props, ...children) {
 function Counter(props) {
   function handleSubmit(event) {
     event.preventDefault();
-  
-    const formData = new FormData(event.target);
-    const data = formData.get('data');
-  
-    var responseClone; // 1
-fetch('/api/installer')
-.then(function (response) {
-    responseClone = response.clone(); // 2
-    return response.json();
-})
-.then(function (data) {
-    // Do something with data
-}, function (rejectionReason) { // 3
-    console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
-    responseClone.text() // 5
-    .then(function (bodyText) {
-        console.log('Received the following instead of valid JSON:', bodyText); // 6
-    });
-});
+
+    const formData = {
+      host: event.target.elements.host.value,
+      dbname: event.target.elements.dbname.value,
+      port: event.target.elements.port.value,
+      user: event.target.elements.user.value,
+      password: event.target.elements.password.value,
+      email: event.target.elements.email.value,
+      name: event.target.elements.name.value,
+    };
+    console.log(formData);
+    fetch('/api/installer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Faire quelque chose avec la réponse du backend
+      })
+      .catch(error => {
+        // Gérer les erreurs de la requête
+      });
+    
   }
 
-    return (
-      <form onSubmit={handleSubmit}>
-    <input type="text" name="data" />
-    <button type="submit">Envoyer</button>
-  </form>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="host" placeholder="Hôte" />
+      <input type="text" name="dbname" placeholder="Nom de la base de données" />
+      <input type="text" name="port" placeholder="Port" />
+      <input type="text" name="user" placeholder="Utilisateur" />
+      <input type="password" name="password" placeholder="Mot de passe" />
+      <input type="text" name="email" placeholder="Votre adresse e-mail" />
+      <input type="text" name="name" placeholder="Votre nom" />
+      <button type="submit">Envoyer</button>
+    </form>
+  );
 }
   
  /** @jsx React.createElement */
