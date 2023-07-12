@@ -75,6 +75,7 @@
 						<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
 						<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
 						<a class="button-Delete" href="/back/restore-annonce?id=<?=$row->getId()?>">Restaurer</a>
+						<a class="button-Delete" href="/back/add-photo-annonce?idAnnonce=<?=$row->getId()?>">Ajouter des photos</a>
 					</td>
 				</tr>
 		<?php endwhile; ?>
