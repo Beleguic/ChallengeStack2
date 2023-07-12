@@ -1,4 +1,4 @@
-/* Styles similaires à la classe .form-control de Bootstrap */
+/* Custom Textarea Fields */
 .custom-textarea {
     display: block;
     width: 100%;
@@ -19,6 +19,7 @@
     box-shadow: 0 0 0 0.25rem rgba(46, 196, 128, 0.25);
 }
 
+/* Custom Input Fields */
 .custom-input {
     display: block;
     width: 100%;
@@ -28,7 +29,7 @@
     color: #212529;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid #e7e9ed;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

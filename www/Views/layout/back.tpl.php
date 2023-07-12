@@ -8,6 +8,7 @@
   <meta name="description" content="Admin · Moving House">
   <link rel="stylesheet" href="../../asset/back-template/css/style.css">
   <link rel="stylesheet" href="../../asset/back-template/css/back-bootstrap.css">
+  <link href="../../asset/back-template/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="icon" href="../../asset/back-template/images/logo.png">
 </head>
