@@ -1,5 +1,3 @@
-<h2>Liste des utilisateurs</h2>
-
 <?php
 
 	/*
@@ -34,44 +32,60 @@
 		<?php // $this->partial("form", $formDel) ?>
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
-	<a href="/">Accueil</a>
-	<div style="width: 90%; margin: auto;">
-		<table id='tableType' >	
-			<thead>
-				<tr>	
-					<th> Nom </th>
-					<th> Prenom </th>
-					<th> Adresse mail </th>
-					<th> Status </th>
-					<th> Actif </th>
-					<th> Action </th>
-			</thead>
-			<tbody>	
-		<?php while ($row = $this->data['userList']->fetch()): ?>
-				<tr>
-					<td><?=$row->getFirstName()?></td>
-					<td><?=$row->getLastName()?></td>
-					<td><?=$row->getEmail()?></td>
-					<?php if($row->getStatus() == 3): ?>
-						<td> Administrateur </td>
-					<?php elseif($row->getStatus() == 2): ?>
-						<td> Agent </td>
-					<?php else: ?>
-						<td> Utilisateur </td>
-					<?php endif; ?>
-					<?php if($row->getActif() == 1): ?>
-						<td> Actif </td>
-					<?php else: ?>
-						<td> Non Actif </td>
-					<?php endif; ?>
-					<td>
-						<a class="button-Update" href="/back/update-user?id=<?=$row->getId()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-user?id=<?=$row->getId()?>">Supprimer</a>
-					</td>
-				</tr>
-		<?php endwhile; ?>
-			</tbody>
-		</table>
+
+	<div class="container">
+		<h2 class="mb-3">Navigation</h2>
+		<div class="row">
+			<div class="col-6">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title"><i class="bi bi-house-door-fill"></i> Accueil</h5>
+				<p class="card-text">Cliquez pour retourner à la page d'accueil</p>
+				<a href="/back" class="btn app-btn-primary btn-lg btn-icon"><i class="bi bi-house-door"></i> Accueil</a>
+				</div>
+			</div>
+			</div>
+		</div>
+
+		<div class="mt-5">
+			<h2 class="mb-3">Liste des utilisateurs</h2>
+			<table id='tableType' >	
+				<thead>
+					<tr>	
+						<th> Nom </th>
+						<th> Prenom </th>
+						<th> Adresse mail </th>
+						<th> Status </th>
+						<th> Actif </th>
+						<th> Action </th>
+				</thead>
+				<tbody>	
+			<?php while ($row = $this->data['userList']->fetch()): ?>
+					<tr>
+						<td><?=$row->getFirstName()?></td>
+						<td><?=$row->getLastName()?></td>
+						<td><?=$row->getEmail()?></td>
+						<?php if($row->getStatus() == 3): ?>
+							<td> Administrateur </td>
+						<?php elseif($row->getStatus() == 2): ?>
+							<td> Agent </td>
+						<?php else: ?>
+							<td> Utilisateur </td>
+						<?php endif; ?>
+						<?php if($row->getActif() == 1): ?>
+							<td> Actif </td>
+						<?php else: ?>
+							<td> Non Actif </td>
+						<?php endif; ?>
+						<td>
+							<a class="button-Update" href="/back/update-user?id=<?=$row->getId()?>">Modifier</a>
+							<a class="button-Delete" href="/back/delete-user?id=<?=$row->getId()?>">Supprimer</a>
+						</td>
+					</tr>
+			<?php endwhile; ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<script src='../../asset/back-template/js/jquery.js'></script>
