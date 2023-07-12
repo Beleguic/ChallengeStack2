@@ -1,5 +1,3 @@
-<h2>Annonce</h2>
-
 <?php
 
 	/*
@@ -34,52 +32,76 @@
 		<?php // $this->partial("form", $formDel) ?>
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
-	<a href="/">Accueil</a>
-	<?php if($this->data['showAdd']): ?>
-		<a href="/back/add-annonce">Ajouter une nouvelle annonce</a>
-	<?php endif; ?>
-	<div style="width: 90%; margin: auto;">
-		<table id='tableType' >	
-			<thead>
-				<tr>	
-					<th> Titre </th>
-					<th> Prix </th>
-					<th> Type </th>
-					<th> Superficie Maison </th>
-					<th> Superficie Terrain </th>
-					<th> Nombre de pieces </th>
-					<th> Nombre de chambre </th>
-					<th> Ville </th>
-					<th> Rue </th>
-					<th> Departement </th>
-					<th> Regions </th>
-					<th> Description </th>
-					<th> Action </th>
-			</thead>
-			<tbody>	
-		<?php while ($row = $this->data['annonceList']->fetch()): ?>
-				<tr>
-					<td><?=$row->getTitre()?></td>
-					<td><?=$row->getPrix()?></td>
-					<td><?=$row->getTexte()?></td>
-					<td><?=$row->getSuperficiemaison()?></td>
-					<td><?=$row->getSuperficieterrain()?></td>
-					<td><?=$row->getNbrpiece()?></td>
-					<td><?=$row->getNbrchambre()?></td>
-					<td><?=$row->getVille()?></td>
-					<td><?=$row->getRue()?></td>
-					<td><?=$row->getDepartement()?></td>
-					<td><?=$row->getRegions()?></td>
-					<td><?=$row->getDescription()?></td>
-					<td>
-						<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
-						<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
-						<a class="button-Delete" href="/back/restore-annonce?id=<?=$row->getId()?>">Restaurer</a>
-					</td>
-				</tr>
-		<?php endwhile; ?>
-			</tbody>
-		</table>
+	<div class="container">
+		<h2 class="mb-3">Navigation</h2>
+		<div class="row">
+			<?php if($this->data['showAdd']): ?>
+			<div class="col-md-6 mt-3 mt-md-0">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-plus-circle-fill"></i> Ajouter une nouvelle annonce</h5>
+						<p class="card-text">Cliquez pour ajouter une nouvelle annonce</p>
+						<a href="/back/add-annonce" class="btn app-btn-primary btn-lg btn-icon"><i class="bi bi-plus-circle"></i> Ajouter une nouvelle annonce</a>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+			<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title"><i class="bi bi-house-door-fill"></i> Accueil</h5>
+				<p class="card-text">Cliquez pour retourner à la page d'accueil</p>
+				<a href="/back" class="btn app-btn-primary btn-lg btn-icon"><i class="bi bi-house-door"></i> Accueil</a>
+				</div>
+			</div>
+			</div>
+		</div>
+
+
+		<div class="mt-5">
+			<h2 class="mb-3">Liste des annonces</h2>
+			<table id='tableType' >	
+				<thead>
+					<tr>	
+						<th> Titre </th>
+						<th> Prix </th>
+						<th> Type </th>
+						<th> Superficie Maison </th>
+						<th> Superficie Terrain </th>
+						<th> Nombre de pieces </th>
+						<th> Nombre de chambre </th>
+						<th> Ville </th>
+						<th> Rue </th>
+						<th> Departement </th>
+						<th> Regions </th>
+						<th> Description </th>
+						<th> Action </th>
+				</thead>
+				<tbody>	
+			<?php while ($row = $this->data['annonceList']->fetch()): ?>
+					<tr>
+						<td><?=$row->getTitre()?></td>
+						<td><?=$row->getPrix()?></td>
+						<td><?=$row->getTexte()?></td>
+						<td><?=$row->getSuperficiemaison()?></td>
+						<td><?=$row->getSuperficieterrain()?></td>
+						<td><?=$row->getNbrpiece()?></td>
+						<td><?=$row->getNbrchambre()?></td>
+						<td><?=$row->getVille()?></td>
+						<td><?=$row->getRue()?></td>
+						<td><?=$row->getDepartement()?></td>
+						<td><?=$row->getRegions()?></td>
+						<td><?=$row->getDescription()?></td>
+						<td>
+							<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
+							<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>
+							<a class="button-Delete" href="/back/restore-annonce?id=<?=$row->getId()?>">Restaurer</a>
+						</td>
+					</tr>
+			<?php endwhile; ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 	<script src='../../asset/back-template/js/jquery.js'></script>
