@@ -1,5 +1,3 @@
-<h2>Type annonce</h2>
-
 <?php
 
 	/*
@@ -34,9 +32,53 @@
 		<?php // $this->partial("form", $formDel) ?>
 		<button onclick="document.getElementById('modal-delete').close();"> Annuler </button>
 	</dialog>-->
-	<a href="/">Accueil</a>
-	<a href="/back/add-type">Ajouter un Type de propriéter </a>
-	<div style="width: 60%; margin: auto;">
+	<div class="container">
+		<h2 class="mb-3">Navigation</h2>
+		<div class="row">
+			<div class="col-md-6 mt-3 mt-md-0">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title"><i class="bi bi-plus-circle-fill"></i> Ajouter un type</h5>
+						<p class="card-text">Cliquez pour ajouter un nouveau type de propriété</p>
+						<a href="/back/add-type" class="btn app-btn-primary btn-lg btn-icon"><i class="bi bi-plus-circle"></i> Ajouter un type</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+				<h5 class="card-title"><i class="bi bi-house-door-fill"></i> Accueil</h5>
+				<p class="card-text">Cliquez pour retourner à la page d'accueil</p>
+				<a href="/back" class="btn app-btn-primary btn-lg btn-icon"><i class="bi bi-house-door"></i> Accueil</a>
+				</div>
+			</div>
+			</div>
+		</div>
+
+
+		<div class="mt-5">
+			<h2 class="mb-3">Type annonce</h2>
+				<table id='tableType' >	
+					<thead>	
+						<tr>	
+							<td> Texte </td>
+							<td> Action </td>
+					</thead>
+					<tbody>	
+				<?php while ($row = $this->data['typeList']->fetch()): ?>
+						<tr>
+							<td><?=$row->getTexte()?></td>
+							<td>
+								<a class="button-Update" href="/back/update-type?id=<?=$row->getId()?>">Modifier</a>
+								<a class="button-Delete" href="/back/delete-type?id=<?=$row->getId()?>">Supprimer</a>
+							</td>
+						</tr>
+				<?php endwhile; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 		<table id='tableType' >	
 			<thead>	
 				<tr>	

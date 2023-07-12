@@ -282,11 +282,11 @@ class Annonce extends Validator
                 "id"=>"update-annonce-form",
                 "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"",
-                "submit"=>["Modifier le type d'annonce"],
+                "submit"=>["Modifier l'annonce"],
                 "reset"=>"Annuler",
             ],
             "submit"=>[
-                "Modifier le type d'annonce" => [
+                "Modifier l'annonce" => [
                     "id" => "",
                     "class" => "btn app-btn-primary m-2"
                 ],
