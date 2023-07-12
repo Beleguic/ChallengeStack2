@@ -7,7 +7,7 @@
 <div class="container">
   <h2 class="mb-3">Navigation</h2>
   <div class="row">
-    <div class="col-md-6 mt-3 mt-md-0">
+    <div class="col-md-6">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-list-task"></i> Liste des annonces</h5>
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mt-3 mt-md-0">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-house-door-fill"></i> Accueil</h5>
