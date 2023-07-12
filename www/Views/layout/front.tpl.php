@@ -74,7 +74,7 @@
   </nav><!-- End Header/Navbar -->
 
   <!-- ======= Main Content ======= -->
-  <main class="<?php echo ($_SERVER['REQUEST_URI'] === '/' || empty($_SERVER['REQUEST_URI'])) ? 'intro-single pt-0' : 'intro-single'; ?>">
+  <main class="<?php echo ($_SERVER['REQUEST_URI'] === '/' || empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === '/?conn=true' || $_SERVER['REQUEST_URI'] === '/?logout=true') ? 'intro-single pt-0' : 'intro-single'; ?>">
     {{content}}
   </main><!-- End Main Content -->
 
