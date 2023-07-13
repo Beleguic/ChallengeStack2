@@ -316,15 +316,14 @@ function FormDatabse() {
 function FormDb(props) {
   function handleSubmit(event) {
     event.preventDefault();
-
+    console.log(event.target.elements.host.value);
     const formData = {
       host: event.target.elements.host.value,
       dbname: event.target.elements.dbname.value,
       port: event.target.elements.port.value,
       user: event.target.elements.user.value,
       password: event.target.elements.password.value,
-      email: event.target.elements.email.value,
-      name: event.target.elements.name.value,
+      
     };
     console.log(formData);
     fetch('/api/installer', {
@@ -362,57 +361,7 @@ function FormDb(props) {
       </div>
   );
 }
-function FormUser() {
-  function handleSubmit(event) {
-    event.preventDefault();
 
-    const formData = {
-      host: event.target.elements.host.value,
-      dbname: event.target.elements.dbname.value,
-      port: event.target.elements.port.value,
-      user: event.target.elements.user.value,
-      password: event.target.elements.password.value,
-      email: event.target.elements.email.value,
-      name: event.target.elements.name.value,
-    };
-    console.log(formData);
-    fetch('/api/installer', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
-        } else {
-          alert('Connexion Reussi !');
-          window.location.href = '/'
-        }
-      })
-      .catch(error => {
-        console.error('Erreur lors de la requête API :', error);
-      });
-    
-  }
-
-  return (
-    
-    <form onSubmit={handleSubmit} className="max-w-md px-4 mx-auto mt-12">
-      <input type="text" name="host" placeholder="Hôte" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
-      <input type="text" name="dbname" placeholder="Nom de la base de données" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
-      <input type="text" name="port" placeholder="Port" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
-      <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
-      <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
-      <input type="text" name="email" placeholder="Votre adresse e-mail" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
-      <input type="text" name="name" placeholder="Votre nom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
-      <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
-    </form>
-  );
-  
-}
   
 /** @jsx React.createElement */
 function Test() {
