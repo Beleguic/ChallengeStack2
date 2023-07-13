@@ -1,5 +1,5 @@
 function createElement(type, props, ...children) {
-  console.log("cestm moi ");
+  
     return {
       type,
       props: {
@@ -306,8 +306,14 @@ function createElement(type, props, ...children) {
     useState,
   }
   
+/** @jsx React.createElement */
+function FormDatabse() {
+    
+  }
+
+
   /** @jsx React.createElement */
-function Counter(props) {
+function FormDb(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -330,33 +336,129 @@ function Counter(props) {
     })
       .then(response => response.json())
       .then(data => {
-        // Faire quelque chose avec la réponse du backend
+        if (data.error) {
+          alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
+        } else {
+          alert('Connexion Reussi !');
+          window.location.href = '/'
+        }
       })
       .catch(error => {
-        // Gérer les erreurs de la requête
+        console.error('Erreur lors de la requête API :', error);
       });
     
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="host" placeholder="Hôte" />
-      <input type="text" name="dbname" placeholder="Nom de la base de données" />
-      <input type="text" name="port" placeholder="Port" />
-      <input type="text" name="user" placeholder="Utilisateur" />
-      <input type="password" name="password" placeholder="Mot de passe" />
-      <input type="text" name="email" placeholder="Votre adresse e-mail" />
-      <input type="text" name="name" placeholder="Votre nom" />
-      <button type="submit">Envoyer</button>
-    </form>
+    <div className=" p-4 py-6 sm:p-6 ">
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <input type="text" name="host" placeholder="Hôte" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <input type="text" name="dbname" placeholder="Nom de la base de données" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <input type="text" name="port" placeholder="Port" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
+      </form>
+      </div>
   );
 }
+function FormUser() {
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = {
+      host: event.target.elements.host.value,
+      dbname: event.target.elements.dbname.value,
+      port: event.target.elements.port.value,
+      user: event.target.elements.user.value,
+      password: event.target.elements.password.value,
+      email: event.target.elements.email.value,
+      name: event.target.elements.name.value,
+    };
+    console.log(formData);
+    fetch('/api/installer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
+        } else {
+          alert('Connexion Reussi !');
+          window.location.href = '/'
+        }
+      })
+      .catch(error => {
+        console.error('Erreur lors de la requête API :', error);
+      });
+    
+  }
+
+  return (
+    
+    <form onSubmit={handleSubmit} className="max-w-md px-4 mx-auto mt-12">
+      <input type="text" name="host" placeholder="Hôte" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <input type="text" name="dbname" placeholder="Nom de la base de données" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <input type="text" name="port" placeholder="Port" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="text" name="email" placeholder="Votre adresse e-mail" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+      <input type="text" name="name" placeholder="Votre nom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
+    </form>
+  );
   
+}
+  
+/** @jsx React.createElement */
+function Test() {
+  return  (
+    <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="flex justify-between p-4 rounded-md bg-blue-50 border border-blue-300">
+            <div className="flex gap-3">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div className="self-center">
+                    <span className="text-blue-600 font-medium">
+                        New update available
+                    </span>
+                    <div className="text-blue-600">
+                        <p className="mt-2 sm:text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                        <div className="mt-2">
+                            <a
+                                href="javascript:void(0)"
+                                className="inline-flex items-center font-medium hover:underline sm:text-sm">
+                                Details
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+)
+}
+
+
+
  /** @jsx React.createElement */
 function App() {
   const [step, setStep] = React.useState(0);
 
   function goToNextStep() {
+    console.log("coucou")
     setStep(c=>c+1);
   }
 
@@ -368,24 +470,67 @@ function App() {
     switch (step) {
       case 0:
         return (
-          <div>
-            <h1>Bienvenue sur l'installateur</h1>
-            <button onClick={goToPreviousStep}>Précédent</button>
-            <button onClick={goToNextStep}>Suivant</button>
+          <div >
+            <div className="mt-2 ">
+                <h3 className="text-xl text-gray-900 font-semibold hover:underline">
+                    Bienvenue sur l'installateur MovingHouse
+                </h3>
+                <p className="text-gray-400 mt-1 leading-relaxed">
+                    Avant de nous lancer, nous allons avoir besoin de certaines informations sur votre base de données. Il va vous falloir réunir les informations suivantes pour continuer
+              </p>
+              <ul className="list-disc list-inside">
+                <li>Nom de la base de donnée</li>
+                <li>Adresse de la base de donnée</li>
+                <li>Le port d'accès</li>
+                <li>Nom d'utilisateur</li>
+                <li>Le mot de passe</li>
+              </ul>
+            </div>           
           </div>
         );
       case 1:
-        console.log("salut les amis");
-        return <Counter />;
+        return <FormDb />;
+      case 2:<FormUser/>
     }
   }
 
   return (
-    <div>
-      {renderContent()}
+    <div className="w-full h-[800px] flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+      <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
+      <div className="text-center">
+                    
+                    <div className="mt-5 space-y-2">
+                        <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Installation</h3>
+                       
+                    </div>
+                </div>
+        <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+          <div>
+             {renderContent()}
+          </div>
+         
+
+          <div className="mt-5 flex justify-around">
+              <button onClick={goToPreviousStep}
+              className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg"
+              >
+                Précédent
+              </button>
+              <button onClick={goToNextStep}
+                className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">
+                Suivant
+              </button>
+            </div>
+        </div>
+        
+      </div>
+      
     </div>
+    
   )
 }
+
+
   
   const element = <App/>
   const container = document.getElementById("root")

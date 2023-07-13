@@ -24,15 +24,15 @@ class InstallerController extends Controller
         // Chemin vers le fichier config.php (à adapter selon votre besoin)
         $configFilePath = 'config.php';
         try {
-            $pdo = new \PDO("$host;dbname=$dbname;port=$port", $user, $password);
+            $pdo = new \PDO("pgsql:host=$host;dbname=$dbname;port=$port", $user, $password);
         } catch (\PDOException $e) {
             // En cas d'erreur de connexion, renvoyer une réponse JSON avec le message d'erreur
             $response = [
                 'error' => $e->getMessage()
             ];
-    
+            http_response_code(400);
             header('Content-Type: application/json');
-            echo json_encode("oui");
+            echo json_encode($response);
             return;
         }
 
@@ -65,7 +65,7 @@ class InstallerController extends Controller
         $response = [
             'message' => $host,
         ];
-    
+        http_response_code(200);
         header('Content-Type: application/json');
         echo json_encode($response);
         
