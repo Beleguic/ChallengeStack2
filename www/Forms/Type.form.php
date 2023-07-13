@@ -13,23 +13,35 @@ class Type extends Validator
                 "method"=>$this->method,
                 "action"=>"",
                 "id"=>"type-form",
-                "class"=>"form-add",
+                "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"",
                 "submit"=>["Ajouter le type d'annonce"],
                 "reset"=>"Annuler"
             ],
+            "submit"=>[
+                "Ajouter le type d'annonce" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
+            ],
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
+            ],
             "divs"=>[
                 "div-texte" =>[
                     "id" => "div-type-texte",
-                    "class" => "div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["texte"]
                 ],
             ],
             "inputs"=>[
                 "texte"=>[
                     "id"=>"type-form-texte",
-                    "class"=>"form-input",
-                    "placeholder"=>"Type d'annonce",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Le type d'annonce est incorrect",
                     "label" =>[
@@ -53,9 +65,15 @@ class Type extends Validator
                 "method"=>$this->method,
                 "action"=>"",
                 "id"=>"",
-                "class"=>"form-updatde",
+                "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"",
                 "submit"=>["Modifier le type d'annonce"],
+            ],
+            "submit"=>[
+                "Modifier le type d'annonce" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
             ],
             "divs"=>[
                 "div-texte" =>[
@@ -76,13 +94,19 @@ class Type extends Validator
                 ],
                 "texte"=>[
                     "id"=>"texte-update",
-                    "class"=>"form-input",
+                    "class"=>"custom-input",
                     "type"=>"text",
                     "value"=>"",
                     "error"=>"Le type d'annonce est incorrect",
                     "required"=>true,
                     "placeholder"=>"",
-                    "error"=>""
+                    "error"=>"",
+                    "label" =>[
+                        "for" => "Type-form-titre",
+                        "id" => "label-Type-form-titre",
+                        "class" => "form-label",
+                        "value" => "Nom du type"
+                    ],
                 ],
             ]
         ];
@@ -98,7 +122,13 @@ class Type extends Validator
                 "id"=>"",
                 "class"=>"form-delete",
                 "enctype"=>"",
-                "submit"=>["Supprimer","Annuler"],
+                "submit"=>["Supprimer"],
+            ],
+            "submit"=>[
+                "Supprimer" => [
+                    "id" => "",
+                    "class" => "btn btn-danger m-2 text-white"
+                ],
             ],
             "divs"=>[
                 "div-form" =>[

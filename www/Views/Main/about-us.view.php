@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-sm-12 position-relative">
             <div class="about-img-box">
-              <img src="../../asset/images/background/background-3.jpg" alt="" class="img-fluid">
+              <img src="../../asset/front-template/img/background-3.jpg" alt="" class="img-fluid">
             </div>
             <div class="sinse-box">
               <h3 class="sinse-title">Moving House
@@ -41,7 +41,7 @@
           <div class="col-md-12 section-t8 position-relative">
             <div class="row">
               <div class="col-md-6 col-lg-5">
-                <img src="../../asset/images/background/background-1.jpg" alt="" class="img-fluid">
+                <img src="../../asset/front-template/img/background-1.jpg" alt="" class="img-fluid">
               </div>
               <div class="col-lg-2  d-none d-lg-block position-relative">
                 <div class="title-vertical d-flex justify-content-start">

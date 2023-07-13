@@ -11,7 +11,7 @@
   <meta name="keywords" content="Moving House">
 
   <!-- Favicons -->
-  <link rel="shortcut icon" href="../../asset/images/logo.png">
+  <link rel="shortcut icon" href="../../asset/front-template/images/logo.png">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -24,9 +24,6 @@
 
   <!-- Main style CSS -->
   <link href="../../asset/front-template/style.css" rel="stylesheet">
-
-  <!-- Jquery -->
-  <script type="text/javascript" src="../../asset/js/jquery.js"></script>
 
 </head>
 
@@ -77,7 +74,7 @@
   </nav><!-- End Header/Navbar -->
 
   <!-- ======= Main Content ======= -->
-  <main class="<?php echo ($_SERVER['REQUEST_URI'] === '/' || empty($_SERVER['REQUEST_URI'])) ? 'intro-single pt-0' : 'intro-single'; ?>">
+  <main class="<?php echo ($_SERVER['REQUEST_URI'] === '/' || empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] === '/?conn=true' || $_SERVER['REQUEST_URI'] === '/?logout=true') ? 'intro-single pt-0' : 'intro-single'; ?>">
     {{content}}
   </main><!-- End Main Content -->
 
