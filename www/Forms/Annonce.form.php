@@ -589,9 +589,114 @@ class Annonce extends Validator
         return $this->config;
     }
 
-    function getOptionFromSelect($table){
+    public function getConfigAddPhoto(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Ajouter les photos","Annuler"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["photo","idAnnonce","operation"]
+                ],
+                "div-preview" => [
+                    "id" => "div-preview",
+                    "class" => "preview",
+                    "inside" => []
+                ]
+            ],
 
+            "inputs"=>[
+                "idAnnonce"=>[
+                    "id"=>"id-annonce-add",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "photo"=>[
+                    "id" => "type-form-photo",
+                    "class"=>"form-input",
+                    "placeholder"=>"Ajouter des photo a l'annonce",
+                    "type"=>"file",
+                    "error"=>"La photo est incorrect incorrect",
+                    "label" =>[
+                        "for" => "type-form-photo",
+                        "id" => "label-Type-form-photo",
+                        "class" => "form-label",
+                        "value" => "Sélectionner des images à uploader (PNG, JPG)"
+                    ],
+                    "value"=>"",
+                    "required"=>true,
+                    "multiple"=>true,
+                    "accept"=>".jpg, .jpeg, .png"
 
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"addPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+            ]
+        ];
+        return $this->config;
+
+    }
+
+    public function getConfigDelPhoto(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Supprimer la photo"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["id", "operation"]
+                ]
+            ],
+
+            "inputs"=>[
+                "id"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"delPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+            ]
+        ];
+        return $this->config;
 
     }
 }

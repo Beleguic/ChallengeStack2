@@ -74,7 +74,12 @@
                             <?php endif;?>
                         <?php else: ?>
                             <input
-                                name="<?= $name ?>"
+                                <?php if($inputVal["type"] == 'file'): ?>
+                                    <?php $fileInput = '[]'; ?>
+                                <?php else: ?>
+                                    <?php $fileInput = ""; ?>
+                                <?php endif; ?>
+                                name="<?= $name.$fileInput ?>"
                                 placeholder="<?= $inputVal["placeholder"] ?>"
                                 class="<?= $inputVal["class"] ?>"
                                 id="<?= $inputVal["id"] ?>"
@@ -94,6 +99,10 @@
                                 ?>
                                 value="<?= $value ?>"
                                 <?= $inputVal["required"]?"required":"" ?>
+                                <?php if($inputVal["type"] == 'file'): ?>
+                                    <?= $inputVal["multiple"]?"multiple":"" ?>
+                                    accept="<?= $inputVal["accept"] ?>"
+                                <?php endif; ?>
                             >
                         <?php endif;?>
                     </div>

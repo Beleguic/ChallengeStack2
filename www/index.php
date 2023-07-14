@@ -203,11 +203,15 @@ else{
     $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
     $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     $app->router->get('/back/restore-annonce', [Annonce::class ,"restoreAnnonce"],[AuthMiddleware::class],2);
+    $app->router->get('/back/add-photo-annonce', [Annonce::class ,"photo"],[AuthMiddleware::class],2);
     
     $app->router->post('/back/add-annonce', [Annonce::class ,"addAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/restore-annonce', [Annonce::class ,"restoreAnnonce"],[AuthMiddleware::class],2);
+
+    $app->router->post('/back/add-photo-annonce', [Annonce::class ,"photo"],[AuthMiddleware::class],2);
+    
     
     // Route type back
     $app->router->get('/back/type', [Type::class ,"viewType"],[AuthMiddleware::class],2);
