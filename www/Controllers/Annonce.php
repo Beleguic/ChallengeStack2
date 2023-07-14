@@ -9,6 +9,8 @@ use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
 use App\Models\Type as TypeModel;
 use App\Models\AnnonceMemento as AnnonceMemento;
+use App\Models\Favori;
+use App\Models\Photo;
 
 class Annonce extends Controller
 
@@ -107,6 +109,7 @@ class Annonce extends Controller
         if($formAdd->isSubmited() && $formAdd->isValid()){
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
+            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -150,6 +153,7 @@ class Annonce extends Controller
             $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
+            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -239,5 +243,133 @@ class Annonce extends Controller
     }
 
 
+    public function photo(): String
+    {
+        if(!isset($_GET['idAnnonce'])){
+            header("/back/annonce");
+        }
 
+        $this->setView("Annonce/annonce-photo"); // vue ajout type
+        $this->setTemplate("back");
+
+        $photo = new Photo();
+        $photoFromAdd = new AnnonceForm();
+        $photoFromDel = new AnnonceForm();
+        $this->assign('formAddPhoto', $photoFromAdd->getConfigAddPhoto());
+        $this->assign("idAnnonce", ['idAnnonce' => $_GET['idAnnonce']]);
+        $this->assign('imageList', $photo->getAllWhere(["id_annonce = '".$_GET['idAnnonce']."'"]));
+        $this->assign('formDelPhoto', $photoFromDel->getConfigDelPhoto());
+
+
+        if(isset($_POST['operation'])){
+            if($_POST['operation'] == "delPhoto" && $photoFromDel->isSubmited() && $photoFromDel->isValid()){
+                $photo = new photo();
+                $photo = $photo->populate($_POST['id']);
+                if(file_exists($photo->getLinkPhoto())){
+                    unlink($photo->getLinkPhoto());
+                }
+                $photo->save('del');  
+            }
+
+
+            if($_POST['operation'] == "addPhoto" && $photoFromAdd->isSubmited() && $photoFromAdd->isValid()){
+
+                $error=array();
+                $extension=array("jpeg","jpg","png");
+                foreach($_FILES["photo"]["tmp_name"] as $key=>$tmp_name) {
+                    $file_name_new = sha1(uniqid());
+                    $file_name=$_FILES["photo"]["name"][$key];
+                    $file_tmp=$_FILES["photo"]["tmp_name"][$key];
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                    $path = 'asset/data/'.$file_name_new.'.'.$ext;
+                    if(in_array($ext,$extension)) {
+                        if(!file_exists($path)) {
+                            if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                                // Ajout BDD
+                                $photo = new Photo();
+                                $photo->setIdAnnonce($_POST['idAnnonce']);
+                                $photo->setLinkPhoto($path);
+                                $photo->setDescription("");
+                                $photo->save();
+                            }
+                        }
+                        else {
+                            $filename=basename($file_name,$ext);
+                            $path='asset/data/'.$filename.time().".".$ext;
+                            if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                                // Ajout BDD
+                                $photo = new Photo();
+                                $photo->setIdAnnonce($_POST['idAnnonce']);
+                                $photo->setLinkPhoto($path);
+                                $photo->setDescription("");
+                                $photo->save();
+                            }
+                        }
+                    }
+                    else {
+                        array_push($error,"$file_name, ");
+                    }
+                }
+            }
+            header("location: /back/add-photo-annonce?idAnnonce=".$_GET['idAnnonce']);
+        }
+
+        return $this->render();
+    }
+
+
+    public function addFavori(): Void
+    {
+
+        // Ajoute un favorie pour l'utilisateur
+
+        if(!isset($_SESSION['zfgh_login']['id'])){
+            exit;
+        }
+
+        if(!isset($_GET['id_annonce']) && is_string($_GET['id_annonce'])){
+            exit;
+        }
+
+        $favori = new Favori();
+        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdAnnonce($_GET['id_annonce']);
+        $favori->save();
+
+    }
+
+    public function removeFavori(): Void
+    {
+
+        // Ajoute un favorie pour l'utilisateur
+        if(!isset($_SESSION['zfgh_login']['id'])){
+            exit;
+        }
+
+        if(!isset($_GET['id_annonce']) && !is_string($_GET['id_annonce'])){
+            exit;
+        }
+
+        $favori = new Favori();
+        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdAnnonce($_GET['id_annonce']);
+        $favori->delWhere();
+
+    }
+
+    public function getAllBuyAnnonces(): String
+    {
+        $this->setView("Annonce/annonce-all-buy");
+        $this->setTemplate("front");
+        
+        return $this->render();
+    }
+
+    public function getAllRentAnnonces(): String
+    {
+        $this->setView("Annonce/annonce-all-rent");
+        $this->setTemplate("front");
+        
+        return $this->render();
+    }
 }

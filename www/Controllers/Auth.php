@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\UserCode;
 use App\Models\UserPwdForget;
 use App\Models\Connexion;
+use App\Models\Status;
 
 class Auth extends Controller
 {
@@ -140,7 +141,7 @@ class Auth extends Controller
 
         $user = new User();
 
-        $this->assign("userList", $user->getAll());
+        $this->assign("userList", $user->getAllWhere(["status < 4"]));
         
         return $this->render();
 
@@ -152,8 +153,10 @@ class Auth extends Controller
         $this->setTemplate("back");
 
         $user = new User();
-        $form=new Register();
+        $form = new Register();
+        $status = new Status();
         $user = $user->populate($_GET["id"]);
+        $this->assign("statusList", $status->getSelectInfo());
         $this->assign("formUpd", $form->getConfigUpdate());
         $this->assign("formUpdDate", $user->getConfigObject());
 

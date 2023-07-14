@@ -13,53 +13,65 @@ class Annonce extends Validator
                 "method"=>$this->method,
                 "action"=>"",
                 "id"=>"annonce-form",
-                "class"=>"form-add",
+                "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"",
                 "submit"=>["Ajouter l'annonce"],
                 "reset"=>"Annuler"
             ],
+            "submit"=>[
+                "Ajouter l'annonce" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
+            ],
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
+            ],
             "divs"=>[
                 "div-titre" =>[
                     "id" => "div-titre",
-                    "class" => "div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["titre"]
                 ],
                 "div-prix-type" =>[
                     "id" => "div-prix-type",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["prix","id_type"]
                 ],
                 "div-superficie-maison-terrain" =>[
                     "id" => "div-superficie-maison-terrain",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["superficieMaison","superficieTerrain"]
                 ],
                 "div-nombre-piece-chambre" =>[
                     "id" => "div-nombre-piece-chambre",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["nbrPiece","nbrChambre"]
                 ],
                 "div-ville-rue" =>[
                     "id" => "div-ville-rue",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["ville","rue"]
                 ],
                 "div-departement-regions" =>[
                     "id" => "div-departement-regions",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["departement","regions"]
                 ],
                 "div-departement-description" =>[
                     "id" => "div-description",
-                    "class" => "div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["description"]
                 ],
             ],
             "inputs"=>[
                 "titre"=>[
                     "id"=>"type-form-titre",
-                    "class"=>"form-input",
-                    "placeholder"=>"Titre de l'annonce",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Le titre d'annonce est incorrect",
                     "label" =>[
@@ -72,9 +84,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "prix"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-prix",
-                    "class"=>"form-input",
-                    "placeholder"=>"Prix de l'annonce",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"Le prix d'annonce est incorrect",
                     "label" =>[
@@ -87,9 +101,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "id_type"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "balise" => "select",
                     "id"=>"type-form-id-type",
-                    "class"=>"form-input",
+                    "class"=>"form-select",
                     "error"=>"Le type d'annonce est incorrect",
                     "label" =>[
                         "for" => "Type-form-id-type",
@@ -101,9 +117,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "superficieMaison"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-superficieMaison",
-                    "class"=>"form-input",
-                    "placeholder"=>"superficie du bien",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La superficie de la maison est incorrect",
                     "label" =>[
@@ -116,9 +134,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "superficieTerrain"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-superficieTerrain",
-                    "class"=>"form-input",
-                    "placeholder"=>"superficie du bien",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La superficie du terrain est incorrect",
                     "label" =>[
@@ -131,9 +151,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "nbrPiece"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-nbrPiece",
-                    "class"=>"form-input",
-                    "placeholder"=>"Nombre de piece",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La nombre de piece est incorrect",
                     "label" =>[
@@ -146,9 +168,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "nbrChambre"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-nbrChambre",
-                    "class"=>"form-input",
-                    "placeholder"=>"Nombre de chambre",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La nombre de piece est incorrect",
                     "label" =>[
@@ -161,9 +185,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "ville"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-ville",
-                    "class"=>"form-input",
-                    "placeholder"=>"Ville",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La ville est incorrect",
                     "label" =>[
@@ -176,9 +202,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "rue"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-rue",
-                    "class"=>"form-input",
-                    "placeholder"=>"Rue",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La rue est incorrect",
                     "label" =>[
@@ -191,9 +219,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "departement"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-departement",
-                    "class"=>"form-input",
-                    "placeholder"=>"Département",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Le departement est incorrect",
                     "label" =>[
@@ -206,9 +236,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "regions"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-regions",
-                    "class"=>"form-input",
-                    "placeholder"=>"Régions",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La régions est incorrect",
                     "label" =>[
@@ -222,9 +254,10 @@ class Annonce extends Validator
                 ],
                 "description"=>[
                     "balise"=>"textarea",
+                    "rows" => "5",
                     "id"=>"type-form-description",
-                    "class"=>"form-input",
-                    "placeholder"=>"Description",
+                    "class"=>"custom-textarea",
+                    "placeholder"=>"",
                     "error"=>"La description est incorrect",
                     "label" =>[
                         "for" => "Type-form-description",
@@ -246,45 +279,58 @@ class Annonce extends Validator
             "config"=>[
                 "method"=>$this->method,
                 "action"=>"",
-                "id"=>"",
-                "class"=>"form-updatde",
+                "id"=>"update-annonce-form",
+                "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"",
-                "submit"=>["Modifier le type d'annonce","Annuler"],
+                "submit"=>["Modifier l'annonce"],
+                "reset"=>"Annuler",
+            ],
+            "submit"=>[
+                "Modifier l'annonce" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
+            ],
+            "reset"=>[
+                "Annuler" => [
+                    "id" => "",
+                    "class" => "btn app-btn-primary m-2"
+                ],
             ],
             "divs"=>[
                 "div-titre" =>[
                     "id" => "div-titre",
-                    "class" => "div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["titre","id"]
                 ],
                 "div-prix-type" =>[
                     "id" => "div-prix-type",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["prix","id_type"]
                 ],
                 "div-superficie-maison-terrain" =>[
                     "id" => "div-superficie-maison-terrain",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["superficieMaison","superficieTerrain"]
                 ],
                 "div-nombre-piece-chambre" =>[
                     "id" => "div-nombre-piece-chambre",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["nbrPiece","nbrChambre"]
                 ],
                 "div-ville-rue" =>[
                     "id" => "div-ville-rue",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["ville","rue"]
                 ],
                 "div-departement-regions" =>[
                     "id" => "div-departement-regions",
-                    "class" => "div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["departement","regions"]
                 ],
                 "div-departement-description" =>[
                     "id" => "div-description",
-                    "class" => "div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["description"]
                 ],
             ],
@@ -301,8 +347,8 @@ class Annonce extends Validator
                 ],
                 "titre"=>[
                     "id"=>"type-form-titre",
-                    "class"=>"form-input",
-                    "placeholder"=>"Titre de l'annonce",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Le titre d'annonce est incorrect",
                     "label" =>[
@@ -315,9 +361,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "prix"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-prix",
-                    "class"=>"form-input",
-                    "placeholder"=>"Prix de l'annonce",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"Le prix d'annonce est incorrect",
                     "label" =>[
@@ -330,9 +378,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "id_type"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "balise" => "select",
                     "id"=>"type-form-id-type",
-                    "class"=>"form-input",
+                    "class"=>"form-select",
                     "error"=>"Le type d'annonce est incorrect",
                     "label" =>[
                         "for" => "Type-form-id-type",
@@ -344,9 +394,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "superficieMaison"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-superficieMaison",
-                    "class"=>"form-input",
-                    "placeholder"=>"superficie du bien",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La superficie de la maison est incorrect",
                     "label" =>[
@@ -359,9 +411,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "superficieTerrain"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-superficieTerrain",
-                    "class"=>"form-input",
-                    "placeholder"=>"superficie du bien",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La superficie du terrain est incorrect",
                     "label" =>[
@@ -374,9 +428,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "nbrPiece"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-nbrPiece",
-                    "class"=>"form-input",
-                    "placeholder"=>"Nombre de piece",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La nombre de piece est incorrect",
                     "label" =>[
@@ -389,9 +445,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "nbrChambre"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-nbrChambre",
-                    "class"=>"form-input",
-                    "placeholder"=>"Nombre de chambre",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"number",
                     "error"=>"La nombre de piece est incorrect",
                     "label" =>[
@@ -404,9 +462,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "ville"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-ville",
-                    "class"=>"form-input",
-                    "placeholder"=>"Ville",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La ville est incorrect",
                     "label" =>[
@@ -419,9 +479,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "rue"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-rue",
-                    "class"=>"form-input",
-                    "placeholder"=>"Rue",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La rue est incorrect",
                     "label" =>[
@@ -434,9 +496,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "departement"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-departement",
-                    "class"=>"form-input",
-                    "placeholder"=>"Département",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Le departement est incorrect",
                     "label" =>[
@@ -449,9 +513,11 @@ class Annonce extends Validator
                     "required"=>true
                 ],
                 "regions"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"type-form-regions",
-                    "class"=>"form-input",
-                    "placeholder"=>"Régions",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La régions est incorrect",
                     "label" =>[
@@ -465,9 +531,10 @@ class Annonce extends Validator
                 ],
                 "description"=>[
                     "balise"=>"textarea",
+                    "rows" => "5",
                     "id"=>"type-form-description",
-                    "class"=>"form-input",
-                    "placeholder"=>"Description",
+                    "class"=>"custom-textarea",
+                    "placeholder"=>"",
                     "error"=>"La description est incorrect",
                     "label" =>[
                         "for" => "Type-form-description",
@@ -492,7 +559,13 @@ class Annonce extends Validator
                 "id"=>"",
                 "class"=>"form-delete",
                 "enctype"=>"",
-                "submit"=>["Supprimer","Annuler"],
+                "submit"=>["Supprimer"],
+            ],
+            "submit"=>[
+                "Supprimer" => [
+                    "id" => "",
+                    "class" => "btn btn-danger m-2 text-white"
+                ],
             ],
             "divs"=>[
                 "div-form" =>[
@@ -516,9 +589,114 @@ class Annonce extends Validator
         return $this->config;
     }
 
-    function getOptionFromSelect($table){
+    public function getConfigAddPhoto(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Ajouter les photos","Annuler"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["photo","idAnnonce","operation"]
+                ],
+                "div-preview" => [
+                    "id" => "div-preview",
+                    "class" => "preview",
+                    "inside" => []
+                ]
+            ],
 
+            "inputs"=>[
+                "idAnnonce"=>[
+                    "id"=>"id-annonce-add",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "photo"=>[
+                    "id" => "type-form-photo",
+                    "class"=>"form-input",
+                    "placeholder"=>"Ajouter des photo a l'annonce",
+                    "type"=>"file",
+                    "error"=>"La photo est incorrect incorrect",
+                    "label" =>[
+                        "for" => "type-form-photo",
+                        "id" => "label-Type-form-photo",
+                        "class" => "form-label",
+                        "value" => "Sélectionner des images à uploader (PNG, JPG)"
+                    ],
+                    "value"=>"",
+                    "required"=>true,
+                    "multiple"=>true,
+                    "accept"=>".jpg, .jpeg, .png"
 
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"addPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+            ]
+        ];
+        return $this->config;
+
+    }
+
+    public function getConfigDelPhoto(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Supprimer la photo"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["id", "operation"]
+                ]
+            ],
+
+            "inputs"=>[
+                "id"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"delPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+            ]
+        ];
+        return $this->config;
 
     }
 }

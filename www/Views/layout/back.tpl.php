@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin · Moving house</title>
   <meta name="description" content="Admin · Moving House">
-  <link rel="stylesheet" href="../../asset/css/style.css">
-  <link rel="stylesheet" href="../../asset/css/bootstrap.css">
-  <link rel="stylesheet" href="../../asset/css/back-bootstrap.css">
-  <link rel="icon" href="../../asset/images/logo.png">
+  <link rel="stylesheet" href="../../asset/back-template/css/style.css">
+  <link rel="stylesheet" href="../../asset/back-template/css/back-bootstrap.css">
+  <link href="../../asset/back-template/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="icon" href="../../asset/back-template/images/logo.png">
 </head>
 
 <body class="app">
@@ -23,26 +24,10 @@
               <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
 					    </a>
-				    </div>
-            <!-- <div class="search-mobile-trigger d-sm-none col">
-              <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
-            </div>
-		        <div class="app-search-box col">
-              <form class="app-search-form">   
-							  <input type="text" placeholder="Search..." name="search" class="form-control search-input">
-                <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
-              </form>
-            </div> -->
-		          
+				    </div>     
             <div class="app-utilities col-auto">
               <div class="app-utility-item app-notifications-dropdown dropdown">    
-                <!-- <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
-                  <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                </svg>
-                <span class="icon-badge">3</span>
-                </a> -->
+
 
                 <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                   <div class="dropdown-menu-header p-3">
@@ -52,7 +37,7 @@
                     <div class="item p-3">
                       <div class="row gx-2 justify-content-between align-items-center">
                         <div class="col-auto">
-                          <img class="profile-image" src="../../asset/images/profiles/profile-1.png" alt="">
+                          <img class="profile-image" src="../../asset/back-template/images/profiles/profile-1.png" alt="">
                         </div>
                         <div class="col">
 										        <div class="info"> 
@@ -103,7 +88,7 @@
 							        <div class="item p-3">
                         <div class="row gx-2 justify-content-between align-items-center">
 									        <div class="col-auto">
-										       <img class="profile-image" src="../../asset/images/profiles/profile-2.png" alt="">
+										       <img class="profile-image" src="../../asset/back-template/images/profiles/profile-2.png" alt="">
 									        </div>
 									        <div class="col">
 										        <div class="info"> 
@@ -133,7 +118,7 @@
 					      </div>
 			            
                 <div class="app-utility-item app-user-dropdown dropdown">
-                  <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="../../asset/images/user.png" alt="user profile"></a>
+                  <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="../../asset/back-template/images/user.png" alt="user profile"></a>
                   <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                     <li><a class="dropdown-item" href="account.html">Account</a></li>
                     <li><a class="dropdown-item" href="settings.html">Settings</a></li>
@@ -152,7 +137,7 @@
 	      <div class="sidepanel-inner d-flex flex-column">
 		      <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		      <div class="app-branding">
-		        <a class="app-logo" href="/back"><img class="logo-icon me-2" src="../../asset/images/app-logo.svg" alt="logo"><span class="logo-text">ADMIN</span></a>
+		        <a class="app-logo" href="/back"><img class="logo-icon me-2" src="../../asset/back-template/images/app-logo.svg" alt="logo"><span class="logo-text">ADMIN</span></a>
 	        </div>
 		        
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
@@ -188,6 +173,8 @@
                     <li class="submenu-item"><a class="submenu-link" href="/back/annonce">Annonce</a></li>
                     <li class="submenu-item"><a class="submenu-link" href="/back/type">Type annonce</a></li>
                     <li class="submenu-item"><a class="submenu-link" href="/back/user">Liste des utilisateurs</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/agent">Liste des agents</a></li>
+                    <li class="submenu-item"><a class="submenu-link" href="/back/status">Liste des Status</a></li>
                   </ul>
                 </div>
 					    </li>    
@@ -209,14 +196,13 @@
                   </a>
 						    </li>
 						    <li class="nav-item">
-                  <a class="nav-link" href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">
+                  <a class="nav-link" href="/">
                     <span class="nav-icon">
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
-                        <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                      <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </svg>
                     </span>
-                    <span class="nav-link-text">License</span>
+                    <span class="nav-link-text">Revenir sur le site</span>
                   </a>
 						    </li>
 					    </ul>
@@ -253,8 +239,8 @@
    
 
   <!-- Javascript -->          
-    <script src="../../asset/js/popper.min.js"></script>
-    <script src="../../asset/js/bootstrap.js"></script>  
+    <script src="../../asset/back-template/js/popper.min.js"></script>
+    <script src="../../asset/back-template/js/bootstrap.js"></script>  
 
 </body>
 </html>

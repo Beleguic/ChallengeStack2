@@ -15,12 +15,19 @@ class Register extends Validator
                     "id"=>"register-form",
                     "class"=>"form",
                     "enctype"=>"",
-                    "submit"=>["Nous rejoindre"]
+                    "submit"=>["Nous rejoindre"],
+                    "reset"=>"Annuler"
                 ],
                 "submit"=>[
                     "Nous rejoindre" => [
                         "id" => "",
-                        "class" => "btn btn-outline-primary btn-block mb-4 mt-4"
+                        "class" => "btn btn-outline-b-n btn-block m-4 w-25"
+                    ],
+                ],
+                "reset"=>[
+                    "Annuler" => [
+                        "id" => "",
+                        "class" => "btn btn-outline-b-n btn-block m-4 w-25"
                     ],
                 ],
                 "divs"=>[
@@ -43,7 +50,7 @@ class Register extends Validator
                 "inputs"=>[
                     "firstname"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6 mb-3 mb-md-0",
                         "id"=>"register-form-firstname",
                         "class"=>"form-control",
                         "placeholder"=>"Votre prénom",
@@ -55,14 +62,14 @@ class Register extends Validator
                             
                             "for" => "register-form-firstname",
                             "id" => "label-register-form-firstname",
-                            "class" => "form-label",
+                            "class" => "form-label color-a",
                             "value" => "Prenom"
                         ],
                         "required"=>true
                     ],
                     "lastname"=>[
                         "divId"=>"",
-                        "divClass"=>"col",
+                        "divClass"=>"col-md-6",
                         "id"=>"register-form-lastname",
                         "class"=>"form-control",
                         "placeholder"=>"Votre nom",
@@ -73,7 +80,7 @@ class Register extends Validator
                         "label" =>[
                             "for" => "register-form-lastname",
                             "id" => "label-register-form-lastname",
-                            "class" => "form-label",
+                            "class" => "form-label  color-a",
                             "value" => "Nom"
                         ],
                         "required"=>true
@@ -88,7 +95,7 @@ class Register extends Validator
                             "balise" => "label",
                             "for" => "register-form-email",
                             "id" => "label-register-form-email",
-                            "class" => "form-label",
+                            "class" => "form-label  color-a",
                             "value" => "Adresse mail"
                         ],
                         "required"=>true
@@ -103,7 +110,7 @@ class Register extends Validator
                             "balise" => "label",
                             "for" => "register-form-pwd",
                             "id" => "label-register-form-pwd",
-                            "class" => "form-label",
+                            "class" => "form-label  color-a",
                             "value" => "Mot de passe"
                         ],
                         "required"=>true
@@ -111,7 +118,7 @@ class Register extends Validator
                     "pwdConfirm"=>[
                         "id"=>"register-form-pwd-confirm",
                         "class"=>"form-control",
-                        "placeholder"=>"Confirmation",
+                        "placeholder"=>"Confirmation du mot de passe",
                         "type"=>"password",
                         "error"=>"Votre mot de passe de confirmation ne correspond pas",
                         "required"=>true,
@@ -119,7 +126,7 @@ class Register extends Validator
                             "balise" => "label",
                             "for" => "register-form-pwd-confirm",
                             "id" => "label-register-form-pwd-confirm",
-                            "class" => "form-label pt-3",
+                            "class" => "form-label color-a pt-3",
                             "value" => "Confirmation du mot de passe"
                         ],
                         "confirm"=>"pwd"
@@ -136,21 +143,49 @@ class Register extends Validator
                     "method"=>$this->method,
                     "action"=>"",
                     "id"=>"register-form",
-                    "class"=>"form",
+                    "class"=>"app-card app-card-settings shadow-sm p-4",
                     "enctype"=>"",
-                    "submit"=>["Modifier les informations", "Annuler"]
+                    "submit"=>["Modifier les informations"],
+                    "reset"=>"Annuler"
+                ],
+                "submit"=>[
+                    "Modifier les informations" => [
+                        "id" => "",
+                        "class" => "btn app-btn-primary m-2"
+                    ],
+                ],
+                "reset"=>[
+                    "Annuler" => [
+                        "id" => "",
+                        "class" => "btn app-btn-primary m-2"
+                    ],
                 ],
                 "divs"=>[
-                    "div-firstname-lastname" =>[
-                        "id" => "div-register-firstname-lastname",
-                        "class" => "div-form-50",
-                        "inside" => ["firstname","lastname", "id"]
+                    "div-firstname" =>[
+                        "id" => "div-register-update-firstname",
+                        "class" => "row pb-4",
+                        "inside" => ["firstname"]
+                    ],
+                    "div-lastname" =>[
+                        "id" => "div-register-update-lastname",
+                        "class" => "pb-4",
+                        "inside" => ["lastname"]
+                    ],
+                    "div-status" =>[
+                        "id" => "div-register-update-status",
+                        "class" => "pb-4",
+                        "inside" => ["status"]
+                    ],
+                    "div-id" =>[
+                        "id" => "div-register-update-id",
+                        "class" => "pb-4",
+                        "inside" => ["id"]
                     ],
                 ],
                 "inputs"=>[
                     "firstname"=>[
                         "id"=>"register-form-firstname",
-                        "class"=>"form-input",
+                        "class"=>"custom-input",
                         "placeholder"=>"Votre prénom",
                         "type"=>"text",
                         "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
@@ -159,14 +194,14 @@ class Register extends Validator
                         "label" =>[
                             "for" => "register-form-firstname",
                             "id" => "label-register-form-firstname",
-                            "class" => "form-label",
+                            "class" => "form-label  color-a",
                             "value" => "Prenom"
                         ],
                         "required"=>true
                     ],
                     "lastname"=>[
                         "id"=>"register-form-lastname",
-                        "class"=>"form-input",
+                        "class"=>"custom-input",
                         "placeholder"=>"Votre nom",
                         "type"=>"text",
                         "error"=>"Votre nom doit faire entre 2 et 120 caractères",
@@ -175,9 +210,23 @@ class Register extends Validator
                         "label" =>[
                             "for" => "register-form-lastname",
                             "id" => "label-register-form-lastname",
-                            "class" => "form-label",
+                            "class" => "form-label  color-a",
                             "value" => "Nom"
                         ],
+                        "required"=>true
+                    ],
+                    "status"=>[
+                        "balise" => "select",
+                        "id"=>"type-form-status",
+                        "class"=>"form-select",
+                        "error"=>"Le status de l'utilisateur est incorrect",
+                        "label" =>[
+                            "for" => "Type-form-select",
+                            "id" => "label-Type-form-select",
+                            "class" => "form-label  color-a",
+                            "value" => "Status de l'utilisateur"
+                        ],
+                        "value"=>"statusList",
                         "required"=>true
                     ],
                     "id"=>[
@@ -203,7 +252,13 @@ class Register extends Validator
                     "id"=>"register-form",
                     "class"=>"form",
                     "enctype"=>"",
-                    "submit"=>["Supprimer", "Annuler"]
+                    "submit"=>["Supprimer"]
+                ],
+                "submit"=>[
+                    "Supprimer" => [
+                        "id" => "",
+                        "class" => "btn btn-danger m-2"
+                    ],
                 ],
                 "divs"=>[
                     "div-firstname-lastname" =>[
