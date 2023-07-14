@@ -1,107 +1,580 @@
-<div class="container">
-  <h1 class="text-center m-0">Welcome to Home Page</h1>
-  <h2 class="text-center py-3 m-0">Liste des annonces</h2>
-  <div class="row row-cols-1 row-cols-lg-2 g-4">
-    <div class="col-12 col-lg-6">
-      <div class="card h-100">
-        <img src="../../asset/images/annonces/appartement.jpg" class="card-img-top custom-img-height" alt="Appartement">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <h5 class="card-title">Appartement</h5>
-            </div>
-            <div class="col-6">
-              <h5 class="card-title text-end">1249€ /mois</h5>
-            </div>
-          </div>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi labore totam, numquam ullam accusantium cum odit rem saepe accusamus expedita itaque. Temporibus debitis amet doloremque qui quaerat cupiditate exercitationem aliquam?</p>
-          <div class="row">
-            <div class="col-12 col-md-4">
-            <a href="/annonce/Annonce 1" class="btn btn-dark text-light">Voir l'annonce</a>
-            </div>
-            <div class="col-4">
-            <a class="btn btn-danger text-light favorite-button" dataAnnonce='54de3091-56c8-49f0-ad52-52671d16aa2c'>Ajouter au favoris</a>
-            </div>
-            <div class="col-4">
-            <a href="#" class="btn btn-info text-light">Envoyer un message</a>
+<!-- ======= Intro Section ======= -->
+<div class="intro intro-carousel swiper position-relative">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(../../asset/front-template/img/slide-1.jpg)">
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-title-top">Doral, Florida
+                    <br> 78345
+                  </p>
+                  <h1 class="intro-title mb-4 ">
+                    <span class="color-b">204 </span> Mount
+                    <br> Olive Road Two
+                  </h1>
+                  <p class="intro-subtitle intro-price">
+                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="col-12 col-lg-6">
-      <div class="card h-100">
-        <img src="../../asset/images/annonces/maison.jpg" class="card-img-top custom-img-height" alt="Maison">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <h5 class="card-title">Maison</h5>
-            </div>
-            <div class="col-6">
-              <h5 class="card-title text-end">2109€ /mois</h5>
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(../../asset/front-template/img/slide-2.jpg)">
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-title-top">Doral, Florida
+                    <br> 78345
+                  </p>
+                  <h1 class="intro-title mb-4">
+                    <span class="color-b">204 </span> Rino
+                    <br> Venda Road Five
+                  </h1>
+                  <p class="intro-subtitle intro-price">
+                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi labore totam, numquam ullam accusantium cum odit rem saepe accusamus expedita itaque. Temporibus debitis amet doloremque qui quaerat cupiditate exercitationem aliquam?</p>
         </div>
       </div>
     </div>
-    
-    <div class="col-12 col-lg-6">
-      <div class="card h-100">
-        <img src="../../asset/images/annonces/parking.jpg" class="card-img-top custom-img-height" alt="Parking">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <h5 class="card-title">Parking</h5>
-            </div>
-            <div class="col-6">
-              <h5 class="card-title text-end">78€ /mois</h5>
-            </div>
-          </div>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi labore totam, numquam ullam accusantium cum odit rem saepe accusamus expedita itaque. Temporibus debitis amet doloremque qui quaerat cupiditate exercitationem aliquam?</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-12 col-lg-6">
-      <div class="card h-100">
-        <img src="../../asset/images/annonces/chateau.jpg" class="card-img-top custom-img-height" alt="Chateau">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <h5 class="card-title">Chateau</h5>
-            </div>
-            <div class="col-6">
-              <h5 class="card-title text-end">22049€ /mois</h5>
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(../../asset/front-template/img/slide-3.jpg)">
+      <div class="overlay overlay-a"></div>
+      <div class="intro-content display-table">
+        <div class="table-cell">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="intro-body">
+                  <p class="intro-title-top">Doral, Florida
+                    <br> 78345
+                  </p>
+                  <h1 class="intro-title mb-4">
+                    <span class="color-b">204 </span> Alira
+                    <br> Roan Road One
+                  </h1>
+                  <p class="intro-subtitle intro-price">
+                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi labore totam, numquam ullam accusantium cum odit rem saepe accusamus expedita itaque. Temporibus debitis amet doloremque qui quaerat cupiditate exercitationem aliquam?</p>
         </div>
       </div>
     </div>
   </div>
+  <div class="swiper-pagination"></div>
+</div><!-- End Intro Section -->
 
-  <script type="text/javascript">
-    
+<!-- ======= Services Section ======= -->
+<section class="section-services section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Our Services</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="bi bi-cart"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Lifestyle</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c">
+              Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
+              convallis a pellentesque
+              nec, egestas non nisi.
+            </p>
+          </div>
+          <div class="card-footer-c">
+            <a href="#" class="link-c link-icon">Read more
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="bi bi-calendar4-week"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Loans</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c">
+              Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Mauris blandit
+              aliquet elit, eget tincidunt
+              nibh pulvinar a.
+            </p>
+          </div>
+          <div class="card-footer-c">
+            <a href="#" class="link-c link-icon">Read more
+              <span class="bi bi-calendar4-week"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-c foo">
+          <div class="card-header-c d-flex">
+            <div class="card-box-ico">
+              <span class="bi bi-card-checklist"></span>
+            </div>
+            <div class="card-title-c align-self-center">
+              <h2 class="title-c">Sell</h2>
+            </div>
+          </div>
+          <div class="card-body-c">
+            <p class="content-c">
+              Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
+              convallis a pellentesque
+              nec, egestas non nisi.
+            </p>
+          </div>
+          <div class="card-footer-c">
+            <a href="#" class="link-c link-icon">Read more
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Services Section -->
 
-    $('.favorite-button').click(function() {
-      $(this).toggleClass('active');
-      if ($(this).hasClass('active')) {
-        // favori : Oui
-        this.textContent = "Enlever des favoris";
-        $.get("/favori-add", { id_annonce: this.attributes.dataAnnonce.value });
-        
-      } else {
-        // favori : Non
-        
-        this.textContent = "Ajouter au favoris";
-        $.get("/favori-del", { id_annonce: this.attributes.dataAnnonce.value });
-      }
-      
-    });
 
+<!-- ======= Latest Properties Section ======= -->
+<section class="section-property section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Latest Properties</h2>
+          </div>
+          <div class="title-link">
+            <a href="property-grid.html">All Property
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </script>
-</div>
+    <div id="property-carousel" class="swiper">
+      <div class="swiper-wrapper">
 
+        <div class="carousel-item-b swiper-slide">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="../../asset/front-template/img/property-6.jpg" alt="" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="property-single.html">206 Mount
+                      <br /> Olive Road Two</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">rent | $ 12.000</span>
+                  </div>
+                  <a href="#" class="link-a">Click here to view
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+                <div class="card-footer-a">
+                  <ul class="card-info d-flex justify-content-around">
+                    <li>
+                      <h4 class="card-info-title">Area</h4>
+                      <span>340m
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Beds</h4>
+                      <span>2</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Baths</h4>
+                      <span>4</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Garages</h4>
+                      <span>1</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End carousel item -->
+
+        <div class="carousel-item-b swiper-slide">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="../../asset/front-template/img/property-3.jpg" alt="" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="property-single.html">157 West
+                      <br /> Central Park</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">rent | $ 12.000</span>
+                  </div>
+                  <a href="property-single.html" class="link-a">Click here to view
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+                <div class="card-footer-a">
+                  <ul class="card-info d-flex justify-content-around">
+                    <li>
+                      <h4 class="card-info-title">Area</h4>
+                      <span>340m
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Beds</h4>
+                      <span>2</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Baths</h4>
+                      <span>4</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Garages</h4>
+                      <span>1</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End carousel item -->
+
+        <div class="carousel-item-b swiper-slide">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="../../asset/front-template/img/property-7.jpg" alt="" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="property-single.html">245 Azabu
+                      <br /> Nishi Park let</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">rent | $ 12.000</span>
+                  </div>
+                  <a href="property-single.html" class="link-a">Click here to view
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+                <div class="card-footer-a">
+                  <ul class="card-info d-flex justify-content-around">
+                    <li>
+                      <h4 class="card-info-title">Area</h4>
+                      <span>340m
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Beds</h4>
+                      <span>2</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Baths</h4>
+                      <span>4</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Garages</h4>
+                      <span>1</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End carousel item -->
+
+        <div class="carousel-item-b swiper-slide">
+          <div class="card-box-a card-shadow">
+            <div class="img-box-a">
+              <img src="../../asset/front-template/img/property-10.jpg" alt="" class="img-a img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-overlay-a-content">
+                <div class="card-header-a">
+                  <h2 class="card-title-a">
+                    <a href="property-single.html">204 Montal
+                      <br /> South Bela Two</a>
+                  </h2>
+                </div>
+                <div class="card-body-a">
+                  <div class="price-box d-flex">
+                    <span class="price-a">rent | $ 12.000</span>
+                  </div>
+                  <a href="property-single.html" class="link-a">Click here to view
+                    <span class="bi bi-chevron-right"></span>
+                  </a>
+                </div>
+                <div class="card-footer-a">
+                  <ul class="card-info d-flex justify-content-around">
+                    <li>
+                      <h4 class="card-info-title">Area</h4>
+                      <span>340m
+                        <sup>2</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Beds</h4>
+                      <span>2</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Baths</h4>
+                      <span>4</span>
+                    </li>
+                    <li>
+                      <h4 class="card-info-title">Garages</h4>
+                      <span>1</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- End carousel item -->
+      </div>
+    </div>
+    <div class="propery-carousel-pagination carousel-pagination"></div>
+
+  </div>
+</section><!-- End Latest Properties Section -->
+
+<!-- ======= Agents Section ======= -->
+<section class="section-agents section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Best Agents</h2>
+          </div>
+          <div class="title-link">
+            <a href="agents-grid.html">All Agents
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card-box-d">
+          <div class="card-img-d">
+            <img src="../../asset/front-template/img/agent-4.jpg" alt="" class="img-d img-fluid">
+          </div>
+          <div class="card-overlay card-overlay-hover">
+            <div class="card-header-d">
+              <div class="card-title-d align-self-center">
+                <h3 class="title-d">
+                  <a href="agent-single.html" class="link-two">Margaret Sotillo
+                    <br> Escala</a>
+                </h3>
+              </div>
+            </div>
+            <div class="card-body-d">
+              <p class="content-d color-text-a">
+                Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
+              </p>
+              <div class="info-agents color-a">
+                <p>
+                  <strong>Phone: </strong> +54 356 945234
+                </p>
+                <p>
+                  <strong>Email: </strong> agents@example.com
+                </p>
+              </div>
+            </div>
+            <div class="card-footer-d">
+              <div class="socials-footer d-flex justify-content-center">
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-facebook" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-instagram" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-linkedin" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-d">
+          <div class="card-img-d">
+            <img src="../../asset/front-template/img/agent-1.jpg" alt="" class="img-d img-fluid">
+          </div>
+          <div class="card-overlay card-overlay-hover">
+            <div class="card-header-d">
+              <div class="card-title-d align-self-center">
+                <h3 class="title-d">
+                  <a href="agent-single.html" class="link-two">Stiven Spilver
+                    <br> Darw</a>
+                </h3>
+              </div>
+            </div>
+            <div class="card-body-d">
+              <p class="content-d color-text-a">
+                Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
+              </p>
+              <div class="info-agents color-a">
+                <p>
+                  <strong>Phone: </strong> +54 356 945234
+                </p>
+                <p>
+                  <strong>Email: </strong> agents@example.com
+                </p>
+              </div>
+            </div>
+            <div class="card-footer-d">
+              <div class="socials-footer d-flex justify-content-center">
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-facebook" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-instagram" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-linkedin" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-box-d">
+          <div class="card-img-d">
+            <img src="../../asset/front-template/img/agent-5.jpg" alt="" class="img-d img-fluid">
+          </div>
+          <div class="card-overlay card-overlay-hover">
+            <div class="card-header-d">
+              <div class="card-title-d align-self-center">
+                <h3 class="title-d">
+                  <a href="agent-single.html" class="link-two">Emma Toledo
+                    <br> Cascada</a>
+                </h3>
+              </div>
+            </div>
+            <div class="card-body-d">
+              <p class="content-d color-text-a">
+                Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
+              </p>
+              <div class="info-agents color-a">
+                <p>
+                  <strong>Phone: </strong> +54 356 945234
+                </p>
+                <p>
+                  <strong>Email: </strong> agents@example.com
+                </p>
+              </div>
+            </div>
+            <div class="card-footer-d">
+              <div class="socials-footer d-flex justify-content-center">
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-facebook" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-instagram" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#" class="link-one">
+                      <i class="bi bi-linkedin" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Agents Section -->

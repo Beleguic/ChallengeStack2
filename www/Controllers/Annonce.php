@@ -357,4 +357,19 @@ class Annonce extends Controller
 
     }
 
+    public function getAllBuyAnnonces(): String
+    {
+        $this->setView("Annonce/annonce-all-buy");
+        $this->setTemplate("front");
+        
+        return $this->render();
+    }
+
+    public function getAllRentAnnonces(): String
+    {
+        $this->setView("Annonce/annonce-all-rent");
+        $this->setTemplate("front");
+        
+        return $this->render();
+    }
 }
