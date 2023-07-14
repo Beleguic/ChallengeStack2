@@ -141,7 +141,7 @@ class Auth extends Controller
 
         $user = new User();
 
-        $this->assign("userList", $user->getAll());
+        $this->assign("userList", $user->getAllWhere(["status < 4"]));
         
         return $this->render();
 
