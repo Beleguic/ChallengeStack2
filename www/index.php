@@ -15,9 +15,13 @@
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
 
- if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
-        header('Location: /public/react/src/index.html');
     
+
+    if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
+        header('Location: /public/react/src/index.html');
+    }
+    else{
+        include "./config.php";
     }
     
     date_default_timezone_set("Europe/Paris");

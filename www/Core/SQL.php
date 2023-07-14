@@ -19,8 +19,15 @@ class SQL{
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
+
+        $host = $GLOBALS['config']['host'];
+        $dbname = $GLOBALS['config']['dbname'];
+        $port = $GLOBALS['config']['port'];
+        $user = $GLOBALS['config']['user'];
+        $password = $GLOBALS['config']['password'];
+
         try {
-            $this->pdo = new \PDO("pgsql:host=db.bpuhpyzfldoarlwgwxkz.supabase.co;dbname=postgres;port=5432", "postgres", "zdS2TmaWFhb4fgmo");
+            $this->pdo = new \PDO("pgsql:host=".$host.";dbname=".$dbname.";port=".$port, $user, $password);
         } catch(\Exception $e) {
             die("Erreur SQL : ".$e->getMessage());
         }
