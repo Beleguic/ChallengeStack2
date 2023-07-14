@@ -27,6 +27,7 @@ class Validator
             die("Tentative de Hack1");
         }
         //Le nb de inputs3
+        var_dump($this->config["inputs"]);
         if(count($this->config["inputs"])+1 != count($this->data)){
             die("Tentative de Hack2");
         }

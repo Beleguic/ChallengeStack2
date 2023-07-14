@@ -253,49 +253,65 @@ class Annonce extends Controller
         $this->setTemplate("back");
 
         $photo = new Photo();
-        $photoFrom = new AnnonceForm();
-        $this->assign('formAddPhoto', $photoFrom->getConfigAddPhoto());
+        $photoFromAdd = new AnnonceForm();
+        $photoFromDel = new AnnonceForm();
+        $this->assign('formAddPhoto', $photoFromAdd->getConfigAddPhoto());
         $this->assign("idAnnonce", ['idAnnonce' => $_GET['idAnnonce']]);
-        $this->assign('imageList', $photo->getAll());
+        $this->assign('imageList', $photo->getAllWhere(["id_annonce = '".$_GET['idAnnonce']."'"]));
+        $this->assign('formDelPhoto', $photoFromDel->getConfigDelPhoto());
 
-        if($photoFrom->isSubmited() && $photoFrom->isValid()){
 
-            $error=array();
-            $extension=array("jpeg","jpg","png");
-            foreach($_FILES["photo"]["tmp_name"] as $key=>$tmp_name) {
-                $file_name_new = sha1(uniqid());
-                $file_name=$_FILES["photo"]["name"][$key];
-                $file_tmp=$_FILES["photo"]["tmp_name"][$key];
-                $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-                $path = 'asset/data/'.$file_name_new.'.'.$ext;
-                if(in_array($ext,$extension)) {
-                    if(!file_exists($path)) {
-                        if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
-                            // Ajout BDD
-                            $photo = new Photo();
-                            $photo->setIdAnnonce($_POST['idAnnonce']);
-                            $photo->setLinkPhoto($path);
-                            $photo->setDescription("");
-                            $photo->save();
+        if(isset($_POST['operation'])){
+            if($_POST['operation'] == "delPhoto" && $photoFromDel->isSubmited() && $photoFromDel->isValid()){
+                $photo = new photo();
+                $photo = $photo->populate($_POST['id']);
+                if(file_exists($photo->getLinkPhoto())){
+                    unlink($photo->getLinkPhoto());
+                }
+                $photo->save('del');  
+            }
+
+
+            if($_POST['operation'] == "addPhoto" && $photoFromAdd->isSubmited() && $photoFromAdd->isValid()){
+
+                $error=array();
+                $extension=array("jpeg","jpg","png");
+                foreach($_FILES["photo"]["tmp_name"] as $key=>$tmp_name) {
+                    $file_name_new = sha1(uniqid());
+                    $file_name=$_FILES["photo"]["name"][$key];
+                    $file_tmp=$_FILES["photo"]["tmp_name"][$key];
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                    $path = 'asset/data/'.$file_name_new.'.'.$ext;
+                    if(in_array($ext,$extension)) {
+                        if(!file_exists($path)) {
+                            if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                                // Ajout BDD
+                                $photo = new Photo();
+                                $photo->setIdAnnonce($_POST['idAnnonce']);
+                                $photo->setLinkPhoto($path);
+                                $photo->setDescription("");
+                                $photo->save();
+                            }
+                        }
+                        else {
+                            $filename=basename($file_name,$ext);
+                            $path='asset/data/'.$filename.time().".".$ext;
+                            if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                                // Ajout BDD
+                                $photo = new Photo();
+                                $photo->setIdAnnonce($_POST['idAnnonce']);
+                                $photo->setLinkPhoto($path);
+                                $photo->setDescription("");
+                                $photo->save();
+                            }
                         }
                     }
                     else {
-                        $filename=basename($file_name,$ext);
-                        $path='asset/data/'.$filename.time().".".$ext;
-                        if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
-                            // Ajout BDD
-                            $photo = new Photo();
-                            $photo->setIdAnnonce($_POST['id_annonce']);
-                            $photo->setLinkPhoto($path);
-                            $photo->setDescription("");
-                            $photo->save();
-                        }
+                        array_push($error,"$file_name, ");
                     }
                 }
-                else {
-                    array_push($error,"$file_name, ");
-                }
             }
+            header("location: /back/add-photo-annonce?idAnnonce=".$_GET['idAnnonce']);
         }
 
         return $this->render();

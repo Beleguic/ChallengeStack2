@@ -531,7 +531,7 @@ class Annonce extends Validator
                 "div-photo" =>[
                     "id" => "div-photo",
                     "class" => "div-form-100",
-                    "inside" => ["photo","idAnnonce"]
+                    "inside" => ["photo","idAnnonce","operation"]
                 ],
                 "div-preview" => [
                     "id" => "div-preview",
@@ -567,6 +567,59 @@ class Annonce extends Validator
                     "multiple"=>true,
                     "accept"=>".jpg, .jpeg, .png"
 
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"addPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+            ]
+        ];
+        return $this->config;
+
+    }
+
+    public function getConfigDelPhoto(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Supprimer la photo"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["id", "operation"]
+                ]
+            ],
+
+            "inputs"=>[
+                "id"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"delPhoto",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
             ]
         ];

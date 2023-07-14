@@ -98,7 +98,7 @@ class SQL{
         return $queryPrepared;
     }
 
-    public function getAllWhere(array $where,array $order): object
+    public function getAllWhere(array $where,array $order=["id","ASC"]): object
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table." WHERE ".implode(" and ", $where)." ORDER BY ".implode(' ', $order).";");
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());

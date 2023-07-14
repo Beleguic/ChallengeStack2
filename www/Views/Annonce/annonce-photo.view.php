@@ -5,6 +5,8 @@
 
 <?php while ($row = $this->data['imageList']->fetch()): ?>
 	<img width="150" src="/<?=$row->getLinkPhoto() ?>">
+	<?php var_dump($row->getId()); ?>
+	<?php $this->partial("form", $this->data['formDelPhoto'], ['id' => $row->getId()]) ?>
 <?php endwhile; ?>	
 
 
