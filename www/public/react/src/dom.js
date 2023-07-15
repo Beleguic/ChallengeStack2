@@ -1,3 +1,8 @@
+const isEvent = k => k.startsWith('on');
+const eventName = k => k.toLowerCase().substring(2);
+const  isProperty = k => k != 'children';
+
+
 /**
  * Convertit un fiber en élément
  * @param {object} fiber 
@@ -11,20 +16,12 @@ export function createDom(fiber) {
     ? document.createTextNode(fiber.props.nodeValue) 
       : document.createElement(fiber.type);
   
-  Object.keys(fiber.props).forEach(name => {
-    if (name !== 'children'){
-      dom[name]=fiber.props[name]
-    }
-  })
-
-  
-
-  return dom
+    updateDom(dom, {}, fiber.props);
+ 
+    return dom;
 }
 
-const isEvent = k => k.startsWith('on');
-const eventName = k => k.toLowerCase().substring(2);
-const  isProperty = k => k != 'children';
+
 export function updateDom(dom, prevProps, nextProps) {
     //supprime les anciennes propriété
     Object.keys(prevProps)

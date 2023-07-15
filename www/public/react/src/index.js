@@ -5,7 +5,9 @@ import {createDom,updateDom} from './dom.js'
 let nextUnitOfWork = null;
 let wipRoot = null;
 let currentRoot = null; //valeur courante de notre arbre dom
-let deletions=[] //tableau des éléments a supprimer
+let deletions = [] //tableau des éléments a supprimer
+let hookIndex = null;
+let wipFiber = null;
 
 /**
  * Ajout la racine de travail en cours au niveau du dom
@@ -22,18 +24,31 @@ function commitWork(fiber) {
   if (!fiber) {
     return;
   }
-  const domParent = fiber.parent.dom
+  let domParentFiber = fiber.parent;
+  while (!domParentFiber.dom) {
+    domParentFiber = domParentFiber.parent;
+  }
+  const domParent = domParentFiber.dom;
   if (fiber.effectTag == 'PLACEMENT' && fiber.dom != null) {
     domParent.appendChild(fiber.dom);
   } else if (fiber.effectTag == 'DELETION') {
-    domParent.removeChild(fiber.dom)
+    commitDeletion(fiber, domParent);
     return
   } else if (fiber.effectTag == 'UPDATE' && fiber.dom != null) {
-    updateDom(fiber.dom,fiber.alternate.props,fiber.props)
+    updateDom(fiber.dom, fiber.alternate.props, fiber.props);
+    domParent.appendChild(fiber.dom);
   }
   
   commitWork(fiber.child);
   commitWork(fiber.sibling);
+}
+
+function commitDeletion(fiber, domParent) {
+  if (fiber.dom) {
+    domParent.removeChild(fiber.dom);
+  } else {
+    commitDeletion(fiber.child, domParent);
+  }
 }
 
 function render(element, container) {
@@ -80,15 +95,11 @@ requestIdleCallback(workLoop);
  */
 function performUnitOfWork(fiber) {
   
-  if (!fiber.dom) { //si pas d'élément qui correzpond dans mon dom,on convertit l'element avec createDom
-   
-    fiber.dom = createDom(fiber)
+  if (fiber.type instanceof Function) {
+    updateFunctionComponent(fiber) //quand on a à faire à un composant fonction
+  } else {
+    updateHostComponent(fiber)
   }
-
-  
-
-  const elements = fiber.props.children
-  reconcileChildren(fiber,elements)
   
 
   
@@ -106,6 +117,47 @@ function performUnitOfWork(fiber) {
   }
   
   return null;
+}
+
+
+function updateFunctionComponent(fiber) {
+  wipFiber = fiber;
+  hookIndex = 0;
+  wipFiber.hooks = [];
+  const children = [fiber.type(fiber.props)];
+  reconcileChildren(fiber,children)
+}
+
+function useState(initial) {
+  const oldHook = wipFiber.alternate && wipFiber.alternate.hooks && wipFiber.alternate.hooks[hookIndex];
+  const hook = {
+    state: oldHook ? oldHook.state : initial
+  }
+  wipFiber.hooks.push(hook)
+
+  const setState = state => {
+    hook.state = state;
+    render(currentRoot.props.children[0],currentRoot.dom);
+  }
+
+  hookIndex++;
+  return [hook.state,setState]
+
+  
+}
+
+function updateHostComponent(fiber) {
+
+  
+  if (!fiber.dom) { //si pas d'élément qui correzpond dans mon dom,on convertit l'element avec createDom
+   
+    fiber.dom = createDom(fiber)
+  }
+
+  
+
+  const elements = fiber.props.children
+  reconcileChildren(fiber,elements)
 }
 
 
@@ -174,38 +226,188 @@ function reconcileChildren(wipFiber, elements) {
 
 window.React = {
   createElement,
-  render
+  render,
+  useState
   
 }
 
 
-function step1() {
-  /** @jsx React.createElement */
-  const element2 = (
-    <div id="foo">
-      <h1>Bienvenue sur le site</h1>
-      <button onclick={step2}>En savoir plus !</button>
-    </div>
-  )
-  React.render(element2, document.getElementById('root'));
+
+function useIncrement() {
+  const [n, setN] = React.useState(0);
+  const increment = function () {
+    setN(n + 1);
+  }
+  return [n, increment];
 }
 
 
+function Compteur({ name }) {
+  const [n, increment] = useIncrement()
+  
+  return <div>
+    Compteur : {n}
+    <button onclick={()=>increment()}>Incrementer</button>
+  </div>
+}
 
 
-function step2() {
+function FirsPage() {
+  return(
+  <div >
+            <div className="mt-2 ">
+                <h3 className="text-xl text-gray-900 font-semibold hover:underline">
+                    Bienvenue sur l'installateur MovingHouse
+                </h3>
+                <p className="text-gray-400 mt-1 leading-relaxed">
+                    Avant de nous lancer, nous allons avoir besoin de certaines informations sur votre base de données. Il va vous falloir réunir les informations suivantes pour continuer
+              </p>
+              <ul className="list-disc list-inside">
+                <li>Nom de la base de donnée</li>
+                <li>Adresse de la base de donnée</li>
+                <li>Le port d'accès</li>
+                <li>Nom d'utilisateur</li>
+                <li>Le mot de passe</li>
+              </ul>
+            </div>           
+    </div>
+  )
+}
+
   /** @jsx React.createElement */
-  const element2 = (
-    <div id="foo">
-      <h1>poage2</h1>
-      <button onclick={step1}>En savoir plus !</button>
+  function FormDb(props) {
+    function handleSubmit(event) {
+      event.preventDefault();
+      console.log(event.target.elements.host.value);
+      const formData = {
+        host: event.target.elements.host.value,
+        dbname: event.target.elements.dbname.value,
+        port: event.target.elements.port.value,
+        user: event.target.elements.user.value,
+        password: event.target.elements.password.value,
+        
+      };
+      console.log(formData);
+      fetch('/api/installer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
+          } else {
+            alert('Connexion Reussi !');
+            window.location.href = '/'
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de la requête API :', error);
+        });
+      
+    }
+  
+    return (
+      <div className=" p-4 py-6 sm:p-6 ">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <input type="text" name="host" placeholder="Hôte" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+        <input type="text" name="dbname" placeholder="Nom de la base de données" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+        <input type="text" name="port" placeholder="Port" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
+        </form>
+        </div>
+    );
+  }
+
+ /** @jsx React.createElement */
+ function App() {
+   const [n, increment] = useIncrement();
+   
+ 
+
+   function renderContent() {
+    
+    switch (n) {
+      case 0:
+        return (
+          <FirsPage />
+        );
+      case 1:
+        return (<FormDb/>);
+      case 2:<Compteur/>
+    }
+  }
+
+  return (
+    <div className="w-full h-[800px] flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+      <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
+      <div className="text-center">
+                    
+                    <div className="mt-5 space-y-2">
+                        <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">Installation</h3>
+                       
+                    </div>
+                </div>
+        <div className="bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg">
+          <div>
+             {renderContent()}
+          </div>
+         
+
+          <div className="mt-5 flex justify-around">
+              <button onclick={()=>increment()}
+              className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg"
+              >
+                Précédent
+              </button>
+              <button onclick={()=>increment()}
+                className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">
+                Suivant
+              </button>
+            </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  )
+}
+
+React.render(<App />, document.getElementById('root'));
+
+// function step1() {
+//   /** @jsx React.createElement */
+//   const element2 = (
+//     <div id="foo">
+//       <Compteur name={"jason"}/>
+//       <button onclick={step2}>En savoir plus !</button>
+//     </div>
+//   )
+//   React.render(element2, document.getElementById('root'));
+// }
+
+
+
+
+// function step2() {
+//   /** @jsx React.createElement */
+//   const element2 = (
+//     <div id="foo">
+//       <h1>poage2</h1>
+//       <button onclick={step1}>En savoir plus !</button>
      
-    </div>
-  )
+//     </div>
+//   )
   
-  React.render(element2, document.getElementById('root'));
-}
+//   React.render(element2, document.getElementById('root'));
+// }
 
-step1();
+// step1();
 
 
