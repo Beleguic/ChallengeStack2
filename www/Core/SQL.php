@@ -162,6 +162,23 @@ class SQL{
 
     }
 
+    public function protectScriptInjection(array $columns): array
+    {
+        $newColumns = [];
+        foreach ($columns as $key => $value) {
+            if(is_string($value)){
+                $valueTemp = str_replace(">", "&gt;", $value);
+                $valueTemp = str_replace("<", "&lt;", $valueTemp);
+                $newColumns[$key] = $valueTemp;
+            }
+            else{
+                $newColumns[$key] = $value;
+            }
+        }
+
+        return $newColumns;
+    }   
+
 
     public function save($del=''): void
     {
@@ -169,6 +186,7 @@ class SQL{
         
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
+        $columns = $this->protectScriptInjection($columns);
 
         if($del == 'del'){
             if(is_string($this->getId()) && $this->getId()!='0') { 
