@@ -36,6 +36,9 @@ class InstallerController extends Controller
             return;
         }
 
+        // insertion BDD
+        // recuperation des donnée du fichier bdd.sql
+        // insertion de la chaine de caractere via un $pdo->exec($query);
 
 
 
