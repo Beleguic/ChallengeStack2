@@ -1,3 +1,11 @@
+<script type="text/javascript">
+		
+	function alert(message) { 
+	    console.info(message);
+	} 
+
+</script>
+
 <div class="container">
 	<h2 class="mb-3">Navigation</h2>
 	<div class="row">
@@ -52,5 +60,7 @@
 	<script>
 
 		let table = new DataTable('#tableType');
+
+
 
     </script>

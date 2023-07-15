@@ -54,7 +54,7 @@ class Back extends Controller
         	$status->setIdStatus($_POST['id_status']);
         	$status->setStatus($_POST['status']);
         	$status->save();
-        	header("location: /back/status");
+        	//header("location: /back/status");
         }
 
         return $this->render();

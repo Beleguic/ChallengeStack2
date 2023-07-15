@@ -27,7 +27,7 @@
 
 </head>
 
-<body>
+<body oncontextmenu="return false;">
 
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
