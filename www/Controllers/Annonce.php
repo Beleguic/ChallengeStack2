@@ -255,13 +255,25 @@ class Annonce extends Controller
         $photo = new Photo();
         $photoFromAdd = new AnnonceForm();
         $photoFromDel = new AnnonceForm();
+        $photoFromDescription = new AnnonceForm();
         $this->assign('formAddPhoto', $photoFromAdd->getConfigAddPhoto());
         $this->assign("idAnnonce", ['idAnnonce' => $_GET['idAnnonce']]);
         $this->assign('imageList', $photo->getAllWhere(["id_annonce = '".$_GET['idAnnonce']."'"]));
         $this->assign('formDelPhoto', $photoFromDel->getConfigDelPhoto());
+        $this->assign('photoFromDescription', $photoFromDescription->getConfigUpdateDescription());
 
 
         if(isset($_POST['operation'])){
+
+            if($_POST['operation'] == "updateDescription" && $photoFromDescription->isSubmited() && $photoFromDescription->isValid()){
+                $photo = new photo();
+                $photo = $photo->populate($_POST['id']);
+                $photo->setDescription($_POST['description']);
+                $photo->save();
+
+            }
+
+
             if($_POST['operation'] == "delPhoto" && $photoFromDel->isSubmited() && $photoFromDel->isValid()){
                 $photo = new photo();
                 $photo = $photo->populate($_POST['id']);

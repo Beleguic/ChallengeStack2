@@ -699,4 +699,63 @@ class Annonce extends Validator
         return $this->config;
 
     }
+
+    public function getConfigUpdateDescription(): array
+    {
+        $this->config = [
+            "config"=>[
+                "method"=>$this->method,
+                "action"=>"",
+                "id"=>"",
+                "class"=>"form-updatde",
+                "enctype"=>"multipart/form-data",
+                "submit"=>["Mettre a jour la description"],
+            ],
+            "divs"=>[
+                "div-photo" =>[
+                    "id" => "div-photo",
+                    "class" => "div-form-100",
+                    "inside" => ["id", "operation", "description"]
+                ]
+            ],
+
+            "inputs"=>[
+                "id"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "operation"=>[
+                    "id"=>"id-photo-del",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"updateDescription",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "description"=>[
+                    "balise"=>"textarea",
+                    "rows" => "5",
+                    "id"=>"type-form-description",
+                    "class"=>"custom-textarea",
+                    "placeholder"=>"",
+                    "error"=>"La description est incorrect",
+                    "label" =>[
+                        "for" => "Type-form-description",
+                        "id" => "label-Type-form-description",
+                        "class" => "form-label",
+                        "value" => "Description"
+                    ],
+                    "value"=>""
+                ],
+            ]
+        ];
+        return $this->config;
+
+    }
 }
