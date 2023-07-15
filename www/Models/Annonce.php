@@ -9,6 +9,7 @@ class Annonce extends SQL implements SQLInterface
 {
     private String $id = '0';
     protected String $id_type;
+    protected String $id_agent;
     protected String $titre;
     protected Int $prix;
     protected Int $superficiemaison;
@@ -16,6 +17,7 @@ class Annonce extends SQL implements SQLInterface
     protected Int $nbrpiece;
     protected Int $nbrchambre;
     protected String $description;
+    
     //addresse
     protected String $ville;
     protected String $rue;
@@ -37,6 +39,7 @@ class Annonce extends SQL implements SQLInterface
 
         $array['id'] = $this->getId();
         $array['id_type'] = $this->getIdType();
+        $array['id_agent'] = $this->getIdAgent();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
         $array['superficieMaison'] = $this->getSuperficiemaison();
@@ -67,6 +70,23 @@ class Annonce extends SQL implements SQLInterface
     {
         
         $this->id = $id;
+    }
+
+    /**
+     * @return Int
+     */
+    public function getIdAgent(): String
+    {
+        return $this->id_agent;
+    }
+
+    /**
+     * @param Int $id
+     */
+    public function setIdAgent(String $id_agent): void
+    {
+        
+        $this->id_agent = $id_agent;
     }
 
 

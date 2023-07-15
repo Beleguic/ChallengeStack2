@@ -13,6 +13,7 @@
     use App\Models\Connexion;
     use App\Core\Application;
     use App\Controllers\Newsletter;
+    use App\Controllers\Back;
 
  if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
         header('Location: /public/react/src/index.html');
@@ -20,8 +21,6 @@
     }
     
     date_default_timezone_set("Europe/Paris");
-
-    //require "Core/View.php";
 
     spl_autoload_register(function ($class) {
 
@@ -184,9 +183,14 @@ else{
     $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
     
     // Route annonce front
+    $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
+    $app->router->post('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
 
+    // Route newsletter
     $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     $app->router->post('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
     $app->router->get('/unsubscribe-newsletter', [Newsletter::class ,"unsubscribe"],[AuthMiddleware::class],0);
@@ -203,6 +207,12 @@ else{
     $app->router->post('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
     $app->router->post('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
 
+    //route favori
+    $app->router->post('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);
+    $app->router->post('/favori-del', [Annonce::class ,"removeFavori"],[AuthMiddleware::class],1);
+    $app->router->get('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);
+    $app->router->get('/favori-del', [Annonce::class ,"removeFavori"],[AuthMiddleware::class],1);
+
     // Route annonce back
     $app->router->get('/back/annonce', [Annonce::class ,"viewAnnonce"],[AuthMiddleware::class],2);
     
@@ -210,11 +220,15 @@ else{
     $app->router->get('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
     $app->router->get('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     $app->router->get('/back/restore-annonce', [Annonce::class ,"restoreAnnonce"],[AuthMiddleware::class],2);
+    $app->router->get('/back/add-photo-annonce', [Annonce::class ,"photo"],[AuthMiddleware::class],2);
     
     $app->router->post('/back/add-annonce', [Annonce::class ,"addAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/update-annonce', [Annonce::class ,"updateAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/delete-annonce', [Annonce::class ,"deleteAnnonce"],[AuthMiddleware::class],2);
     $app->router->post('/back/restore-annonce', [Annonce::class ,"restoreAnnonce"],[AuthMiddleware::class],2);
+
+    $app->router->post('/back/add-photo-annonce', [Annonce::class ,"photo"],[AuthMiddleware::class],2);
+    
     
     // Route type back
     $app->router->get('/back/type', [Type::class ,"viewType"],[AuthMiddleware::class],2);
@@ -234,6 +248,19 @@ else{
     $app->router->get('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
     $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
 
+    // Route agent back
+    $app->router->get('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->post('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
+
+    // Route status
+    $app->router->get('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
+    $app->router->get('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
+    $app->router->post('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 

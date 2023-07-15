@@ -12,6 +12,7 @@ class AnnonceMemento extends SQL implements SQLInterface
     protected String $date_memento;
     protected String $id_annonce;
     protected String $id_type;
+    protected String $id_agent;
     protected String $titre;
     protected Int $prix;
     protected Int $superficiemaison;
@@ -41,6 +42,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $this->setDateMemento(date('Y-m-d H:i:s'));
         $this->setIdAnnonce($annonce->getId());
         $this->setIdType($annonce->getIdType());
+        $this->setIdAgent($annonce->getIdAgent());
         $this->setTitre($annonce->getTitre());
         $this->setPrix($annonce->getPrix());
         $this->setSuperficiemaison($annonce->getSuperficiemaison());
@@ -63,6 +65,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $annonce = new Annonce();
         $annonce->setId($AnnonceMemento->getIdAnnonce());
         $annonce->setIdType($AnnonceMemento->getIdType());
+        $annonce->setIdAgent($AnnonceMemento->getIdAgent());
         $annonce->setTitre($AnnonceMemento->getTitre());
         $annonce->setPrix($AnnonceMemento->getPrix());
         $annonce->setSuperficiemaison($AnnonceMemento->getSuperficiemaison());
@@ -86,6 +89,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $array['date_memento'] = $this->getDateMemento();
         $array['id_annonce'] = $this->getIdAnnonce();
         $array['id_type'] = $this->getIdType();
+        $array['id_agent'] = $this->getIdAgent();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
         $array['superficieMaison'] = $this->getSuperficiemaison();
@@ -117,6 +121,23 @@ class AnnonceMemento extends SQL implements SQLInterface
     {
         
         $this->id = $id;
+    }
+
+    /**
+     * @return Int
+     */
+    public function getIdAgent(): String
+    {
+        return $this->id_agent;
+    }
+
+    /**
+     * @param Int $id
+     */
+    public function setIdAgent(String $id_agent): void
+    {
+        
+        $this->id_agent = $id_agent;
     }
 
     /**

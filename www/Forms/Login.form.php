@@ -21,40 +21,40 @@ class Login extends Validator
             "submit"=>[
                 "Se connecter" => [
                     "id" => "",
-                    "class" => "btn btn-outline-primary btn-block mb-4"
+                    "class" => "btn btn-outline-b-n btn-block m-4 w-25"
                 ],
             ],
             "reset"=>[
                 "Annuler" => [
                     "id" => "",
-                    "class" => "btn btn-outline-primary btn-block mb-4"
+                    "class" => "btn btn-outline-b-n btn-block m-4 w-25"
                 ],
             ],
             "divs"=>[
                 "div-email" =>[
                     "id" => "div-login-email",
-                    "class" => "form-group div-form-100 col-md-6 mx-auto",
+                    "class" => "form-group div-form-100",
                     "inside" => ["email"]
                 ],
                 "div-pwd" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100 col-md-6 mx-auto",
+                    "class" => "form-group div-form-100",
                     "inside" => ["pwdLogin"]
                 ],
             ],
             "inputs"=>[
                 "email"=>[
                     "divId"=>"",
-                    "divClass"=>"",
+                    "divClass"=>"mb-3",
                     "id"=>"login-form-email",
                     "class"=>"form-control",
-                    "placeholder"=>"Email",
+                    "placeholder"=>"E-mail",
                     "type"=>"email",
                     "error"=>"Votre email est incorrect",
                     "label" =>[
                         "for" => "login-form-email",
                         "id" => "label-login-form-email",
-                        "class" => "form-label",
+                        "class" => "form-label color-a",
                         "value" => "Adresse mail"
                     ],
                     "required"=>true
@@ -68,7 +68,7 @@ class Login extends Validator
                     "label" =>[
                         "for" => "login-form-pwd",
                         "id" => "label-login-form-pwd",
-                        "class" => "form-label",
+                        "class" => "form-label color-a",
                         "value" => "Mot de passe"
                     ],
                     "required"=>true
@@ -92,7 +92,7 @@ class Login extends Validator
             "submit"=>[
                 "Activer mon compte" => [
                     "id" => "",
-                    "class" => "btn btn-outline-primary btn-block mb-4"
+                    "class" => "btn btn-outline-b-n btn-block m-4 w-25"
                 ],
             ],
             "divs"=>[
@@ -106,13 +106,13 @@ class Login extends Validator
                 "code"=>[
                     "id"=>"login-form-activation",
                     "class"=>"form-control",
-                    "placeholder"=>"Code d'activation",
+                    "placeholder"=>"Code",
                     "type"=>"text",
                     "error"=>"Votre Code d'activation est incorrect",
                     "label" =>[
                         "for" => "login-form-activation",
                         "id" => "label-login-form-activation",
-                        "class" => "form-label",
+                        "class" => "form-label color-a",
                         "value" => "Code d'activation"
                     ],
                     "required"=>true

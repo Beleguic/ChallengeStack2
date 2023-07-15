@@ -5,11 +5,16 @@ namespace App\Core;
 class Validator
 {
     private array $data = [];
+    private array $dataFile = [];
     public array $errors = [];
     
     public function isSubmited(): bool
     {
+
         $this->data = ($this->method == "POST")?$_POST:$_GET;
+        if(isset($_FILES) && sizeof($_FILES) > 0){
+            $this->data = array_merge($this->data, $_FILES);
+        }
         if(isset($this->data["submit"])){
             return true;
         }
@@ -22,6 +27,7 @@ class Validator
             die("Tentative de Hack1");
         }
         //Le nb de inputs3
+        var_dump($this->config["inputs"]);
         if(count($this->config["inputs"])+1 != count($this->data)){
             die("Tentative de Hack2");
         }
@@ -30,9 +36,18 @@ class Validator
             if(!isset($this->data[$name])){
                 die("Tentative de Hack3");
             }
-            if(isset($configInput["required"]) && self::isEmpty($this->data[$name])){
-                die("Tentative de Hack4");
-            }
+            if(isset($configInput["required"])){
+                if(is_string($this->data[$name])){ // chaine de caractere
+                    if(self::isEmpty($this->data[$name])){
+                        die("Tentaive de hack 4");
+                    }
+                }
+                else { // tableau
+                    if(!sizeof($this->data[$name]) > 0){
+                        die("Tentaive de hack 5");
+                    }
+                }
+            } 
             if(isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])){
                 $this->errors[]=$configInput["error"];
             }

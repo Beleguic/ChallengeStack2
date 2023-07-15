@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\View;
+use App\Forms\Contact;
 
 class Main extends Controller
 {
@@ -34,13 +35,27 @@ class Main extends Controller
         return $this->render();
     }
 
-    public function contact(): void
+    public function contact(): String
     {
-        echo "Page de contact";
+        $this->setView("Main/contact");
+        $this->setTemplate("front");
+
+        $formContact = new Contact();
+  
+        $this->assign("contactForm", $formContact->getConfig());
+        
+        if ($formContact->isSubmited() && $formContact->isValid()) {
+            // TODO : Envoyer le message
+        }
+
+        return $this->render();
     }
 
-    public function aboutUs(): void
+    public function aboutUs(): String
     {
-        echo "Page à propos";
+        $this->setView("Main/about-us");
+        $this->setTemplate("front");
+
+        return $this->render();
     }
 }
