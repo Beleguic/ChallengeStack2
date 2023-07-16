@@ -3,6 +3,7 @@
 DROP VIEW  IF EXISTS public.zfgh_v_agent;
 DROP VIEW  IF EXISTS public.zfgh_v_annonce;
 DROP TABLE IF EXISTS public.zfgh_connexion;
+DROP TABLE IF EXISTS public.zfgh_advice;
 DROP TABLE IF EXISTS public.zfgh_favori;
 DROP TABLE IF EXISTS public.zfgh_photo;
 DROP TABLE IF EXISTS public.zfgh_newsletter;
@@ -136,6 +137,22 @@ create table public.zfgh_user_code (
     constraint usercode_pkey primary key (id),
     constraint fk_id_user_user foreign key (id_user) references zfgh_user (id) on delete cascade
   ) tablespace pg_default;
+
+
+create table public.zfgh_opinion (
+    id uuid not null default gen_random_uuid (),
+    note float not null,
+    commentaire text null,
+    id_agent uuid null,
+    id_user uuid null,
+    date_avis timestamp with time zone not null default (now() at time zone 'utc'::text),
+    avis_agence boolean not null default 0,
+    is_valid boolean not null default false,
+    constraint idavis_pkey primary key (id),
+    constraint fk_id_agent_user foreign key (id_agent) references zfgh_user (id) on delete cascade,
+    constraint fk_id_user_user foreign key (id_user) references zfgh_user (id)
+  ) tablespace pg_default;
+
 
 create view public.zfgh_v_agent as
 select u.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) as nbr_annonce
