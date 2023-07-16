@@ -97,7 +97,7 @@
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Margaret Sotillo
+                      <a href="/agent1" class="link-two">Margaret Sotillo
                         <br> Escala</a>
                     </h3>
                   </div>
@@ -153,7 +153,7 @@
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Stiven Spilver
+                      <a href="/agent2" class="link-two">Stiven Spilver
                         <br> Darw</a>
                     </h3>
                   </div>
@@ -214,7 +214,7 @@
                 <div class="card-header-d">
                   <div class="card-title-d align-self-center">
                     <h3 class="title-d">
-                      <a href="agent-single.html" class="link-two">Emma Toledo
+                      <a href="/agent3" class="link-two">Emma Toledo
                         <br> Cascada</a>
                     </h3>
                   </div>
