@@ -1,0 +1,1 @@
+<h1 class="text-center">La vue des annonces Favorites</h1>

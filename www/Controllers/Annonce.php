@@ -377,11 +377,11 @@ class Annonce extends Controller
         return $this->render();
     }
 
-    public function getAllRentAnnonces(): String
+    public function getAllFavoritesAnnonces(): String
     {
-        $this->setView("Annonce/annonce-all-rent");
+        $this->setView("Annonce/annonce-favorites");
         $this->setTemplate("front");
-        
+
         return $this->render();
     }
 }
