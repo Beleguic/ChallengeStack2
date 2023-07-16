@@ -113,7 +113,8 @@ class SQL{
         return $queryPrepared;
     }
 
-    public function getThemWhereAll(array $who): object{
+    public function getThemWhereAll(array $who): object
+    {
 
         $queryPrepared = $this->pdo->prepare("SELECT ".implode(' , ', $who). " FROM ".$this->table.";"); 
         $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
@@ -121,6 +122,16 @@ class SQL{
         return $queryPrepared;
 
     }
+
+    public function getSumOfWhere(String $who, array $where): object
+    {
+        
+        $queryPrepared = $this->pdo->prepare("SELECT  FROM SUM(".$who.") ".$this->table." WHERE ".implode(' AND ', $who). ";"); 
+        $queryPrepared->setFetchMode( \PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+        return $queryPrepared;
+    }
+
     // .implode(' , ', $who).
     public function checkSomething(array $who): bool
     {
@@ -162,7 +173,7 @@ class SQL{
 
     }
 
-    public function protectScriptInjection(array $columns): array
+    /*public function protectScriptInjection(array $columns): array
     {
         $newColumns = [];
         foreach ($columns as $key => $value) {
@@ -177,7 +188,7 @@ class SQL{
         }
 
         return $newColumns;
-    }   
+    } */
 
 
     public function save($del=''): void
@@ -186,7 +197,7 @@ class SQL{
         
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
-        $columns = $this->protectScriptInjection($columns);
+        //$columns = $this->protectScriptInjection($columns);
 
         if($del == 'del'){
             if(is_string($this->getId()) && $this->getId()!='0') { 

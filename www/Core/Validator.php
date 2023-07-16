@@ -36,7 +36,7 @@ class Validator
             if(!isset($this->data[$name])){
                 die("Tentative de Hack3");
             }
-            if(isset($configInput["required"])){
+            if(isset($configInput["required"]) && $configInput["required"]){
                 if(is_string($this->data[$name])){ // chaine de caractere
                     if(self::isEmpty($this->data[$name])){
                         die("Tentaive de hack 4");

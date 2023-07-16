@@ -14,6 +14,7 @@
     use App\Core\Application;
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
+    use App\Controllers\Opinion;
     use App\Controllers\Agent;
 
     
@@ -219,6 +220,21 @@ else{
     $app->router->post('/modify-connexion', [Setting::class ,"modifyConnexion"],[AuthMiddleware::class],1);
     $app->router->post('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
     $app->router->post('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
+
+    //route avis
+    $app->router->post('/add-opinion-agent', [Opinion::class ,"addOpinionAgent"],[AuthMiddleware::class],1);
+    $app->router->post('/add-opinion-agence', [Opinion::class ,"addOpinionAgence"],[AuthMiddleware::class],1);
+    $app->router->post('/show-opinion', [Opinion::class ,"showOpinion"],[AuthMiddleware::class],1);
+    $app->router->get('/add-opinion-agent', [Opinion::class ,"addOpinionAgent"],[AuthMiddleware::class],1);
+    $app->router->get('/add-opinion-agence', [Opinion::class ,"addOpinionAgence"],[AuthMiddleware::class],1);
+    $app->router->get('/show-opinion', [Opinion::class ,"showOpinion"],[AuthMiddleware::class],1);
+
+    $app->router->get('/back/opinion-list', [Opinion::class ,"opinionList"],[AuthMiddleware::class],3);
+    $app->router->get('/back/opinion-valid', [Opinion::class ,"validOpinion"],[AuthMiddleware::class],3);
+    $app->router->get('/back/opinion-delete', [Opinion::class ,"deleteOpinion"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-list', [Opinion::class ,"opinionList"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-valid', [Opinion::class ,"validOpinion"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-delete', [Opinion::class ,"deleteOpinion"],[AuthMiddleware::class],3);
 
     //route favori
     $app->router->post('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);
