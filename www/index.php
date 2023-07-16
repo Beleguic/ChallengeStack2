@@ -198,8 +198,8 @@ else{
     // Route annonce front
     $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
     $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
-    $app->router->post('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
-    $app->router->get('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
+    $app->router->post('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
 
