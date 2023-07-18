@@ -53,13 +53,12 @@ class InstallerController extends Controller
         $configContent .= "\$config['name'] = '$name';\n";
         $configContent .= "\n";
 
-
-
-
-
-
         // Écriture du contenu dans le fichier config.php
         file_put_contents($configFilePath, $configContent);
+        $sqlFilePath = __DIR__ . "/../bdd.sql";
+        
+        $sqlContent = file_get_contents($sqlFilePath);
+        $pdo->exec($sqlContent);
 
         // Retourner une réponse JSON
         $response = [
