@@ -115,11 +115,15 @@ class Annonce extends Controller
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
             $annonce->setNbrPiece($_POST['nbrPiece']);
             $annonce->setNbrChambre($_POST['nbrChambre']);
-            $annonce->setVille($_POST['ville']);
-            $annonce->setRue($_POST['rue']);
-            $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
-            $annonce->setRegions($_POST['regions']);
+            $annonce->setCity($_POST['city']);
+            $annonce->setAddressComplet($_POST['adrcomplet']);
+            $annonce->setPostCode($_POST['postcode']);
+            $annonce->setDepNum($_POST['depnum']);
+            $annonce->setDepLabel($_POST['deplabel']);
+            $annonce->setRegions($_POST['region']);
+            $annonce->setLatitude($_POST['latitude']);
+            $annonce->setLongitude($_POST['longitude']);
             $annonce->save();
             header('location: /back/annonce');
         }
@@ -159,11 +163,15 @@ class Annonce extends Controller
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
             $annonce->setNbrPiece($_POST['nbrPiece']);
             $annonce->setNbrChambre($_POST['nbrChambre']);
-            $annonce->setVille($_POST['ville']);
-            $annonce->setRue($_POST['rue']);
-            $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
-            $annonce->setRegions($_POST['regions']);
+            $annonce->setCity($_POST['city']);
+            $annonce->setAddressComplet($_POST['adrcomplet']);
+            $annonce->setPostCode($_POST['postcode']);
+            $annonce->setDepNum($_POST['depnum']);
+            $annonce->setDepLabel($_POST['deplabel']);
+            $annonce->setRegions($_POST['region']);
+            $annonce->setLatitude($_POST['latitude']);
+            $annonce->setLongitude($_POST['longitude']);
             $annonce->save();
             header('location: /back/annonce');
         }
