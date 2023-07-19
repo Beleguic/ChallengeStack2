@@ -19,8 +19,10 @@ class SQL{
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
+        $ini = parse_ini_file('app.ini');
+
         try {
-            $this->pdo = new \PDO("pgsql:host=db.bpuhpyzfldoarlwgwxkz.supabase.co;dbname=postgres;port=5432", "postgres", "zdS2TmaWFhb4fgmo");
+            $this->pdo = new \PDO("pgsql:host=".$ini['host'].";dbname=".$ini['dbname'].";port=".$ini['port'], $ini['user'], $ini['password']);
         } catch(\Exception $e) {
             die("Erreur SQL : ".$e->getMessage());
         }

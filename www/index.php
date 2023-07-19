@@ -15,7 +15,7 @@
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
 
- if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
+ if (!file_exists('app.ini') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
         header('Location: /public/react/src/index.html');
     
     }
@@ -89,14 +89,14 @@
     if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
-        echo "salut";
+        
             header("location: /activation");
         }
     }
     else{
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri == "activation"){
-            echo "salut";
+            
             header("location: /");
         }
     }
@@ -148,6 +148,8 @@ else{
     $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
     $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
     $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
+    $app->router->post('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+    $app->router->get('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);

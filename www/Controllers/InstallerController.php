@@ -27,7 +27,7 @@ class InstallerController extends Controller
 
 
         // Chemin vers le fichier config.php (à adapter selon votre besoin)
-        $configFilePath = 'config.php';
+        $configFilePath = 'app.ini';
         try {
             $pdo = new \PDO("pgsql:host=$host;dbname=$dbname;port=$port", $user, $password);
         } catch (\PDOException $e) {
@@ -48,15 +48,15 @@ class InstallerController extends Controller
 
 
 
-        $configContent = "<?php\n\n";
-        $configContent .= "\$config['host'] = '$host';\n";
-        $configContent .= "\$config['dbname'] = '$dbname';\n";
-        $configContent .= "\$config['port'] = '$port';\n";
-        $configContent .= "\$config['user'] = '$user';\n";
-        $configContent .= "\$config['password'] = '$password';\n";
-        $configContent .= "\$config['email'] = '$email';\n";
-        $configContent .= "\$config['name'] = '$name';\n";
-        $configContent .= "\n";
+        $configContent = "[database]\n\n";
+        $configContent .= "host = $host\n";
+        $configContent .= "dbname = $dbname\n";
+        $configContent .= "port = $port\n";
+        $configContent .= "user = $user\n";
+        $configContent .= "password = $password\n";
+        $configContent .= "email = $email\n";
+        $configContent .= "name = $name\n";
+        $configContent .= "n";
 
         // Écriture du contenu dans le fichier config.php
         file_put_contents($configFilePath, $configContent);
@@ -81,15 +81,114 @@ class InstallerController extends Controller
 
         $validator = new ValidatorApi();
         $formData = json_decode(file_get_contents('php://input'), true);
-            $validationResult = $validator->validateFormData($formData);
+        $validationResult = $validator->validateFormData($formData);
+        if (!empty($validationResult['error'])) {
+            // En cas d'erreurs de validation, renvoyer les messages d'erreur JSON
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode($validationResult);
+            return;
+        }
+            $user = new User();
+            $user->setFirstname($validator->sanitizeInput($formData['firstName']));
+            $user->setLastname($validator->sanitizeInput($formData['lastName']));
+            $user->setEmail($validator->sanitizeInput($formData['email']));
+            $user->setPwd($validator->sanitizeInput($formData['pwd']));
+            $user->setStatus(4);
+            $user->save();
+            $userAdd = $user->populateWithMail($formData['email']);
+            
+            
+            $newToken = sha1(uniqid());
+            $_SESSION['zfgh_login']['connected'] = true;
+            $_SESSION['zfgh_login']['email'] = $formData['email'];
+            $_SESSION['zfgh_login']['firstname'] = $userAdd->getFirstname();
+            $_SESSION['zfgh_login']['lastname'] = $userAdd->getLastname();
+            $_SESSION['zfgh_login']['id'] = $userAdd->getId();
+            $_SESSION['zfgh_login']['status'] = $userAdd->getStatus();
+            $_SESSION['zfgh_login']['actif'] = $userAdd->getActif();
+            $_SESSION['zfgh_login']['token'] = $newToken;
+           
+            $user_code = new UserCode();
+            $user_code->setIdUser($userAdd->getId());
+            $user_code->setCode($this->createCode());
+            $user_code->save();
+            // Envoie du mail
+            $mail = new Mailer();
+            $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
+            
+            $connexion = new Connexion;
+            $connexion->setIdUser($userAdd->getId());
+            $connexion->setToken($newToken);   
+            $connexion->save();
+            
+            $response = [
+                'message' => "Demande de validation envoyé par mail"
+            ];
+            
+      
             http_response_code(200);
-        header('Content-Type: application/json');
-        echo json_encode($validationResult);
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        
+            
+        }
+        
+
+        public function verifyUser(){
+            $formData = json_decode(file_get_contents('php://input'), true);
+            $validator = new ValidatorApi();
+            $user_code = new UserCode();
+            $user_code = $user_code->populateWith(["id_user" => $_SESSION['zfgh_login']['id']]);
+            $formData_validate = $validator->valideCodeData($formData["code"]);
+            if (!empty($validationResult['error'])) {
+                http_response_code(400);
+                header('Content-Type: application/json');
+                echo json_encode($formData_validate);
+                return;
+            }
+            if($formData["code"]==$user_code->getCode()){
+                    $user = new User();
+                    $user = $user->populate($user_code->getIdUser());
+                    $user->setActif(true);
+                    $user->save();
+                    $user = $user->populate($user->getId());
+                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
+            }else{
+                $response = [
+                    'error' => "code invalide"
+                ];
+                http_response_code(400);
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
+            }
+
+                $response = [
+                    'message' =>  $_SESSION['zfgh_login']['actif']
+                ];
+                
+          
+                http_response_code(200);
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            
+                
+            }
+            
        
 
 
 
         
+    
+
+
+
+    private function createCode(){
+
+        return str_pad(mt_rand(100000, 999999), 6, '0', STR_PAD_LEFT);
+
     }
     
     

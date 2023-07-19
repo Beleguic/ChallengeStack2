@@ -4,6 +4,16 @@ namespace App\Core;
 
 
 class ValidatorAPI {
+
+
+
+  public function valideCodeData($code){
+    $validationResult=[];
+    if(!is_int($code)){
+       $validationResult['error'] = "Veuillez rentrer un nombre";
+       return $validationResult;
+    }
+  }
     public function validateFormData($formData) {
       $validationResult = [];
   
@@ -37,4 +47,11 @@ class ValidatorAPI {
       // If all validations pass, return an empty result
       return $validationResult;
     }
+
+    public function sanitizeInput($input) {
+        // Utilisez cette fonction pour échapper les caractères spéciaux de l'input utilisateur
+        // Avant d'utiliser les données dans une requête SQL ou de les afficher sur une page HTML
+        // Assurez-vous d'échapper correctement les données pour éviter les attaques par injection SQL et XSS
+        return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+      }
   }

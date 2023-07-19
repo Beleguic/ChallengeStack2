@@ -99,7 +99,7 @@
                         $middleware = new $routeCallback["middleware"][0]($role, $user);
                         
                         if(!$middleware->execute()){
-                        echo "salut";
+                        
                             if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
                                 $this->response->setStatutCode(403);
                                 return $this->renderView("Views/_403.php","Views/layout/_403.tpl.php");

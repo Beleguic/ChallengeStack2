@@ -347,6 +347,7 @@ function FormRoot(props) {
     })
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         if (data.error) {
           alert('Validation Error: ' + data.error); // Show validation error to the user
         } else {
@@ -374,6 +375,48 @@ function FormRoot(props) {
   );
 }
 
+  /** @jsx React.createElement */
+  function VerifyRoot(props) {
+    function handleSubmit(event) {
+      event.preventDefault();
+      const formData = {
+        code: event.target.elements.code.value,
+      };
+      console.log(formData);
+      fetch('/api/verifyUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          if (data.error) {
+            alert('Validation Error: ' + data.error); // Show validation error to the user
+          } else {
+            alert('Form submitted successfully!'); // Show success message to the user
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de la requête API :', error);
+        });
+      
+    }
+  
+    return (
+      <div className=" p-4 py-6 sm:p-6 ">
+      <form onSubmit={handleSubmit} className="space-y-5">
+       
+        
+        <input type="number" name="code" placeholder="Confirmez le mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
+        </form>
+        </div>
+    );
+  }
+
 
  /** @jsx React.createElement */
  function App() {
@@ -391,7 +434,9 @@ function FormRoot(props) {
       case 1:
         return (<FormDb/>);
       case 2:
-        return <FormRoot/>
+        return <FormRoot/>;
+      case 3:
+        return <VerifyRoot/>
     }
   }
 
