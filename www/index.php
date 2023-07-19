@@ -146,6 +146,8 @@ else{
     //api route
     $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
     $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+    $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
+    $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);

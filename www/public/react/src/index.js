@@ -330,13 +330,15 @@ function FormRoot(props) {
     event.preventDefault();
     const formData = {
       email: event.target.elements.email.value,
-      confirmEMail: event.target.elements.confirmEmail.value,
+      confirmEmail: event.target.elements.confirmEmail.value,
       pwd: event.target.elements.pwd.value,
       confirmPwd: event.target.elements.confirmPwd.value,
+      firstName:event.target.elements.firstName.value,
+      lastName:event.target.elements.lastName.value
       
     };
     console.log(formData);
-    fetch('/api/createRoot', {
+    fetch('/api/createUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -346,10 +348,9 @@ function FormRoot(props) {
       .then(response => response.json())
       .then(data => {
         if (data.error) {
-          alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
+          alert('Validation Error: ' + data.error); // Show validation error to the user
         } else {
-          alert('Connexion Reussi !');
-          window.location.href = '/'
+          alert('Form submitted successfully!'); // Show success message to the user
         }
       })
       .catch(error => {
@@ -361,6 +362,8 @@ function FormRoot(props) {
   return (
     <div className=" p-4 py-6 sm:p-6 ">
     <form onSubmit={handleSubmit} className="space-y-5">
+      <input type="text" name="lastName" placeholder="Nom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+      <input type="text" name="firstName" placeholder="Prenom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
       <input type="text" name="email" placeholder="Email" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
       <input type="text" name="confirmEmail" placeholder="Confirmer votre email" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
       <input type="password" name="pwd" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
@@ -409,11 +412,7 @@ function FormRoot(props) {
          
 
           <div className="mt-5 flex justify-around">
-              <button onclick={()=>increment()}
-              className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg"
-              >
-                Précédent
-              </button>
+             
               <button onclick={()=>increment()}
                 className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">
                 Suivant

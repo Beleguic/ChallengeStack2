@@ -3,6 +3,11 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Models\User;
+use App\Core\Mailer;
+use App\Models\Connexion;
+use App\Models\UserCode;
+use App\Core\ValidatorApi;
 
 
 class InstallerController extends Controller
@@ -55,6 +60,9 @@ class InstallerController extends Controller
 
         // Écriture du contenu dans le fichier config.php
         file_put_contents($configFilePath, $configContent);
+
+
+        //mettre try catch et utilisation technique thibault
         $sqlFilePath = __DIR__ . "/../bdd.sql";
         
         $sqlContent = file_get_contents($sqlFilePath);
@@ -69,4 +77,21 @@ class InstallerController extends Controller
         echo json_encode($response);
         
     }
+    public function createUser(){
+
+        $validator = new ValidatorApi();
+        $formData = json_decode(file_get_contents('php://input'), true);
+            $validationResult = $validator->validateFormData($formData);
+            http_response_code(200);
+        header('Content-Type: application/json');
+        echo json_encode($validationResult);
+       
+
+
+
+        
+    }
+    
+    
+
 }
