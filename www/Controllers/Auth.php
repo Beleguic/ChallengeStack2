@@ -80,6 +80,11 @@ class Auth extends Controller
         //Form validé ? et correct ?
         if($form->isSubmited() && $form->isValid()){
             $user = new User();
+            $mailExist = $user->checkSomething(['email',$_POST['email']]);
+            if($mailExist){
+                // email deja existant
+                header('location: /register');
+            }
             $user->setFirstname($_POST['firstname']);
             $user->setLastname($_POST['lastname']);
             $user->setEmail($_POST['email']);

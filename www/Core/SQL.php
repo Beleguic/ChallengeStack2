@@ -173,13 +173,16 @@ class SQL{
 
     }
 
-    /*public function protectScriptInjection(array $columns): array
+    public function protectScriptInjection(array $columns): array
     {
         $newColumns = [];
         foreach ($columns as $key => $value) {
             if(is_string($value)){
                 $valueTemp = str_replace(">", "&gt;", $value);
                 $valueTemp = str_replace("<", "&lt;", $valueTemp);
+                $valueTemp = str_replace("*", "&ast;", $valueTemp);
+                $valueTemp = str_replace('"', "&QUOT;", $valueTemp);
+                $valueTemp = str_replace("'", "&rsquo;", $valueTemp);
                 $newColumns[$key] = $valueTemp;
             }
             else{
@@ -188,7 +191,7 @@ class SQL{
         }
 
         return $newColumns;
-    } */
+    }
 
 
     public function save($del=''): void
