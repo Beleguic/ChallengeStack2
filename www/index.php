@@ -189,12 +189,14 @@ else{
     $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
     // Route agent front
-    $app->router->post('/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);
-    $app->router->get('/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
-    $app->router->post('/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);
-    $app->router->get('/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);  
-    $app->router->post('/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);
-    $app->router->get('/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
+    $app->router->post('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->post('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
+    $app->router->get('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
+    $app->router->post('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);  
+    $app->router->post('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
 
     // Route annonce front
     $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);

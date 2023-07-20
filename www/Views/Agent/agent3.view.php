@@ -15,7 +15,7 @@
                 <a href="/">Accueil</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="/about-us">A propos</a>
+                <a href="/all-agents">Tous Les Agents</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
                 Emma Toledo
@@ -55,24 +55,20 @@
                 </p>
                 <div class="info-agents color-a">
                     <p>
-                    <strong>Phone: </strong>
-                    <span class="color-text-a"> +54 356 945234 </span>
+                        <strong>Phone: </strong>
+                        <span class="color-text-a"> +54 356 945234 </span>
                     </p>
                     <p>
-                    <strong>Mobile: </strong>
-                    <span class="color-text-a"> 999 123 456 789</span>
+                        <strong>Mobile: </strong>
+                        <span class="color-text-a"> 999 123 456 789</span>
                     </p>
                     <p>
-                    <strong>Email: </strong>
-                    <span class="color-text-a"> agents@example.com</span>
+                        <strong>Email: </strong>
+                        <span class="color-text-a"> agents@example.com</span>
                     </p>
                     <p>
-                    <strong>skype: </strong>
-                    <span class="color-text-a"> Margaret.Es</span>
-                    </p>
-                    <p>
-                    <strong>Email: </strong>
-                    <span class="color-text-a"> agents@example.com</span>
+                        <strong>Skype: </strong>
+                        <span class="color-text-a"> Margaret.Es</span>
                     </p>
                 </div>
                 </div>
