@@ -21,7 +21,7 @@ class AnnonceMemento extends SQL implements SQLInterface
     protected Int $nbrchambre;
     protected String $description;
     //addresse
-    protected String $city;
+    protected String $ville;
     protected String $adrcomplet;
     protected String $postcode;
     protected String $depnum;
@@ -51,7 +51,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $this->setNbrpiece($annonce->getNbrpiece());
         $this->setNbrchambre($annonce->getNbrchambre());
         $this->setDescription($annonce->getDescription());
-        $this->setCity($annonce->getCity());
+        $this->setVille($annonce->getVille());
         $this->setAddressComplet($annonce->getAddressComplet());
         $this->setPostCode($annonce->getPostCode());
         $this->setDepNum($annonce->getDepNum());
@@ -78,7 +78,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $annonce->setNbrpiece($AnnonceMemento->getNbrpiece());
         $annonce->setNbrchambre($AnnonceMemento->getNbrchambre());
         $annonce->setDescription($AnnonceMemento->getDescription());
-        $annonce->setCity($AnnonceMemento->getCity());
+        $annonce->setVille($AnnonceMemento->getVille());
         $annonce->setAddressComplet($AnnonceMemento->getAddressComplet());
         $annonce->setPostCode($AnnonceMemento->getPostCode());
         $annonce->setDepNum($AnnonceMemento->getDepNum());
@@ -106,7 +106,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $array['nbrPiece'] = $this->getNbrpiece();
         $array['nbrChambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
-        $array['city'] = $this->getCity();
+        $array['ville'] = $this->getVille();
         $array['adrComplet'] = $this->getAddressComplet();
         $array['postCode'] = $this->getPostCode();
         $array['depNum'] = $this->getDepNum();
@@ -114,7 +114,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $array['region'] = $this->getRegions();
         $array['latitude'] = $this->getLatitude();
         $array['longitude'] = $this->getLongitude();
-        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getCity();
+        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getVille();
         return $array;
 
     }
@@ -332,19 +332,19 @@ class AnnonceMemento extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getCity(): String
+    public function getVille(): String
     {
-        return $this->city;
+        return $this->ville;
     }
 
     /**
-     * @param mixed $city
+     * @param mixed $ville
      *
      * @return self
      */
-    public function setCity(String $city): void
+    public function setVille(String $ville): void
     {
-        $this->city = $city;
+        $this->ville = $ville;
     }
 
     /**

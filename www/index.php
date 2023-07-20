@@ -199,8 +199,8 @@ else{
     $app->router->get('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
 
     // Route annonce front
-    $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
-    $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
+    $app->router->post('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);
+    $app->router->get('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);    
     $app->router->post('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->get('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
