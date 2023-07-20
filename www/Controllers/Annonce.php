@@ -109,7 +109,7 @@ class Annonce extends Controller
         if($formAdd->isSubmited() && $formAdd->isValid()){
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
+            $annonce->setIdAgent($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -153,7 +153,7 @@ class Annonce extends Controller
             $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
+            $annonce->setIdAgent($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -323,7 +323,7 @@ class Annonce extends Controller
 
         // Ajoute un favorie pour l'utilisateur
 
-        if(!isset($_SESSION['zfgh_login']['id'])){
+        if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['id'])){
             exit;
         }
 
@@ -332,7 +332,7 @@ class Annonce extends Controller
         }
 
         $favori = new Favori();
-        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdUser($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
         $favori->setIdAnnonce($_GET['id_annonce']);
         $favori->save();
 
@@ -342,7 +342,7 @@ class Annonce extends Controller
     {
 
         // Ajoute un favorie pour l'utilisateur
-        if(!isset($_SESSION['zfgh_login']['id'])){
+        if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['id'])){
             exit;
         }
 
@@ -351,7 +351,7 @@ class Annonce extends Controller
         }
 
         $favori = new Favori();
-        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdUser($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
         $favori->setIdAnnonce($_GET['id_annonce']);
         $favori->delWhere();
 

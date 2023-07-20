@@ -26,7 +26,7 @@ class v_Annonce extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_".end($classExploded);
+        $this->table = "".$GLOBALS['prefixe']."_".end($classExploded);
     }
 
     public function getConfigObject(): array

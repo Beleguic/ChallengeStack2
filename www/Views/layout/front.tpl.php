@@ -65,7 +65,7 @@
         </ul>
       </div>
 
-      <a href="<?php echo (isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true) ? '/account-settings' : '/login'; ?>" class="btn btn-b-n">
+      <a href="<?php echo (isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']) && $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] == true) ? '/account-settings' : '/login'; ?>" class="btn btn-b-n">
         <i class="bi bi-person-square"></i>
         <span class="space">Mon Compte</span>
       </a>

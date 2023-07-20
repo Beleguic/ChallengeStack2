@@ -18,7 +18,7 @@ class v_Agent extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_v_agent";
+        $this->table = "".$GLOBALS['prefixe']."_v_agent";
     }
 
     public function getConfigObject(): array

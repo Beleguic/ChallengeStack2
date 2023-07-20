@@ -285,6 +285,7 @@ function FirsPage() {
         port: event.target.elements.port.value,
         user: event.target.elements.user.value,
         password: event.target.elements.password.value,
+        prefixe:event.target.elements.prefixe.value,
         
       };
       console.log(formData);
@@ -318,6 +319,7 @@ function FirsPage() {
         <input type="text" name="port" placeholder="Port" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <input type="text" name="prefixe" placeholder="Prefixe de table" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
         </form>
         </div>

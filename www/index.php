@@ -15,8 +15,16 @@
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
 
+    $ini = parse_ini_file('./app.ini');
+    $globals = $GLOBALS;
+    $GLOBALS['prefixe'] = $ini['prefixe'];
+    
+
+
+
  if (!file_exists('app.ini') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
         header('Location: /public/react/src/index.html');
+        
     
     }
     
@@ -38,19 +46,20 @@
             include $classForm;
         }
     });
+    
 
 
 
    
 
-    if(isset($_SESSION['zfgh_login'])){
-        if(isset($_SESSION['zfgh_login']['token'])){
-            $token = $_SESSION['zfgh_login']['token'];
-            $id = $_SESSION['zfgh_login']['id'];
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+        if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['token'])){
+            $token = $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'];
+            $id = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
             $connexion = new Connexion();
             $connexion = $connexion->populateWith(["id_user" => $id]);
             if(isset($connexion->property)){ 
-                unset($_SESSION['zfgh_login']);
+                unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
             }
             else{
                 $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
@@ -60,33 +69,33 @@
                 if ($dateNow > $last_seenPlus2Hour)
                 {
                    $connexion->save('del');
-                   unset($_SESSION['zfgh_login']);
+                   unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
                 }
                 else{
                     if($token == $connexion->getToken()){
                         $newToken = sha1(uniqid());
-                        $_SESSION['zfgh_login']['token'] = $newToken;
+                        $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'] = $newToken;
                         $connexion->setToken($newToken);
                         $connexion->setLastSeen(date('Y-m-d H:i:s'));
                         $connexion->save();
                     }
                     else{
                         $connexion->save('del');
-                        unset($_SESSION['zfgh_login']);; 
+                        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);; 
                     }
                 }
             }
 
         }
         else{
-            unset($_SESSION['zfgh_login']);
+            unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
         }
     }
     else{
-        unset($_SESSION['zfgh_login']);
+        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
     }
     
-    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']) && !$_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
         
@@ -126,9 +135,9 @@ Level Authentificatioin
 
 
 // Recuperation info de connection
-if(isset($_SESSION['zfgh_login'])){
-    if($_SESSION['zfgh_login']['connected']){
-        $level_auth_user = $_SESSION['zfgh_login']['status'];
+if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+    if($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']){
+        $level_auth_user = $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'];
     }
     else{
         $level_auth_user = 0;    

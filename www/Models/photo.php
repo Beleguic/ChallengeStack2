@@ -15,7 +15,7 @@ class Photo extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_photo";
+        $this->table = "".$GLOBALS['prefixe']."_photo";
     }
 
     public function getConfigObject(): array

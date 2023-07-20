@@ -10,11 +10,11 @@ class Setting extends Controller
 {
   public function setting(): String
   {
-    if(!isset($_SESSION['zfgh_login'])) {
+    if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])) {
       header('Location : /');
     }
       $user = new UserModel();
-      $userId = $_SESSION['zfgh_login']['id'];
+      $userId = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
 
       $this->setView("Settings/account-settings");
       $this->setTemplate("front");
@@ -30,7 +30,7 @@ class Setting extends Controller
     $this->setTemplate("front");
       
     $user = new UserModel();
-    $userId = $_SESSION['zfgh_login']['id'];
+    $userId = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
     $formChangeEmail = new UserForm();
 
     $this->assign("form", $formChangeEmail->getConfigChangeEmail());
@@ -52,7 +52,7 @@ class Setting extends Controller
       $this->setTemplate("front");
         
       $user = new UserModel();
-      $userId = $_SESSION['zfgh_login']['id'];
+      $userId = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
       $formChangeInfo = new UserForm();
 
       $this->assign("form", $formChangeInfo->getConfigChangeInfo());
@@ -75,7 +75,7 @@ class Setting extends Controller
     $this->setTemplate("front");
 
     $user = new UserModel();
-    $userId = $_SESSION['zfgh_login']['id'];
+    $userId = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
     $formChangePwd = new UserForm();
     
     $this->assign("form", $formChangePwd->getConfigChangePwd());
