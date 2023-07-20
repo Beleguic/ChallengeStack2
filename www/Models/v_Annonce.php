@@ -16,7 +16,7 @@ class v_Annonce extends SQL implements SQLInterface
     protected Int $nbrchambre;
     protected String $description;
     //addresse
-    protected String $city;
+    protected String $ville;
     protected String $adrcomplet;
     protected String $postcode;
     protected String $depnum;
@@ -129,7 +129,7 @@ class v_Annonce extends SQL implements SQLInterface
      */
     public function getVille(): String
     {
-        return $this->city;
+        return $this->ville;
     }
 
     /**

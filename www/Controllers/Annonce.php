@@ -28,6 +28,19 @@ class Annonce extends Controller
         return $this->render();
     }
 
+    public function displayAllAnnonce(): String 
+    {
+        $this->setView("Annonce/annonce-all");
+        $this->setTemplate("front");
+
+        $annonce = new v_AnnonceModel();
+
+        $this->assign("annoncelist", $annonce->getAll());
+
+        return $this->render();
+    }
+
+
     public function viewAnnonce(): String
     {
 
@@ -377,9 +390,9 @@ class Annonce extends Controller
 
     }
 
-    public function getAllBuyAnnonces(): String
+    public function getAllAnnonces(): String
     {
-        $this->setView("Annonce/annonce-all-buy");
+        $this->setView("Annonce/annonce-all");
         $this->setTemplate("front");
         
         return $this->render();

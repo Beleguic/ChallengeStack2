@@ -19,7 +19,7 @@ class Annonce extends SQL implements SQLInterface
     protected String $description;
     
     //addresse
-    protected String $city;
+    protected String $ville;
     protected String $adrcomplet;
     protected String $postcode;
     protected String $depnum;
@@ -51,7 +51,7 @@ class Annonce extends SQL implements SQLInterface
         $array['nbrPiece'] = $this->getNbrpiece();
         $array['nbrChambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
-        $array['city'] = $this->getCity();
+        $array['ville'] = $this->getVille();
         $array['adrComplet'] = $this->getAddressComplet();
         $array['postCode'] = $this->getPostCode();
         $array['depNum'] = $this->getDepNum();
@@ -59,7 +59,7 @@ class Annonce extends SQL implements SQLInterface
         $array['region'] = $this->getRegions();
         $array['latitude'] = $this->getLatitude();
         $array['longitude'] = $this->getLongitude();
-        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getCity();
+        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getVille();
         return $array;
 
     }
@@ -248,19 +248,19 @@ class Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getCity(): String
+    public function getVille(): String
     {
-        return $this->city;
+        return $this->ville;
     }
 
     /**
-     * @param mixed $city
+     * @param mixed $ville
      *
      * @return self
      */
-    public function setCity(String $city): void
+    public function setVille(String $ville): void
     {
-        $this->city = $city;
+        $this->ville = $ville;
     }
 
     /**
