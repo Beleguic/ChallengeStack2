@@ -83,7 +83,7 @@ create table public.zfgh_annonce (
     longitude text not null,
     latitude text not null,
     constraint zfgh_annonce_pkey primary key (id),
-    constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
+    constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade,
     constraint fk_id_agent_agent foreign key (id_agent) references zfgh_agent (id) on delete cascade
   ) tablespace pg_default;
 
@@ -110,7 +110,8 @@ create table public.zfgh_annonce_memento (
     latitude text not null,
     constraint zfgh_memento_pkey primary key (id),
     constraint fk_id_annonce_user foreign key (id_annonce) references zfgh_annonce (id) on delete cascade,
-    constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
+    constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade,
+    constraint fk_id_agent_agent_memento foreign key (id_agent) references zfgh_agent (id) on delete cascade
   ) tablespace pg_default;
 
 create table public.zfgh_connexion (
