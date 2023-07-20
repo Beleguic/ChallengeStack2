@@ -241,6 +241,16 @@ function useIncrement() {
   return [n, increment];
 }
 
+function useStateArray() {
+  const [array, setArray] = React.useState([]);
+
+  const addElement = function (element) {
+    setArray(prevArray => [...prevArray, element]);
+  };
+
+  return [array, addElement];
+}
+
 
 function Compteur({ name }) {
   const [n, increment] = useIncrement()
@@ -275,7 +285,7 @@ function FirsPage() {
 }
 
   /** @jsx React.createElement */
-  function FormDb(props) {
+  function FormDb({increment}) {
     function handleSubmit(event) {
       event.preventDefault();
       console.log(event.target.elements.host.value);
@@ -285,6 +295,7 @@ function FirsPage() {
         port: event.target.elements.port.value,
         user: event.target.elements.user.value,
         password: event.target.elements.password.value,
+        email:event.target.elements.email.value,
         prefixe:event.target.elements.prefixe.value,
         
       };
@@ -301,6 +312,7 @@ function FirsPage() {
           if (data.error) {
             alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
           } else {
+            increment();
             alert('Connexion Reussi ! Cliquez sur suivant');
             
           }
@@ -320,6 +332,7 @@ function FirsPage() {
         <input type="text" name="user" placeholder="Utilisateur" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="text" name="prefixe" placeholder="Prefixe de table" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+        <input type="text" name="email" placeholder="Email" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
         <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
         </form>
         </div>
@@ -327,7 +340,7 @@ function FirsPage() {
   }
 
   /** @jsx React.createElement */
-function FormRoot(props) {
+function FormRoot({increment}) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = {
@@ -353,7 +366,8 @@ function FormRoot(props) {
         if (data.error) {
           alert('Validation Error: ' + data.error); // Show validation error to the user
         } else {
-          alert('Form submitted successfully!'); // Show success message to the user
+          increment();
+          alert('Création du compte Admin réussi ! '); // Show success message to the user
         }
       })
       .catch(error => {
@@ -378,7 +392,7 @@ function FormRoot(props) {
 }
 
   /** @jsx React.createElement */
-  function VerifyRoot(props) {
+  function VerifyRoot({increment}) {
     function handleSubmit(event) {
       event.preventDefault();
       const formData = {
@@ -396,9 +410,10 @@ function FormRoot(props) {
         .then(data => {
           console.log(data)
           if (data.error) {
-            alert('Validation Error: ' + data.error); // Show validation error to the user
+            alert('Validation Error: ' + data.error); 
           } else {
-            alert('Form submitted successfully!'); // Show success message to the user
+            increment();
+            alert('Le code est Valide'); 
           }
         })
         .catch(error => {
@@ -419,10 +434,32 @@ function FormRoot(props) {
     );
   }
 
+  /** @jsx React.createElement */
+  function FinalStep() {
+    const redirectToHomePage = () => {
+      window.location.href = "/";
+    };
+  
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <h2>L'installation est terminée</h2>
+        <button
+          className="px-7 py-4 text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg"
+          onClick={redirectToHomePage}
+        >
+          Allez vers le site
+        </button>
+      </div>
+    );
+  }
+
 
  /** @jsx React.createElement */
  function App() {
    const [n, increment] = useIncrement();
+   
+
+   console.log(n);
    
  
 
@@ -434,11 +471,17 @@ function FormRoot(props) {
           <FirsPage />
         );
       case 1:
-        return (<FormDb/>);
+        return <FormDb increment={increment}/>;
       case 2:
-        return <FormRoot/>;
+        return <FormRoot increment={increment}/>;
       case 3:
-        return <VerifyRoot/>
+        return <VerifyRoot increment={increment}/>;
+      case 4:
+        return <FinalStep />;
+      default:
+        return (
+          <FirsPage />
+        );
     }
   }
 
