@@ -49,7 +49,7 @@ class v_Annonce extends SQL implements SQLInterface
         $array['nbrpiece'] = $this->getNbrpiece();
         $array['nbrchambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
-        $array['ville'] = $this->getVille();
+        $array['city'] = $this->getCity();
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
         $array['regions'] = $this->getRegions();
@@ -134,9 +134,9 @@ class v_Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getVille(): String
+    public function getCity(): String
     {
-        return $this->ville;
+        return $this->city;
     }
 
     /**
