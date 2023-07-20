@@ -24,6 +24,10 @@ class v_Annonce extends SQL implements SQLInterface
     protected String $region;
     protected String $longitude;
     protected String $latitude;
+    //user
+    protected String $lastname_agent;
+    protected String $firstname_agent;
+    protected String $email_agent;
 
 
     public function __construct(){
@@ -49,6 +53,9 @@ class v_Annonce extends SQL implements SQLInterface
         $array['rue'] = $this->getRue();
         $array['departement'] = $this->getDepartement();
         $array['regions'] = $this->getRegions();
+        $array['lastnameagent'] = $this->getLastnameAgent();
+        $array['firstnameagent'] = $this->getFirstnameAgent();
+        $array['emailagent'] = $this->getEmailAgent();
         return $array;
 
     }
@@ -186,6 +193,30 @@ class v_Annonce extends SQL implements SQLInterface
     public function getLongitude(): String
     {
         return $this->longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastnameAgent(): String
+    {
+        return $this->lastname_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstnameAgent(): String
+    {
+        return $this->firstname_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailAgent(): String
+    {
+        return $this->email_agent;
     }
 
 

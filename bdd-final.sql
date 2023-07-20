@@ -181,36 +181,15 @@ create table public.zfgh_opinion (
 
 
 create view public.zfgh_v_agent as
-select u.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) as nbr_annonce
-from zfgh_user u  left join zfgh_annonce a on u.id = a.id_agent
-where u.status > 1
-group by u.id
+select u.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) as nbr_annonce, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
+from zfgh_user u left join zfgh_agent ag on u.id = ag.id_user left join zfgh_annonce a on u.id = a.id_agent
+where u.status > 1 and ag.id_user = u.id
+group by u.id, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
 order by (count(a.id_agent)) desc;
 
-  create view
-  public.zfgh_v_annonce as
-select
-  a.id,
-  a.titre,
-  a.prix,
-  a.superficiemaison,
-  a.superficieterrain,
-  a.nbrpiece,
-  a.nbrchambre,
-  a.description,
-  a.city,
-  a.adrcomplet,
-  a.postcode,
-  a.depnum,
-  a.deplabel,
-  a.region,
-  a.longitude,
-  a.latitude,
-  t.texte
-from
-  zfgh_annonce a,
-  zfgh_type t
-where
-  a.id_type = t.id;
+create view public.zfgh_v_annonce as
+select a.id, a.titre, a.prix, a.superficiemaison, a.superficieterrain, a.nbrpiece, a.nbrchambre, a.description, a.city, a.adrcomplet, a.postcode, a.depnum, a.deplabel, a.region, a.longitude, a.latitude, t.texte, u.lastname as lastname_agent, u.firstname as firstname_agent, u.email as email_agent
+from zfgh_annonce a, zfgh_type t, zfgh_user u
+where a.id_type = t.id and a.id_agent = u.id;
 
 INSERT INTO zfgh_status (id_status, status) VALUES ('0','Lecture seul'),('1','Utilisateur'),('2','Agent Immobilier'),('3','Administrateur'),('4','Super Administrateur');
