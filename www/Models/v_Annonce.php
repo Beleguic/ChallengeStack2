@@ -127,7 +127,7 @@ class v_Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getCity(): String
+    public function getVille(): String
     {
         return $this->city;
     }

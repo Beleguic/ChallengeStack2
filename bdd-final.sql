@@ -146,7 +146,7 @@ create table public.zfgh_opinion (
     id_agent uuid null,
     id_user uuid null,
     date_avis timestamp with time zone not null default (now() at time zone 'utc'::text),
-    avis_agence boolean not null default 0,
+    avis_agence boolean not null default false,
     is_valid boolean not null default false,
     constraint idavis_pkey primary key (id),
     constraint fk_id_agent_user foreign key (id_agent) references zfgh_user (id) on delete cascade,

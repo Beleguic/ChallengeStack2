@@ -181,12 +181,12 @@ else{
     $app->router->post('/deconnexion', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     
     $app->router->get('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
-    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
-    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
+    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],0);
+    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
     $app->router->post('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
-    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
-    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
+    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],0);
+    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
     // Route agent front
     $app->router->post('/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);
