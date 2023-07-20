@@ -398,6 +398,11 @@
           <div class="title-box">
             <h2 class="title-a">Best Agents</h2>
           </div>
+          <div class="title-link">
+            <a href="/all-agents">Tous les agents
+              <span class="bi bi-chevron-right"></span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -411,7 +416,7 @@
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="/agent1" class="link-two">Margaret Sotillo
+                  <a href="/all-agents/agent1" class="link-two">Margaret Sotillo
                     <br> Escala</a>
                 </h3>
               </div>
@@ -467,7 +472,7 @@
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="/agent2" class="link-two">Stiven Spilver
+                  <a href="/all-agents/agent2" class="link-two">Stiven Spilver
                     <br> Darw</a>
                 </h3>
               </div>
@@ -523,7 +528,7 @@
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="/agent3" class="link-two">Emma Toledo
+                  <a href="/all-agents/agent3" class="link-two">Emma Toledo
                     <br> Cascada</a>
                 </h3>
               </div>

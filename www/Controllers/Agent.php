@@ -8,6 +8,14 @@ use App\Forms\Contact;
 
 class Agent extends Controller
 {
+    public function agent(): String
+    {
+        $this->setView("Agent/all-agents");
+        $this->setTemplate("front");
+
+        return $this->render();
+    }
+
     public function agent1(): String
     {
         $this->setView("Agent/agent1");
