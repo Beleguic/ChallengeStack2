@@ -3,7 +3,6 @@
 DROP VIEW  IF EXISTS public.zfgh_v_agent;
 DROP VIEW  IF EXISTS public.zfgh_v_annonce;
 DROP TABLE IF EXISTS public.zfgh_opinion;
-DROP TABLE IF EXISTS public.zfgh_agent;
 DROP TABLE IF EXISTS public.zfgh_connexion;
 DROP TABLE IF EXISTS public.zfgh_advice;
 DROP TABLE IF EXISTS public.zfgh_favori;
@@ -14,6 +13,7 @@ DROP TABLE IF EXISTS public.zfgh_user_code;
 DROP TABLE IF EXISTS public.zfgh_annonce_memento;
 DROP TABLE IF EXISTS public.zfgh_annonce;
 DROP TABLE IF EXISTS public.zfgh_type;
+DROP TABLE IF EXISTS public.zfgh_agent;
 DROP TABLE IF EXISTS public.zfgh_user;
 DROP TABLE IF EXISTS public.zfgh_status;
 
@@ -39,6 +39,22 @@ create table public.zfgh_user (
     constraint zfgh_user_pkey primary key (id),
     constraint zfgh_user_email_key unique (email),
     constraint fk_status_user foreign key (status) references zfgh_status (id_status) on delete cascade
+  ) tablespace pg_default;
+
+create table public.zfgh_agent (
+    id uuid not null default gen_random_uuid (),
+    id_user uuid not null,
+    photolink text not null,
+    description text not null,
+    telephone text not null default '',
+    mobile text not null default '',
+    skype text not null default '',
+    facebook text not null default '',
+    twitter text not null default '',
+    instagram text not null default '',
+    linkedin text not null default '',
+    constraint zfgh_agent_pkey primary key (id),
+    constraint fk_agent_userId foreign key (id_user) references zfgh_user (id) on delete cascade
   ) tablespace pg_default;
 
 create table public.zfgh_type (
@@ -68,6 +84,7 @@ create table public.zfgh_annonce (
     latitude text not null,
     constraint zfgh_annonce_pkey primary key (id),
     constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
+    constraint fk_id_agent_agent foreign key (id_agent) references zfgh_agent (id) on delete cascade
   ) tablespace pg_default;
 
 create table public.zfgh_annonce_memento (
@@ -148,23 +165,6 @@ create table public.zfgh_user_code (
     constraint usercode_pkey primary key (id),
     constraint fk_id_user_user foreign key (id_user) references zfgh_user (id) on delete cascade
   ) tablespace pg_default;
-
-create table public.zfgh_agent (
-    id uuid not null default gen_random_uuid (),
-    id_user uuid not null,
-    photolink text not null,
-    description text not null,
-    telephone text not null default '',
-    mobile text not null default '',
-    skype text not null default '',
-    facebook text not null default '',
-    twitter text not null default '',
-    instagram text not null default '',
-    linkedin text not null default '',
-    constraint zfgh_agent_pkey primary key (id),
-    constraint fk_agent_userId foreign key (id_user) references zfgh_user (id) on delete cascade
-  ) tablespace pg_default;
-
 
 create table public.zfgh_opinion (
     id uuid not null default gen_random_uuid (),
