@@ -45,7 +45,7 @@
                       <span></span> <?=$row->getPrix()?> 
                       </span>
                     </div>
-                    <a href="property-single.html" class="link-a">Click here to view
+                    <a href="/annonce/<?=$row->getId()?>"class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
                     </a>
                   </div>

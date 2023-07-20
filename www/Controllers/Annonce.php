@@ -39,9 +39,23 @@ class Annonce extends Controller
 
         return $this->render();
     }
+    
+    public function detailsAnnonce($id)
+    {
+        var_dump("salut les amis");
+        // $this->setView("Annonce/annonce-details");
+        // $this->setTemplate("front");
 
+        // $annonce = new v_AnnonceModel();
+        // $annonce = $annonce->populate($id);
+        // var_dump($annonce);
 
-    public function viewAnnonce(): String
+        // $this->assign("annonceDetails", $annonce);
+
+        // return $this->render();
+    }
+
+    public function viewAnnonce(): String 
     {
 
         //$view = new View("Annonce/annonce-view", "back");

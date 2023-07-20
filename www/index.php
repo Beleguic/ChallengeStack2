@@ -203,8 +203,8 @@ else{
     $app->router->get('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);    
     $app->router->post('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->get('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
-    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
-    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
+    $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"detailsAnnonce"],[AuthMiddleware::class],0);
+    $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"detailsAnnonce"],[AuthMiddleware::class],0);
 
     // Route newsletter
     $app->router->get('/subscribe-newsletter', [Newsletter::class ,"subscribe"],[AuthMiddleware::class],0);
