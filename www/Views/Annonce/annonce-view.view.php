@@ -92,7 +92,7 @@
 						<td><?=$row->getNbrpiece()?></td>
 						<td><?=$row->getNbrchambre()?></td>
 						<td><?=$row->getDescription()?></td>
-						<td><?=$row->getVille()?></td>
+						<td><?=$row->getCity()?></td>
 						<td><?=$row->getAddressComplet()?></td>
 						<td><?=$row->getPostCode()?></td>
 						<td><?=$row->getDepNum()?></td>

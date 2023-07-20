@@ -31,7 +31,7 @@
 					<td><?=$row->getSuperficieterrain()?></td>
 					<td><?=$row->getNbrpiece()?></td>
 					<td><?=$row->getNbrchambre()?></td>
-					<td><?=$row->getVille()?></td>
+					<td><?=$row->getCity()?></td>
 					<td><?=$row->getRue()?></td>
 					<td><?=$row->getDepartement()?></td>
 					<td><?=$row->getRegions()?></td>
