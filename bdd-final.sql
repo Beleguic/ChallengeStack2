@@ -189,7 +189,7 @@ order by (count(a.id_agent)) desc;
 
 create view public.zfgh_v_annonce as
 select a.id, a.titre, a.prix, a.superficiemaison, a.superficieterrain, a.nbrpiece, a.nbrchambre, a.description, a.city, a.adrcomplet, a.postcode, a.depnum, a.deplabel, a.region, a.longitude, a.latitude, t.texte, u.lastname as lastname_agent, u.firstname as firstname_agent, u.email as email_agent
-from zfgh_annonce a, zfgh_type t, zfgh_user u
-where a.id_type = t.id and a.id_agent = u.id;
+from zfgh_annonce a, zfgh_type t, zfgh_agent ag, zfgh_user u
+where a.id_type = t.id and a.id_agent = ag.id and ag.id_user = u.id;
 
 INSERT INTO zfgh_status (id_status, status) VALUES ('0','Lecture seul'),('1','Utilisateur'),('2','Agent Immobilier'),('3','Administrateur'),('4','Super Administrateur');
