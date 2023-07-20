@@ -15,7 +15,7 @@ class Agent extends Validator
                 "id"=>"login-form",
                 "class"=>"form",
                 "enctype"=>"multipart/form-data",
-                "submit"=>["Mettre à jour vos information d'agent"],
+                "submit"=>["Se connecter"],
                 "reset"=>"Annuler"
             ],
             "submit"=>[
@@ -85,7 +85,7 @@ class Agent extends Validator
                     "balise"=>"textarea",
                     "rows" => "5",  
                     "id"=>"agent-form-description",
-                    "class"=>"form-control",
+                    "class"=>"custom-textarea",
                     "placeholder"=>"Description",
                     "type"=>"text",
                     "error"=>"Votre description est incorrect",
@@ -207,52 +207,52 @@ class Agent extends Validator
                 "method"=>$this->method,
                 "action"=>"",
                 "id"=>"login-form",
-                "class"=>"form",
+                "class"=>"app-card app-card-settings shadow-sm p-4",
                 "enctype"=>"multipart/form-data",
                 "submit"=>["Mettre à jour vos information d'agent"],
                 "reset"=>"Annuler"
             ],
             "submit"=>[
-                "Se connecter" => [
+                "Mettre à jour vos information d'agent" => [
                     "id" => "",
-                    "class" => "btn btn-outline-b-n btn-block m-4 w-25"
+                    "class" => "btn app-btn-primary m-2"
                 ],
             ],
             "reset"=>[
                 "Annuler" => [
                     "id" => "",
-                    "class" => "btn btn-outline-b-n btn-block m-4 w-25"
+                    "class" => "btn app-btn-primary m-2"
                 ],
             ],
             "divs"=>[
                 "div-photo" =>[
                     "id" => "div-login-email",
-                    "class" => "form-group div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["photo","id"]
                 ],
                 "div-description" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["description"]
                 ],
                 "div-telephone" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["telephone","mobile"]
                 ],
                 "div-skype-facebook" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["skype","facebook"]
                 ],
                 "div-twitter-instagram" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100",
+                    "class" => "row pb-4",
                     "inside" => ["twitter","instagram"]
                 ],
                 "div-linkedin" =>[
                     "id" => "div-login-pwd",
-                    "class" => "form-group div-form-100",
+                    "class" => "pb-4",
                     "inside" => ["linkedin"]
                 ],
             ],
@@ -268,10 +268,10 @@ class Agent extends Validator
                 ],
                 "photo"=>[
                     "divId"=>"",
-                    "divClass"=>"mb-3",
+                    "divClass"=>"",
                     "id"=>"agent-form-photo-link",
-                    "class"=>"form-control",
-                    "placeholder"=>"Photo d'agent",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"file",
                     "error"=>"Votre photo est incorrect",
                     "label" =>[
@@ -288,8 +288,8 @@ class Agent extends Validator
                     "balise"=>"textarea",
                     "rows" => "5",
                     "id"=>"agent-form-description",
-                    "class"=>"form-control",
-                    "placeholder"=>"Description",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre description est incorrect",
                     "label" =>[
@@ -301,9 +301,11 @@ class Agent extends Validator
                     "required"=>true
                 ],
                 "telephone"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-description",
-                    "class"=>"form-control",
-                    "placeholder"=>"Telephone Mobile",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre telephone mobile est incorrect",
                     "label" =>[
@@ -315,9 +317,11 @@ class Agent extends Validator
                     "required"=>false
                 ],
                 "mobile"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-description",
-                    "class"=>"form-control",
-                    "placeholder"=>"Telephone Fixe",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre telephone fixe est incorrect",
                     "label" =>[
@@ -329,9 +333,11 @@ class Agent extends Validator
                     "required"=>false
                 ],
                 "skype"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-skype",
-                    "class"=>"form-control",
-                    "placeholder"=>"Skype",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre skype fixe est incorrect",
                     "label" =>[
@@ -343,9 +349,11 @@ class Agent extends Validator
                     "required"=>false
                 ],
                 "facebook"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-facebook",
-                    "class"=>"form-control",
-                    "placeholder"=>"Facebook",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre facebook fixe est incorrect",
                     "label" =>[
@@ -357,9 +365,11 @@ class Agent extends Validator
                     "required"=>false
                 ],
                 "twitter"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-twitter",
-                    "class"=>"form-control",
-                    "placeholder"=>"Twitter",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre twitter fixe est incorrect",
                     "label" =>[
@@ -371,9 +381,11 @@ class Agent extends Validator
                     "required"=>false
                 ],
                 "instagram"=>[
+                    "divId"=>"",
+                    "divClass"=>"col-md-6 mb-3 mb-md-0",
                     "id"=>"agent-form-instagram",
-                    "class"=>"form-control",
-                    "placeholder"=>"Instagram",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre instagram fixe est incorrect",
                     "label" =>[
@@ -386,8 +398,8 @@ class Agent extends Validator
                 ],
                 "linkedin"=>[
                     "id"=>"agent-form-linkedin",
-                    "class"=>"form-control",
-                    "placeholder"=>"Linkedin",
+                    "class"=>"custom-input",
+                    "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"Votre linkedin fixe est incorrect",
                     "label" =>[

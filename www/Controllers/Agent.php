@@ -6,7 +6,9 @@ use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Contact;
 use App\Models\Agent as AgentModel;
+use App\Models\v_Agent as v_AgentModel;
 use App\Forms\Agent as AgentForm;
+use App\Models\User as UserModel;
 
 class Agent extends Controller
 {
@@ -104,10 +106,26 @@ class Agent extends Controller
             $agent->setInstagram($_POST['instagram']);
             $agent->setLinkedin($_POST['linkedin']);
             $agent->save();
-            header("location: /back/agentInfo");
+            header("location: /back/agent-info");
         }
 
         return $this->render();
 
+    }
+
+    public function agentInfo(): String
+    {
+        $user = new UserModel();
+        $agent = new v_AgentModel();
+
+        $userId = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
+
+        $this->setView("Agent/agent-info");
+        $this->setTemplate("back");
+
+        $this->assign("userInfo", $user->populate($userId));
+        $this->assign("agentInfo", $agent->populate($userId));
+
+        return $this->render();
     }
 }
