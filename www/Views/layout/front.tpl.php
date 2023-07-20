@@ -54,7 +54,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proriétés</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="/annonces-buy">Acheter</a>
-              <a class="dropdown-item " href="/annonces-rent">Louer</a>
+              <a class="dropdown-item " href="/favoris">Favoris</a>
             </div>
           </li>
 
@@ -117,7 +117,7 @@
                     <i class="bi bi-chevron-right"></i> <a href="/annonces-buy">Acheter</a>
                   </li>
                   <li class="item-list-a">
-                    <i class="bi bi-chevron-right"></i> <a href="/annonces-rent">Louer</a>
+                    <i class="bi bi-chevron-right"></i> <a href="/favoris">Favoris</a>
                   </li>
                   <li class="item-list-a">
                     <i class="bi bi-chevron-right"></i> <a href="#">Appartements</a>
