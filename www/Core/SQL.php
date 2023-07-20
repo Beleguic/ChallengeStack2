@@ -19,15 +19,12 @@ class SQL{
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
-
-        $host = $GLOBALS['config']['host'];
-        $dbname = $GLOBALS['config']['dbname'];
-        $port = $GLOBALS['config']['port'];
-        $user = $GLOBALS['config']['user'];
-        $password = $GLOBALS['config']['password'];
-
+        $ini = parse_ini_file('app.ini');  
         try {
-            $this->pdo = new \PDO("pgsql:host=".$host.";dbname=".$dbname.";port=".$port, $user, $password);
+            $request = "pgsql:host=".$ini['host'].";dbname=".$ini['dbname'].";port=".$ini['port']."";
+    
+            
+            $this->pdo = new \PDO("pgsql:host=".$ini['host'].";dbname=".$ini['dbname'].";port=".$ini['port']."", $ini['user'], $ini['password']);
         } catch(\Exception $e) {
             die("Erreur SQL : ".$e->getMessage());
         }

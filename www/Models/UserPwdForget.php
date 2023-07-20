@@ -15,7 +15,7 @@ class UserPwdForget extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_pwd_forget";
+        $this->table = "".$GLOBALS['prefixe']."_pwd_forget";
     }
 
     public function getConfigObject(): array

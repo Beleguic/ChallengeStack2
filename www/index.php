@@ -16,15 +16,9 @@
     use App\Controllers\Back;
     use App\Controllers\Opinion;
     use App\Controllers\Agent;
-
     
 
-    if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
-        header('Location: /public/react/src/index.html');
-    }
-    else{
-        include "./config.php";
-    }
+    
     
     date_default_timezone_set("Europe/Paris");
 
@@ -46,17 +40,21 @@
     });
 
 
-
-   
-
-    if(isset($_SESSION['zfgh_login'])){
-        if(isset($_SESSION['zfgh_login']['token'])){
-            $token = $_SESSION['zfgh_login']['token'];
-            $id = $_SESSION['zfgh_login']['id'];
+ if (!file_exists('app.ini')) {
+        header('Location: /public/react/src/index.html');
+    }else{
+        $ini = parse_ini_file('./app.ini');
+    $globals = $GLOBALS;
+    $GLOBALS['prefixe'] = $ini['prefixe'];
+    
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+        if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['token'])){
+            $token = $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'];
+            $id = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
             $connexion = new Connexion();
             $connexion = $connexion->populateWith(["id_user" => $id]);
             if(isset($connexion->property)){ 
-                unset($_SESSION['zfgh_login']);
+                unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
             }
             else{
                 $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
@@ -66,46 +64,57 @@
                 if ($dateNow > $last_seenPlus2Hour)
                 {
                    $connexion->save('del');
-                   unset($_SESSION['zfgh_login']);
+                   unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
                 }
                 else{
                     if($token == $connexion->getToken()){
                         $newToken = sha1(uniqid());
-                        $_SESSION['zfgh_login']['token'] = $newToken;
+                        $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'] = $newToken;
                         $connexion->setToken($newToken);
                         $connexion->setLastSeen(date('Y-m-d H:i:s'));
                         $connexion->save();
                     }
                     else{
                         $connexion->save('del');
-                        unset($_SESSION['zfgh_login']);; 
+                        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);; 
                     }
                 }
             }
 
         }
         else{
-            unset($_SESSION['zfgh_login']);
+            unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
         }
     }
     else{
-        unset($_SESSION['zfgh_login']);
+        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
     }
     
-    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']) && !$_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
-        echo "salut";
+        
             header("location: /activation");
         }
     }
     else{
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri == "activation"){
-            echo "salut";
+            
             header("location: /");
         }
     }
+    }
+
+    
+    
+    
+    
+
+
+
+   
+
 
 /*
 
@@ -132,9 +141,9 @@ Level Authentificatioin
 
 
 // Recuperation info de connection
-if(isset($_SESSION['zfgh_login'])){
-    if($_SESSION['zfgh_login']['connected']){
-        $level_auth_user = $_SESSION['zfgh_login']['status'];
+if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+    if($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']){
+        $level_auth_user = $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'];
     }
     else{
         $level_auth_user = 0;    
@@ -150,8 +159,15 @@ else{
     $app = new Application();
 
     //api route
-    $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
-    $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+    
+         $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
+        $app->router->post('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+    
+   
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);

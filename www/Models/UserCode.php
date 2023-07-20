@@ -14,7 +14,7 @@ class UserCode extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_user_code";
+        $this->table = "".$GLOBALS['prefixe']."_user_code";
     }
 
     public function getConfigObject(): array

@@ -73,24 +73,29 @@
 
         public function resolve()
         {
-            $path=$this->request->getPath();
+            
+;            $path=$this->request->getPath();
             $method = $this->request->getMethod();
             $params = [];
 
 
             $callback = $this->routes[$method][$path]["callback"] ?? false;
             $role = $this->routes[$method][$path]["role"] ?? false;
-            $user = new User();
-
-            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
-                $user=$user->populate($_SESSION["zfgh_login"]["id"]);
-            }else{
-                $user->setStatus(0);
-            }
 
             
-
-
+            
+            
+            if (strpos($path, "/api") !== false) {
+               
+                
+            }else{
+                $user = new User();
+                if(isset($_SESSION["".$GLOBALS['prefixe']."_login"]["connected"]) && $_SESSION["".$GLOBALS['prefixe']."_login"]["connected"]){
+                $user=$user->populate($_SESSION["".$GLOBALS['prefixe']."_login"]["id"]);
+                }else{
+                    $user->setStatus(0);
+                
+            }
             foreach ($this->routes[$method] as $route => $routeCallback) {
                 $pattern = $this->convertToRegex($route);
                 
@@ -100,7 +105,7 @@
                         
                         if(!$middleware->execute()){
                         echo "salut";
-                            if(isset($_SESSION["zfgh_login"]["connected"]) && $_SESSION["zfgh_login"]["connected"]){
+                            if(isset($_SESSION["".$GLOBALS['prefixe']."_login"]["connected"]) && $_SESSION["".$GLOBALS['prefixe']."_login"]["connected"]){
                                 $this->response->setStatutCode(403);
                                 return $this->renderView("Views/_403.php","Views/layout/_403.tpl.php");
                             }else{
@@ -123,12 +128,23 @@
                     
                 }
             }
+            }
+            
+            
+            
+
+            
+
+            
+
+
+            
 
 
 
        
             if($callback === false){
-            echo "ici";
+            
                 $this->response->setStatutCode(404);
                 return $this->renderView("Views/_404.php","Views/layout/_404.tpl.php");
             }
@@ -139,7 +155,8 @@
             }
 
             if(is_array($callback)){
-                $callback[0] = new $callback[0](); // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
+                $callback[0] = new $callback[0]();
+                 // Cette ligne crée une nouvelle instance de la classe spécifiée dans la première position du tableau $callback. Cela permet d'instancier la classe pour appeler sa méthode.
             }
         
             return call_user_func($callback,$params);
