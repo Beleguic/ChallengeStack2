@@ -20,9 +20,13 @@ class Annonce extends SQL implements SQLInterface
     
     //addresse
     protected String $ville;
-    protected String $rue;
-    protected String $departement;
-    protected String $regions;
+    protected String $adrcomplet;
+    protected String $postcode;
+    protected String $depnum;
+    protected String $deplabel;
+    protected String $region;
+    protected String $longitude;
+    protected String $latitude;
 
 
 
@@ -48,9 +52,14 @@ class Annonce extends SQL implements SQLInterface
         $array['nbrChambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
         $array['ville'] = $this->getVille();
-        $array['rue'] = $this->getRue();
-        $array['departement'] = $this->getDepartement();
-        $array['regions'] = $this->getRegions();
+        $array['adrComplet'] = $this->getAddressComplet();
+        $array['postCode'] = $this->getPostCode();
+        $array['depNum'] = $this->getDepNum();
+        $array['depLabel'] = $this->getDepLabel();
+        $array['region'] = $this->getRegions();
+        $array['latitude'] = $this->getLatitude();
+        $array['longitude'] = $this->getLongitude();
+        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getVille();
         return $array;
 
     }
@@ -89,24 +98,6 @@ class Annonce extends SQL implements SQLInterface
         $this->id_agent = $id_agent;
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function getRegions(): String 
-    {
-        return $this->regions;
-    }
-
-    /**
-     * @param mixed $regions
-     *
-     * @return self
-     */
-    public function setRegions(String $regions): void
-    {
-        $this->regions = $regions;
-    }
 
     /**
      * @return mixed
@@ -234,6 +225,26 @@ class Annonce extends SQL implements SQLInterface
         $this->nbrchambre = $nbrchambre;
     }
 
+
+    /**
+    * @return String
+    */
+    public function getDescription(): String
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     *
+     * @return self
+     */
+    public function setDescription(String $description): void
+    {
+        $this->description = $description;
+    }
+
+
     /**
      * @return mixed
      */
@@ -255,53 +266,128 @@ class Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getRue(): String
+    public function getAddressComplet(): String
     {
-        return $this->rue;
+        return $this->adrcomplet;
     }
 
     /**
-     * @param mixed $rue
+     * @param mixed $adrcomplet
      *
      * @return self
      */
-    public function setRue(String $rue): void
+    public function setAddressComplet(String $adrcomplet): void
     {
-        $this->rue = $rue;
+        $this->adrcomplet = $adrcomplet;
     }
 
     /**
      * @return mixed
      */
-    public function getDepartement(): String
+    public function getPostCode(): String
     {
-        return $this->departement;
+        return $this->postcode;
     }
 
     /**
-     * @param mixed $departement
+     * @param mixed $postcode
      *
      * @return self
      */
-    public function setDepartement(String $departement): void
+    public function setPostCode(String $postcode): void
     {
-        $this->departement = $departement;
-    }
-
-
-    public function getDescription(): String
-    {
-        return $this->description;
+        $this->postcode = $postcode;
     }
 
     /**
-     * @param mixed $departement
+     * @return mixed
+     */
+    public function getDepNum(): String
+    {
+        return $this->depnum;
+    }
+
+    /**
+     * @param mixed $depnum
      *
      * @return self
      */
-    public function setDescription(String $description): void
+    public function setDepNum(String $depnum): void
     {
-        $this->description = $description;
+        $this->depnum = $depnum;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDepLabel(): String
+    {
+        return $this->deplabel;
+    }
+
+    /**
+     * @param mixed $deplabel
+     *
+     * @return self
+     */
+    public function setDepLabel(String $deplabel): void
+    {
+        $this->deplabel = $deplabel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegions(): String
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     *
+     * @return self
+     */
+    public function setRegions(String $region): void
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude(): String
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     *
+     * @return self
+     */
+    public function setLatitude(String $latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude(): String
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     *
+     * @return self
+     */
+    public function setLongitude(String $longitude): void
+    {
+        $this->longitude = $longitude;
+    }
+    
 
 }

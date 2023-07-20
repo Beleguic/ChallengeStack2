@@ -28,6 +28,19 @@ class Annonce extends Controller
         return $this->render();
     }
 
+    public function displayAllAnnonce(): String 
+    {
+        $this->setView("Annonce/annonce-all");
+        $this->setTemplate("front");
+
+        $annonce = new v_AnnonceModel();
+
+        $this->assign("annoncelist", $annonce->getAll());
+
+        return $this->render();
+    }
+
+
     public function viewAnnonce(): String
     {
 
@@ -115,11 +128,15 @@ class Annonce extends Controller
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
             $annonce->setNbrPiece($_POST['nbrPiece']);
             $annonce->setNbrChambre($_POST['nbrChambre']);
-            $annonce->setVille($_POST['ville']);
-            $annonce->setRue($_POST['rue']);
-            $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
-            $annonce->setRegions($_POST['regions']);
+            $annonce->setCity($_POST['city']);
+            $annonce->setAddressComplet($_POST['adrcomplet']);
+            $annonce->setPostCode($_POST['postcode']);
+            $annonce->setDepNum($_POST['depnum']);
+            $annonce->setDepLabel($_POST['deplabel']);
+            $annonce->setRegions($_POST['region']);
+            $annonce->setLatitude($_POST['latitude']);
+            $annonce->setLongitude($_POST['longitude']);
             $annonce->save();
             header('location: /back/annonce');
         }
@@ -159,11 +176,15 @@ class Annonce extends Controller
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
             $annonce->setNbrPiece($_POST['nbrPiece']);
             $annonce->setNbrChambre($_POST['nbrChambre']);
-            $annonce->setVille($_POST['ville']);
-            $annonce->setRue($_POST['rue']);
-            $annonce->setDepartement($_POST['departement']);
             $annonce->setDescription($_POST['description']);
-            $annonce->setRegions($_POST['regions']);
+            $annonce->setCity($_POST['city']);
+            $annonce->setAddressComplet($_POST['adrcomplet']);
+            $annonce->setPostCode($_POST['postcode']);
+            $annonce->setDepNum($_POST['depnum']);
+            $annonce->setDepLabel($_POST['deplabel']);
+            $annonce->setRegions($_POST['region']);
+            $annonce->setLatitude($_POST['latitude']);
+            $annonce->setLongitude($_POST['longitude']);
             $annonce->save();
             header('location: /back/annonce');
         }
@@ -255,13 +276,25 @@ class Annonce extends Controller
         $photo = new Photo();
         $photoFromAdd = new AnnonceForm();
         $photoFromDel = new AnnonceForm();
+        $photoFromDescription = new AnnonceForm();
         $this->assign('formAddPhoto', $photoFromAdd->getConfigAddPhoto());
         $this->assign("idAnnonce", ['idAnnonce' => $_GET['idAnnonce']]);
         $this->assign('imageList', $photo->getAllWhere(["id_annonce = '".$_GET['idAnnonce']."'"]));
         $this->assign('formDelPhoto', $photoFromDel->getConfigDelPhoto());
+        $this->assign('photoFromDescription', $photoFromDescription->getConfigUpdateDescription());
 
 
         if(isset($_POST['operation'])){
+
+            if($_POST['operation'] == "updateDescription" && $photoFromDescription->isSubmited() && $photoFromDescription->isValid()){
+                $photo = new photo();
+                $photo = $photo->populate($_POST['id']);
+                $photo->setDescription($_POST['description']);
+                $photo->save();
+
+            }
+
+
             if($_POST['operation'] == "delPhoto" && $photoFromDel->isSubmited() && $photoFromDel->isValid()){
                 $photo = new photo();
                 $photo = $photo->populate($_POST['id']);
@@ -357,19 +390,19 @@ class Annonce extends Controller
 
     }
 
-    public function getAllBuyAnnonces(): String
+    public function getAllAnnonces(): String
     {
-        $this->setView("Annonce/annonce-all-buy");
+        $this->setView("Annonce/annonce-all");
         $this->setTemplate("front");
         
         return $this->render();
     }
 
-    public function getAllRentAnnonces(): String
+    public function getAllFavoritesAnnonces(): String
     {
-        $this->setView("Annonce/annonce-all-rent");
+        $this->setView("Annonce/annonce-favorites");
         $this->setTemplate("front");
-        
+
         return $this->render();
     }
 }

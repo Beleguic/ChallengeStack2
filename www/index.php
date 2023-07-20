@@ -14,6 +14,9 @@
     use App\Core\Application;
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
+    use App\Controllers\Opinion;
+    use App\Controllers\Agent;
+    
 
     
     
@@ -194,18 +197,28 @@ else{
     $app->router->post('/deconnexion', [Auth::class ,"logout"],[AuthMiddleware::class],0);
     
     $app->router->get('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
-    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
-    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
+    $app->router->get('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],0);
+    $app->router->get('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
     $app->router->post('/activation', [Auth::class ,"activateAccount"],[AuthMiddleware::class],1);
-    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],1);
-    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],1);
+    $app->router->post('/reset-pwd', [Auth::class ,"resetPwd"],[AuthMiddleware::class],0);
+    $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
+    // Route agent front
+    $app->router->post('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->post('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
+    $app->router->get('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
+    $app->router->post('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);  
+    $app->router->post('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
+
     // Route annonce front
-    $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
-    $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
-    $app->router->post('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
-    $app->router->get('/annonces-rent', [Annonce::class ,"getAllRentAnnonces"],[AuthMiddleware::class],0);
+    $app->router->post('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);
+    $app->router->get('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);    
+    $app->router->post('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
+    $app->router->get('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
     $app->router->get('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
 
@@ -225,6 +238,21 @@ else{
     $app->router->post('/modify-connexion', [Setting::class ,"modifyConnexion"],[AuthMiddleware::class],1);
     $app->router->post('/modify-info', [Setting::class ,"modifyInfo"],[AuthMiddleware::class],1);
     $app->router->post('/modify-password', [Setting::class ,"modifyPassword"],[AuthMiddleware::class],1);
+
+    //route avis
+    $app->router->post('/add-opinion-agent', [Opinion::class ,"addOpinionAgent"],[AuthMiddleware::class],1);
+    $app->router->post('/add-opinion-agence', [Opinion::class ,"addOpinionAgence"],[AuthMiddleware::class],1);
+    $app->router->post('/show-opinion', [Opinion::class ,"showOpinion"],[AuthMiddleware::class],1);
+    $app->router->get('/add-opinion-agent', [Opinion::class ,"addOpinionAgent"],[AuthMiddleware::class],1);
+    $app->router->get('/add-opinion-agence', [Opinion::class ,"addOpinionAgence"],[AuthMiddleware::class],1);
+    $app->router->get('/show-opinion', [Opinion::class ,"showOpinion"],[AuthMiddleware::class],1);
+
+    $app->router->get('/back/opinion-list', [Opinion::class ,"opinionList"],[AuthMiddleware::class],3);
+    $app->router->get('/back/opinion-valid', [Opinion::class ,"validOpinion"],[AuthMiddleware::class],3);
+    $app->router->get('/back/opinion-delete', [Opinion::class ,"deleteOpinion"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-list', [Opinion::class ,"opinionList"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-valid', [Opinion::class ,"validOpinion"],[AuthMiddleware::class],3);
+    $app->router->post('/back/opinion-delete', [Opinion::class ,"deleteOpinion"],[AuthMiddleware::class],3);
 
     //route favori
     $app->router->post('/favori-add', [Annonce::class ,"addFavori"],[AuthMiddleware::class],1);

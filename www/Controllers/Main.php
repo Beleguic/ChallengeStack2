@@ -10,6 +10,8 @@ class Main extends Controller
 {
     public function home(): String
     {
+
+
         // Affiche les annonces 3 par lignes
         $pseudo = "Prof";
         //$view = new View("Main/home", "front"); 

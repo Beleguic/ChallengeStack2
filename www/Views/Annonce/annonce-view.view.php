@@ -72,10 +72,14 @@
 						<th> Nombre de chambre </th>
 						<th> Ville </th>
 						<th> Rue </th>
-						<th> Departement </th>
-						<th> Regions </th>
 						<th> Description </th>
-						<th> Action </th>
+						<th> Adresse complete </th>
+						<th> Code postale </th>
+						<th> N° Département </th>
+						<th> Département </th>
+						<th> postale </th>
+						<th> Latitude </th>
+						<th> Longitude </th>
 				</thead>
 				<tbody>	
 			<?php while ($row = $this->data['annonceList']->fetch()): ?>
@@ -87,11 +91,15 @@
 						<td><?=$row->getSuperficieterrain()?></td>
 						<td><?=$row->getNbrpiece()?></td>
 						<td><?=$row->getNbrchambre()?></td>
-						<td><?=$row->getVille()?></td>
-						<td><?=$row->getRue()?></td>
-						<td><?=$row->getDepartement()?></td>
-						<td><?=$row->getRegions()?></td>
 						<td><?=$row->getDescription()?></td>
+						<td><?=$row->getVille()?></td>
+						<td><?=$row->getAddressComplet()?></td>
+						<td><?=$row->getPostCode()?></td>
+						<td><?=$row->getDepNum()?></td>
+						<td><?=$row->getDepLabel()?></td>
+						<td><?=$row->getRegions()?></td>
+						<td><?=$row->getLatitude()?></td>
+						<td><?=$row->getLongitude()?></td>
 						<td>
 							<a class="button-Update" href="/back/update-annonce?id=<?=$row->getId()?>">Modifier</a>
 							<a class="button-Delete" href="/back/delete-annonce?id=<?=$row->getId()?>">Supprimer</a>

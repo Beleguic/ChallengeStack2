@@ -17,9 +17,13 @@ class v_Annonce extends SQL implements SQLInterface
     protected String $description;
     //addresse
     protected String $ville;
-    protected String $rue;
-    protected String $departement;
-    protected String $regions;
+    protected String $adrcomplet;
+    protected String $postcode;
+    protected String $depnum;
+    protected String $deplabel;
+    protected String $region;
+    protected String $longitude;
+    protected String $latitude;
 
 
     public function __construct(){
@@ -115,41 +119,74 @@ class v_Annonce extends SQL implements SQLInterface
     /**
      * @return String
      */
+    public function getDescription(): String
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getVille(): String
     {
         return $this->ville;
     }
 
     /**
-     * @return String
+     * @return mixed
      */
-    public function getRue(): String
+    public function getAddressComplet(): String
     {
-        return $this->rue;
+        return $this->adrcomplet;
     }
 
     /**
-     * @return String
+     * @return mixed
      */
-    public function getDepartement(): String
+    public function getPostCode(): String
     {
-        return $this->departement;
+        return $this->postcode;
     }
 
     /**
-     * @return String
+     * @return mixed
+     */
+    public function getDepNum(): String
+    {
+        return $this->depnum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepLabel(): String
+    {
+        return $this->deplabel;
+    }
+
+    /**
+     * @return mixed
      */
     public function getRegions(): String
     {
-        return $this->regions;
+        return $this->region;
     }
 
     /**
-     * @return String
+     * @return mixed
      */
-    public function getDescription(): String
+    public function getLatitude(): String
     {
-        return $this->description;
+        return $this->latitude;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude(): String
+    {
+        return $this->longitude;
+    }
+
 
 }

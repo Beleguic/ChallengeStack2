@@ -399,7 +399,7 @@
             <h2 class="title-a">Best Agents</h2>
           </div>
           <div class="title-link">
-            <a href="agents-grid.html">All Agents
+            <a href="/all-agents">Tous les agents
               <span class="bi bi-chevron-right"></span>
             </a>
           </div>
@@ -410,13 +410,13 @@
       <div class="col-md-4">
         <div class="card-box-d">
           <div class="card-img-d">
-            <img src="../../asset/front-template/img/agent-4.jpg" alt="" class="img-d img-fluid">
+            <img src="../../asset/front-template/img/agent-7.jpg" alt="" class="img-d img-fluid">
           </div>
           <div class="card-overlay card-overlay-hover">
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="agent-single.html" class="link-two">Margaret Sotillo
+                  <a href="/all-agents/agent1" class="link-two">Margaret Sotillo
                     <br> Escala</a>
                 </h3>
               </div>
@@ -466,13 +466,13 @@
       <div class="col-md-4">
         <div class="card-box-d">
           <div class="card-img-d">
-            <img src="../../asset/front-template/img/agent-1.jpg" alt="" class="img-d img-fluid">
+            <img src="../../asset/front-template/img/agent-6.jpg" alt="" class="img-d img-fluid">
           </div>
           <div class="card-overlay card-overlay-hover">
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="agent-single.html" class="link-two">Stiven Spilver
+                  <a href="/all-agents/agent2" class="link-two">Stiven Spilver
                     <br> Darw</a>
                 </h3>
               </div>
@@ -528,7 +528,7 @@
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="agent-single.html" class="link-two">Emma Toledo
+                  <a href="/all-agents/agent3" class="link-two">Emma Toledo
                     <br> Cascada</a>
                 </h3>
               </div>

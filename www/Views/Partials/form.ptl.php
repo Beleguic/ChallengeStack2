@@ -84,6 +84,9 @@
                                 class="<?= $inputVal["class"] ?>"
                                 id="<?= $inputVal["id"] ?>"
                                 type="<?= $inputVal["type"] ?>"
+                                <?php if(isset($inputVal['for'])): ?>
+                                    list="<?= $inputVal["list"] ?>"
+                                <?php endif; ?>
                                 <?php   
                                     if(!isset($inputData[$name])){
                                         if(!isset($inputVal['value'])){
@@ -104,6 +107,13 @@
                                     accept="<?= $inputVal["accept"] ?>"
                                 <?php endif; ?>
                             >
+                            <?php if(isset($config["inputs"][$name]['div'])) : ?>
+                                <?php $labelVal = $config["inputs"][$name]['div']; ?>
+                                <div
+                                    id="<?= $labelVal["id"]?>"
+                                >
+                                </div>
+                            <?php endif;?>
                         <?php endif;?>
                     </div>
                 <?php endif;?>
