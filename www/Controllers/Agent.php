@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Contact;
+use App\Models\Agent as AgentModel;
+use App\Forms\Agent as AgentForm;
 
 class Agent extends Controller
 {
@@ -38,5 +40,74 @@ class Agent extends Controller
         $this->setTemplate("front");
 
         return $this->render();
+    }
+
+    public function updateAgent(): String
+    {
+
+        $this->setView("Agent/updateAgent");
+        $this->setTemplate("back");
+
+        $formAgent = new AgentForm();
+
+        $agent = new AgentModel();
+        $agent = $agent->populateWith(['id_user' => $_SESSION['zfgh_login']['id']]);
+        if(isset($agent->property) && $agent->property == 'pas de resultat'){
+            $agent = new AgentModel();
+            $this->assign("agentInfo", []);
+            $this->assign("form", $formAgent->getConfigAdd());
+        }
+        else{
+            $this->assign("agentInfo", $agent->getConfigObject());
+            $this->assign("form", $formAgent->getConfigUpdate());
+        }
+
+        if($formAgent->isSubmited() && $formAgent->isValid()){
+
+            $error=array();
+            $extension=array("jpeg","jpg","png");
+            var_dump($_FILES);
+            foreach($_FILES["photo"]["tmp_name"] as $key=>$tmp_name) {
+                $file_name_new = sha1(uniqid());
+                $file_name=$_FILES["photo"]["name"][$key];
+                $file_tmp=$_FILES["photo"]["tmp_name"][$key];
+                $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                $path = 'asset/data/agent/'.$file_name_new.'.'.$ext;
+                if(in_array($ext,$extension)) {
+                    if(!file_exists($path)) {
+                        if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                            $agent->setPhotoLink($path);
+                        }
+                    }
+                    else {
+                        $filename=basename($file_name,$ext);
+                        $path='asset/data/agent/'.$filename.time().".".$ext;
+                        if(move_uploaded_file($file_tmp=$_FILES["photo"]["tmp_name"][$key],$path)){
+                            // Ajout BDD
+                            $agent->setPhotoLink($path);
+                        }
+                    }
+                }
+                else {
+                    array_push($error,"$file_name, ");
+                }
+            }
+
+            $agent->setIdUser($_SESSION['zfgh_login']['id']);
+            
+            $agent->setDescription($_POST['description']);
+            $agent->setTelephone($_POST['telephone']);
+            $agent->setMobile($_POST['mobile']);
+            $agent->setSkype($_POST['skype']);
+            $agent->setFacebook($_POST['facebook']);
+            $agent->setTwitter($_POST['twitter']);
+            $agent->setInstagram($_POST['instagram']);
+            $agent->setLinkedin($_POST['linkedin']);
+            $agent->save();
+            header("location: /back/agentInfo");
+        }
+
+        return $this->render();
+
     }
 }
