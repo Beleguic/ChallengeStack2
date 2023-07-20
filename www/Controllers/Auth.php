@@ -14,6 +14,7 @@ use App\Models\UserCode;
 use App\Models\UserPwdForget;
 use App\Models\Connexion;
 use App\Models\Status;
+use App\Models\Agent;
 
 class Auth extends Controller
 {
@@ -173,7 +174,18 @@ class Auth extends Controller
             $user->setStatus($_POST['status']);
             $user->setDateUpdated(date('Y-m-d H:i:s'));
             $user->save();
-            //header('location: /back/user');
+            if(isset($_POST['status']) && $_POST['status'] > 1){
+                $agent = new Agent();
+                $agent = $agent->populateWith(["is_user" => $user->getId()]);
+                if(isset($agent->property) && $agent->property == 'pas de resultat'){
+                    $agent = new Agent();
+                }
+                $agent->setIdUser($user->getId());
+                $agent->setPhotoLink(' ');
+                $agent->setDescription(' ');
+                $agent->save();
+            }
+            header('location: /back/user');
         }
         
         return $this->render();
