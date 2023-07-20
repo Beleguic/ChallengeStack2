@@ -73,7 +73,6 @@
 						<th> Ville </th>
 						<th> Rue </th>
 						<th> Description </th>
-						<th> Ville </th>
 						<th> Adresse complete </th>
 						<th> Code postale </th>
 						<th> N° Département </th>
@@ -92,9 +91,8 @@
 						<td><?=$row->getSuperficieterrain()?></td>
 						<td><?=$row->getNbrpiece()?></td>
 						<td><?=$row->getNbrchambre()?></td>
-						<td><?=$row->getVille()?></td>
 						<td><?=$row->getDescription()?></td>
-						<td><?=$row->getCity()?></td>
+						<td><?=$row->getVille()?></td>
 						<td><?=$row->getAddressComplet()?></td>
 						<td><?=$row->getPostCode()?></td>
 						<td><?=$row->getDepNum()?></td>
