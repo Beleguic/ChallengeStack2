@@ -206,6 +206,18 @@ class Login extends Validator
                     "submit"=>["Confirmer mon mail"],
                     "reset"=>"Annuler"
                 ],
+                "submit"=>[
+                    "Confirmer mon mail" => [
+                        "id" => "",
+                        "class" => "btn btn-outline-b-n btn-block m-4 w-25"
+                    ],
+                ],
+                "reset"=>[
+                    "Annuler" => [
+                        "id" => "",
+                        "class" => "btn btn-outline-b-n btn-block m-4 w-25"
+                    ],
+                ],
                 "divs"=>[
                     "div-pwd" =>[
                         "id" => "div-register-pwd",
