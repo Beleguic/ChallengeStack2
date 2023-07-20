@@ -26,5 +26,7 @@
   <?php $this->partial("form", $this->data['form']) ?>
 
   <p class="text-center">Vous n'avez pas de compte ? <a href="/s-inscrire" class="text-center color-b">Créer un compte ! </a>
+  / <a href="/reset-pwd-mail" class="text-center color-b"> Mot de passe oublié ?</a></p>
+
 
 </div>
