@@ -11,6 +11,7 @@ use App\Models\Type as TypeModel;
 use App\Models\AnnonceMemento as AnnonceMemento;
 use App\Models\Favori;
 use App\Models\Photo;
+use App\Models\Agent;
 
 class Annonce extends Controller
 
@@ -120,9 +121,11 @@ class Annonce extends Controller
         $this->assign("typeList", $type->getSelectInfo());
         $this->assign("formAdd", $formAdd->getConfigAdd()); 
         if($formAdd->isSubmited() && $formAdd->isValid()){
+            $agent = new Agent();
+            $agent = $agent->populateWith(["id_user" => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
+            $annonce->setIdAgent($agent->getId());
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -165,12 +168,14 @@ class Annonce extends Controller
         $this->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
+            $agent = new Agent();
+            $agent = $agent->populateWith(["id_user" => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
             $annonceMemento = new AnnonceMemento();
             $annonce = $annonce->populate($_POST["id"]);
             $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
+            $annonce->setIdAgent($agent->getId());
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
