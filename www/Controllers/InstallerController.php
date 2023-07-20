@@ -28,7 +28,7 @@ class InstallerController extends Controller
 
 
         
-        $configFilePath = 'app.ini';
+        $configFilePath = './app.ini';
         try {
             $pdo = new \PDO("pgsql:host=$host;dbname=$dbname;port=$port", $user, $password);
         } catch (\PDOException $e) {
@@ -56,8 +56,10 @@ class InstallerController extends Controller
         $configContent .= "user = $user\n";
         $configContent .= "password = $password\n";
         $configContent .= "email = $email\n";
-        $configContent .= "name = $name\n";
         $configContent .= "prefixe = $prefixe\n";
+
+      
+        $GLOBALS['prefixe'] = $prefixe;
         
 
         // Écriture du contenu dans le fichier app.ini

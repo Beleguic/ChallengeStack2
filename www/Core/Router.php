@@ -82,6 +82,9 @@
             $callback = $this->routes[$method][$path]["callback"] ?? false;
             $role = $this->routes[$method][$path]["role"] ?? false;
 
+            
+            
+            
             if (strpos($path, "/api") !== false) {
                
                 

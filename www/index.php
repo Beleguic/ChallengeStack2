@@ -15,18 +15,7 @@
     use App\Controllers\Newsletter;
     use App\Controllers\Back;
 
-    $ini = parse_ini_file('./app.ini');
-    $globals = $GLOBALS;
-    $GLOBALS['prefixe'] = $ini['prefixe'];
     
-
-
-
- if (!file_exists('app.ini') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
-        header('Location: /public/react/src/index.html');
-        
-    
-    }
     
     date_default_timezone_set("Europe/Paris");
 
@@ -46,12 +35,15 @@
             include $classForm;
         }
     });
+
+
+ if (!file_exists('app.ini')) {
+        header('Location: /public/react/src/index.html');
+    }else{
+        $ini = parse_ini_file('./app.ini');
+    $globals = $GLOBALS;
+    $GLOBALS['prefixe'] = $ini['prefixe'];
     
-
-
-
-   
-
     if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
         if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['token'])){
             $token = $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'];
@@ -109,6 +101,17 @@
             header("location: /");
         }
     }
+    }
+
+    
+    
+    
+    
+
+
+
+   
+
 
 /*
 
@@ -153,12 +156,15 @@ else{
     $app = new Application();
 
     //api route
-    $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
-    $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
-    $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
-    $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
-    $app->router->post('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
-    $app->router->get('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+    
+         $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
+        $app->router->post('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+    
+   
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);
