@@ -104,7 +104,7 @@ class Agent extends SQL implements SQLInterface
     /**
      * @param String $desription
      */
-    public function setDescription(string $id_user): void
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
