@@ -49,6 +49,7 @@ create table public.zfgh_type (
 
 create table public.zfgh_annonce (
     id uuid not null default gen_random_uuid (),
+    id_agent uuid null,
     id_type uuid not null,
     titre text not null,
     prix integer not null,
@@ -56,12 +57,15 @@ create table public.zfgh_annonce (
     superficieterrain integer not null,
     nbrpiece integer not null,
     nbrchambre integer not null,
-    ville text not null,
-    rue text not null,
-    departement text not null,
-    regions text not null,
     description text not null,
-    id_agent uuid null,
+    city text not null,
+    adrcomplet text not null,
+    postcode varchar(6) not null,
+    depnum varchar(2) not null,
+    deplabel text not null,
+    region text not null,
+    longitude text not null,
+    latitude text not null,
     constraint zfgh_annonce_pkey primary key (id),
     constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
   ) tablespace pg_default;
@@ -70,6 +74,7 @@ create table public.zfgh_annonce_memento (
     id uuid not null default gen_random_uuid (),
     date_memento timestamp without time zone not null default now(),
     id_annonce uuid not null,
+    id_agent uuid null,
     id_type uuid not null,
     titre text not null,
     prix integer not null,
@@ -77,12 +82,15 @@ create table public.zfgh_annonce_memento (
     superficieterrain integer not null,
     nbrpiece integer not null,
     nbrchambre integer not null,
-    ville text not null,
-    rue text not null,
-    departement text not null,
-    regions text not null,
     description text not null,
-    id_agent uuid null,
+    city text not null,
+    adrcomplet text not null,
+    postcode varchar(6) not null,
+    depnum varchar(2) not null,
+    deplabel text not null,
+    region text not null,
+    longitude text not null,
+    latitude text not null,
     constraint zfgh_memento_pkey primary key (id),
     constraint fk_id_annonce_user foreign key (id_annonce) references zfgh_annonce (id) on delete cascade,
     constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
@@ -179,9 +187,30 @@ where u.status > 1
 group by u.id
 order by (count(a.id_agent)) desc;
 
-create view public.zfgh_v_annonce as
-select a.id, a.titre, a.prix, a.superficiemaison, a.superficieterrain, a.nbrpiece, a.nbrchambre, a.ville, a.rue, a.departement, a.regions, a.description, t.texte
-from zfgh_annonce a, zfgh_type t
-where  a.id_type = t.id;
+  create view
+  public.zfgh_v_annonce as
+select
+  a.id,
+  a.titre,
+  a.prix,
+  a.superficiemaison,
+  a.superficieterrain,
+  a.nbrpiece,
+  a.nbrchambre,
+  a.description,
+  a.city,
+  a.adrcomplet,
+  a.postcode,
+  a.depnum,
+  a.deplabel,
+  a.region,
+  a.longitude,
+  a.latitude,
+  t.texte
+from
+  zfgh_annonce a,
+  zfgh_type t
+where
+  a.id_type = t.id;
 
 INSERT INTO zfgh_status (id_status, status) VALUES ('0','Lecture seul'),('1','Utilisateur'),('2','Agent Immobilier'),('3','Administrateur'),('4','Super Administrateur');

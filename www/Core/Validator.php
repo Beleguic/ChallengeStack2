@@ -26,8 +26,13 @@ class Validator
         if($_SERVER["REQUEST_METHOD"] != $this->method){
             die("Tentative de Hack1");
         }
+        //echo("<pre>");
         //Le nb de inputs3
-        var_dump($this->config["inputs"]);
+        //var_dump($this->config["inputs"]);
+        //var_dump($this->data);
+        //var_dump(count($this->data));
+        //var_dump(count($this->config["inputs"])+1);
+        //echo("</pre>"); 
         if(count($this->config["inputs"])+1 != count($this->data)){
             die("Tentative de Hack2");
         }

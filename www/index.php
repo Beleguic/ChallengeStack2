@@ -295,6 +295,11 @@ else{
 
     $app->router->post('/contact',[SiteController::class ,'handleContact']);*/
     
+    // Route agent Self
+    $app->router->post('/back/agent-info', [Agent::class ,"agentInfo"],[AuthMiddleware::class],2);
+    $app->router->post('/back/agent-update', [Agent::class ,"updateAgent"],[AuthMiddleware::class],2);
+    $app->router->get('/back/agent-info', [Agent::class ,"agentInfo"],[AuthMiddleware::class],2);
+    $app->router->get('/back/agent-update', [Agent::class ,"updateAgent"],[AuthMiddleware::class],2);
 
 
     $app->run();
