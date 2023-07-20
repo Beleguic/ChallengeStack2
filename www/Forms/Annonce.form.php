@@ -54,12 +54,17 @@ class Annonce extends Validator
                 "div-ville-rue" =>[
                     "id" => "div-ville-rue",
                     "class" => "row pb-4",
-                    "inside" => ["ville","rue"]
+                    "inside" => ["adresse"]
                 ],
-                "div-departement-regions" =>[
-                    "id" => "div-departement-regions",
+                "div-adresse-container" =>[
+                    "id" => "resultats",
                     "class" => "row pb-4",
-                    "inside" => ["departement","regions"]
+                    "inside" => []
+                ],
+                "div-adresse-hidden-container" =>[
+                    "id" => "address-hidden",
+                    "class" => "",
+                    "inside" => ["region","deplabel","depnum","postcode","adrcomplet","city","latitude","longitude"]
                 ],
                 "div-departement-description" =>[
                     "id" => "div-description",
@@ -184,11 +189,12 @@ class Annonce extends Validator
                     "value"=>"",
                     "required"=>true
                 ],
-                "ville"=>[
+                "adresse"=>[
                     "divId"=>"",
                     "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-ville",
+                    "id"=>"type-form-adresse",
                     "class"=>"custom-input",
+                    "list" => "listAdresse",
                     "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La ville est incorrect",
@@ -196,61 +202,85 @@ class Annonce extends Validator
                         "for" => "Type-form-ville",
                         "id" => "label-Type-form-ville",
                         "class" => "form-label",
-                        "value" => "Ville"
+                        "value" => "Adresse de l'annonce"
+                    ],
+                    "div" => [
+                        'id' => "listAdresse"
                     ],
                     "value"=>"",
                     "required"=>true
                 ],
-                "rue"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-rue",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"La rue est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-rue",
-                        "id" => "label-Type-form-rue",
-                        "class" => "form-label",
-                        "value" => "Rue"
-                    ],
+                "city"=>[
+                    "id"=>"city-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
-                "departement"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-departement",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"Le departement est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-departement",
-                        "id" => "label-Type-form-departement",
-                        "class" => "form-label",
-                        "value" => "Département"
-                    ],
+                "adrcomplet"=>[
+                    "id"=>"adrcomplet-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
-                "regions"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-regions",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"La régions est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-regions",
-                        "id" => "label-Type-form-regions",
-                        "class" => "form-label",
-                        "value" => "Régions"
-                    ],
+                "postcode"=>[
+                    "id"=>"postcode-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "depnum"=>[
+                    "id"=>"depnum-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "deplabel"=>[
+                    "id"=>"deplabel-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "region"=>[
+                    "id"=>"region-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "latitude"=>[
+                    "id"=>"latitude-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "longitude"=>[
+                    "id"=>"longitude-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
                 "description"=>[
                     "balise"=>"textarea",
@@ -321,12 +351,17 @@ class Annonce extends Validator
                 "div-ville-rue" =>[
                     "id" => "div-ville-rue",
                     "class" => "row pb-4",
-                    "inside" => ["ville","rue"]
+                    "inside" => ["adresse"]
                 ],
-                "div-departement-regions" =>[
-                    "id" => "div-departement-regions",
+                "div-adresse-container" =>[
+                    "id" => "resultats",
                     "class" => "row pb-4",
-                    "inside" => ["departement","regions"]
+                    "inside" => []
+                ],
+                "div-adresse-hidden-container" =>[
+                    "id" => "address-hidden",
+                    "class" => "",
+                    "inside" => ["region","deplabel","depnum","postcode","adrcomplet","city","latitude","longitude"]
                 ],
                 "div-departement-description" =>[
                     "id" => "div-description",
@@ -461,11 +496,12 @@ class Annonce extends Validator
                     "value"=>"",
                     "required"=>true
                 ],
-                "ville"=>[
+                "adresse"=>[
                     "divId"=>"",
                     "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-ville",
+                    "id"=>"type-form-adresse",
                     "class"=>"custom-input",
+                    "list" => "listAdresse",
                     "placeholder"=>"",
                     "type"=>"text",
                     "error"=>"La ville est incorrect",
@@ -473,61 +509,85 @@ class Annonce extends Validator
                         "for" => "Type-form-ville",
                         "id" => "label-Type-form-ville",
                         "class" => "form-label",
-                        "value" => "Ville"
+                        "value" => "Adresse de l'annonce"
+                    ],
+                    "div" => [
+                        'id' => "listAdresse"
                     ],
                     "value"=>"",
                     "required"=>true
                 ],
-                "rue"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-rue",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"La rue est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-rue",
-                        "id" => "label-Type-form-rue",
-                        "class" => "form-label",
-                        "value" => "Rue"
-                    ],
+                "city"=>[
+                    "id"=>"city-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
-                "departement"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-departement",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"Le departement est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-departement",
-                        "id" => "label-Type-form-departement",
-                        "class" => "form-label",
-                        "value" => "Département"
-                    ],
+                "adrcomplet"=>[
+                    "id"=>"adrcomplet-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
-                "regions"=>[
-                    "divId"=>"",
-                    "divClass"=>"col-md-6 mb-3 mb-md-0",
-                    "id"=>"type-form-regions",
-                    "class"=>"custom-input",
-                    "placeholder"=>"",
-                    "type"=>"text",
-                    "error"=>"La régions est incorrect",
-                    "label" =>[
-                        "for" => "Type-form-regions",
-                        "id" => "label-Type-form-regions",
-                        "class" => "form-label",
-                        "value" => "Régions"
-                    ],
+                "postcode"=>[
+                    "id"=>"postcode-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
                     "value"=>"",
-                    "required"=>true
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "depnum"=>[
+                    "id"=>"depnum-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "deplabel"=>[
+                    "id"=>"deplabel-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "region"=>[
+                    "id"=>"region-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "latitude"=>[
+                    "id"=>"latitude-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
+                ],
+                "longitude"=>[
+                    "id"=>"longitude-annonce-form",
+                    "class"=>"",
+                    "type"=>"hidden",
+                    "value"=>"",
+                    "required"=>true,
+                    "placeholder"=>"",
+                    "error"=>""
                 ],
                 "description"=>[
                     "balise"=>"textarea",

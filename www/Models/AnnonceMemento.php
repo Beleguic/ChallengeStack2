@@ -21,13 +21,14 @@ class AnnonceMemento extends SQL implements SQLInterface
     protected Int $nbrchambre;
     protected String $description;
     //addresse
-    protected String $ville;
-    protected String $rue;
-    protected String $departement;
-    protected String $regions;
-
-
-
+    protected String $city;
+    protected String $adrcomplet;
+    protected String $postcode;
+    protected String $depnum;
+    protected String $deplabel;
+    protected String $region;
+    protected String $longitude;
+    protected String $latitude;
 
     public function __construct(){
         $sql = parent::getInstance();
@@ -50,10 +51,14 @@ class AnnonceMemento extends SQL implements SQLInterface
         $this->setNbrpiece($annonce->getNbrpiece());
         $this->setNbrchambre($annonce->getNbrchambre());
         $this->setDescription($annonce->getDescription());
-        $this->setVille($annonce->getVille());
-        $this->setRue($annonce->getRue());
-        $this->setDepartement($annonce->getDepartement());
+        $this->setCity($annonce->getCity());
+        $this->setAddressComplet($annonce->getAddressComplet());
+        $this->setPostCode($annonce->getPostCode());
+        $this->setDepNum($annonce->getDepNum());
+        $this->setDepLabel($annonce->getDepLabel());
         $this->setRegions($annonce->getRegions());
+        $this->setLatitude($annonce->getLatitude());
+        $this->setLongitude($annonce->getLongitude());
         $this->save();
 
     }
@@ -73,10 +78,14 @@ class AnnonceMemento extends SQL implements SQLInterface
         $annonce->setNbrpiece($AnnonceMemento->getNbrpiece());
         $annonce->setNbrchambre($AnnonceMemento->getNbrchambre());
         $annonce->setDescription($AnnonceMemento->getDescription());
-        $annonce->setVille($AnnonceMemento->getVille());
-        $annonce->setRue($AnnonceMemento->getRue());
-        $annonce->setDepartement($AnnonceMemento->getDepartement());
+        $annonce->setCity($AnnonceMemento->getCity());
+        $annonce->setAddressComplet($AnnonceMemento->getAddressComplet());
+        $annonce->setPostCode($AnnonceMemento->getPostCode());
+        $annonce->setDepNum($AnnonceMemento->getDepNum());
+        $annonce->setDepLabel($AnnonceMemento->getDepLabel());
         $annonce->setRegions($AnnonceMemento->getRegions());
+        $annonce->setLatitude($AnnonceMemento->getLatitude());
+        $annonce->setLongitude($AnnonceMemento->getLongitude());
         return $annonce;
 
     }
@@ -97,10 +106,15 @@ class AnnonceMemento extends SQL implements SQLInterface
         $array['nbrPiece'] = $this->getNbrpiece();
         $array['nbrChambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
-        $array['ville'] = $this->getVille();
-        $array['rue'] = $this->getRue();
-        $array['departement'] = $this->getDepartement();
-        $array['regions'] = $this->getRegions();
+        $array['city'] = $this->getCity();
+        $array['adrComplet'] = $this->getAddressComplet();
+        $array['postCode'] = $this->getPostCode();
+        $array['depNum'] = $this->getDepNum();
+        $array['depLabel'] = $this->getDepLabel();
+        $array['region'] = $this->getRegions();
+        $array['latitude'] = $this->getLatitude();
+        $array['longitude'] = $this->getLongitude();
+        $array['adresse'] = $this->getAddressComplet(). ' ' . $this->getPostCode() .  ' ' . $this->getCity();
         return $array;
 
     }
@@ -172,24 +186,6 @@ class AnnonceMemento extends SQL implements SQLInterface
     {
         
         $this->date_memento = $date_memento;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRegions(): String 
-    {
-        return $this->regions;
-    }
-
-    /**
-     * @param mixed $regions
-     *
-     * @return self
-     */
-    public function setRegions(String $regions): void
-    {
-        $this->regions = $regions;
     }
 
     /**
@@ -318,61 +314,6 @@ class AnnonceMemento extends SQL implements SQLInterface
         $this->nbrchambre = $nbrchambre;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getVille(): String
-    {
-        return $this->ville;
-    }
-
-    /**
-     * @param mixed $ville
-     *
-     * @return self
-     */
-    public function setVille(String $ville): void
-    {
-        $this->ville = $ville;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRue(): String
-    {
-        return $this->rue;
-    }
-
-    /**
-     * @param mixed $rue
-     *
-     * @return self
-     */
-    public function setRue(String $rue): void
-    {
-        $this->rue = $rue;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDepartement(): String
-    {
-        return $this->departement;
-    }
-
-    /**
-     * @param mixed $departement
-     *
-     * @return self
-     */
-    public function setDepartement(String $departement): void
-    {
-        $this->departement = $departement;
-    }
-
-
     public function getDescription(): String
     {
         return $this->description;
@@ -386,6 +327,150 @@ class AnnonceMemento extends SQL implements SQLInterface
     public function setDescription(String $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity(): String
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     *
+     * @return self
+     */
+    public function setCity(String $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddressComplet(): String
+    {
+        return $this->adrcomplet;
+    }
+
+    /**
+     * @param mixed $adrcomplet
+     *
+     * @return self
+     */
+    public function setAddressComplet(String $adrcomplet): void
+    {
+        $this->adrcomplet = $adrcomplet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostCode(): String
+    {
+        return $this->postcode;
+    }
+
+    /**
+     * @param mixed $postcode
+     *
+     * @return self
+     */
+    public function setPostCode(String $postcode): void
+    {
+        $this->postcode = $postcode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepNum(): String
+    {
+        return $this->depnum;
+    }
+
+    /**
+     * @param mixed $depnum
+     *
+     * @return self
+     */
+    public function setDepNum(String $depnum): void
+    {
+        $this->depnum = $depnum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepLabel(): String
+    {
+        return $this->deplabel;
+    }
+
+    /**
+     * @param mixed $deplabel
+     *
+     * @return self
+     */
+    public function setDepLabel(String $deplabel): void
+    {
+        $this->deplabel = $deplabel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegions(): String
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     *
+     * @return self
+     */
+    public function setRegions(String $region): void
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude(): String
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     *
+     * @return self
+     */
+    public function setLatitude(String $latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude(): String
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     *
+     * @return self
+     */
+    public function setLongitude(String $longitude): void
+    {
+        $this->longitude = $longitude;
     }
 
 }
