@@ -166,12 +166,14 @@ class Auth extends Controller
         $this->assign("formUpdDate", $user->getConfigObject());
 
         if($form->isSubmited() && $form->isValid()){
+            var_dump($_POST);
             $user = $user->populate($_POST["id"]);
             $user->setFirstname($_POST['firstname']);
             $user->setLastname($_POST['lastname']);
+            $user->setStatus($_POST['status']);
             $user->setDateUpdated(date('Y-m-d H:i:s'));
             $user->save();
-            header('location: /back/user');
+            //header('location: /back/user');
         }
         
         return $this->render();
