@@ -17,15 +17,18 @@ class Annonce extends Controller
 
 {
 
-    public function getOneAnnonce($annonceTitle): String
+    public function getOneAnnonce($id): String
     {
         $this->setView("Annonce/annonce-one");
         $this->setTemplate("front");
         $annonce = new v_AnnonceModel();
+        $images = new Photo();
         //var_dump($annonceTitle[0]);
         //var_dump($annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
-        $this->assign("annonceOne", $annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
-        
+        $this->assign("annonceOne", $annonce->getOneWhere(["id"=>str_replace('%20', ' ', $id[0])]));
+        // echo '<pre>';
+        // var_dump($annonce->getOneWhere(["id" => str_replace('%20', ' ', $id[0])]));
+        //$this->assign("annonceImages", $images->getOneWhere(["id_annonce"=>str_replace('%20', ' ', $id[0])])); ajout des images
         return $this->render();
     }
 

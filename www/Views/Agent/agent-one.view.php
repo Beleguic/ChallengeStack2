@@ -1,10 +1,17 @@
+<?php 
+	$firstname = $this->data['agentOne']->getFirstname();
+	
+  //regardez dans le model v_annonce les methode et complété ici NE PAS OUBLIER AGENT EN BAS
+	?>
+
+
 <!-- ======= Intro Single ======= -->
 <section class="pb-5">
     <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-8">
         <div class="title-single-box">
-            <h1 class="title-single">Margaret Stone</h1>
+            <h1 class="title-single"><?= $firstname?></h1>
             <span class="color-text-a">Agent Immobilier</span>
         </div>
         </div>

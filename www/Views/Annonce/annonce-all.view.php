@@ -36,8 +36,8 @@
                 <div class="card-overlay-a-content">
                   <div class="card-header-a">
                     <h2 class="card-title-a">
-                      <a href="#">204 Mount
-                        <br /> <?= $row->getTitre()?>/a>
+                      <a href="#">
+                        <br /> <?= $row->getTitre()?>
                     </h2>
                   </div>
                   <div class="card-body-a">
@@ -45,7 +45,7 @@
                       <span></span> <?=$row->getPrix()?> 
                       </span>
                     </div>
-                    <a href="property-single.html" class="link-a">Click here to view
+                    <a href="/annonce/<?=$row->getId()?>" class="link-a">Click here to view
                       <span class="bi bi-chevron-right"></span>
                     </a>
                   </div>

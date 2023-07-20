@@ -117,12 +117,12 @@
                         
                     
                     }
-                    else{
+                    
                         $callback = $routeCallback["callback"];
                     array_shift($matches); // Supprime la première correspondance qui contient le chemin complet
                     $params = $matches;
                     
-                    }
+                    
                     
                     // La route correspond, enregistrez le rappel (callback) et les paramètres
                     
