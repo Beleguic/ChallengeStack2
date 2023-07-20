@@ -3,26 +3,48 @@
 namespace App\Models;
 
 use App\Core\SQL;
-class User extends SQL
+use App\Core\SQLInterface;
+class User extends SQL implements SQLInterface
 {
-    private Int $id = 0;
+    private String $id = '0';
     protected String $firstname;
     protected String $lastname;
     protected String $email;
     protected String $pwd;
     protected String $country;
-    protected Int $status = 0;
-    private ?String $date_inserted;
-    private ?String $date_updated;
+    protected Int $status = 1;
+    private String $date_inserted;
+    private String $date_updated;
+    protected bool $actif;
 
     public function __construct(){
-        parent::__construct();
+        $sql = parent::getInstance();
+        $classExploded = explode("\\", get_called_class());
+        $this->pdo = $sql->pdo;
+        $this->table = "zfgh_".end($classExploded);
     }
 
+    public function getConfigObject(): array
+    {
+
+        $array['id'] = $this->getId();
+        $array['firstname'] = $this->getFirstname();
+        $array['lastname'] = $this->getLastname();
+        $array['email'] = $this->getEmail();
+        //$array['pwd'] = $this->getPwd();
+        $array['country'] = $this->getCountry();
+        $array['status'] = $this->getStatus();
+        //$array['date_inserted'] = $this->getDateInserted();
+        //$array['date_updated'] = $this->getDateUpdated();
+        $array['actif'] = $this->getActif();
+        return $array;
+
+    }
+    
     /**
      * @return Int
      */
-    public function getId(): int
+    public function getId(): String
     {
         return $this->id;
     }
@@ -30,7 +52,7 @@ class User extends SQL
     /**
      * @param Int $id
      */
-    public function setId(int $id): void
+    public function setId(String $id): void
     {
         $this->id = $id;
     }
@@ -134,7 +156,7 @@ class User extends SQL
     /**
      * @return \DateTime
      */
-    public function getDateInserted(): \DateTime
+    public function getDateInserted(): String
     {
         return $this->date_inserted;
     }
@@ -142,7 +164,7 @@ class User extends SQL
     /**
      * @param \DateTime $date_inserted
      */
-    public function setDateInserted(\DateTime $date_inserted): void
+    public function setDateInserted(String $date_inserted): void
     {
         $this->date_inserted = $date_inserted;
     }
@@ -150,7 +172,7 @@ class User extends SQL
     /**
      * @return \DateTime
      */
-    public function getDateUpdated(): \DateTime
+    public function getDateUpdated(): String
     {
         return $this->date_updated;
     }
@@ -158,9 +180,25 @@ class User extends SQL
     /**
      * @param \DateTime $date_updated
      */
-    public function setDateUpdated(\DateTime $date_updated): void
+    public function setDateUpdated(String $date_updated): void
     {
         $this->date_updated = $date_updated;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getActif(): Int
+    {
+        return $this->actif;
+    }
+
+    /**
+     * @param \DateTime $date_updated
+     */
+    public function setActif(bool $actif): void
+    {
+        $this->actif = $actif;
     }
 
 
