@@ -1,7 +1,7 @@
 # ChallengeStack2
 
 ## Moving House
-CMS d'agence immobiliere
+CMS d'agence immobilière
 
 ## Installation
 Une fois le code récupéré, il faut faire un 
@@ -10,12 +10,12 @@ Une fois le code récupéré, il faut faire un
 cd www/public/react/
 ```
 
-pour compilé le js
+pour compiler le js
 
 ```sh 
 npm run build
 ```   
-Pui faire un
+Puis faire un
 
 ```sh
 npx tailwindcss -i src/index.css -o ./dist/index.css --watch
@@ -27,4 +27,4 @@ npx tailwindcss -i src/index.css -o ./dist/index.css --watch
 docker compose up
 ```
 
-Le CMS seras accesible via le port 80 du localhost
+Le CMS sera accessible via le port 80 du localhost
