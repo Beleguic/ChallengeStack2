@@ -25,13 +25,53 @@
   <!-- Main style CSS -->
   <link href="../../asset/front-template/style.css" rel="stylesheet">
 
+  <script src='../../asset/back-template/js/jquery.js'></script>
+
 </head>
 
 <body>
-  <dialog id="errorContainer">
-
-    <button id=""> Fermer </button>
+  <dialog id="error-container">
+    <div id="div-error-container">
+      
+    </div>
+    <div>
+      <button id="close-button-dialog"> Fermer </button>
+    </div>
+    <script type="text/javascript">
+      $("#close-button-dialog").on("click", function(){
+        document.getElementById('error-container').close();
+      })
+    </script>
   </dialog>
+  <script type="text/javascript">
+    function showPopUpError(message, code){
+      let dialog = document.getElementById('error-container');
+      let color;
+      let h2 = document.createElement('h2');
+      
+      if(code == 1){
+        color = "green";
+        h2.textContent = 'Operation réussie';
+      }
+      else{
+        color = "red";
+        h2.textContent = 'Echec de l\'Operation';
+      }
+      let div = document.getElementById('div-error-container');
+      let messageP = document.createElement('p');
+      messageP.textContent = message;
+      div.append(h2);
+      div.append(messageP);
+      dialog.append(div);
+      dialog.style.borderColor = color;
+      dialog.showModal();
+
+    }
+
+    
+    // A appaler pour ouvrir la popup
+    
+  </script>
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
