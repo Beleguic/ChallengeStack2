@@ -1,21 +1,32 @@
 <?php 
+
 	$firstname = $this->data['agentOne']->getFirstname();
-	
-  //regardez dans le model v_annonce les methode et complété ici NE PAS OUBLIER AGENT EN BAS
-	?>
+	$lastname = $this->data['agentOne']->getLastname();
+	$photolink = $this->data['agentOne']->getPhotoLink();
+	$description = $this->data['agentOne']->getDescription();
+	$mobile = $this->data['agentOne']->getMobile();
+	$telephone = $this->data['agentOne']->getTelephone();
+	$email = $this->data['agentOne']->getEmail();
+	$skype = $this->data['agentOne']->getSkype();
+	$facebook = $this->data['agentOne']->getFacebook();
+	$twitter = $this->data['agentOne']->getTwitter();
+	$instagram = $this->data['agentOne']->getInstagram();
+	$linkedin = $this->data['agentOne']->getLinkedin();
+
+?>
 
 
 <!-- ======= Intro Single ======= -->
 <section class="pb-5">
     <div class="container">
     <div class="row">
-        <div class="col-md-12 col-lg-8">
+        <div class="col-md-12 col-lg-7">
         <div class="title-single-box">
-            <h1 class="title-single"><?= $firstname?></h1>
+            <h1 class="title-single"><?= $firstname,' ', $lastname; ?></h1>
             <span class="color-text-a">Agent Immobilier</span>
         </div>
         </div>
-        <div class="col-md-12 col-lg-4">
+        <div class="col-md-12 col-lg-5">
         <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -25,7 +36,7 @@
                 <a href="/all-agents">Tous Les Agents</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-                Margaret Stone
+                <?= $firstname,' ', $lastname; ?>
             </li>
             </ol>
         </nav>
@@ -42,65 +53,71 @@
         <div class="row">
             <div class="col-md-6">
             <div class="agent-avatar-box">
-                <img src="../../asset/front-template/img/agent-7.jpg" alt="" class="agent-avatar img-fluid">
+                <img src="../../<?= ($photolink != " ") ? $photolink : "asset/data/agent/default.png" ?>" alt="" class="agent-avatar img-fluid w-100">
             </div>
             </div>
             <div class="col-md-5 section-md-t3">
             <div class="agent-info-box">
                 <div class="agent-title">
                 <div class="title-box-d">
-                    <h3 class="title-d">Margaret Stone
-                    <br> Escala
+                    <h3 class="title-d"><?= $firstname ?>
+                    <br> <?= $lastname; ?>
                     </h3>
                 </div>
                 </div>
                 <div class="agent-content mb-3">
                 <p class="content-d color-text-a">
-                    Sed porttitor lectus nibh. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                    Vivamus suscipit tortor
-                    eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat.
+                    <?= $description ?>
                 </p>
                 <div class="info-agents color-a">
                     <p>
                         <strong>Phone: </strong>
-                        <span class="color-text-a"> +54 356 945234 </span>
+                        <span class="color-text-a"><?= $telephone ?></span>
                     </p>
                     <p>
                         <strong>Mobile: </strong>
-                        <span class="color-text-a"> 999 123 456 789</span>
+                        <span class="color-text-a"><?= $mobile ?></span>
                     </p>
                     <p>
                         <strong>Email: </strong>
-                        <span class="color-text-a"> agents@example.com</span>
+                        <span class="color-text-a"><?= $email ?></span>
                     </p>
                     <p>
                         <strong>Skype: </strong>
-                        <span class="color-text-a"> Margaret.Es</span>
+                        <span class="color-text-a"><?= $skype ?></span>
                     </p>
                 </div>
                 </div>
                 <div class="socials-footer">
                 <ul class="list-inline">
-                    <li class="list-inline-item">
-                    <a href="#" class="link-one">
-                        <i class="bi bi-facebook" aria-hidden="true"></i>
-                    </a>
-                    </li>
-                    <li class="list-inline-item">
-                    <a href="#" class="link-one">
-                        <i class="bi bi-twitter" aria-hidden="true"></i>
-                    </a>
-                    </li>
-                    <li class="list-inline-item">
-                    <a href="#" class="link-one">
-                        <i class="bi bi-instagram" aria-hidden="true"></i>
-                    </a>
-                    </li>
-                    <li class="list-inline-item">
-                    <a href="#" class="link-one">
-                        <i class="bi bi-linkedin" aria-hidden="true"></i>
-                    </a>
-                    </li>
+                    <?php if( $facebook != null ): ?>
+                        <li class="list-inline-item">
+                            <a href="<?= $facebook ?>" class="link-one" target="_blank">
+                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if( $twitter != null ): ?>
+                        <li class="list-inline-item">
+                            <a href="<?= $twitter ?>" class="link-one" target="_blank">
+                                <i class="bi bi-twitter" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if( $instagram != null ): ?>
+                        <li class="list-inline-item">
+                            <a href="<?= $instagram ?>" class="link-one" target="_blank">
+                                <i class="bi bi-instagram" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if( $linkedin != null ): ?>
+                        <li class="list-inline-item">
+                            <a href="<?= $linkedin ?>" class="link-one" target="_blank">
+                                <i class="bi bi-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 </div>
             </div>

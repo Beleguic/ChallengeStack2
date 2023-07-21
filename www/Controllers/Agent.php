@@ -8,11 +8,8 @@ use App\Forms\Contact;
 use App\Models\Agent as AgentModel;
 use App\Models\v_Agent as v_AgentModel;
 use App\Forms\Agent as AgentForm;
-<<<<<<< HEAD
 use App\Models\User as UserModel;
-=======
-use App\Models\v_Agent;
->>>>>>> 50f083a (gestion dynamique des agents et annonces)
+
 
 class Agent extends Controller
 {
@@ -20,7 +17,7 @@ class Agent extends Controller
     {
         $this->setView("Agent/all-agents");
         $this->setTemplate("front");
-        $agent = new v_Agent();
+        $agent = new v_AgentModel();
         $this->assign("allAgents", $agent->getAll());
 
         return $this->render();
@@ -30,7 +27,7 @@ class Agent extends Controller
     {
         $this->setView("Agent/agent-one");
         $this->setTemplate("front");
-        $agent = new v_Agent();
+        $agent = new v_AgentModel();
         $this->assign("agentOne", $agent->getOneWhere(["id" => str_replace('%20', ' ', $id[0])]));
         return $this->render();
     }

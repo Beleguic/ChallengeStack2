@@ -25,33 +25,33 @@
 
 <!-- ======= All Agents ======= -->
 <section class="agents-grid grid">
-    <div class="container">
+  <div class="container">
     <div class="row">
       <?php while($row=$this->data['allAgents']->fetch()):?>
         <div class="col-md-4">
         <div class="card-box-d">
           <div class="card-img-d">
-            <img src="../../asset/front-template/img/agent-7.jpg" alt="" class="img-d img-fluid">
+            <img src="../../<?= ($row->getPhotoLink() != " ") ? $row->getPhotoLink() : 'asset/data/agent/default.png' ?>" alt="Photo Agent <?= $row->getId() ?>" class="img-d img-fluid w-100">
           </div>
           <div class="card-overlay card-overlay-hover">
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="/all-agents/<?=$row->getId()?>" class="link-two"><?=$row->getFirstname()?>
-                    <br> Escala</a>
+                  <a href="/all-agents/<?= $row->getId() ?>" class="link-two"><?= $row->getFirstname() ?>
+                    <br><?= $row->getLastname() ?></a>
                 </h3>
               </div>
             </div>
             <div class="card-body-d">
               <p class="content-d color-text-a">
-                Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
+                <?= $row->getDescription() ?>
               </p>
               <div class="info-agents color-a">
                 <p>
-                  <strong>Phone: </strong> +54 356 945234
+                  <strong>Phone: </strong> <?= $row->getTelephone() ?>
                 </p>
                 <p>
-                  <strong>Email: </strong> agents@example.com
+                  <strong>Email: </strong> <?= $row->getEmail() ?>
                 </p>
               </div>
             </div>
@@ -59,22 +59,22 @@
               <div class="socials-footer d-flex justify-content-center">
                 <ul class="list-inline">
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="<?= $row->getFacebook() ?>" class="link-one">
                       <i class="bi bi-facebook" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="<?= $row->getTwitter() ?>" class="link-one">
                       <i class="bi bi-twitter" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="<?= $row->getInstagram() ?>" class="link-one">
                       <i class="bi bi-instagram" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="<?= $row->getLinkedin() ?>" class="link-one">
                       <i class="bi bi-linkedin" aria-hidden="true"></i>
                     </a>
                   </li>
