@@ -52,17 +52,35 @@ class Validator
 
         foreach ($this->config["inputs"] as $name=>$configInput){
             if(!isset($this->data[$name])){
-                die("Tentative de Hack3");
+                $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                $_SESSION['error']['codeErorr'] = 2;
+                $_SESSION['error']['data'] = $this->data;
+                $redirection = $_SERVER['HTTP_REFERER'];
+                $redirectionExploded = explode("/", $redirection);
+                $redirection = end($redirectionExploded);
+                header('location: /'.$redirection);
             }
             if(isset($configInput["required"]) && $configInput["required"]){
                 if(is_string($this->data[$name])){ // chaine de caractere
                     if(self::isEmpty($this->data[$name])){
-                        die("Tentaive de hack 4");
+                        $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                        $_SESSION['error']['codeErorr'] = 2;
+                        $_SESSION['error']['data'] = $this->data;
+                        $redirection = $_SERVER['HTTP_REFERER'];
+                        $redirectionExploded = explode("/", $redirection);
+                        $redirection = end($redirectionExploded);
+                        header('location: /'.$redirection);
                     }
                 }
                 else { // tableau
                     if(!sizeof($this->data[$name]) > 0){
-                        die("Tentaive de hack 5");
+                        $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                        $_SESSION['error']['codeErorr'] = 2;
+                        $_SESSION['error']['data'] = $this->data;
+                        $redirection = $_SERVER['HTTP_REFERER'];
+                        $redirectionExploded = explode("/", $redirection);
+                        $redirection = end($redirectionExploded);
+                        header('location: /'.$redirection);
                     }
                 }
             } 

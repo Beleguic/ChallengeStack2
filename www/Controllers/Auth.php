@@ -57,13 +57,31 @@ class Auth extends Controller
                         $connexion->save();
                     }
 
-                    header('location: /?conn=true');
-                } else {
-                    echo "Identifiant Incorrect";
+                    $_SESSION['error']['message'] = 'Connexion Reussie';
+                    $_SESSION['error']['codeErorr'] = 1;
+                    $_SESSION['error']['data'] = $_POST;
+                    $redirection = $_SERVER['HTTP_REFERER'];
+                    $redirectionExploded = explode("/", $redirection);
+                    $redirection = end($redirectionExploded);
+                    header('location: /'.$redirection);
+                } else {    
+                    $_SESSION['error']['message'] = 'Identifiant Incorrect';
+                    $_SESSION['error']['codeErorr'] = 2;
+                    $_SESSION['error']['data'] = $_POST;
+                    $redirection = $_SERVER['HTTP_REFERER'];
+                    $redirectionExploded = explode("/", $redirection);
+                    $redirection = end($redirectionExploded);
+                    //header('location: /'.$redirection);
                 }
             }
             else{
-                echo "Identifiant Incorrect";
+                $_SESSION['error']['message'] = 'Identifiant Incorrect';
+                $_SESSION['error']['codeErorr'] = 2;
+                $_SESSION['error']['data'] = $_POST;
+                $redirection = $_SERVER['HTTP_REFERER'];
+                $redirectionExploded = explode("/", $redirection);
+                $redirection = end($redirectionExploded);
+                //header('location: /'.$redirection);
             }
         }
         
@@ -188,7 +206,7 @@ class Auth extends Controller
             }
             header('location: /back/user');
         }
-        
+        $this->assign("formErrors", $form->errors);
         return $this->render();
 
     }
@@ -215,7 +233,7 @@ class Auth extends Controller
             }
         }
 
-
+        $this->assign("formErrors", $form->errors);
         
         return $this->render();
 
@@ -264,7 +282,7 @@ class Auth extends Controller
                 header('location: /activation?e=2');
             }
         }
-
+        $this->assign("formErrors", $form->errors);
         return $this->render();
     } 
 
@@ -303,7 +321,7 @@ class Auth extends Controller
             header('location: /');
         }
 
- 
+        $this->assign("formErrors", $form->errors);
 
         return $this->render();
     }
@@ -336,7 +354,7 @@ class Auth extends Controller
             //header('location: /');
         }
 
- 
+        $this->assign("formErrors", $form->errors);
 
         return $this->render();
     }
