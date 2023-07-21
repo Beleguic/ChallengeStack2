@@ -47,6 +47,7 @@
         $ini = parse_ini_file('./app.ini');
     $globals = $GLOBALS;
     $GLOBALS['prefixe'] = $ini['prefixe'];
+    $GLOBALS['siteName'] = $ini['siteName'];
     
     if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
         if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['token'])){
