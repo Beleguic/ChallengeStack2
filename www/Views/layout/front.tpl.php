@@ -51,7 +51,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proriétés</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Propriétés</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="/annonce-all">Voir les annonces</a>
               <a class="dropdown-item " href="/favoris">Favoris</a>
