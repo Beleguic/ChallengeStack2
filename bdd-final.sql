@@ -76,15 +76,17 @@ create table public.zfgh_annonce (
     description text not null,
     city text not null,
     adrcomplet text not null,
-    postcode varchar(6) not null,
-    depnum varchar(2) not null,
+    postcode character varying(6) not null,
+    depnum character varying(2) not null,
     deplabel text not null,
     region text not null,
     longitude text not null,
     latitude text not null,
+    date_inserted timestamp with time zone not null default (now() at time zone 'utc'::text),
+    date_updated timestamp with time zone not null default (now() at time zone 'utc'::text),
     constraint zfgh_annonce_pkey primary key (id),
+    constraint fk_id_agent_agent foreign key (id_agent) references zfgh_agent (id) on delete cascade,
     constraint fk_id_type_user foreign key (id_type) references zfgh_type (id) on delete cascade
-    constraint fk_id_agent_agent foreign key (id_agent) references zfgh_agent (id) on delete cascade
   ) tablespace pg_default;
 
 create table public.zfgh_annonce_memento (
@@ -187,8 +189,8 @@ where u.status > 1 and ag.id_user = u.id
 group by u.id, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
 order by (count(a.id_agent)) desc;
 
-create view public.zfgh_v_annonce as
-select a.id, a.titre, a.prix, a.superficiemaison, a.superficieterrain, a.nbrpiece, a.nbrchambre, a.description, a.city, a.adrcomplet, a.postcode, a.depnum, a.deplabel, a.region, a.longitude, a.latitude, t.texte, u.lastname as lastname_agent, u.firstname as firstname_agent, u.email as email_agent
+create view public.zfgh_v_annonce as 
+select a.id, a.id_agent, a.date_inserted, a.date_updated, a.titre, a.prix, a.superficiemaison, a.superficieterrain, a.nbrpiece, a.nbrchambre, a.description, a.city, a.adrcomplet, a.postcode, a.depnum, a.deplabel, a.region, a.longitude, a.latitude, t.texte, u.lastname as lastname_agent, u.firstname as firstname_agent, u.email as email_agent
 from zfgh_annonce a, zfgh_type t, zfgh_agent ag, zfgh_user u
 where a.id_type = t.id and a.id_agent = ag.id and ag.id_user = u.id;
 
