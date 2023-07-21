@@ -246,6 +246,10 @@
   <!-- Javascript -->          
     <script src="../../asset/back-template/js/popper.min.js"></script>
     <script src="../../asset/back-template/js/bootstrap.js"></script>  
+  
+  <!-- Charts JS -->
+    <script src="../../asset/back-template/plugins/chart.js/chart.min.js"></script> 
+    <script src="../../asset/back-template/js/charts-demo.js"></script> 
 
 </body>
 </html>
