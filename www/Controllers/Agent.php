@@ -140,4 +140,18 @@ class Agent extends Controller
 
         return $this->render();
     }
+
+    public function viewAgent(): String
+    {
+
+        //$view = new View("Annonce/annonce-view", "back");
+        $this->setView("Back/agent-view");
+        $this->setTemplate("back");
+
+        $agent = new agent();
+
+        $this->assign("agentList", $agent->getAll());
+        
+        return $this->render();
+    }
 }

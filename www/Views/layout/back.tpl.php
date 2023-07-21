@@ -170,12 +170,14 @@
                 </a>
 					      <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
 						      <ul class="submenu-list list-unstyled">
-                    <li class="submenu-item"><a class="submenu-link" href="/back/annonce">Annonce</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="/back/type">Type annonce</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="/back/user">Liste des utilisateurs</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="/back/agent">Liste des agents</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="/back/status">Liste des Status</a></li>
-                    <li class="submenu-item"><a class="submenu-link" href="/back/opinion-list">Liste des opinions</a></li>
+                      <li class="submenu-item"><a class="submenu-link" href="/back/annonce">Annonce</a></li>
+                      <li class="submenu-item"><a class="submenu-link" href="/back/type">Type annonce</a></li>
+                    <?php if($_SESSION[''.$GLOBALS['prefixe'].'_login']['status'] > 2): ?>
+                      <li class="submenu-item"><a class="submenu-link" href="/back/user">Liste des utilisateurs</a></li>
+                      <li class="submenu-item"><a class="submenu-link" href="/back/agent">Liste des agents</a></li>
+                      <li class="submenu-item"><a class="submenu-link" href="/back/opinion-list">Liste des opinions</a></li>
+                    <?php endif
+                    ; ?>
                   </ul>
                 </div>
 					    </li>    

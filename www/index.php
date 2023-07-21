@@ -5,6 +5,7 @@
     use App\Controllers\SiteController;
     use App\Controllers\Main;
     use App\Controllers\InstallerController;
+    use App\Controllers\SiteMapController;
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
@@ -157,7 +158,8 @@ else{
 
 
     $app = new Application();
-
+    //sitemap
+    $app->router->get('/sitemap',[SiteMapController::class,'getSitemap'],[AuthMiddleware::class],0);
     //api route
     
          $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
@@ -293,18 +295,9 @@ else{
     $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
 
     // Route agent back
-    $app->router->get('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
-    $app->router->post('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->get('/back/agent', [Agent::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->post('/back/agent', [Agent::class ,"viewAgent"],[AuthMiddleware::class],3);
 
-    // Route status
-    $app->router->get('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 
