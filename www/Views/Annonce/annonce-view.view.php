@@ -68,6 +68,7 @@
 						<th> Type </th>
 						<th> Ville </th>
 						<th> Adresse complete </th>
+						<th> Action</th>
 				</thead>
 				<tbody>	
 			<?php while ($row = $this->data['annonceList']->fetch()): ?>

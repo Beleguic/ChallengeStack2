@@ -258,12 +258,12 @@ class InstallerController extends Controller
 
     // Create view statements
     "CREATE VIEW public.".$prefixe."_v_agent AS
-        SELECT u.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) AS nbr_annonce, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
+        SELECT u.id, ag.id as id_agent, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) AS nbr_annonce, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
         FROM ".$prefixe."_user u
         LEFT JOIN ".$prefixe."_agent ag ON u.id = ag.id_user
         LEFT JOIN ".$prefixe."_annonce a ON u.id = a.id_agent
         WHERE u.status > 1 AND ag.id_user = u.id
-        GROUP BY u.id, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
+        GROUP BY u.id, ag.id, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
         ORDER BY count(a.id_agent) DESC;",
 
     "CREATE VIEW public.".$prefixe."_v_annonce AS
