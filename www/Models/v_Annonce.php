@@ -19,7 +19,7 @@ class v_Annonce extends SQL implements SQLInterface
     protected Int $nbrchambre;
     protected String $description;
     //addresse
-    protected String $ville;
+    protected String $city;
     protected String $adrcomplet;
     protected String $postcode;
     protected String $depnum;
