@@ -31,7 +31,7 @@
         <div class="col-md-4">
         <div class="card-box-d">
           <div class="card-img-d">
-            <img src="../../<?= ($row->getPhotoLink() != " ") ? $row->getPhotoLink() : 'asset/data/agent/default.png' ?>" alt="Photo Agent <?= $row->getId() ?>" class="img-d img-fluid w-100">
+            <img src="../../<?= ($row->getPhotoLink() != " ") ? $row->getPhotoLink() : 'asset/data/agent/default.png' ?>" alt="Photo Agent <?= $row->getId() ?>" class="img-d img-fluid w-100" style="max-width:416px ; max-height: 466px;">
           </div>
           <div class="card-overlay card-overlay-hover">
             <div class="card-header-d">
@@ -58,26 +58,34 @@
             <div class="card-footer-d">
               <div class="socials-footer d-flex justify-content-center">
                 <ul class="list-inline">
-                  <li class="list-inline-item">
-                    <a href="<?= $row->getFacebook() ?>" class="link-one">
-                      <i class="bi bi-facebook" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="<?= $row->getTwitter() ?>" class="link-one">
-                      <i class="bi bi-twitter" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="<?= $row->getInstagram() ?>" class="link-one">
-                      <i class="bi bi-instagram" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="<?= $row->getLinkedin() ?>" class="link-one">
-                      <i class="bi bi-linkedin" aria-hidden="true"></i>
-                    </a>
-                  </li>
+                  <?php if( $row->getFacebook() != null ): ?>
+                    <li class="list-inline-item">
+                      <a href="<?= $row->getFacebook() ?>" class="link-one">
+                        <i class="bi bi-facebook" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                  <?php if( $row->getTwitter() != null ): ?>  
+                    <li class="list-inline-item">
+                      <a href="<?= $row->getTwitter() ?>" class="link-one">
+                        <i class="bi bi-twitter" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                  <?php if( $row->getInstagram() != null ): ?>
+                    <li class="list-inline-item">
+                      <a href="<?= $row->getInstagram() ?>" class="link-one">
+                        <i class="bi bi-instagram" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                  <?php if( $row->getLinkedin() != null ): ?>
+                    <li class="list-inline-item">
+                      <a href="<?= $row->getLinkedin() ?>" class="link-one">
+                        <i class="bi bi-linkedin" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  <?php endif; ?>
                 </ul>
               </div>
             </div>
