@@ -11,6 +11,8 @@
   <link href="../../asset/back-template/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="icon" href="../../asset/back-template/images/logo.png">
+
+  <script src='../../asset/back-template/js/jquery.js'></script>
 </head>
 
 <body class="app">
