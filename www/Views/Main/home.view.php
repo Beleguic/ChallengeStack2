@@ -16,7 +16,7 @@
                     <span><?= $row->getTitre()?></span>
                   </h1>
                   <p class="intro-subtitle intro-price">
-                    <a href="#"><span class="price-a">Louer |<?= $row->getPrix()?>€</span></a>
+                    <a href="/annonce/<?=$row->getId()?>"><span class="price-a">Louer |<?= $row->getPrix()?>€</span></a>
                   </p>
                 </div>
               </div>
