@@ -1,3 +1,10 @@
+<?php
+if(file_exists('../../../app.ini')){
+  header('location: /');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

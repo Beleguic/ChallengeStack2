@@ -42,7 +42,7 @@
 
 
  if (!file_exists('app.ini')) {
-        header('Location: /public/react/src/index.html');
+        header('Location: /public/react/src/index.php');
     }else{
         $ini = parse_ini_file('./app.ini');
     $globals = $GLOBALS;
