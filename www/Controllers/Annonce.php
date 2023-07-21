@@ -193,6 +193,7 @@ class Annonce extends Controller
             $annonce->setRegions($_POST['region']);
             $annonce->setLatitude($_POST['latitude']);
             $annonce->setLongitude($_POST['longitude']);
+            $annonce->setDateUpdated(date('Y-m-d H:i:s'));
             $annonce->save();
             header('location: /back/annonce');
         }
