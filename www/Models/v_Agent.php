@@ -7,6 +7,7 @@ use App\Core\SQLInterface;
 class v_Agent extends SQL implements SQLInterface
 {
     private String $id = '0';
+    protected String $id_agent;
     protected String $firstname;
     protected String $lastname;
     protected String $email;
@@ -34,6 +35,7 @@ class v_Agent extends SQL implements SQLInterface
     {
 
         $array['id'] = $this->getId();
+        $array['id_agent'] = $this->getIdAgent();
         $array['firstname'] = $this->getFirstname();
         $array['lastname'] = $this->getLastname();
         $array['email'] = $this->getEmail();
@@ -58,6 +60,14 @@ class v_Agent extends SQL implements SQLInterface
      * @return String
      */
     public function getId(): String
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return String
+     */
+    public function getIdAgent(): String
     {
         return $this->id;
     }

@@ -9,6 +9,7 @@ use App\Models\Agent as AgentModel;
 use App\Models\v_Agent as v_AgentModel;
 use App\Forms\Agent as AgentForm;
 use App\Models\User as UserModel;
+use App\Models\Opinions as UserAvis;
 
 
 class Agent extends Controller
@@ -28,7 +29,9 @@ class Agent extends Controller
         $this->setView("Agent/agent-one");
         $this->setTemplate("front");
         $agent = new v_AgentModel();
+        $avis = new UserAvis();
         $this->assign("agentOne", $agent->getOneWhere(["id" => str_replace('%20', ' ', $id[0])]));
+        $this->assign("avisCommentaire", $avis->getAllWere(['id_agent = '.$agent->getIdAgent()]));
         return $this->render();
     }
 
@@ -137,6 +140,7 @@ class Agent extends Controller
 
         $this->assign("userInfo", $user->populate($userId));
         $this->assign("agentInfo", $agent->populate($userId));
+
 
         return $this->render();
     }
