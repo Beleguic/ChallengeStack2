@@ -13,6 +13,10 @@ cd www/public/react/
 pour compiler le js
 
 ```sh 
+npm install
+```
+
+```sh 
 npm run build
 ```   
 Puis faire un
