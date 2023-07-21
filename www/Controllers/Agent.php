@@ -10,6 +10,8 @@ use App\Models\v_Agent as v_AgentModel;
 use App\Forms\Agent as AgentForm;
 use App\Models\User as UserModel;
 use App\Models\Opinion as UserAvis;
+use App\Models\Opinion as OpinionModel;
+use App\Forms\Opinion as OpinionForm;
 
 
 class Agent extends Controller
@@ -28,11 +30,30 @@ class Agent extends Controller
     {
         $this->setView("Agent/agent-one");
         $this->setTemplate("front");
+
+        $formOpinion = new OpinionForm(); // genere le model Type (Formulaire Ajout)
+        $opinion = new OpinionModel();
+
         $agent = new v_AgentModel();
         $avis = new UserAvis();
         $agentInfo = $agent->populate(str_replace('%20', ' ', $id[0]));
         $this->assign("agentOne", $agentInfo);
-        $this->assign("avisCommentaire", $avis->getAllWhere(["id_agent = '".$agentInfo->getIdAgent()."'"]));
+        $this->assign("avisCommentaire", $avis->getAllWhere(["id_agent = '".$agentInfo->getIdAgent()."'", "is_valid = true"]));
+        $this->assign("formOpinion", $formOpinion->getConfigAddOpinion()); 
+        $this->assign("id_agent", $agentInfo->getIdAgent());
+
+        if($formOpinion->isSubmited() && $formOpinion->isValid()){
+
+            $opinion->setNote($_POST['note']);
+            $opinion->setCommentaire($_POST['commentaire']);
+            $opinion->setIdAgent($_POST['id_agent']);
+            $opinion->save();
+            $redirection = $_SERVER['HTTP_REFERER'];
+            $redirectionExploded = explode("/", $redirection);
+            $redirection = end($redirectionExploded);
+            header('location: /all-agents/'.$redirection);
+        }
+        $this->assign("formErrors", $formOpinion->errors);
         return $this->render();
     }
 
@@ -69,7 +90,7 @@ class Agent extends Controller
         $formAgent = new AgentForm();
 
         $agent = new AgentModel();
-        $agent = $agent->populateWith(['id_user' => $_SESSION['zfgh_login']['id']]);
+        $agent = $agent->populateWith(['id_user' => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
         if(isset($agent->property) && $agent->property == 'pas de resultat'){
             $agent = new AgentModel();
             $this->assign("agentInfo", []);
@@ -111,7 +132,7 @@ class Agent extends Controller
                 }
             }
 
-            $agent->setIdUser($_SESSION['zfgh_login']['id']);
+            $agent->setIdUser($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
             
             $agent->setDescription($_POST['description']);
             $agent->setTelephone($_POST['telephone']);
