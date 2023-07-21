@@ -10,13 +10,25 @@ use App\Models\v_Agent as v_AgentModel;
 use App\Forms\Agent as AgentForm;
 use App\Models\User as UserModel;
 
+
 class Agent extends Controller
 {
     public function agent(): String
     {
         $this->setView("Agent/all-agents");
         $this->setTemplate("front");
+        $agent = new v_AgentModel();
+        $this->assign("allAgents", $agent->getAll());
 
+        return $this->render();
+    }
+
+    public function getOneAgent($id):string
+    {
+        $this->setView("Agent/agent-one");
+        $this->setTemplate("front");
+        $agent = new v_AgentModel();
+        $this->assign("agentOne", $agent->getOneWhere(["id" => str_replace('%20', ' ', $id[0])]));
         return $this->render();
     }
 

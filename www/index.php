@@ -207,12 +207,9 @@ else{
     // Route agent front
     $app->router->post('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
     $app->router->get('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
-    $app->router->post('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
-    $app->router->get('/all-agents/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
-    $app->router->post('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);
-    $app->router->get('/all-agents/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);  
-    $app->router->post('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);
-    $app->router->get('/all-agents/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
+    $app->router->post('/all-agents/{agent}', [Agent::class ,"getOneAgent"],[AuthMiddleware::class],0);    
+    $app->router->get('/all-agents/{agent}', [Agent::class ,"getOneAgent"],[AuthMiddleware::class],0);    
+  
 
     // Route annonce front
     $app->router->post('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);
