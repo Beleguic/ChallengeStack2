@@ -73,6 +73,7 @@ class Auth extends Controller
 
     public function register(): String
     {
+        var_dump($_SESSION['error']);
         $this->setView("Auth/register");
         $this->setTemplate("front");
         $form=new Register();

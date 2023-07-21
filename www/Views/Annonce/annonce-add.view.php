@@ -33,8 +33,6 @@
   </div>
 </div>
 
-<script src='../../asset/back-template/js/jquery.js'></script>
-
 <script type="text/javascript">
 
     //let q = document.getElementById('type-form-adresse').value;

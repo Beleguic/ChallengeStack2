@@ -23,14 +23,30 @@
     </div>
   </section><!-- End Intro Single-->
 
-  <?php $this->partial("form", $this->data["form"]) ?>
+  <?php 
+    if(isset($_SESSION['error']['message'])){
 
-  <div class="bg-warning">
-    <p>Gestion des msg d'erreurs</p>
-    <?php if(isset($this->data['formErrors'])): ?>
-      <?php print_r($this->data['formErrors']) ?>
-    <?php endif; ?>
-  </div>
+      echo("<script> showPopUpError('".$_SESSION['error']['message']."',".$_SESSION['error']['codeErorr']."); </script>");
+    }
+    ?>
+  <?php 
+  if(isset($_POST['firstname'])){
+    $valueData = $_POST;
+  }
+  elseif(isset($_SESSION['error']['data']['firstname'])){
+    $valueData = $_SESSION['error']['data'];
+  }
+  else{
+    $valueData = [];
+  }
+  ?>
+  <?php $this->partial("form", $this->data["form"], $valueData, $this->data['formErrors']) ?>
+  <!--<?php $errors = $this->data['formErrors']; ?>-->
+  
 
   <p class="text-center">Vous avez déjà un compte ? <a href="/login" class="color-b">Se connecter</a></p>
 </div>
+
+<?php
+  unset($_SESSION['error']);
+?>
