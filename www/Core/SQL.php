@@ -197,7 +197,7 @@ class SQL{
         
         $columnsToExclude = get_class_vars(get_class());
         $columns = array_diff_key($columns, $columnsToExclude);
-        //$columns = $this->protectScriptInjection($columns);
+        $columns = $this->protectScriptInjection($columns);
 
         if($del == 'del'){
             if(is_string($this->getId()) && $this->getId()!='0') { 
