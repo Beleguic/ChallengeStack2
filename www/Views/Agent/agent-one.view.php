@@ -120,6 +120,11 @@
                     <?php endif; ?>
                 </ul>
                 </div>
+                <div class="avis">
+                    <?php while($row=$this->data['avisCommentaire']->fetch()): ?>
+                        <?php var_dump($row); ?>
+                    <?php endwhile; ?>
+                </div>
             </div>
             </div>
         </div>

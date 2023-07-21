@@ -69,7 +69,7 @@ class v_Agent extends SQL implements SQLInterface
      */
     public function getIdAgent(): String
     {
-        return $this->id;
+        return $this->id_agent;
     }
 
     /**
