@@ -40,7 +40,7 @@
         <span></span>
         <span></span>
       </button>
-      <a class="text-brand" href="/"><span class="color-b">Moving</span>House</a>
+      <a class="text-brand" href="/"><span class="color-b"><?= $GLOBALS["siteName"] ?></span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
