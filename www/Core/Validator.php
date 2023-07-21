@@ -24,27 +24,63 @@ class Validator
     {
         //La bonne method ?
         if($_SERVER["REQUEST_METHOD"] != $this->method){
-            die("Tentative de Hack1");
+            $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+            $_SESSION['error']['codeErorr'] = 2;
+            $_SESSION['error']['data'] = $data;
+            $redirection = $_SERVER['HTTP_REFERER'];
+            $redirectionExploded = explode("/", $redirection);
+            $redirection = end($redirectionExploded);
+            header('location: /'.$redirection);
+            //die("Tentative de Hack1");
         }
+        //echo("<pre>");
         //Le nb de inputs3
-        var_dump($this->config["inputs"]);
+        //var_dump($this->config["inputs"]);
+        //var_dump($this->data);
+        //var_dump(count($this->data));
+        //var_dump(count($this->config["inputs"])+1);
+        //echo("</pre>"); 
         if(count($this->config["inputs"])+1 != count($this->data)){
-            die("Tentative de Hack2");
+            $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+            $_SESSION['error']['codeErorr'] = 2;
+            $_SESSION['error']['data'] = $this->data;
+            $redirection = $_SERVER['HTTP_REFERER'];
+            $redirectionExploded = explode("/", $redirection);
+            $redirection = end($redirectionExploded);
+            header('location: /'.$redirection);
         }
 
         foreach ($this->config["inputs"] as $name=>$configInput){
             if(!isset($this->data[$name])){
-                die("Tentative de Hack3");
+                $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                $_SESSION['error']['codeErorr'] = 2;
+                $_SESSION['error']['data'] = $this->data;
+                $redirection = $_SERVER['HTTP_REFERER'];
+                $redirectionExploded = explode("/", $redirection);
+                $redirection = end($redirectionExploded);
+                header('location: /'.$redirection);
             }
             if(isset($configInput["required"]) && $configInput["required"]){
                 if(is_string($this->data[$name])){ // chaine de caractere
                     if(self::isEmpty($this->data[$name])){
-                        die("Tentaive de hack 4");
+                        $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                        $_SESSION['error']['codeErorr'] = 2;
+                        $_SESSION['error']['data'] = $this->data;
+                        $redirection = $_SERVER['HTTP_REFERER'];
+                        $redirectionExploded = explode("/", $redirection);
+                        $redirection = end($redirectionExploded);
+                        header('location: /'.$redirection);
                     }
                 }
                 else { // tableau
                     if(!sizeof($this->data[$name]) > 0){
-                        die("Tentaive de hack 5");
+                        $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+                        $_SESSION['error']['codeErorr'] = 2;
+                        $_SESSION['error']['data'] = $this->data;
+                        $redirection = $_SERVER['HTTP_REFERER'];
+                        $redirectionExploded = explode("/", $redirection);
+                        $redirection = end($redirectionExploded);
+                        header('location: /'.$redirection);
                     }
                 }
             } 

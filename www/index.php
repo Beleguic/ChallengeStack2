@@ -5,6 +5,7 @@
     use App\Controllers\SiteController;
     use App\Controllers\Main;
     use App\Controllers\InstallerController;
+    use App\Controllers\SiteMapController;
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
@@ -16,15 +17,9 @@
     use App\Controllers\Back;
     use App\Controllers\Opinion;
     use App\Controllers\Agent;
-
     
 
-    if (!file_exists('config.php') && $_SERVER['REQUEST_URI'] !== '/api/installer') {
-        header('Location: /public/react/src/index.html');
-    }
-    else{
-        include "./config.php";
-    }
+    
     
     date_default_timezone_set("Europe/Paris");
 
@@ -46,17 +41,22 @@
     });
 
 
-
-   
-
-    if(isset($_SESSION['zfgh_login'])){
-        if(isset($_SESSION['zfgh_login']['token'])){
-            $token = $_SESSION['zfgh_login']['token'];
-            $id = $_SESSION['zfgh_login']['id'];
+ if (!file_exists('app.ini')) {
+        header('Location: /public/react/src/index.html');
+    }else{
+        $ini = parse_ini_file('./app.ini');
+    $globals = $GLOBALS;
+    $GLOBALS['prefixe'] = $ini['prefixe'];
+    $GLOBALS['siteName'] = $ini['siteName'];
+    
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+        if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['token'])){
+            $token = $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'];
+            $id = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
             $connexion = new Connexion();
             $connexion = $connexion->populateWith(["id_user" => $id]);
             if(isset($connexion->property)){ 
-                unset($_SESSION['zfgh_login']);
+                unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
             }
             else{
                 $last_seen = date('Y-m-d H:i:s.u', strtotime($connexion->getLastSeen()));
@@ -66,46 +66,57 @@
                 if ($dateNow > $last_seenPlus2Hour)
                 {
                    $connexion->save('del');
-                   unset($_SESSION['zfgh_login']);
+                   unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
                 }
                 else{
                     if($token == $connexion->getToken()){
                         $newToken = sha1(uniqid());
-                        $_SESSION['zfgh_login']['token'] = $newToken;
+                        $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'] = $newToken;
                         $connexion->setToken($newToken);
                         $connexion->setLastSeen(date('Y-m-d H:i:s'));
                         $connexion->save();
                     }
                     else{
                         $connexion->save('del');
-                        unset($_SESSION['zfgh_login']);; 
+                        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);; 
                     }
                 }
             }
 
         }
         else{
-            unset($_SESSION['zfgh_login']);
+            unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
         }
     }
     else{
-        unset($_SESSION['zfgh_login']);
+        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
     }
     
-    if(isset($_SESSION['zfgh_login']['actif']) && !$_SESSION['zfgh_login']['actif']){
+    if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']) && !$_SESSION[''.$GLOBALS['prefixe'].'_login']['actif']){
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri != "activation"){
-        echo "salut";
+        
             header("location: /activation");
         }
     }
     else{
         $uri = strtolower(trim(explode("?", $_SERVER["REQUEST_URI"])[0], "/"));
         if($uri == "activation"){
-            echo "salut";
+            
             header("location: /");
         }
     }
+    }
+
+    
+    
+    
+    
+
+
+
+   
+
 
 /*
 
@@ -132,9 +143,9 @@ Level Authentificatioin
 
 
 // Recuperation info de connection
-if(isset($_SESSION['zfgh_login'])){
-    if($_SESSION['zfgh_login']['connected']){
-        $level_auth_user = $_SESSION['zfgh_login']['status'];
+if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
+    if($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']){
+        $level_auth_user = $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'];
     }
     else{
         $level_auth_user = 0;    
@@ -148,10 +159,18 @@ else{
 
 
     $app = new Application();
-
+    //sitemap
+    $app->router->get('/sitemap',[SiteMapController::class,'getSitemap'],[AuthMiddleware::class],0);
     //api route
-    $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
-    $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+    
+         $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->get('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
+        $app->router->post('/api/createUser', [InstallerController::class ,"createUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/createUser', [InstallerController::class ,"createUSer"],[AuthMiddleware::class],0);
+        $app->router->post('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+        $app->router->get('/api/verifyUser', [InstallerController::class ,"verifyUser"],[AuthMiddleware::class],0);
+    
+   
     // Route de base
     $app->router->get('/', [Main::class ,"home"],[AuthMiddleware::class],0);
     $app->router->get('/back', [Main::class ,"dashboard"],[AuthMiddleware::class],2);
@@ -189,16 +208,15 @@ else{
     $app->router->post('/reset-pwd-mail', [Auth::class ,"resetPwdMail"],[AuthMiddleware::class],0);
     
     // Route agent front
-    $app->router->post('/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);
-    $app->router->get('/agent1', [Agent::class ,"agent1"],[AuthMiddleware::class],0);    
-    $app->router->post('/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);
-    $app->router->get('/agent2', [Agent::class ,"agent2"],[AuthMiddleware::class],0);  
-    $app->router->post('/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);
-    $app->router->get('/agent3', [Agent::class ,"agent3"],[AuthMiddleware::class],0);  
+    $app->router->post('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->get('/all-agents', [Agent::class ,"agent"],[AuthMiddleware::class],0);
+    $app->router->post('/all-agents/{agent}', [Agent::class ,"getOneAgent"],[AuthMiddleware::class],0);    
+    $app->router->get('/all-agents/{agent}', [Agent::class ,"getOneAgent"],[AuthMiddleware::class],0);    
+  
 
     // Route annonce front
-    $app->router->post('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);
-    $app->router->get('/annonces-buy', [Annonce::class ,"getAllBuyAnnonces"],[AuthMiddleware::class],0);    
+    $app->router->post('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);
+    $app->router->get('/annonce-all', [Annonce::class ,"displayAllAnnonce"],[AuthMiddleware::class],0);    
     $app->router->post('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->get('/favoris', [Annonce::class ,"getAllFavoritesAnnonces"],[AuthMiddleware::class],0);
     $app->router->post('/annonce/{annonceTitle}', [Annonce::class ,"getOneAnnonce"],[AuthMiddleware::class],0);
@@ -278,23 +296,19 @@ else{
     $app->router->post('/back/delete-user', [Auth::class ,"deleteUser"],[AuthMiddleware::class],3);
 
     // Route agent back
-    $app->router->get('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
-    $app->router->post('/back/agent', [Back::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->get('/back/agent', [Agent::class ,"viewAgent"],[AuthMiddleware::class],3);
+    $app->router->post('/back/agent', [Agent::class ,"viewAgent"],[AuthMiddleware::class],3);
 
-    // Route status
-    $app->router->get('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/status', [Back::class ,"viewStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/add-status', [Back::class ,"addStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/update-status', [Back::class ,"updateStatus"],[AuthMiddleware::class],3);
-    $app->router->get('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
-    $app->router->post('/back/delete-status', [Back::class ,"deleteStatus"],[AuthMiddleware::class],3);
     /*$app->router->get('/contact',[SiteController::class ,"contact"]);
     $app->router->get('/contact/{id}/test/{test}', [SiteController::class ,"contact"]);
 
     $app->router->post('/contact',[SiteController::class ,'handleContact']);*/
     
+    // Route agent Self
+    $app->router->post('/back/agent-info', [Agent::class ,"agentInfo"],[AuthMiddleware::class],2);
+    $app->router->post('/back/agent-update', [Agent::class ,"updateAgent"],[AuthMiddleware::class],2);
+    $app->router->get('/back/agent-info', [Agent::class ,"agentInfo"],[AuthMiddleware::class],2);
+    $app->router->get('/back/agent-update', [Agent::class ,"updateAgent"],[AuthMiddleware::class],2);
 
 
     $app->run();

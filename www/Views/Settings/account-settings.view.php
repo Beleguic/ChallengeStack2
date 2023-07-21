@@ -13,7 +13,7 @@
   <h1 class="text-center pb-2">Bienvenue <?= $firstName ?>,</h1>
   <h2 class="text-center pb-4">Options du compte</h2>
 
-  <?php if(isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true && ($_SESSION['zfgh_login']['status'] == 2 || $_SESSION['zfgh_login']['status'] == 3)): ?>
+  <?php if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']) && $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] == true && ($_SESSION[''.$GLOBALS['prefixe'].'_login']['status'] == 2 || $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'] == 3)): ?>
   <div class="col">
     <div class="card bg-light mb-4">
       <div class="card-body">

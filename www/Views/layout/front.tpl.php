@@ -25,10 +25,53 @@
   <!-- Main style CSS -->
   <link href="../../asset/front-template/style.css" rel="stylesheet">
 
+  <script src='../../asset/back-template/js/jquery.js'></script>
+
 </head>
 
 <body>
+  <dialog id="error-container">
+    <div id="div-error-container">
+      
+    </div>
+    <div>
+      <button id="close-button-dialog"> Fermer </button>
+    </div>
+    <script type="text/javascript">
+      $("#close-button-dialog").on("click", function(){
+        document.getElementById('error-container').close();
+      })
+    </script>
+  </dialog>
+  <script type="text/javascript">
+    function showPopUpError(message, code){
+      let dialog = document.getElementById('error-container');
+      let color;
+      let h2 = document.createElement('h2');
+      
+      if(code == 1){
+        color = "green";
+        h2.textContent = 'Operation réussie';
+      }
+      else{
+        color = "red";
+        h2.textContent = 'Echec de l\'Operation';
+      }
+      let div = document.getElementById('div-error-container');
+      let messageP = document.createElement('p');
+      messageP.textContent = message;
+      div.append(h2);
+      div.append(messageP);
+      dialog.append(div);
+      dialog.style.borderColor = color;
+      dialog.showModal();
 
+    }
+
+    
+    // A appaler pour ouvrir la popup
+    
+  </script>
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
@@ -37,7 +80,7 @@
         <span></span>
         <span></span>
       </button>
-      <a class="text-brand" href="/"><span class="color-b">Moving</span>House</a>
+      <a class="text-brand" href="/"><span class="color-b"><?= $GLOBALS["siteName"] ?></span></a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
@@ -51,10 +94,10 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proriétés</a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Propriétés</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item " href="/annonces-buy">Acheter</a>
-              <a class="dropdown-item " href="/annonces-rent">Louer</a>
+              <a class="dropdown-item " href="/annonce-all">Voir les annonces</a>
+              <a class="dropdown-item " href="/favoris">Favoris</a>
             </div>
           </li>
 
@@ -65,7 +108,7 @@
         </ul>
       </div>
 
-      <a href="<?php echo (isset($_SESSION['zfgh_login']['connected']) && $_SESSION['zfgh_login']['connected'] == true) ? '/account-settings' : '/login'; ?>" class="btn btn-b-n">
+      <a href="<?php echo (isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']) && $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] == true) ? '/account-settings' : '/login'; ?>" class="btn btn-b-n">
         <i class="bi bi-person-square"></i><span class="space d-none d-md-inline">Mon Compte</span>
       </a>
     </div>
@@ -117,7 +160,7 @@
                     <i class="bi bi-chevron-right"></i> <a href="/annonces-buy">Acheter</a>
                   </li>
                   <li class="item-list-a">
-                    <i class="bi bi-chevron-right"></i> <a href="/annonces-rent">Louer</a>
+                    <i class="bi bi-chevron-right"></i> <a href="/favoris">Favoris</a>
                   </li>
                   <li class="item-list-a">
                     <i class="bi bi-chevron-right"></i> <a href="#">Appartements</a>

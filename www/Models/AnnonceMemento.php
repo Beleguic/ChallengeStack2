@@ -34,7 +34,7 @@ class AnnonceMemento extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_Annonce_Memento";
+        $this->table = "".$GLOBALS['prefixe']."_Annonce_Memento";
     }
 
     public function backup(Annonce $annonce): void
@@ -338,7 +338,7 @@ class AnnonceMemento extends SQL implements SQLInterface
     }
 
     /**
-     * @param mixed $city
+     * @param mixed $ville
      *
      * @return self
      */

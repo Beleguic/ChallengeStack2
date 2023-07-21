@@ -7,26 +7,50 @@ use App\Core\Controller;
 use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
+use App\Models\v_Agent as v_AgentModel;
 use App\Models\Type as TypeModel;
 use App\Models\AnnonceMemento as AnnonceMemento;
 use App\Models\Favori;
 use App\Models\Photo;
+use App\Models\Agent;
 
 class Annonce extends Controller
 
 {
 
-    public function getOneAnnonce($annonceTitle): String
+    public function getOneAnnonce($id): String
     {
         $this->setView("Annonce/annonce-one");
         $this->setTemplate("front");
-        $annonce = new v_AnnonceModel();
-        //var_dump($annonceTitle[0]);
-        //var_dump($annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
-        $this->assign("annonceOne", $annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
         
+        $annonce = new v_AnnonceModel();
+        $agent = new v_AgentModel();
+        $images = new Photo();
+
+        $annonce = $annonce->populate(str_replace('%20', ' ', $id[0]));
+        $this->assign("annonceOne", $annonce);
+
+        $idAgent = $annonce->getIdAgent();
+        $this->assign("agentAnnonce", $agent->populateWith(["id_agent" => $idAgent]));
+        $idAnnonce = $annonce->getId();
+        var_dump($idAnnonce);
+        $this->assign("imagesAnnonce", $images->getAllWhere(["id_annonce = '".$idAnnonce."'"]));
+
         return $this->render();
     }
+
+    public function displayAllAnnonce(): String 
+    {
+        $this->setView("Annonce/annonce-all");
+        $this->setTemplate("front");
+
+        $annonce = new v_AnnonceModel();
+
+        $this->assign("annoncelist", $annonce->getAll());
+
+        return $this->render();
+    }
+
 
     public function viewAnnonce(): String
     {
@@ -107,9 +131,11 @@ class Annonce extends Controller
         $this->assign("typeList", $type->getSelectInfo());
         $this->assign("formAdd", $formAdd->getConfigAdd()); 
         if($formAdd->isSubmited() && $formAdd->isValid()){
+            $agent = new Agent();
+            $agent = $agent->populateWith(["id_user" => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
+            $annonce->setIdAgent($agent->getId());
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -152,12 +178,14 @@ class Annonce extends Controller
         $this->assign("typeList", $type->getSelectInfo());
 
         if($formUpd->isSubmited() && $formUpd->isValid()){
+            $agent = new Agent();
+            $agent = $agent->populateWith(["id_user" => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
             $annonceMemento = new AnnonceMemento();
             $annonce = $annonce->populate($_POST["id"]);
             $annonceMemento->backup($annonce);
             $annonce->setTitre($_POST['titre']);
             $annonce->setIdType($_POST['id_type']);
-            $annonce->setIdAgent($_SESSION['zfgh_login']['id']);
+            $annonce->setIdAgent($agent->getId());
             $annonce->setPrix($_POST['prix']);
             $annonce->setSuperficieMaison($_POST['superficieMaison']);
             $annonce->setSuperficieTerrain($_POST['superficieTerrain']);
@@ -172,6 +200,7 @@ class Annonce extends Controller
             $annonce->setRegions($_POST['region']);
             $annonce->setLatitude($_POST['latitude']);
             $annonce->setLongitude($_POST['longitude']);
+            $annonce->setDateUpdated(date('Y-m-d H:i:s'));
             $annonce->save();
             header('location: /back/annonce');
         }
@@ -343,7 +372,7 @@ class Annonce extends Controller
 
         // Ajoute un favorie pour l'utilisateur
 
-        if(!isset($_SESSION['zfgh_login']['id'])){
+        if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['id'])){
             exit;
         }
 
@@ -352,7 +381,7 @@ class Annonce extends Controller
         }
 
         $favori = new Favori();
-        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdUser($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
         $favori->setIdAnnonce($_GET['id_annonce']);
         $favori->save();
 
@@ -362,7 +391,7 @@ class Annonce extends Controller
     {
 
         // Ajoute un favorie pour l'utilisateur
-        if(!isset($_SESSION['zfgh_login']['id'])){
+        if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['id'])){
             exit;
         }
 
@@ -371,15 +400,15 @@ class Annonce extends Controller
         }
 
         $favori = new Favori();
-        $favori->setIdUser($_SESSION['zfgh_login']['id']);
+        $favori->setIdUser($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
         $favori->setIdAnnonce($_GET['id_annonce']);
         $favori->delWhere();
 
     }
 
-    public function getAllBuyAnnonces(): String
+    public function getAllAnnonces(): String
     {
-        $this->setView("Annonce/annonce-all-buy");
+        $this->setView("Annonce/annonce-all");
         $this->setTemplate("front");
         
         return $this->render();

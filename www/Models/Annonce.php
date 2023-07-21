@@ -10,6 +10,8 @@ class Annonce extends SQL implements SQLInterface
     private String $id = '0';
     protected String $id_type;
     protected String $id_agent;
+    private String $date_inserted;
+    private String $date_updated;
     protected String $titre;
     protected Int $prix;
     protected Int $superficiemaison;
@@ -35,7 +37,7 @@ class Annonce extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_".end($classExploded);
+        $this->table = "".$GLOBALS['prefixe']."_".end($classExploded);
     }
 
     public function getConfigObject(): array
@@ -254,7 +256,7 @@ class Annonce extends SQL implements SQLInterface
     }
 
     /**
-     * @param mixed $city
+     * @param mixed $ville
      *
      * @return self
      */
@@ -387,6 +389,38 @@ class Annonce extends SQL implements SQLInterface
     public function setLongitude(String $longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateInserted(): String
+    {
+        return $this->date_inserted;
+    }
+
+    /**
+     * @param \DateTime $date_inserted
+     */
+    public function setDateInserted(String $date_inserted): void
+    {
+        $this->date_inserted = $date_inserted;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateUpdated(): String
+    {
+        return $this->date_updated;
+    }
+
+    /**
+     * @param \DateTime $date_updated
+     */
+    public function setDateUpdated(String $date_updated): void
+    {
+        $this->date_updated = $date_updated;
     }
     
 

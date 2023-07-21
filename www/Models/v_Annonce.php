@@ -7,6 +7,9 @@ use App\Core\SQLInterface;
 class v_Annonce extends SQL implements SQLInterface
 {
     private String $id = '0';
+    protected String $id_agent;
+    private String $date_inserted;
+    private String $date_updated;
     protected String $texte;
     protected String $titre;
     protected Int $prix;
@@ -24,19 +27,26 @@ class v_Annonce extends SQL implements SQLInterface
     protected String $region;
     protected String $longitude;
     protected String $latitude;
+    //user
+    protected String $lastname_agent;
+    protected String $firstname_agent;
+    protected String $email_agent;
 
 
     public function __construct(){
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_".end($classExploded);
+        $this->table = "".$GLOBALS['prefixe']."_".end($classExploded);
     }
 
     public function getConfigObject(): array
     {
 
         $array['id'] = $this->getId();
+        $array['id_agent'] = $this->getIdAgent();
+        $array['dateInserted'] = $this->getDateInserted();
+        $array['dateUpdated'] = $this->getDateUpdated();
         $array['texte'] = $this->getTexte();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
@@ -45,10 +55,15 @@ class v_Annonce extends SQL implements SQLInterface
         $array['nbrpiece'] = $this->getNbrpiece();
         $array['nbrchambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
-        $array['ville'] = $this->getVille();
-        $array['rue'] = $this->getRue();
-        $array['departement'] = $this->getDepartement();
+        $array['city'] = $this->getCity();
+        $array['adrcomplet'] = $this->getAddressComplet();
+        $array['postcode'] = $this->getPostCode();
+        $array['depnum'] = $this->getDepNum();
+        $array['deplabel'] = $this->getDepLabel();
         $array['regions'] = $this->getRegions();
+        $array['lastnameagent'] = $this->getLastnameAgent();
+        $array['firstnameagent'] = $this->getFirstnameAgent();
+        $array['emailagent'] = $this->getEmailAgent();
         return $array;
 
     }
@@ -58,6 +73,14 @@ class v_Annonce extends SQL implements SQLInterface
     public function getId(): String
     {
         return $this->id;
+    }
+
+        /**
+     * @return Int
+     */
+    public function getIdAgent(): String
+    {
+        return $this->id_agent;
     }
 
     /**
@@ -127,7 +150,7 @@ class v_Annonce extends SQL implements SQLInterface
     /**
      * @return mixed
      */
-    public function getVille(): String
+    public function getCity(): String
     {
         return $this->city;
     }
@@ -187,6 +210,48 @@ class v_Annonce extends SQL implements SQLInterface
     {
         return $this->longitude;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLastnameAgent(): String
+    {
+        return $this->lastname_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstnameAgent(): String
+    {
+        return $this->firstname_agent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailAgent(): String
+    {
+        return $this->email_agent;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateInserted(): String
+    {
+        return $this->date_inserted;
+    }
+
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateUpdated(): String
+    {
+        return $this->date_updated;
+    }
+
 
 
 }

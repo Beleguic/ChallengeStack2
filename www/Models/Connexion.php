@@ -15,7 +15,7 @@ class Connexion extends SQL implements SQLInterface
         $sql = parent::getInstance();
         $classExploded = explode("\\", get_called_class());
         $this->pdo = $sql->pdo;
-        $this->table = "zfgh_connexion";
+        $this->table = "".$GLOBALS['prefixe']."_connexion";
     }
 
     public function getConfigObject(): array

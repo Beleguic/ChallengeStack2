@@ -33,7 +33,7 @@
   </div>
 </div>
 
-<script src='../../asset/back-template/js/jquery.js'></script>
+
 
 <script type="text/javascript">
 

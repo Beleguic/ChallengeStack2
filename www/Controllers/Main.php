@@ -5,28 +5,27 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Contact;
+use App\Models\v_Agent as v_AgentModel;
+use App\Models\v_Annonce;
 
 class Main extends Controller
 {
     public function home(): String
     {
-
-
-        // Affiche les annonces 3 par lignes
         $pseudo = "Prof";
-        //$view = new View("Main/home", "front"); 
-
+        $agent = new v_AgentModel();
+        $annnonce = new v_Annonce();
+        
         $this->setView("Main/home");
         $this->setTemplate("front");
-        // Appelle la l'objet Vue 
-        // Vassigner a la vue le fichier main/home sur le tamplete front
-        // la vue va appeller le template puis la vue precise ...
-        $this->assign("pseudo", $pseudo); // Passe des variable dans la vue avec assign 
+        
+        $this->assign("bestAgents", $agent->getAll());
+        $this->assign("carrousselAnnonce", $annnonce->getAll());
+        $this->assign("pseudo", $pseudo);
         $this->assign("age", 30);
         $this->assign("titleseo", "supernouvellepage");
 
         return $this->render();
-
     }
 
     public function dashboard(): String
@@ -55,8 +54,13 @@ class Main extends Controller
 
     public function aboutUs(): String
     {
+
+        $agent = new v_AgentModel();
+
         $this->setView("Main/about-us");
         $this->setTemplate("front");
+
+        $this->assign("teamAgents", $agent->getAll());
 
         return $this->render();
     }

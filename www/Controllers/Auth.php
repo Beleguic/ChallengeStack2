@@ -14,6 +14,7 @@ use App\Models\UserCode;
 use App\Models\UserPwdForget;
 use App\Models\Connexion;
 use App\Models\Status;
+use App\Models\Agent;
 
 class Auth extends Controller
 {
@@ -33,14 +34,14 @@ class Auth extends Controller
                     $user->populateWithMail($_POST['email']);
                     $connexion = new Connexion();
                     $newToken = sha1(uniqid());
-                    $_SESSION['zfgh_login']['connected'] = true;
-                    $_SESSION['zfgh_login']['email'] = $_POST['email'];
-                    $_SESSION['zfgh_login']['firstname'] = $user->getFirstname();
-                    $_SESSION['zfgh_login']['lastname'] = $user->getLastname();
-                    $_SESSION['zfgh_login']['id'] = $user->getId();
-                    $_SESSION['zfgh_login']['status'] = $user->getStatus();
-                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
-                    $_SESSION['zfgh_login']['token'] = $newToken;
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] = true;
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['email'] = $_POST['email'];
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['firstname'] = $user->getFirstname();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['lastname'] = $user->getLastname();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'] = $user->getId();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'] = $user->getStatus();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['actif'] = $user->getActif();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'] = $newToken;
                     $connexion = $connexion->populateWith(['id_user' => $user->getId()]);
                     if(isset($connexion->property)){ 
                         // Insertion nouveau token
@@ -56,13 +57,31 @@ class Auth extends Controller
                         $connexion->save();
                     }
 
-                    header('location: /?conn=true');
-                } else {
-                    echo "Identifiant Incorrect";
+                    $_SESSION['error']['message'] = 'Connexion Reussie';
+                    $_SESSION['error']['codeErorr'] = 1;
+                    $_SESSION['error']['data'] = $_POST;
+                    $redirection = $_SERVER['HTTP_REFERER'];
+                    $redirectionExploded = explode("/", $redirection);
+                    $redirection = end($redirectionExploded);
+                    header('location: /'.$redirection);
+                } else {    
+                    $_SESSION['error']['message'] = 'Identifiant Incorrect';
+                    $_SESSION['error']['codeErorr'] = 2;
+                    $_SESSION['error']['data'] = $_POST;
+                    $redirection = $_SERVER['HTTP_REFERER'];
+                    $redirectionExploded = explode("/", $redirection);
+                    $redirection = end($redirectionExploded);
+                    //header('location: /'.$redirection);
                 }
             }
             else{
-                echo "Identifiant Incorrect";
+                $_SESSION['error']['message'] = 'Identifiant Incorrect';
+                $_SESSION['error']['codeErorr'] = 2;
+                $_SESSION['error']['data'] = $_POST;
+                $redirection = $_SERVER['HTTP_REFERER'];
+                $redirectionExploded = explode("/", $redirection);
+                $redirection = end($redirectionExploded);
+                //header('location: /'.$redirection);
             }
         }
         
@@ -72,6 +91,7 @@ class Auth extends Controller
 
     public function register(): String
     {
+        var_dump($_SESSION['error']);
         $this->setView("Auth/register");
         $this->setTemplate("front");
         $form=new Register();
@@ -94,14 +114,14 @@ class Auth extends Controller
             $userAdd = $user->populateWithMail($_POST['email']);
             
             $newToken = sha1(uniqid());
-            $_SESSION['zfgh_login']['connected'] = true;
-            $_SESSION['zfgh_login']['email'] = $_POST['email'];
-            $_SESSION['zfgh_login']['firstname'] = $userAdd->getFirstname();
-            $_SESSION['zfgh_login']['lastname'] = $userAdd->getLastname();
-            $_SESSION['zfgh_login']['id'] = $userAdd->getId();
-            $_SESSION['zfgh_login']['status'] = $userAdd->getStatus();
-            $_SESSION['zfgh_login']['actif'] = $userAdd->getActif();
-            $_SESSION['zfgh_login']['token'] = $newToken;
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] = true;
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['email'] = $_POST['email'];
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['firstname'] = $userAdd->getFirstname();
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['lastname'] = $userAdd->getLastname();
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'] = $userAdd->getId();
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['status'] = $userAdd->getStatus();
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['actif'] = $userAdd->getActif();
+            $_SESSION[''.$GLOBALS['prefixe'].'_login']['token'] = $newToken;
             $user_code = new UserCode();
             $user_code->setIdUser($userAdd->getId());
             $user_code->setCode($this->createCode());
@@ -122,16 +142,16 @@ class Auth extends Controller
 
     public function logout(): void
     {
-        if(!isset($_SESSION['zfgh_login'])){
+        if(!isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
             header("location: /");
         }
 
-        $id_user = $_SESSION['zfgh_login']['id'];
+        $id_user = $_SESSION[''.$GLOBALS['prefixe'].'_login']['id'];
         $connexion = new Connexion();
         $connexion = $connexion->populateWith(["id_user" => $id_user]);
         $connexion->save('del');
-        unset($_SESSION['zfgh_login']);
-        if(isset($_SESSION['zfgh_login'])){
+        unset($_SESSION[''.$GLOBALS['prefixe'].'_login']);
+        if(isset($_SESSION[''.$GLOBALS['prefixe'].'_login'])){
              header('location: /?logout=false');
         }
         else{
@@ -166,14 +186,27 @@ class Auth extends Controller
         $this->assign("formUpdDate", $user->getConfigObject());
 
         if($form->isSubmited() && $form->isValid()){
+            var_dump($_POST);
             $user = $user->populate($_POST["id"]);
             $user->setFirstname($_POST['firstname']);
             $user->setLastname($_POST['lastname']);
+            $user->setStatus($_POST['status']);
             $user->setDateUpdated(date('Y-m-d H:i:s'));
             $user->save();
+            if(isset($_POST['status']) && $_POST['status'] > 1){
+                $agent = new Agent();
+                $agent = $agent->populateWith(["is_user" => $user->getId()]);
+                if(isset($agent->property) && $agent->property == 'pas de resultat'){
+                    $agent = new Agent();
+                }
+                $agent->setIdUser($user->getId());
+                $agent->setPhotoLink(' ');
+                $agent->setDescription(' ');
+                $agent->save();
+            }
             header('location: /back/user');
         }
-        
+        $this->assign("formErrors", $form->errors);
         return $this->render();
 
     }
@@ -200,7 +233,7 @@ class Auth extends Controller
             }
         }
 
-
+        $this->assign("formErrors", $form->errors);
         
         return $this->render();
 
@@ -218,10 +251,10 @@ class Auth extends Controller
         $this->setTemplate("front");
 
         $user_code = new UserCode();
-        $user_code = $user_code->populateWith(["id_user" => $_SESSION['zfgh_login']['id']]);
+        $user_code = $user_code->populateWith(["id_user" => $_SESSION[''.$GLOBALS['prefixe'].'_login']['id']]);
         if(isset($_GET['email']) && $_GET['email'] == "resend"){
             $userAdd = new User();
-            $userAdd = $userAdd->populate($_SESSION['zfgh_login']['id']);
+            $userAdd = $userAdd->populate($_SESSION[''.$GLOBALS['prefixe'].'_login']['id']);
             $mail = new Mailer();
             $mail->sendMail($userAdd->getEmail(),$userAdd->getFirstname()." ".$userAdd->getLastname(),"Valider votre inscription sur Moving House","Voici votre code d'activation : ".$user_code->getCode()."");
         }
@@ -238,7 +271,7 @@ class Auth extends Controller
                     $user->setActif(true);
                     $user->save();
                     $user = $user->populate($user->getId());
-                    $_SESSION['zfgh_login']['actif'] = $user->getActif();
+                    $_SESSION[''.$GLOBALS['prefixe'].'_login']['actif'] = $user->getActif();
                     header("location: /");
                 }
                 else{
@@ -249,7 +282,7 @@ class Auth extends Controller
                 header('location: /activation?e=2');
             }
         }
-
+        $this->assign("formErrors", $form->errors);
         return $this->render();
     } 
 
@@ -288,7 +321,7 @@ class Auth extends Controller
             header('location: /');
         }
 
- 
+        $this->assign("formErrors", $form->errors);
 
         return $this->render();
     }
@@ -321,7 +354,7 @@ class Auth extends Controller
             //header('location: /');
         }
 
- 
+        $this->assign("formErrors", $form->errors);
 
         return $this->render();
     }
