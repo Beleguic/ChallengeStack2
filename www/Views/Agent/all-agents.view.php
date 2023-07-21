@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-8">
         <div class="title-single-box">
             <h1 class="title-single">Nos Super Agents</h1>
-            <span class="color-text-a">Grid Properties</span>
+            <span class="color-text-a">Découvrez nos super agents immobiliers dévoués, prêts à vous accompagner dans chaque étape de votre projet immobilier. Bénéficiez de leur expertise, de leur passion et de leur engagement pour trouver la propriété parfaite qui correspond à votre style de vie et à vos aspirations.</span>
         </div>
         </div>
         <div class="col-md-12 col-lg-4">

@@ -50,8 +50,10 @@ class v_Annonce extends SQL implements SQLInterface
         $array['nbrchambre'] = $this->getNbrchambre();
         $array['description'] = $this->getDescription();
         $array['city'] = $this->getCity();
-        $array['rue'] = $this->getRue();
-        $array['departement'] = $this->getDepartement();
+        $array['adrcomplet'] = $this->getAddressComplet();
+        $array['postcode'] = $this->getPostCode();
+        $array['depnum'] = $this->getDepNum();
+        $array['deplabel'] = $this->getDepLabel();
         $array['regions'] = $this->getRegions();
         $array['lastnameagent'] = $this->getLastnameAgent();
         $array['firstnameagent'] = $this->getFirstnameAgent();

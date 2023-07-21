@@ -66,8 +66,7 @@
       </div>
 
       <a href="<?php echo (isset($_SESSION[''.$GLOBALS['prefixe'].'_login']['connected']) && $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] == true) ? '/account-settings' : '/login'; ?>" class="btn btn-b-n">
-        <i class="bi bi-person-square"></i>
-        <span class="space">Mon Compte</span>
+        <i class="bi bi-person-square"></i><span class="space d-none d-md-inline">Mon Compte</span>
       </a>
     </div>
   </nav><!-- End Header/Navbar -->

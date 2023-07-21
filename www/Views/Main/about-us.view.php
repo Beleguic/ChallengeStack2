@@ -4,6 +4,7 @@
           <div class="col-md-12 col-lg-8">
             <div class="title-single-box">
               <h1 class="title-single">A Propos De Moving House</h1>
+              <span class="color-text-a">Découvrez Moving House, votre partenaire de confiance pour une transition sans stress vers votre nouvelle maison. Profitez d'un service complet de déménagement, de l'emballage au transport, pour une expérience simple et agréable.</span>
             </div>
           </div>
           <div class="col-md-12 col-lg-4">
