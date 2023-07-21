@@ -262,7 +262,7 @@ function Compteur({ name }) {
 }
 
 
-function FirsPage() {
+function FirsPage({increment}) {
   return(
   <div >
             <div className="mt-2 ">
@@ -278,7 +278,12 @@ function FirsPage() {
                 <li>Le port d'accès</li>
                 <li>Nom d'utilisateur</li>
                 <li>Le mot de passe</li>
+                <li>Le nom de votre site</li>
               </ul>
+              <button onclick={()=>increment()}
+                className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">
+                Suivant
+              </button>
             </div>           
     </div>
   )
@@ -297,6 +302,7 @@ function FirsPage() {
         password: event.target.elements.password.value,
         email:event.target.elements.email.value,
         prefixe:event.target.elements.prefixe.value,
+        siteTitle:event.target.elements.siteTitle.value,
         
       };
       console.log(formData);
@@ -313,7 +319,7 @@ function FirsPage() {
             alert('Veuillez vérifier les informations daccès à la base de données. Connexion impossible.')
           } else {
             increment();
-            alert('Connexion Reussi ! Cliquez sur suivant');
+            alert('Connexion Reussi !');
             
           }
         })
@@ -325,6 +331,7 @@ function FirsPage() {
   
     return (
       <div className=" p-4 py-6 sm:p-6 ">
+        <h2>Information de connexion à la base de donnée POSTGRES</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <input type="text" name="host" placeholder="Hôte" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
         <input type="text" name="dbname" placeholder="Nom de la base de données" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
@@ -333,6 +340,7 @@ function FirsPage() {
         <input type="password" name="password" placeholder="Mot de passe" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="text" name="prefixe" placeholder="Prefixe de table" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
         <input type="text" name="email" placeholder="Email" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
+        <input type="text" name="siteTitle" placeholder="Titre du site" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
         <button type="submit"className="px-3 mt-5 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">Envoyer</button>
         </form>
         </div>
@@ -378,6 +386,7 @@ function FormRoot({increment}) {
 
   return (
     <div className=" p-4 py-6 sm:p-6 ">
+      <h2>Création du profil Admin</h2>
     <form onSubmit={handleSubmit} className="space-y-5">
       <input type="text" name="lastName" placeholder="Nom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
       <input type="text" name="firstName" placeholder="Prenom" className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"/>
@@ -424,6 +433,7 @@ function FormRoot({increment}) {
   
     return (
       <div className=" p-4 py-6 sm:p-6 ">
+        <h2>Un code vous a été envoyé dans votre boite mail</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
        
         
@@ -447,7 +457,7 @@ function FormRoot({increment}) {
           className="px-7 py-4 text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg"
           onClick={redirectToHomePage}
         >
-          Allez vers le site
+          Allez vers le site web
         </button>
       </div>
     );
@@ -468,7 +478,7 @@ function FormRoot({increment}) {
     switch (n) {
       case 0:
         return (
-          <FirsPage />
+          <FirsPage increment={increment} />
         );
       case 1:
         return <FormDb increment={increment}/>;
@@ -503,10 +513,7 @@ function FormRoot({increment}) {
 
           <div className="mt-5 flex justify-around">
              
-              <button onclick={()=>increment()}
-                className="px-3 py-1.5 text-sm text-gray-700 duration-100 border rounded-lg hover:border-indigo-600 active:shadow-lg">
-                Suivant
-              </button>
+              
             </div>
         </div>
         
