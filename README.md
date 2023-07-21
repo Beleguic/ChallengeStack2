@@ -20,3 +20,11 @@ Pui faire un
 ```sh
 npx tailwindcss -i src/index.css -o ./dist/index.css --watch
 ```
+
+## Lancement sous docker
+
+```sh
+docker compose up
+```
+
+Le CMS seras accesible via le port 80 du localhost
