@@ -120,9 +120,16 @@
                     <?php endif; ?>
                 </ul>
                 </div>
+                <div class="add-avis">
+                    <?php $this->partial("form", $this->data['formOpinion'], ['id_agent' => $this->data['id_agent']],$this->data['formErrors']) ?>
+                </div>
                 <div class="avis">
                     <?php while($row=$this->data['avisCommentaire']->fetch()): ?>
-                        <?php var_dump($row); ?>
+                    <div style="border-radius: 15px; padding: 5px; background-color: lightgray; margin: 20px;">
+                        <p> Commentaire : <?= $row->getCommentaire() ?></p>
+                        <p> Note : <?= $row->getNote() ?></p>
+                    
+                    </div>
                     <?php endwhile; ?>
                 </div>
             </div>
