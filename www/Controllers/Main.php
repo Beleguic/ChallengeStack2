@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Core\View;
 use App\Forms\Contact;
 use App\Models\v_Agent as v_AgentModel;
+use App\Models\v_Annonce;
 
 class Main extends Controller
 {
@@ -13,11 +14,13 @@ class Main extends Controller
     {
         $pseudo = "Prof";
         $agent = new v_AgentModel();
+        $annnonce = new v_Annonce();
         
         $this->setView("Main/home");
         $this->setTemplate("front");
         
         $this->assign("bestAgents", $agent->getAll());
+        $this->assign("carrousselAnnonce", $annnonce->getAll());
         $this->assign("pseudo", $pseudo);
         $this->assign("age", 30);
         $this->assign("titleseo", "supernouvellepage");
