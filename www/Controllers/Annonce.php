@@ -7,6 +7,7 @@ use App\Core\Controller;
 use App\Forms\Annonce as AnnonceForm;
 use App\Models\Annonce as AnnonceModel;
 use App\Models\v_Annonce as v_AnnonceModel;
+use App\Models\v_Agent as v_AgentModel;
 use App\Models\Type as TypeModel;
 use App\Models\AnnonceMemento as AnnonceMemento;
 use App\Models\Favori;
@@ -21,14 +22,20 @@ class Annonce extends Controller
     {
         $this->setView("Annonce/annonce-one");
         $this->setTemplate("front");
+        
         $annonce = new v_AnnonceModel();
+        $agent = new v_AgentModel();
         $images = new Photo();
-        //var_dump($annonceTitle[0]);
-        //var_dump($annonce->getOneWhere(["titre"=>str_replace('%20', ' ', $annonceTitle[0])]));
-        $this->assign("annonceOne", $annonce->getOneWhere(["id"=>str_replace('%20', ' ', $id[0])]));
-        // echo '<pre>';
-        // var_dump($annonce->getOneWhere(["id" => str_replace('%20', ' ', $id[0])]));
-        //$this->assign("annonceImages", $images->getOneWhere(["id_annonce"=>str_replace('%20', ' ', $id[0])])); ajout des images
+
+        $annonce = $annonce->populate(str_replace('%20', ' ', $id[0]));
+        $this->assign("annonceOne", $annonce);
+
+        $idAgent = $annonce->getIdAgent();
+        $this->assign("agentAnnonce", $agent->populateWith(["id_agent" => $idAgent]));
+        $idAnnonce = $annonce->getId();
+        var_dump($idAnnonce);
+        $this->assign("imagesAnnonce", $images->getAllWhere(["id_annonce = '".$idAnnonce."'"]));
+
         return $this->render();
     }
 

@@ -18,6 +18,18 @@
   $agentLastname = $this->data['annonceOne']->getLastnameAgent();
   $agentEmail = $this->data['annonceOne']->getEmailAgent();
 
+  // Agent
+  $agentId = $this->data['agentAnnonce']->getId();
+  $agentPhotoLink = $this->data['agentAnnonce']->getPhotoLink();
+  $agentDescription = $this->data['agentAnnonce']->getDescription();
+  $agentMobile = $this->data['agentAnnonce']->getMobile();
+  $agentTelephone = $this->data['agentAnnonce']->getTelephone();
+  $agentSkype = $this->data['agentAnnonce']->getSkype();
+  $agentFacebook = $this->data['agentAnnonce']->getFacebook();
+  $agentTwitter = $this->data['agentAnnonce']->getTwitter();
+  $agentInstagram = $this->data['agentAnnonce']->getInstagram();
+  $agentLinkedin = $this->data['agentAnnonce']->getLinkedin();
+
 ?>
 
     <!-- ======= Intro Single ======= -->
@@ -56,12 +68,11 @@
           <div class="col-lg-8">
             <div id="property-single-carousel" class="swiper">
               <div class="swiper-wrapper">
-                <div class="carousel-item-b swiper-slide">
-                  <img src="assets/img/slide-1.jpg" alt="Image 1 Carroussel">
-                </div>
-                <div class="carousel-item-b swiper-slide">
-                  <img src="assets/img/slide-2.jpg" alt="Image 2 Carroussel">
-                </div>
+                <?php while($row = $this->data['imagesAnnonce']->fetch()): ?>
+                  <div class="carousel-item-b swiper-slide">                
+                    <img src="../../<?= $row->getLinkPhoto() ?>" alt="Image 2 Carroussel">
+                  </div>
+                <?php endwhile; ?>
               </div>
             </div>
             <div class="property-single-carousel-pagination carousel-pagination"></div>
@@ -201,56 +212,62 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <img src="assets/img/agent-4.jpg" alt="Photo Agent" class="img-fluid">
+                <img src="../../<?= $agentPhotoLink ?>" alt="Photo Agent" class="img-fluid">
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
                   <h4 class="title-agent"><?= $agentFirstname, ", ", $agentLastname ?></h4>
                   <p class="color-text-a">
-                    Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                    dui. Quisque velit nisi,
-                    pretium ut lacinia in, elementum id enim.
+                    <?= $agentDescription ?>
                   </p>
                   <ul class="list-unstyled">
                     <li class="d-flex justify-content-between">
                       <strong>Phone:</strong>
-                      <span class="color-text-a">(222) 4568932</span>
+                      <span class="color-text-a"><?= $agentTelephone ?></span>
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Mobile:</strong>
-                      <span class="color-text-a">777 287 378 737</span>
+                      <span class="color-text-a"><?= $agentMobile ?></span>
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Email:</strong>
-                      <span class="color-text-a">annabella@example.com</span>
+                      <span class="color-text-a"><?= $agentEmail ?></span>
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Skype:</strong>
-                      <span class="color-text-a">Annabela.ge</span>
+                      <span class="color-text-a"><?= $agentSkype ?></span>
                     </li>
                   </ul>
                   <div class="socials-a">
                     <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <a href="#">
-                          <i class="bi bi-facebook" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#">
-                          <i class="bi bi-twitter" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#">
-                          <i class="bi bi-instagram" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="#">
-                          <i class="bi bi-linkedin" aria-hidden="true"></i>
-                        </a>
-                      </li>
+                      <?php if( $agentFacebook != null ): ?>
+                          <li class="list-inline-item">
+                              <a href="<?= $agentFacebook ?>" class="link-one" target="_blank">
+                                  <i class="bi bi-facebook" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                      <?php endif; ?>
+                      <?php if( $agentTwitter != null ): ?>
+                          <li class="list-inline-item">
+                              <a href="<?= $agentTwitter ?>" class="link-one" target="_blank">
+                                  <i class="bi bi-twitter" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                      <?php endif; ?>
+                      <?php if( $agentInstagram != null ): ?>
+                          <li class="list-inline-item">
+                              <a href="<?= $agentInstagram ?>" class="link-one" target="_blank">
+                                  <i class="bi bi-instagram" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                      <?php endif; ?>
+                      <?php if( $agentLinkedin != null ): ?>
+                          <li class="list-inline-item">
+                              <a href="<?= $agentLinkedin ?>" class="link-one" target="_blank">
+                                  <i class="bi bi-linkedin" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                      <?php endif; ?>
                     </ul>
                   </div>
                 </div>
