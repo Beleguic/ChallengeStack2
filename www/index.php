@@ -5,6 +5,7 @@
     use App\Controllers\SiteController;
     use App\Controllers\Main;
     use App\Controllers\InstallerController;
+    use App\Controllers\SiteMapController;
     use App\Controllers\Auth;
     use App\Controllers\Annonce;
     use App\Controllers\Type;
@@ -157,7 +158,8 @@ else{
 
 
     $app = new Application();
-
+    //sitemap
+    $app->router->get('/sitemap',[SiteMapController::class,'getSitemap'],[AuthMiddleware::class],0);
     //api route
     
          $app->router->post('/api/installer', [InstallerController::class ,"getInstaller"],[AuthMiddleware::class],0);
