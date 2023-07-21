@@ -29,8 +29,13 @@ class InstallerController extends Controller
         $siteName=$requestData['siteTitle'] ?? '';
 
 
+        if(file_exists('./app.ini')){
+          $configFilePath = './app'.sha1(uniqid()).'.ini';
+        }
+        else{
+          $configFilePath = './app.ini';
+        }
         
-        $configFilePath = './app.ini';
         try {
             $pdo = new \PDO("pgsql:host=$host;dbname=$dbname;port=$port", $user, $password);
         } catch (\PDOException $e) {
