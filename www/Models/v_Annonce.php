@@ -7,6 +7,9 @@ use App\Core\SQLInterface;
 class v_Annonce extends SQL implements SQLInterface
 {
     private String $id = '0';
+    protected String $id_agent;
+    private String $date_inserted;
+    private String $date_updated;
     protected String $texte;
     protected String $titre;
     protected Int $prix;
@@ -41,6 +44,9 @@ class v_Annonce extends SQL implements SQLInterface
     {
 
         $array['id'] = $this->getId();
+        $array['id_agent'] = $this->getIdAgent();
+        $array['dateInserted'] = $this->getDateInserted();
+        $array['dateUpdated'] = $this->getDateUpdated();
         $array['texte'] = $this->getTexte();
         $array['titre'] = $this->getTitre();
         $array['prix'] = $this->getPrix();
@@ -67,6 +73,14 @@ class v_Annonce extends SQL implements SQLInterface
     public function getId(): String
     {
         return $this->id;
+    }
+
+        /**
+     * @return Int
+     */
+    public function getIdAgent(): String
+    {
+        return $this->id_agent;
     }
 
     /**
@@ -220,6 +234,24 @@ class v_Annonce extends SQL implements SQLInterface
     {
         return $this->email_agent;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateInserted(): String
+    {
+        return $this->date_inserted;
+    }
+
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateUpdated(): String
+    {
+        return $this->date_updated;
+    }
+
 
 
 }

@@ -28,7 +28,10 @@
 </head>
 
 <body>
+  <dialog id="errorContainer">
 
+    <button id=""> Fermer </button>
+  </dialog>
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
