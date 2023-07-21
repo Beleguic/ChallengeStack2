@@ -30,15 +30,13 @@
     }
     ?>
   <?php 
-  if(isset($_POST['firstname'])){
+  if(isset($_POST['firstname'])):
     $valueData = $_POST;
-  }
-  elseif(isset($_SESSION['error']['data']['firstname'])){
+  elseif(isset($_SESSION['error']['data']['firstname'])):
     $valueData = $_SESSION['error']['data'];
-  }
-  else{
+  else:
     $valueData = [];
-  }
+  endif;
   ?>
   <?php $this->partial("form", $this->data["form"], $valueData, $this->data['formErrors']) ?>
   <!--<?php $errors = $this->data['formErrors']; ?>-->

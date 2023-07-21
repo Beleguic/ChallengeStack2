@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\User;
+use App\Models\Agent;
 use App\Core\Mailer;
 use App\Models\Connexion;
 use App\Models\UserCode;
@@ -312,7 +313,11 @@ class InstallerController extends Controller
             $user->setStatus(4);
             $user->save();
             $userAdd = $user->populateWithMail($formData['email']);
-            
+            $agent = new Agent();
+            $agent->setIdUser($userAdd->getId());
+            $agent->setPhotoLink(' ');
+            $agent->setDescription(' ');
+            $agent->save();
             
             $newToken = sha1(uniqid());
             $_SESSION[''.$GLOBALS['prefixe'].'_login']['connected'] = true;

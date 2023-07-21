@@ -22,11 +22,28 @@
       </div>
     </div>
   </section><!-- End Intro Single-->
+  <?php 
+    if(isset($_SESSION['error']['message'])){
 
-  <?php $this->partial("form", $this->data['form']) ?>
+      echo("<script> showPopUpError('".$_SESSION['error']['message']."',".$_SESSION['error']['codeErorr']."); </script>");
+    }
+    ?>
+  <?php
+  if(isset($_POST['email'])):
+    $valueData = $_POST;
+  elseif(isset($_SESSION['error']['data']['firstname'])):
+    $valueData = $_SESSION['error']['data'];
+  else:
+    $valueData = [];
+  endif;
+  ?>
+  <?php $this->partial("form", $this->data['form'], $valueData, $this->data['formErrors']) ?>
 
   <p class="text-center">Vous n'avez pas de compte ? <a href="/s-inscrire" class="text-center color-b">Créer un compte ! </a>
   / <a href="/reset-pwd-mail" class="text-center color-b"> Mot de passe oublié ?</a></p>
 
 
 </div>
+<?php
+  unset($_SESSION['error']);
+?>
