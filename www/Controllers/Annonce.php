@@ -27,11 +27,14 @@ class Annonce extends Controller
         $agent = new v_AgentModel();
         $images = new Photo();
 
-        $idAnnonce = $annonce->getOneWhere(["id"=>str_replace('%20', ' ', $id[0])]);
-        $this->assign("annonceOne", $idAnnonce);
+        $annonce = $annonce->populate(str_replace('%20', ' ', $id[0]));
+        $this->assign("annonceOne", $annonce);
 
-        $idAgent = $idAnnonce->getIdAgent();
-        $this->assign("agentAnnonce", $agent->getOneWhere(["id"=>str_replace('%20', ' ', $idAgent[0])]));
+        $idAgent = $annonce->getIdAgent();
+        $this->assign("agentAnnonce", $agent->populateWith(["id_agent" => $idAgent]));
+        $idAnnonce = $annonce->getId();
+        var_dump($idAnnonce);
+        $this->assign("imagesAnnonce", $images->getAllWhere(["id_annonce = '".$idAnnonce."'"]));
 
         return $this->render();
     }
