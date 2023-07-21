@@ -63,7 +63,7 @@ class Auth extends Controller
                     $redirection = $_SERVER['HTTP_REFERER'];
                     $redirectionExploded = explode("/", $redirection);
                     $redirection = end($redirectionExploded);
-                    header('location: /'.$redirection);
+                    header('location: /account-settings');
                 } else {    
                     $_SESSION['error']['message'] = 'Identifiant Incorrect';
                     $_SESSION['error']['codeErorr'] = 2;

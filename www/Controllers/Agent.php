@@ -174,7 +174,7 @@ class Agent extends Controller
         $this->setView("Back/agent-view");
         $this->setTemplate("back");
 
-        $agent = new agent();
+        $agent = new v_AgentModel();
 
         $this->assign("agentList", $agent->getAll());
         

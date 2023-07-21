@@ -9,16 +9,9 @@
 					<th> Titre </th>
 					<th> Prix </th>
 					<th> Type </th>
-					<th> Superficie Maison </th>
-					<th> Superficie Terrain </th>
-					<th> Nombre de pieces </th>
-					<th> Nombre de chambre </th>
 					<th> Ville </th>
-					<th> Rue </th>
-					<th> Departement </th>
-					<th> Regions </th>
-					<th> Description </th>
-					<th> Action </th>
+					<th> Adresse complete </th>
+					<th> Action</th>
 			</thead>
 			<tbody>	
 		<?php while ($row = $this->data['resMemento']->fetch()): ?>
@@ -27,15 +20,8 @@
 					<td><?=$row->getTitre()?></td>
 					<td><?=$row->getPrix()?></td>
 					<td><?=$row->getIdType()?></td>
-					<td><?=$row->getSuperficiemaison()?></td>
-					<td><?=$row->getSuperficieterrain()?></td>
-					<td><?=$row->getNbrpiece()?></td>
-					<td><?=$row->getNbrchambre()?></td>
 					<td><?=$row->getCity()?></td>
-					<td><?=$row->getRue()?></td>
-					<td><?=$row->getDepartement()?></td>
-					<td><?=$row->getRegions()?></td>
-					<td><?=$row->getDescription()?></td>
+					<td><?=$row->getAddressComplet()?></td>
 					<td>
 						<a class="button-Delete" href="/back/restore-annonce?idAnnonce=<?=$row->getId()?>">Restauration</a>
 					</td>

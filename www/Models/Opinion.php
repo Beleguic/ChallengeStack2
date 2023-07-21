@@ -13,7 +13,7 @@ class Opinion extends SQL implements SQLInterface
     protected String $id_user;
     protected String $date_avis;
     protected bool $avis_agence;
-    protected bool $id_valid;
+    protected bool $is_valid;
 
     public function __construct()
     {
