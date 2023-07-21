@@ -24,7 +24,14 @@ class Validator
     {
         //La bonne method ?
         if($_SERVER["REQUEST_METHOD"] != $this->method){
-            die("Tentative de Hack1");
+            $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+            $_SESSION['error']['codeErorr'] = 2;
+            $_SESSION['error']['data'] = $data;
+            $redirection = $_SERVER['HTTP_REFERER'];
+            $redirectionExploded = explode("/", $redirection);
+            $redirection = end($redirectionExploded);
+            header('location: /'.$redirection);
+            //die("Tentative de Hack1");
         }
         //echo("<pre>");
         //Le nb de inputs3
@@ -34,7 +41,13 @@ class Validator
         //var_dump(count($this->config["inputs"])+1);
         //echo("</pre>"); 
         if(count($this->config["inputs"])+1 != count($this->data)){
-            die("Tentative de Hack2");
+            $_SESSION['error']['message'] = 'Une erreur a été detecter, veuiller recommencer';
+            $_SESSION['error']['codeErorr'] = 2;
+            $_SESSION['error']['data'] = $this->data;
+            $redirection = $_SERVER['HTTP_REFERER'];
+            $redirectionExploded = explode("/", $redirection);
+            $redirection = end($redirectionExploded);
+            header('location: /'.$redirection);
         }
 
         foreach ($this->config["inputs"] as $name=>$configInput){

@@ -1,6 +1,3 @@
-<?php if(!empty($errors)): ?>
-<?php print_r($errors);?>
-<?php endif;?>
 
 <form method="<?= $config["config"]["method"] ?>"
       action="<?= $config["config"]["action"] ?>"
@@ -121,6 +118,13 @@
         <?php endif;?>
         </div>
     <?php endforeach;?>
+    <div>
+        <?php if(!empty($errors)): ?>
+            <?php foreach($errors as $error): ?>
+                <p class="text-center text-danger"> <?= $error ?> </p>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
     <div id="div-register-submit-reset" class="div-form-50 d-flex justify-content-center">
         <?php if(isset($config["config"]["submit"])): ?>
             <?php foreach ($config["config"]["submit"] as $value): ?>
