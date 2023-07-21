@@ -65,7 +65,7 @@ create table public.zfgh_type (
 
 create table public.zfgh_annonce (
     id uuid not null default gen_random_uuid (),
-    id_agent uuid null,
+    id_agent uuid not null,
     id_type uuid not null,
     titre text not null,
     prix integer not null,
@@ -76,8 +76,8 @@ create table public.zfgh_annonce (
     description text not null,
     city text not null,
     adrcomplet text not null,
-    postcode character varying(6) not null,
-    depnum character varying(2) not null,
+    postcode character varying(5) not null,
+    depnum character varying(3) not null,
     deplabel text not null,
     region text not null,
     longitude text not null,
@@ -93,7 +93,7 @@ create table public.zfgh_annonce_memento (
     id uuid not null default gen_random_uuid (),
     date_memento timestamp without time zone not null default now(),
     id_annonce uuid not null,
-    id_agent uuid null,
+    id_agent uuid not null,
     id_type uuid not null,
     titre text not null,
     prix integer not null,
@@ -104,8 +104,8 @@ create table public.zfgh_annonce_memento (
     description text not null,
     city text not null,
     adrcomplet text not null,
-    postcode varchar(6) not null,
-    depnum varchar(2) not null,
+    postcode varchar(5) not null,
+    depnum varchar(3) not null,
     deplabel text not null,
     region text not null,
     longitude text not null,
@@ -183,7 +183,7 @@ create table public.zfgh_opinion (
 
 
 create view public.zfgh_v_agent as
-select u.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) as nbr_annonce, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
+select u.id, ag.id, u.lastname, u.firstname, u.email, u.country, u.status, count(a.id_agent) as nbr_annonce, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
 from zfgh_user u left join zfgh_agent ag on u.id = ag.id_user left join zfgh_annonce a on u.id = a.id_agent
 where u.status > 1 and ag.id_user = u.id
 group by u.id, ag.photolink, ag.description, ag.telephone, ag.mobile, ag.skype, ag.facebook, ag.twitter, ag.instagram, ag.linkedin
