@@ -18,6 +18,10 @@
   $agentLastname = $this->data['annonceOne']->getLastnameAgent();
   $agentEmail = $this->data['annonceOne']->getEmailAgent();
 
+  // Agent
+
+  $agentPhotoLink = $this->data['agentAnnonce']->getPhotoLink();
+
 ?>
 
     <!-- ======= Intro Single ======= -->
@@ -201,7 +205,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-lg-4">
-                <img src="assets/img/agent-4.jpg" alt="Photo Agent" class="img-fluid">
+                <img src="../../<?= $agentPhotoLink ?>" alt="Photo Agent" class="img-fluid">
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="property-agent">
